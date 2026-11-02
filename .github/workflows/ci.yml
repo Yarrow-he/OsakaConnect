@@ -1,0 +1,70 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  guards:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: scope
+        if: github.event_name == 'pull_request'
+        run: scripts/check-scope.sh origin/${{ github.base_ref }}
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pytest pyyaml jsonschema openapi-spec-validator
+      - run: pytest -q tests/contract
+  windows-dotnet:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: has
+        shell: bash
+        run: echo "code=$(ls windows/*.sln admin/*.sln windows/**/*.csproj admin/**/*.csproj 2>/dev/null | head -1)" >> "$GITHUB_OUTPUT"
+      - if: steps.has.outputs.code == ''
+        run: echo "无 .NET 代码，跳过"
+      - if: steps.has.outputs.code != ''
+        uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+      - if: steps.has.outputs.code != ''
+        shell: bash
+        run: |
+          for d in windows admin; do [ -d "$d" ] && (cd "$d" && dotnet build -c Release && dotnet test -c Release --no-build); done
+  android:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: has
+        run: echo "code=$([ -f android/gradlew ] && echo y)" >> "$GITHUB_OUTPUT"
+      - if: steps.has.outputs.code == ''
+        run: echo "无 Android 代码，跳过"
+      - if: steps.has.outputs.code != ''
+        uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - if: steps.has.outputs.code != ''
+        working-directory: android
+        run: ./gradlew --no-daemon assembleDebug testDebugUnitTest
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: has
+        run: echo "code=$([ -d server ] && ls server/*.py server/**/*.py 2>/dev/null | head -1)" >> "$GITHUB_OUTPUT"
+      - if: steps.has.outputs.code == ''
+        run: echo "无 Python 代码，跳过"
+      - if: steps.has.outputs.code != ''
+        uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - if: steps.has.outputs.code != ''
+        working-directory: server
+        run: |
+          [ -f requirements.txt ] && pip install -r requirements.txt
+          pip install pytest && pytest -q

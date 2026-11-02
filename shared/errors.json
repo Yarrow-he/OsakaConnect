@@ -1,0 +1,7 @@
+{
+  "UNAUTHENTICATED": {"http": 401, "zh": "未提供管理凭证"},
+  "FORBIDDEN": {"http": 403, "zh": "管理凭证无效"},
+  "INVALID_INVITE_CODE": {"http": 400, "zh": "邀请码格式不正确"},
+  "BACKEND_UNREACHABLE": {"http": 0, "zh": "无法连接后台"},
+  "INTERNAL": {"http": 500, "zh": "发生内部错误，请稍后重试"}
+}

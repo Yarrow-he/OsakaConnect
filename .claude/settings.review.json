@@ -1,0 +1,45 @@
+{
+  "model": "glm-5.3",
+  "apiKeyHelper": "printenv GLM_API_KEY",
+  "env": {
+    "ANTHROPIC_BASE_URL": "https://api.z.ai/api/anthropic",
+    "ANTHROPIC_MODEL": "glm-5.3",
+    "CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC": "1"
+  },
+  "permissions": {
+    "defaultMode": "default",
+    "allow": [
+      "Read",
+      "Grep",
+      "Glob",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)"
+    ],
+    "deny": [
+      "Edit",
+      "Write",
+      "WebFetch",
+      "WebSearch",
+      "Bash(dotnet:*)",
+      "Bash(gradle:*)",
+      "Bash(./gradlew:*)",
+      "Bash(pip:*)",
+      "Bash(npm:*)",
+      "Bash(pnpm:*)",
+      "Bash(python:*)",
+      "Bash(pytest:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(ssh:*)",
+      "Bash(git push:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git reset:*)",
+      "Bash(git branch -D:*)",
+      "Read(./**/.env)",
+      "Read(./**/*.env)"
+    ]
+  },
+  "_comment": "审阅：Claude Code + GLM（智谱 Anthropic 兼容接口），只读 + git diff/log/show；key 只从环境变量 GLM_API_KEY 取。"
+}

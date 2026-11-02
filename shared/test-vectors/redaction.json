@@ -1,0 +1,37 @@
+{
+ "mask": "***",
+ "cases": [
+  {
+   "in": "Authorization: Bearer abc.def.ghi",
+   "out": "Authorization: Bearer ***"
+  },
+  {
+   "in": "invite=7X2KQ9MZ ok",
+   "out": "invite=*** ok"
+  },
+  {
+   "in": "api_key=sk-0123456789abcdef",
+   "out": "api_key=***"
+  },
+  {
+   "in": "token: eyJhbGciOiJIUzI1NiJ9.x.y",
+   "out": "token: ***"
+  },
+  {
+   "in": "connected route=r1",
+   "out": "connected route=r1"
+  },
+  {
+   "in": "INVITE=7x2kq9mz",
+   "out": "INVITE=***"
+  },
+  {
+   "in": "password=hunter2",
+   "out": "password=***"
+  },
+  {
+   "in": "version=0.1.0 status=ok",
+   "out": "version=0.1.0 status=ok"
+  }
+ ]
+}
