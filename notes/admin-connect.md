@@ -27,3 +27,25 @@ A10, A14（见 `acceptance.md`）。完成标准：单测：admin-contract 正�
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 交付证明（写手 · Windows，2026-11-02T17:22:07+10:00）
+1. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403156768，全部 job 成功，其中 windows-dotnet 跑在 windows-latest。
+2. 提交：798112b（origin 分支头，含组长合入 main 的 merge）。
+3. 构建：CI 里 dotnet build -c Release 输出 Build succeeded。
+4. 测试：dotnet test -c Release --no-build，OsakaAdmin.Tests.dll 结果是 Passed 63、Failed 0、Skipped 0、Total 63。
+5. lint：本仓库没有单独的 .NET lint job，guards job 已通过（范围、依赖、硬编码线路检查）。
+6. CI 日志：/home/box/osaka/logs/admin-connect-ci-41403156768.log
+7. 任务卡：/home/box/osaka/logs/admin-connect-card.md
+8. CLI 会话日志：/home/box/osaka/logs/admin-connect-codex-1.log
+9. 改动文件（git diff --name-only origin/main...HEAD，不含 notes 和 board.json）：
+   1. admin/OsakaAdmin.Tests/AdminContractTests.cs
+   2. admin/OsakaAdmin.Tests/OsakaAdmin.Tests.csproj
+   3. admin/OsakaAdmin/AdminContract.cs
+   4. admin/OsakaAdmin/AdminProbe.cs
+   5. admin/OsakaAdmin/App.xaml
+   6. admin/OsakaAdmin/App.xaml.cs
+   7. admin/OsakaAdmin/MainWindow.xaml
+   8. admin/OsakaAdmin/MainWindow.xaml.cs
+   9. admin/OsakaAdmin/OsakaAdmin.csproj
+10. 运行方式：本机没有 .NET SDK，编译和测试只在 CI（windows-latest）上跑。
+11. 已知限制：A10 的 TLS 四项必测由 ci-guards 的 a10-docker 端到端驱动（该 job 本 run 成功），模块自身单测不覆盖真实 TLS；测试项目用了 3 个测试包，需组长确认；WPF 界面没在真机启动过。
