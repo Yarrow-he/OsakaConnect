@@ -12,7 +12,6 @@ package com.osakaconnect.diagnostics
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
-import org.junit.Assume.assumeNoException
 import org.junit.Test
 import java.io.File
 import java.lang.reflect.InvocationTargetException
@@ -99,9 +98,7 @@ private fun entry(className: String, methodName: String, arity: Int): Entry {
     val cls: Class<*> = try {
         Class.forName(className)
     } catch (e: ClassNotFoundException) {
-        println("待测：模块未交付（$className）")
-        assumeNoException("待测：模块未交付（$className）", e)
-        error("unreachable")
+        throw AssertionError("待测：模块未交付（$className）", e)
     }
     val method = cls.methods.firstOrNull { it.name == methodName && it.parameterCount == arity }
         ?: error("待对齐：找不到 $className.$methodName/$arity")

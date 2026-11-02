@@ -6,7 +6,7 @@
 # 前置环境：GitHub Actions ubuntu-latest + JDK 17 + Android SDK + 已启动的模拟器（API >= 26）；
 #           本机无 JDK/SDK，不跑构建。等组长的模拟器 CI 合入后才跑。
 # 运行命令：bash tests/android/android-diagnostics/run-instrumented.sh
-# 行为：产品未交付（缺少 android/gradlew 或 android/app）时打印“待测：模块未交付”并以 0 退出；
+# 行为：产品未交付（缺少 android/gradlew 或 android/app）时打印“待测：模块未交付”并以 3 退出（3 = 待测/未交付，不算通过）；
 #       交付后把 JVM 测试拷入 app/src/test/java/…，androidTest 拷入 app/src/androidTest/java/…，
 #       执行 ./gradlew testDebugUnitTest connectedDebugAndroidTest。
 set -euo pipefail
@@ -19,7 +19,7 @@ exec > >(tee "$log_dir/android-diagnostics-instrumented-$(date +%F).log") 2>&1
 
 if [ ! -x "$root/android/gradlew" ] || [ ! -d "$root/android/app" ]; then
   echo "待测：模块未交付（缺少 android/gradlew 或 android/app）"
-  exit 0
+  exit 3
 fi
 
 jvm_dest="$root/android/app/src/test/java/com/osakaconnect/diagnostics"

@@ -6,6 +6,7 @@
 # 前置环境：GitHub Actions ubuntu-latest + docker compose（待 CI；本机不装 .NET/JDK、不跑构建）。
 #           需要 openssl 生成运行时临时证书。
 # 运行命令：bash tests/admin/admin-connect/run-a10.sh
+# 退出码：0 = 通过；1 = 失败；2 = 待 CI（缺 docker）；3 = 待测/未交付（缺 server/ 或 admin/，不算通过）。
 # 覆盖 acceptance：A10、A14（probe 为 .NET 无界面入口，镜像内构建）。
 set -euo pipefail
 umask 077
@@ -42,7 +43,7 @@ missing=""
 [ -d "$ADMIN_DIR" ] || missing="$missing admin/"
 if [ -n "$missing" ]; then
   echo "待测：模块未交付（缺少$missing）"
-  exit 0
+  exit 3
 fi
 
 if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>&1; then
