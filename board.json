@@ -530,10 +530,10 @@
       "id": "android-diagnostics",
       "端": "Android",
       "模块": "android-diagnostics",
-      "state": "待测试",
+      "state": "完成",
       "owner": "写手 · Android",
       "rework": 3,
-      "updated_at": "2026-11-03T01:30:06+10:00",
+      "updated_at": "2026-11-03T01:33:40+10:00",
       "paths": [
         "android/"
       ],
@@ -578,6 +578,17 @@
         {
           "review": "通过 @f66b7da（含 a94496d 补做）",
           "log": "/home/box/osaka/logs/android-diagnostics/review-rework3-f66b7da-20261103-010111.log"
+        },
+        {
+          "test": "v5 终判 通过 @a285acf（产品代码同 f66b7da）",
+          "run": 41470533804,
+          "commands": [
+            "gh run view 41470533804 --json headSha,jobs",
+            "gh run download 41470533804 -n android-jvm-unit-junit -n android-emulator-logs",
+            "git diff --stat f66b7da a285acf -- android/"
+          ],
+          "results": "必过5项+android-emulator+guards-acceptance success；JvmJsonDivergenceTest 1/0/0/0；JvmJsonTest 6/0/0/0；OrgJsonDivergenceTest 1 tests 0 failures 0 skipped（emulator-5554 - 11）；android/ diff 为空",
+          "log": "logs/android-diagnostics/2026-11-03-test-v5.log"
         }
       ],
       "history": [
@@ -630,6 +641,10 @@
         {
           "state": "待测试",
           "at": "2026-11-03T01:10:25+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T01:33:40+10:00"
         }
       ],
       "branch": "android/android-diagnostics",
