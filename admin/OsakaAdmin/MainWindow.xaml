@@ -1,0 +1,21 @@
+<Window x:Class="OsakaAdmin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Osaka 管理连接" Width="560" Height="340" MinWidth="400" MinHeight="280">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="后台地址（_HTTPS）" Target="{Binding ElementName=BackendAddress}" />
+        <TextBox x:Name="BackendAddress" Grid.Row="1" Margin="0,4,0,12"
+                 Padding="6" AutomationProperties.Name="后台 HTTPS 地址" />
+        <Button x:Name="ConnectButton" Grid.Row="2" Content="连接" Padding="24,6"
+                HorizontalAlignment="Left" IsDefault="True" Click="Connect_Click" />
+        <ScrollViewer Grid.Row="3" Margin="0,16,0,0" VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="ResultText" TextWrapping="Wrap" AutomationProperties.LiveSetting="Polite" />
+        </ScrollViewer>
+    </Grid>
+</Window>
