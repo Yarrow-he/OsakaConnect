@@ -144,9 +144,11 @@ jobs:
         env:
           OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
         with:
-          api-level: 34
-          target: google_apis
+          api-level: 30
+          target: default
           arch: x86_64
+          emulator-boot-timeout: 900
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
