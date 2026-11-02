@@ -63,3 +63,6 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 6. 命令：gh run view 41450041148 -R Yarrow-he/OsakaConnect --log-failed
 7. 日志：/home/box/osaka/repo/logs/android-shell/2026-11-02-test-v2.log；CLI 日志：/home/box/osaka/artifacts/cli-logs/retest-v2-3modules-2026-11-02.log
 8. 复现：android-shell 分支 CI android-emulator job，或 cd android && ./gradlew testDebugUnitTest（先执行 run.sh 拷入测试）。
+## 2026-11-02 合入 main
+1. 合入 origin/main（9662b8e，含 PR #15）为 454063d，已推送。
+2. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499 ，待测试复测。

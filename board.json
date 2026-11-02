@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-02T14:51:30+10:00",
+  "updated_at": "2026-11-03T02:22:00+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -42,7 +42,7 @@
       "state": "待写",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "updated_at": "2026-11-02T23:47:29+10:00",
       "paths": [
         "openapi/",
         "shared/",
@@ -58,16 +58,18 @@
       "history": [],
       "branch": "shared/shared-protocol",
       "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
-      "brief": "notes/shared-protocol.md"
+      "brief": "notes/shared-protocol.md",
+      "review": "未审",
+      "next_step": "未完成：main 仅有骨架初版（4dbde21、bb9fce9），无评审冻结记录。下一步：组长对 openapi/shared/tests/contract 做一次评审，补反例后冻结，开 shared/shared-protocol 小 PR。ETA 2026-11-04"
     },
     {
       "id": "server-core",
       "端": "服务端",
       "模块": "server-core",
-      "state": "待写",
+      "state": "完成",
       "owner": "写手 · 服务端",
-      "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "rework": 1,
+      "updated_at": "2026-11-02T23:27:02+10:00",
       "paths": [
         "server/"
       ],
@@ -77,20 +79,99 @@
         "A15",
         "A17"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        "commit 94c35f3 (server/server-core)",
+        "/home/box/osaka/wt/server-core/notes/logs/server-core-codex-20261102-1455.log",
+        "/home/box/osaka/wt/server-core/notes/logs/server-core-compile.log",
+        "/home/box/osaka/wt/server-core/notes/logs/server-core-lint.log",
+        "/home/box/osaka/wt/server-core/notes/logs/server-core-pytest.log",
+        "commit:83ec2c7",
+        "notes/logs/server-core-rework1-pytest.log",
+        "notes/logs/server-core-rework1-codex-20261102-1509.log",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403209373",
+          "ci_result": "failure @2165b1b：python job ruff lint 4 个错误（I001 导入排序等），pytest 未跑；见 logs/ci-server-core-20261102-postfix.log"
+        },
+        "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41406112495",
+        "tests/results/2026-11-02-server-core-final.log",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41450034777",
+          "ci_result": "@82abe4b：必过+guards 绿；guards-acceptance/a10-docker 等 4 项产品依赖项红（豁免）"
+        },
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
+        "测试v2 @82abe4b 通过：必过+guards 绿，0 skip（旧6 skip=缺jsonschema）；logs/server-core/2026-11-02-test-v2.log；notes 提交 042d919",
+        "测试v2 通过证据：CI 41450034777 @82abe4b 必过+guards 绿，pytest 183 passed/23 passed 0 skip；logs/server-core/2026-11-02-test-v2.log；CLI /home/box/osaka/artifacts/cli-logs/retest-v2-3modules-2026-11-02.log",
+        "已合入 main：PR #22 合并提交 4aaf529（Hao Yin 聊天批准）"
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T14:53:39+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T15:00:41+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-02T15:09:13+10:00"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-02T15:09:13+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T15:10:20+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T15:15:00+10:00",
+          "note": "审阅通过（返工1 83ec2c7），待测试；日志 /home/box/osaka/logs/review-server-core-rework1-20261102-1511.log"
+        },
+        {
+          "state": "待审测(审阅:通过/测试:阻塞)",
+          "at": "2026-11-02T20:12:03+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-02T23:27:02+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T00:47:52+10:00",
+          "note": "PR #22 合并 4aaf529"
+        }
+      ],
       "branch": "server/server-core",
       "summary": "Python 后台：标准库 http.server + ssl 监听 0.0.0.0:8443（证书/私钥路径与令牌均取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN）；GET /v1/health、/v1/version；无凭证 401、错凭证 403（hmac.compare_digest）；响应出站前手写 schema 自检；邀请码格式函数。",
-      "brief": "notes/server-core.md"
+      "brief": "notes/server-core.md",
+      "nudges": 2,
+      "nudge_log": [
+        "2026-11-02T16:50:00+10:00",
+        "2026-11-02T17:20:00+10:00"
+      ],
+      "ci_run": "41406112495",
+      "ci_result": "green: 183 passed + 18 passed (merge 872a57a, PR#4 merged a196ee7)",
+      "test_result": "通过 @82abe4b（logs/server-core/2026-11-02-test-v2.log）",
+      "blocked_on": null,
+      "review": "通过",
+      "review_state": "通过",
+      "test_state": "阻塞",
+      "next_step": "审阅通过（返工1 @83ec2c7；之后仅 9b1065e ruff 格式修正，server/ 3 文件 +4/-7）；测试可标完成，之后开模块 PR"
     },
     {
       "id": "win-shell",
       "端": "Windows",
       "模块": "win-shell",
-      "state": "待写",
+      "state": "完成",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "updated_at": "2026-11-02T23:17:54+10:00",
       "paths": [
         "windows/"
       ],
@@ -100,20 +181,95 @@
         "A16",
         "A14"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41401954341",
+          "ci_result": "failure: windows-dotnet MSB1003 未找到项目/解决方案文件"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403138518",
+          "ci_result": "success @2647a7c：windows-dotnet 真编译，测试 1/1 通过"
+        },
+        "CI 绿 https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403138518",
+        "/home/box/osaka/logs/win-shell-ci-41403138518.log",
+        "notes/win-shell.md（提交 02e2877，windows/win-shell）",
+        "tests/results/2026-11-02-win-shell.log",
+        "/home/box/osaka/logs/tests-ci-41403138518-full.log",
+        "/home/box/osaka/logs/tests-local-win-shell-20261102.log",
+        {
+          "test": "验收通过 @45ab027",
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41439801674",
+          "ci_result": "windows-acceptance/win-shell smoke.ps1 success（A1、A2、A16、A14、A17 PASS）；run 整体 failure 来自其它模块未交付 exit 3",
+          "commands": [
+            "gh run view 41439801674 --log",
+            "git ls-files windows | grep -vE \"\\.(csproj|cs|xaml)$\"",
+            "grep -rnE \"Line 01|OSA · 01\" windows/"
+          ],
+          "log": "logs/win-shell/2026-11-02-test-v1.log",
+          "cli_log": "无（未改/新写脚本）"
+        },
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）"
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T14:56:00+10:00"
+        },
+        {
+          "state": "上报",
+          "at": "2026-11-02T17:20:00+10:00",
+          "note": "巡检：写作中自 14:56 无更新，已催 2 次无动静"
+        },
+        {
+          "state": "待写",
+          "at": "2026-11-02T17:21:10+10:00"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-02T17:22:15+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:22:15+10:00"
+        },
+        {
+          "state": "待审测(审阅:通过/测试:阻塞)",
+          "at": "2026-11-02T20:12:03+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-02T21:52:57+10:00"
+        }
+      ],
       "branch": "windows/win-shell",
       "summary": ".NET 8 WPF 应用入口；侧栏导航与 连接(W1)/设置(W4) 占位页，页标识与设计稿编号一致；--self-test 启动自检退出码 0。",
-      "brief": "notes/win-shell.md"
+      "brief": "notes/win-shell.md",
+      "nudges": 0,
+      "nudge_log": [
+        "2026-11-02T16:15:00+10:00",
+        "2026-11-02T16:50:00+10:00",
+        "2026-11-02T18:46:00+10:00"
+      ],
+      "decision": "组长 17:21 拍板：CI 已绿，退回待写，由写手直接交付",
+      "test_result": "阻塞：A14、A17 通过；A1、A2、A16 未验证（CI 不跑 smoke.ps1）",
+      "review": "通过",
+      "blocked_on": null,
+      "review_state": "通过",
+      "test_state": "阻塞",
+      "next_step": "已合并 main（PR #8）@45ab027 并推送；测试按看板跑验收"
     },
     {
       "id": "win-diagnostics",
       "端": "Windows",
       "模块": "win-diagnostics",
-      "state": "待写",
+      "state": "上报",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "updated_at": "2026-11-03T02:22:00+10:00",
       "paths": [
         "windows/"
       ],
@@ -123,20 +279,85 @@
         "A7",
         "A15"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41401959753",
+          "ci_result": "failure: windows-dotnet MSB1003 未找到项目/解决方案文件"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403148691",
+          "ci_result": "success @1f6adf6：windows-dotnet 真编译，测试 61/61 通过"
+        },
+        "CI 绿 https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403148691",
+        "/home/box/osaka/logs/win-diagnostics-ci-41403148691.log",
+        "notes/win-diagnostics.md（提交 e700fe5，windows/win-diagnostics）",
+        "tests/results/2026-11-02-win-diagnostics.log",
+        "/home/box/osaka/logs/tests-ci-41403148691-full.log",
+        "/home/box/osaka/logs/tests-local-win-diagnostics-20261102.log",
+        "PR #11 审阅 PASS @c56c80a（logs/win-diagnostics/review-pr11-20261102-221042.log）；按审阅意见，#11 暂缓合并，等 win-shell/win-diagnostics 产品分支上 main",
+        "PR #11 @c56c80a：guards 红（分支未含 PR #14 拆分），尚不满足合并标准；且审阅要求等 win-shell/win-diagnostics 产品分支上 main",
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）"
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T16:15:57+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:22:15+10:00"
+        },
+        {
+          "state": "待审测(审阅:通过/测试:阻塞)",
+          "at": "2026-11-02T20:12:03+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "上报",
+          "at": "2026-11-03T02:22:00+10:00"
+        }
+      ],
       "branch": "windows/win-diagnostics",
       "summary": "ErrorPresenter（errors.json 码→中文文案，不含堆栈）、LogRedactor、InviteCode.IsValid；均读 shared 测试向量做单测。",
-      "brief": "notes/win-diagnostics.md"
+      "brief": "notes/win-diagnostics.md",
+      "nudges": 2,
+      "nudge_log": [
+        "2026-11-02T17:20:00+10:00",
+        "2026-11-02T18:46:00+10:00",
+        {
+          "at": "2026-11-03T00:25:00+10:00",
+          "to": "写手 · Windows",
+          "note": "巡检催办：待测试停留约65分钟"
+        },
+        {
+          "at": "2026-11-03T01:46:00+10:00",
+          "to": "写手 · Windows",
+          "note": "巡检催办第2次：待测试自 23:17 无更新约2.5小时"
+        },
+        {
+          "at": "2026-11-03T02:22:00+10:00",
+          "to": "Hao Yin",
+          "note": "巡检第3次：催办2次后自 2026-11-02T23:17 起无更新约3小时，按规则改为上报"
+        }
+      ],
+      "test_result": "阻塞：A3、A4、A15 未验证（CI 不跑 WinDiagnostics.Tests）；A14 通过",
+      "review": "通过",
+      "blocked_on": null,
+      "review_state": "通过",
+      "test_state": "阻塞",
+      "next_step": "已上报 Hao Yin（2026-11-03 02:22）。卡点推测：smoke.ps1 需 win-shell 入口 exe，win-shell PR #21 未合入 main（第2类等 Hao Yin 批准）；WinDiagnostics.Tests 路径待对齐。等组长或 Hao Yin 拍板后回到待写"
     },
     {
       "id": "admin-connect",
       "端": "管理端",
       "模块": "admin-connect",
-      "state": "待写",
+      "state": "完成",
       "owner": "写手 · Windows",
-      "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "rework": 2,
+      "updated_at": "2026-11-03T01:56:34+10:00",
       "paths": [
         "admin/"
       ],
@@ -144,20 +365,104 @@
         "A10",
         "A14"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41401965568",
+          "ci_result": "failure: windows-dotnet MSB1003 未找到项目/解决方案文件"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403156768",
+          "ci_result": "success @798112b：windows-dotnet 真编译，测试 63/63 通过"
+        },
+        "CI 绿 https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403156768",
+        "/home/box/osaka/logs/admin-connect-ci-41403156768.log",
+        "notes/admin-connect.md（提交 6149842，admin/admin-connect）",
+        "/home/box/osaka/logs/admin-connect-rework1-card.md",
+        "/home/box/osaka/logs/admin-connect-codex-rework1.log",
+        "rework1 提交 93fba9d（admin/admin-connect，本地，待 CI）",
+        "tests/results/2026-11-02-admin-connect.log",
+        "/home/box/osaka/logs/tests-ci-41407456188-full.log",
+        "/home/box/osaka/logs/tests-local-admin-connect-20261102.log",
+        "/home/box/osaka/logs/test-admin-grepguard-fix-claude-20261102.log",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/26 开启中；a10-docker 红：gen-certs.sh wronghost 自检误报",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/28 开启中：gen-certs 修复",
+        "测试不通过 @ff89420/ebd7f89：run 41472506117/41472494941 a10-docker 红，osaka-server exited(1) No module named server.__main__；日志 logs/admin-connect/ci-41472506117-a10.log、ci-41472506117-a10-summary.txt；返工单见 notes/admin-connect.md",
+        "测试通过 @0fb37c8（产品代码等同 70a5d35，含 #39 --no-deps 修复）：run 41476049994 a10-docker 绿 4/4，③④ 不受信/SAN 不符均拒绝（退出码 3），probe 前无 Recreate；日志 logs/admin-connect/ci-41476049994-full.log 第1637-1719行；其余 3 红为 exit 3 豁免"
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T16:20:40+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:22:15+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-02T17:32:08+10:00"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-02T17:36:25+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:36:25+10:00"
+        },
+        {
+          "state": "待审测(审阅:通过/测试:阻塞)",
+          "at": "2026-11-02T20:12:03+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T00:47:52+10:00",
+          "note": "server-core 已上 main，解除阻塞；PR #26 待 a10-docker"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T01:28:20+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-03T01:35:35+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T01:56:34+10:00",
+          "note": "组长拍板：审阅 01:45 已通过 70a5d35（review-rework2-70a5d35 日志），状态当时未改"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T01:56:34+10:00"
+        }
+      ],
       "branch": "admin/admin-connect",
       "summary": ".NET 8 WPF 管理连接页：输入后台地址，令牌只取环境变量 OSAKA_ADMIN_TOKEN；HttpClient 默认证书校验（禁止自定义放行回调）；System.Text.Json record+required+Disallow 未知字段做边界校验；被拒/证书失败/响应不合 schema 时显示错误且不显示已连接。",
-      "brief": "notes/admin-connect.md"
+      "brief": "notes/admin-connect.md",
+      "test_result": "阻塞：A14、A10 源码约束通过；A10 ①–④ 未验证（a10-docker 跳过）@93fba9d",
+      "review": "通过",
+      "nudges": 0,
+      "nudge_log": [
+        "2026-11-02T18:46:00+10:00"
+      ],
+      "blocked_on": null,
+      "review_state": "通过",
+      "test_state": "阻塞",
+      "next_step": "已合并 main（PR #8）@deda861 并推送；测试按看板跑验收"
     },
     {
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待写",
+      "state": "完成",
       "owner": "写手 · Android",
-      "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "rework": 1,
+      "updated_at": "2026-11-03T00:47:52+10:00",
       "paths": [
         "android/"
       ],
@@ -167,20 +472,97 @@
         "A16",
         "A14"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41401972539",
+          "ci_result": "假绿: android job 因无 android/gradlew 跳过构建，未真编译"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403200131",
+          "ci_result": "success @9e47998（含 ae5f609 useAndroidX）：Gradle 8.9 真构建，BUILD SUCCESSFUL"
+        },
+        "/home/box/osaka/logs/android-ci-verify-20261102.log",
+        "tests/results/2026-11-02-android-shell.log",
+        "/home/box/osaka/logs/ci-41403200131-android.log",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41450041148",
+          "ci_result": "@1b48848：必过+guards+guards-acceptance 绿；android-emulator 真失败：testDebugUnitTest 5 测 1 失败"
+        },
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
+        "测试v2 @1b48848 不通过（非返工）：CI 接线，shell 分支跑 diagnostics run.sh 缺 JvmJson.kt；logs/android-shell/2026-11-02-test-v2.log；notes 提交 ec7c5c5",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499",
+          "ci_result": "进行中 @454063d（合入 main 9662b8e，含 PR #15），待测试复测"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499",
+          "ci_result": "测试v3 @454063d 通过：必需检查+guards+guards-acceptance+android-emulator 绿，A5 启动无崩溃；a10-docker/windows-acceptance exit 3 豁免",
+          "commands": "gh run view 41455806499 --repo Yarrow-he/OsakaConnect; --log-failed; --job 125312041492 --log",
+          "log": "logs/android-shell/2026-11-02-test-v3.log"
+        }
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T14:53:41+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:22:48+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-02T17:32:08+10:00"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-02T17:33:47+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:34:25+10:00"
+        },
+        {
+          "state": "待审测(审阅:通过/测试:阻塞)",
+          "at": "2026-11-02T20:12:03+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-02T23:53:02+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T00:47:52+10:00",
+          "note": "PR #19 等 Hao Yin 批准"
+        }
+      ],
       "branch": "android/android-shell",
       "summary": "Kotlin 单 Activity；未激活(P1)/已激活(P2) 占位与导航；生命周期回调经 LogRedactor 记录。",
-      "brief": "notes/android-shell.md"
+      "brief": "notes/android-shell.md",
+      "nudges": 2,
+      "nudge_log": [
+        "2026-11-02T16:15:00+10:00",
+        "2026-11-02T16:50:00+10:00"
+      ],
+      "test_result": "通过：A5/A6/A16 run 41455806499 @454063d，日志 logs/android-shell/2026-11-02-test-v3.log；A14 lang-guard 通过",
+      "review": "通过",
+      "review_state": "通过",
+      "test_state": "通过",
+      "next_step": "测试 · Osaka 按 run 41455806499 复测",
+      "blocked_on": "PR #19 等 Hao Yin 批准"
     },
     {
       "id": "android-diagnostics",
       "端": "Android",
       "模块": "android-diagnostics",
-      "state": "待写",
+      "state": "完成",
       "owner": "写手 · Android",
-      "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "rework": 3,
+      "updated_at": "2026-11-03T01:33:40+10:00",
       "paths": [
         "android/"
       ],
@@ -188,11 +570,124 @@
         "A7",
         "A15"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        "/home/box/osaka/logs/android-diagnostics-codex-20261102-161717.log",
+        "/home/box/osaka/logs/android-diagnostics-checks-20261102-161717.log",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41401977139",
+          "ci_result": "假绿: android job 因无 android/gradlew 跳过构建，未真编译"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403204924",
+          "ci_result": "success @97d42d6（含 6c71afc useAndroidX）：Gradle 8.9 真构建，BUILD SUCCESSFUL"
+        },
+        "tests/results/2026-11-02-android-diagnostics.log",
+        "/home/box/osaka/logs/ci-41403204924-android.log",
+        "/home/box/osaka/logs/ci-41408582664-android.log",
+        "/home/box/osaka/logs/android-diagnostics-addon-card.md",
+        "/home/box/osaka/logs/android-diagnostics-addon-codex-20261102-175856.log",
+        "/home/box/osaka/logs/ci-41410083845-android.log",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41450047955",
+          "ci_result": "@a8a30d1：必过+guards+guards-acceptance 绿；android-emulator 真失败：OrgJsonDivergenceTest 设备端失败"
+        },
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
+        "测试v2 @a8a30d1 不通过（待组长定口径）：真机 org.json 重复键 last-wins 与 JvmJson 不一致；logs/android-diagnostics/2026-11-02-test-v2.log；notes 提交 7bd7e26",
+        "2026-11-02T23:32 组长核对 check-scope：@7bd7e26 暂存的 JvmJson.kt/JvmJsonTest.kt/notes 本地 --staged 与对 origin/main 的分支差异都通过；73c7002 已在 main。tests/android/android-diagnostics/ 一直不在本模块 paths（只有 android/），归测试分支；向量 duplicate-keys 与 OrgJsonDivergenceTest.kt:33 由测试在 tests/ 分支改",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455904368",
+          "ci_result": "进行中 @0356475（a174c17 + 合入 main 4f8eccc，含 PR #16 向量修正）"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41466092508",
+          "ci_result": "测试v4 @f66b7da0c7f5be0785220701fe99c6bd2088b48f 临时：OrgJson 通过，Jvm 证据不足。OrgJsonDivergenceTest 1 tests 0 failures 0 skipped（6 向量含 bare-tab/bare-nul/bom ok=true，向量同 9d14901）；MainActivityTest A5 通过；JvmJsonDivergenceTest 在 android-emulator job testDebugUnitTest 执行但无用例级报告；日志 logs/android-diagnostics/2026-11-03-test-v4.log"
+        },
+        "https://github.com/Yarrow-he/OsakaConnect/pull/24 已合并 d6e7791（测试向量）",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/28 开启中（a10 gen-certs 修复）",
+        {
+          "review": "通过 @f66b7da（含 a94496d 补做）",
+          "log": "/home/box/osaka/logs/android-diagnostics/review-rework3-f66b7da-20261103-010111.log"
+        },
+        {
+          "test": "v5 终判 通过 @a285acf（产品代码同 f66b7da）",
+          "run": 41470533804,
+          "commands": [
+            "gh run view 41470533804 --json headSha,jobs",
+            "gh run download 41470533804 -n android-jvm-unit-junit -n android-emulator-logs",
+            "git diff --stat f66b7da a285acf -- android/"
+          ],
+          "results": "必过5项+android-emulator+guards-acceptance success；JvmJsonDivergenceTest 1/0/0/0；JvmJsonTest 6/0/0/0；OrgJsonDivergenceTest 1 tests 0 failures 0 skipped（emulator-5554 - 11）；android/ diff 为空",
+          "log": "logs/android-diagnostics/2026-11-03-test-v5.log"
+        }
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T16:17:01+10:00",
+          "note": "基线 android/android-shell b76cb0e（需 Gradle 骨架）"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:22:48+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-02T17:32:08+10:00"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-02T17:33:47+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:34:25+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-02T17:43:35+10:00"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-02T17:44:48+10:00"
+        },
+        {
+          "state": "待审测",
+          "at": "2026-11-02T17:51:23+10:00"
+        },
+        {
+          "state": "待审测(审阅:通过/测试:阻塞)",
+          "at": "2026-11-02T20:12:03+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "待审阅",
+          "at": "2026-11-03T01:04:35+10:00",
+          "note": "新版本 f66b7da（返工3，合入 main d6e7791）"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T01:10:25+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T01:33:40+10:00"
+        }
+      ],
       "branch": "android/android-diagnostics",
       "summary": "LogRedactor、InviteCode.isValid、错误展示（errors.json 文案）；为 0.2.0 预留的响应校验用 org.json 手写，本期只做 admin-contract 解析校验函数及单测。",
-      "brief": "notes/android-diagnostics.md"
+      "brief": "notes/android-diagnostics.md",
+      "test_result": "阻塞：A7/A15 测试脚本未在 CI 跑（workflow 不调用 tests/android/*）；写手单测 BUILD SUCCESSFUL 但无用例计数；A14 lang-guard 通过",
+      "review": "通过",
+      "nudges": 0,
+      "nudge_log": [
+        "2026-11-02T19:52:00+10:00"
+      ],
+      "review_state": "通过",
+      "test_state": "阻塞",
+      "next_step": "等审阅 CLI 审 f66b7da；Jvm 用例证据等 CI 上传 emulator job testDebugUnitTest XML"
     },
     {
       "id": "ci-guards",
@@ -201,7 +696,7 @@
       "state": "待写",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "updated_at": "2026-11-02T23:47:29+10:00",
       "paths": [
         ".github/",
         "scripts/",
@@ -219,7 +714,282 @@
       "history": [],
       "branch": "ci/ci-guards",
       "summary": "完善 CI：契约测试 job（已有初版）；A10 docker 端到端：ci/ 下用 openssl 生成临时 CA 与 SAN=osaka-server 证书、另一张不可信 CA 证书和 SAN 不匹配证书，server 容器以服务名 osaka-server 运行，探测容器经 docker 网络连接，覆盖四项必测；技术栈/互引路径/硬编码线路检查；PR 行数统计。",
-      "brief": "notes/ci-guards.md"
+      "brief": "notes/ci-guards.md",
+      "review": "未审",
+      "next_step": "部分完成：CI 已由 PR #5/#8/#10/#13/#14/#15 补齐各端 job 与 merge-scope；缺 A10 docker 证书（ci/ 目录不存在）、技术栈/硬编码线路检查、PR 行数统计。下一步：随 server-core 与 admin-connect 合入后开 ci/ci-guards 小 PR。ETA 2026-11-05"
+    }
+  ],
+  "prs": {
+    "7": {
+      "state": "待合并",
+      "review": "通过 notes/pr7-tests.md",
+      "ci": "a10-docker 红：主分支缺 server/ admin/，exit 3 按设计报红 logs/pr7/",
+      "blocked_on": "等 server-core/admin-connect 合入主分支后重跑 CI 再按组长合并",
+      "updated_at": "2026-11-02T20:10:29+10:00"
+    }
+  },
+  "tasks": {
+    "ci-acceptance": {
+      "title": "CI 接线：各端验收脚本接入 GitHub Actions",
+      "owner": "代码组长 · Osaka",
+      "state": "已合并",
+      "started_at": "2026-11-02T21:24:14+10:00",
+      "branch": "lead/ci-acceptance",
+      "unblocks": [
+        "server-core",
+        "win-shell",
+        "win-diagnostics",
+        "admin-connect",
+        "android-shell",
+        "android-diagnostics"
+      ],
+      "pr": 8,
+      "updated_at": "2026-11-02T21:48:34+10:00",
+      "next_step": "已合并；待开组长文档 PR：board.json 与 tests/INDEX.md（tests/v0.1.0 worktree）、decisions/004 合并记录",
+      "merge_commit": "ab2eee4",
+      "history": [
+        {
+          "at": "2026-11-02T21:48:34+10:00",
+          "to": "已合并",
+          "by": "代码组长 · Osaka",
+          "note": "Hao Yin 21:47 批准（二类），PR #8 merge commit ab2eee4"
+        }
+      ]
+    },
+    "check-scope-merge": {
+      "title": "check-scope 合并规则 + pre-merge-commit 钩子",
+      "owner": "代码组长 · Osaka",
+      "state": "已关闭（被 ci-merge-scope 取代）",
+      "started_at": "2026-11-02T21:52:00+10:00",
+      "updated_at": "2026-11-02T22:15:58+10:00",
+      "branch": "lead/check-scope-merge",
+      "pr": 9,
+      "decision": "decisions/005-check-scope-merge.md",
+      "history": [
+        {
+          "at": "2026-11-02T21:58:02+10:00",
+          "to": "待批准（二类）",
+          "by": "代码组长 · Osaka",
+          "note": "PR #9 f261fa1；A/B 三轮均反对；自测 5/5 通过"
+        },
+        {
+          "at": "2026-11-02T22:15:58+10:00",
+          "to": "已关闭",
+          "by": "代码组长 · Osaka",
+          "note": "Hao Yin 22:13 选 B 方案，PR #9 关闭未合并，分支保留"
+        }
+      ],
+      "next_step": "无"
+    },
+    "ci-win-diag-always": {
+      "title": "WinDiagnostics.Tests 不被 smoke.ps1 失败跳过",
+      "owner": "代码组长 · Osaka",
+      "state": "已合并",
+      "updated_at": "2026-11-02T22:05:14+10:00",
+      "pr": 10,
+      "merge_commit": "32a8e0c",
+      "decision": "decisions/006-ci-win-diag-always.md",
+      "history": [
+        {
+          "at": "2026-11-02T22:05:14+10:00",
+          "to": "已合并",
+          "by": "代码组长 · Osaka",
+          "note": "一类，A/B 同意，组长合并"
+        }
+      ],
+      "next_step": "WinDiagnostics.Tests 的 ProductProject 默认指向 windows/OsakaConnect.Windows/，win-diagnostics 实际是 windows/OsakaConnect.Diagnostics/，3 个测试全部 Skipped 却显示绿；需对齐路径并让 Skipped 判失败"
+    },
+    "ci-merge-scope": {
+      "title": "CI 校验模块分支合并提交（B 方案）",
+      "owner": "代码组长 · Osaka",
+      "state": "已合并",
+      "started_at": "2026-11-02T22:13:00+10:00",
+      "updated_at": "2026-11-02T23:02:59+10:00",
+      "branch": "lead/ci-merge-scope",
+      "pr": 13,
+      "decision": "decisions/007-ci-merge-scope.md",
+      "history": [
+        {
+          "at": "2026-11-02T22:15:58+10:00",
+          "to": "待批准（二类）",
+          "by": "代码组长 · Osaka",
+          "note": "PR #13 5e23537；A 反对、B 有条件同意（一轮）；自测 7/7"
+        },
+        {
+          "state": "已批准（待 CI 全绿）",
+          "at": "2026-11-02T22:45:28+10:00",
+          "to": "已批准（待 CI 全绿）",
+          "by": "代码组长 · Osaka",
+          "note": "Hao Yin 22:44 原话「批」，修订 b5a667a"
+        },
+        {
+          "state": "已合并",
+          "at": "2026-11-02T23:02:59+10:00",
+          "to": "已合并",
+          "by": "代码组长 · Osaka",
+          "note": "同步 main @2b2b414 后必过+guards 全绿；merge commit 305ecdb"
+        }
+      ],
+      "next_step": "无",
+      "merge_commit": "305ecdb"
+    },
+    "ci-guards-no-product": {
+      "title": "guards 拆分：产品验收守卫移入 guards-acceptance",
+      "owner": "代码组长 · Osaka",
+      "state": "已合并",
+      "started_at": "2026-11-02T22:49:57+10:00",
+      "updated_at": "2026-11-02T23:02:59+10:00",
+      "branch": "lead/ci-guards-no-product",
+      "pr": 14,
+      "decision": "decisions/008-ci-guards-no-product.md",
+      "history": [
+        {
+          "state": "待批准（二类）",
+          "at": "2026-11-02T22:49:57+10:00",
+          "note": "PR #14 a247f07；A、B 均有条件同意（一轮）"
+        },
+        {
+          "state": "已合并",
+          "at": "2026-11-02T23:02:59+10:00",
+          "to": "已合并",
+          "by": "代码组长 · Osaka",
+          "note": "Hao Yin 22:57 批准；merge commit d34b595；guards 已加入必过"
+        }
+      ],
+      "next_step": "无；guards-acceptance 必过见 tasks.guards-acceptance-required",
+      "merge_commit": "d34b595"
+    },
+    "exempt-checks-required": {
+      "title": "产品依赖检查：豁免至产品进 main，之后必须绿并加入必过",
+      "owner": "代码组长 · Osaka",
+      "state": "豁免中",
+      "started_at": "2026-11-02T23:02:59+10:00",
+      "updated_at": "2026-11-02T23:05:18+10:00",
+      "note": "Hao Yin 22:57：guards-acceptance 等产品代码上 main 再加；23:04：另外三项同样豁免至对应代码进仓库，之后必须报绿",
+      "checks": {
+        "guards-acceptance": {
+          "depends_on_dirs": [
+            "android/",
+            "windows/",
+            "admin/",
+            "server/"
+          ],
+          "exempt_until": "对应产品代码进 main",
+          "state": "豁免中",
+          "reminded_at": null,
+          "note": "lang-guard 无 android/ 即 exit 3；grep-guard 四个目录全缺才 exit 3，缺哪个跳哪个，四个都进 main 才算完整"
+        },
+        "windows-acceptance": {
+          "depends_on_dirs": [
+            "windows/"
+          ],
+          "exempt_until": "对应产品代码进 main",
+          "state": "豁免中",
+          "reminded_at": null,
+          "note": "smoke.ps1 无 windows/ 即 exit 3；需 win-shell 入口 exe + win-diagnostics 测试"
+        },
+        "android-emulator": {
+          "depends_on_dirs": [
+            "android/"
+          ],
+          "exempt_until": "对应产品代码进 main",
+          "state": "豁免中",
+          "reminded_at": null,
+          "note": "无 android/settings.gradle.kts 即 exit 3；需 android-shell + android-diagnostics"
+        },
+        "a10-docker": {
+          "depends_on_dirs": [
+            "server/",
+            "admin/"
+          ],
+          "exempt_until": "对应产品代码进 main",
+          "state": "豁免中",
+          "reminded_at": null,
+          "note": "run-a10.sh 缺 server/ 或 admin/ 即 exit 3；需 server-core + admin-connect"
+        }
+      },
+      "history": [
+        {
+          "state": "待写",
+          "at": "2026-11-02T23:02:59+10:00",
+          "note": "Hao Yin 22:57"
+        },
+        {
+          "state": "豁免中",
+          "at": "2026-11-02T23:05:18+10:00",
+          "note": "Hao Yin 23:04：4 项产品依赖检查统一豁免；替换 guards-acceptance-required"
+        }
+      ],
+      "next_step": "每次产品 PR 合入 main 后核对对应检查在 main 上是否变绿；变绿即填 reminded_at 并请 Hao Yin 批准加入必过"
+    },
+    "ci-wiring-audit": {
+      "title": "核对 lead/ci-android-emulator 与 WinDiagnostics.Tests 接入",
+      "owner": "代码组长 · Osaka",
+      "state": "完成",
+      "started_at": "2026-11-02T23:17:54+10:00",
+      "updated_at": "2026-11-02T23:17:54+10:00",
+      "history": [
+        {
+          "state": "完成",
+          "at": "2026-11-02T23:17:54+10:00",
+          "note": "lead/ci-android-emulator 相对 main 无新提交，PR #5 已合并，已过时，无需新 PR；WinDiagnostics.Tests 已在 windows-acceptance（PR #8/#10），无需新 PR"
+        }
+      ],
+      "next_step": "无；远端分支 lead/ci-android-emulator 仍在，删除需 Hao Yin 点头"
+    },
+    "ci-android-diag-gate": {
+      "title": "android-emulator 按 diagnostics 产品目录执行其验收",
+      "owner": "代码组长 · Osaka",
+      "state": "完成",
+      "started_at": "2026-11-02T23:24:57+10:00",
+      "updated_at": "2026-11-02T23:47:29+10:00",
+      "branch": "lead/ci-android-diag-gate",
+      "pr": 15,
+      "decision": "decisions/009-ci-android-diag-gate.md",
+      "history": [
+        {
+          "state": "待批准（二类）",
+          "at": "2026-11-02T23:24:57+10:00",
+          "note": "PR #15；A、B 均有条件同意（一轮）"
+        },
+        {
+          "state": "待批准（二类）",
+          "at": "2026-11-02T23:28:42+10:00",
+          "note": "采纳 B 三条补强 7cd7654；第二轮 A、B 均有条件同意"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-02T23:47:29+10:00",
+          "note": "Hao Yin 聊天内批准，PR #15 合并 9662b8e"
+        }
+      ],
+      "next_step": "无",
+      "merge_commit": "9662b8e",
+      "artifacts": [
+        {
+          "pr": "https://github.com/Yarrow-he/OsakaConnect/pull/15",
+          "merge": "9662b8e"
+        },
+        "https://github.com/Yarrow-he/OsakaConnect/pull/15#issuecomment-6578710611"
+      ]
+    }
+  },
+  "decisions_log": [
+    {
+      "at": "2026-11-02T23:28:42+10:00",
+      "topic": "android-diagnostics 重复 JSON 键",
+      "ruling": "测试替身 JvmJson 与真机 org.json 一致：重复键后者覆盖前者（规格未规定）",
+      "evidence": "acceptance.md A7/A15、openapi additionalProperties、docs/architecture.md:34 均未规定重复键",
+      "dispatched_to": [
+        "写手 · Android",
+        "测试 · Osaka"
+      ]
+    },
+    {
+      "at": "2026-11-02T23:47:29+10:00",
+      "topic": "shared-protocol、ci-guards 状态核对",
+      "ruling": "两者内容未完全进 main，保持待写，记 next_step 与 ETA，不开大活",
+      "evidence": "git log origin/main -- openapi shared tests/contract .github scripts；origin/main 无 ci/"
     }
   ]
 }
