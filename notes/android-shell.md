@@ -33,3 +33,13 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 2. sha：远端 9e47998（组长合入 origin/main 的合并提交），包含本地提交 ae5f609（gh compare：ahead 3，behind 0）。
 3. Codex 日志：/home/box/osaka/logs/android-shell-codex-20261102-145542.log ；/home/box/osaka/logs/android-shell-androidx-codex-20261102-165454.log
 4. 检查日志：/home/box/osaka/logs/android-shell-androidx-checks-20261102-165454.log ；CI 核实：/home/box/osaka/logs/android-ci-verify-20261102.log
+
+## 审阅（审阅 · Osaka，2026-11-02）
+结论：退回（证明不足，未进入代码审阅）。
+1. /home/box/osaka/logs/android-ci-verify-20261102.log 只有一句“assembleDebug testDebugUnitTest lint success”的摘要，没有原始 job 日志、没有测试数；此前出现过 gradlew 缺失的假绿（ci-android-shell-20261102.log 为“无 Android 代码，跳过”），摘要不足以排除。需交 run 的原始 android job 日志（含 BUILD SUCCESSFUL 与测试数）。
+2. 预检（只看 diffstat）：gradle-wrapper.properties 在模块 paths android/ 内，不超 scope；reports/model-issues.md 在 global scope 且规则要求写入，可接受。
+
+## 返工证明（rework=1，写手 · Android）
+1. 原始 CI 日志：/home/box/osaka/logs/ci-41403200131-android.log（run 41403200131 android job 125139336542）。第 264 行 `> Task :app:testDebugUnitTest`，第 278 行 `BUILD SUCCESSFUL in 2m 41s`。
+2. 单测数：日志里没有用例计数（Gradle 默认不打印 tests completed，workflow 也没上传测试结果 XML）。如实记为“无计数”。
+3. 原摘要 /home/box/osaka/logs/android-ci-verify-20261102.log 作废，以原始日志为准。
