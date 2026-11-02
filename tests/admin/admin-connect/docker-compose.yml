@@ -1,0 +1,53 @@
+# 用途：A10 端到端拓扑。osaka-server 容器跑 server/ 后台；osaka-probe 容器跑管理端无界面入口
+#       --probe https://osaka-server:8443。两容器只走 compose 默认网络，不发布宿主机端口、
+#       不使用 network_mode: host，因此不经本机回环；临时 CA 由 gen-certs.sh 运行时生成后
+#       挂进 probe 信任库。
+# 前置环境：GitHub Actions ubuntu-latest + docker compose（待 CI）；本机不跑构建、不装 .NET/JDK。
+# 运行命令：tests/admin/admin-connect/run-a10.sh（本文件不要单独起）。
+# 覆盖 acceptance：A10（①可信证书+正确令牌、②错误令牌、③非受信 CA、④主机名不匹配）、A14（probe 为 .NET 入口）。
+# 待写手交付后对齐：SERVER_CMD、PROBE_DOCKERFILE、PROBE_BUILD_CONTEXT、PROBE_BIN 的默认值
+# 以 server/、admin/ 实际入口为准。
+
+services:
+  osaka-server:
+    image: python:3.12-slim
+    working_dir: /workspace
+    command: ["sh", "-c", "exec ${SERVER_CMD:-python -m server}"]
+    environment:
+      PYTHONUNBUFFERED: "1"
+      PYTHONPATH: /workspace
+      OSAKA_TLS_CERT: /certs/${OSAKA_CERT_SET:-trusted}/server.crt
+      OSAKA_TLS_KEY: /certs/${OSAKA_CERT_SET:-trusted}/server.key
+      OSAKA_ADMIN_TOKEN: "${OSAKA_ADMIN_TOKEN:?OSAKA_ADMIN_TOKEN required}"
+    volumes:
+      - "${OSAKA_ROOT:-../../..}/server:/workspace/server:ro"
+      - "${CERTS_DIR:?CERTS_DIR required}:/certs:ro"
+    # 仅探 TCP 端口，不做 TLS 校验，保证 ③④ 场景下也能等到后台就绪
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; socket.create_connection(('osaka-server', 8443), 3).close()"]
+      interval: 2s
+      timeout: 5s
+      retries: 30
+
+  osaka-probe:
+    build:
+      context: ${PROBE_BUILD_CONTEXT:-../../..}
+      dockerfile: ${PROBE_DOCKERFILE:-admin/Dockerfile.probe}
+    image: ${PROBE_IMAGE:-osaka-admin-probe:local}
+    depends_on:
+      osaka-server:
+        condition: service_healthy
+    volumes:
+      - "${CERTS_DIR:?CERTS_DIR required}/trusted/ca.crt:/usr/local/share/ca-certificates/osaka-test-ca.crt:ro"
+      - "${CERTS_DIR:?CERTS_DIR required}:/certs:ro"
+    environment:
+      OSAKA_ADMIN_TOKEN: "${PROBE_TOKEN:?PROBE_TOKEN required}"
+      SSL_CERT_FILE: /certs/trusted/ca.crt
+      PROBE_BIN: ${PROBE_BIN:-/app/probe}
+      PROBE_URL: ${PROBE_URL:-https://osaka-server:8443}
+    # 把临时 CA 注入系统信任库后，再跑产品自带的 probe 入口
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        update-ca-certificates >/dev/null 2>&1 || true
+        exec "$$PROBE_BIN" --probe "$$PROBE_URL"
