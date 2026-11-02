@@ -27,3 +27,23 @@ A10, A14（见 `acceptance.md`）。完成标准：单测：admin-contract 正�
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 返工单（测试 · Osaka，2026-11-03T01:35:35+10:00）
+1. 版本：ff89420（PR #26 写手交付），CI head ebd7f89（ff89420 合入 main 后；admin/ 无差异）。
+2. 结论：不通过（以 CI 为准）。run 41472506117（pull_request）与 41472494941（push）：a10-docker=failure；contract、guards、python、android、windows-dotnet=success。
+3. 报错原文（ci-41472506117-a10.log 第 302、306、307 行）：
+   1. container osaka-a10-osaka-server-1 exited (1)
+   2. osaka-server-1  | /usr/local/bin/python: No module named server.__main__; 'server' is a package and cannot be directly executed
+   3. ##[error]Process completed with exit code 1.
+4. 日志：logs/admin-connect/ci-41472506117-a10.log、logs/admin-connect/ci-41472506117-a10-summary.txt。
+5. 复现：
+   1. gh run view 41472506117 --log > a10.log，grep -n "No module named" a10.log。
+   2. 或在有 docker 的机器：git checkout ebd7f89 && bash tests/admin/admin-connect/run-a10.sh，失败时脚本会 dump docker compose logs。
+6. 推测原因（推测，未验证）：tests/admin/admin-connect/docker-compose.yml 第 15 行默认 SERVER_CMD 为 python -m server，而 ebd7f89 的 server/ 下只有 osaka_server/、tests/、README.md，没有 __main__.py；入口应为 python -m osaka_server（或类似），或由写手提供 __main__.py / 设置 SERVER_CMD。请写手 · 服务端定位。
+
+## 测试结论 @0fb37c8（产品代码等同 70a5d35）（2026-11-03T01:55:59+10:00）
+1. 撤回：70a5d35 的不通过是测试脚本问题（run_probe 没带 OSAKA_CERT_SET，compose 按 depends_on 用默认证书重建服务端），不计返工。
+2. 脚本修复：PR #39，提交 8c19c9c，run-a10.sh 的 run_probe 加 --no-deps。CLI 日志 /home/box/osaka/wt/a10-nodeps/logs/admin-connect/cli-a10-nodeps-20261103T015118.log；摘要：claude -p 按任务卡只改 1 行，git diff --name-only 只有 run-a10.sh，bash -n 通过。
+3. 复测：CI run 41476049994 a10-docker 绿，4/4。③④ 拒绝，退出码 3；Recreate 只出现在 start_server，probe 前没有。日志 logs/admin-connect/ci-41476049994-full.log 第 1637-1719 行。
+4. 豁免：guards-acceptance、windows-acceptance、android-emulator 为 exit 3（模块未交付）。
+5. 看板 state 现为“返工”（01:35 那条对应旧版 ff89420），按流程不能直接改成完成，请组长先统一状态。

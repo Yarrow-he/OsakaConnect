@@ -58,9 +58,16 @@ export CERTS_DIR="$(mktemp -d)/certs"
 TMP_DIR=$(dirname "$CERTS_DIR")
 
 cleanup() {
+  rc=$?
+  if [ "$rc" -ne 0 ]; then
+    echo "== 容器诊断（退出码 $rc）==" >&2
+    OSAKA_CERT_SET=trusted docker compose -p "$COMPOSE_PROJECT" -f "$COMPOSE_FILE" ps -a >&2 || true
+    OSAKA_CERT_SET=trusted docker compose -p "$COMPOSE_PROJECT" -f "$COMPOSE_FILE" logs --no-color >&2 || true
+  fi
   OSAKA_CERT_SET=trusted docker compose -p "$COMPOSE_PROJECT" -f "$COMPOSE_FILE" \
     down -v --remove-orphans >/dev/null 2>&1 || true
   rm -rf "$TMP_DIR"
+  exit "$rc"
 }
 trap cleanup EXIT
 
@@ -82,7 +89,7 @@ start_server() { # $1 = trusted|untrusted|wronghost
 run_probe() { # $1 = probe 使用的令牌
   set +e
   PROBE_OUT=$(PROBE_TOKEN="$1" docker compose -p "$COMPOSE_PROJECT" -f "$COMPOSE_FILE" \
-    run --rm -T "$PROBE_SERVICE" 2>&1)
+    run --rm --no-deps -T "$PROBE_SERVICE" 2>&1)
   PROBE_RC=$?
   set -e
   printf '%s\n' "$PROBE_OUT"
