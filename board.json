@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T00:47:52+10:00",
+  "updated_at": "2026-11-03T01:04:35+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -343,7 +343,7 @@
       "state": "待测试",
       "owner": "写手 · Windows",
       "rework": 1,
-      "updated_at": "2026-11-02T23:17:54+10:00",
+      "updated_at": "2026-11-03T01:04:35+10:00",
       "paths": [
         "admin/"
       ],
@@ -369,7 +369,9 @@
         "tests/results/2026-11-02-admin-connect.log",
         "/home/box/osaka/logs/tests-ci-41407456188-full.log",
         "/home/box/osaka/logs/tests-local-admin-connect-20261102.log",
-        "/home/box/osaka/logs/test-admin-grepguard-fix-claude-20261102.log"
+        "/home/box/osaka/logs/test-admin-grepguard-fix-claude-20261102.log",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/26 开启中；a10-docker 红：gen-certs.sh wronghost 自检误报",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/28 开启中：gen-certs 修复"
       ],
       "history": [
         {
@@ -524,10 +526,10 @@
       "id": "android-diagnostics",
       "端": "Android",
       "模块": "android-diagnostics",
-      "state": "待测试",
+      "state": "待审阅",
       "owner": "写手 · Android",
-      "rework": 2,
-      "updated_at": "2026-11-02T23:47:29+10:00",
+      "rework": 3,
+      "updated_at": "2026-11-03T01:04:35+10:00",
       "paths": [
         "android/"
       ],
@@ -566,7 +568,9 @@
         {
           "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41466092508",
           "ci_result": "测试v4 @f66b7da0c7f5be0785220701fe99c6bd2088b48f 临时：OrgJson 通过，Jvm 证据不足。OrgJsonDivergenceTest 1 tests 0 failures 0 skipped（6 向量含 bare-tab/bare-nul/bom ok=true，向量同 9d14901）；MainActivityTest A5 通过；JvmJsonDivergenceTest 在 android-emulator job testDebugUnitTest 执行但无用例级报告；日志 logs/android-diagnostics/2026-11-03-test-v4.log"
-        }
+        },
+        "https://github.com/Yarrow-he/OsakaConnect/pull/24 已合并 d6e7791（测试向量）",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/28 开启中（a10 gen-certs 修复）"
       ],
       "history": [
         {
@@ -609,6 +613,11 @@
         {
           "state": "待测试",
           "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "待审阅",
+          "at": "2026-11-03T01:04:35+10:00",
+          "note": "新版本 f66b7da（返工3，合入 main d6e7791）"
         }
       ],
       "branch": "android/android-diagnostics",
@@ -622,7 +631,7 @@
       ],
       "review_state": "通过",
       "test_state": "阻塞",
-      "next_step": "CI 绿后写手 · Android 交审阅、测试；测试补 NaN/控制字符/BOM 真机结果"
+      "next_step": "等审阅 CLI 审 f66b7da；Jvm 用例证据等 CI 上传 emulator job testDebugUnitTest XML"
     },
     {
       "id": "ci-guards",
