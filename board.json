@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T03:24:21+10:00",
+  "updated_at": "2026-11-03T03:35:49+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -370,7 +370,7 @@
       "state": "完成",
       "owner": "写手 · Windows",
       "rework": 2,
-      "updated_at": "2026-11-03T01:56:34+10:00",
+      "updated_at": "2026-11-03T03:35:49+10:00",
       "paths": [
         "admin/"
       ],
@@ -400,7 +400,9 @@
         "https://github.com/Yarrow-he/OsakaConnect/pull/26 开启中；a10-docker 红：gen-certs.sh wronghost 自检误报",
         "https://github.com/Yarrow-he/OsakaConnect/pull/28 开启中：gen-certs 修复",
         "测试不通过 @ff89420/ebd7f89：run 41472506117/41472494941 a10-docker 红，osaka-server exited(1) No module named server.__main__；日志 logs/admin-connect/ci-41472506117-a10.log、ci-41472506117-a10-summary.txt；返工单见 notes/admin-connect.md",
-        "测试通过 @0fb37c8（产品代码等同 70a5d35，含 #39 --no-deps 修复）：run 41476049994 a10-docker 绿 4/4，③④ 不受信/SAN 不符均拒绝（退出码 3），probe 前无 Recreate；日志 logs/admin-connect/ci-41476049994-full.log 第1637-1719行；其余 3 红为 exit 3 豁免"
+        "测试通过 @0fb37c8（产品代码等同 70a5d35，含 #39 --no-deps 修复）：run 41476049994 a10-docker 绿 4/4，③④ 不受信/SAN 不符均拒绝（退出码 3），probe 前无 Recreate；日志 logs/admin-connect/ci-41476049994-full.log 第1637-1719行；其余 3 红为 exit 3 豁免",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/43 已合并 merge c475c0fc79eeae20b39e900786a66311ea19d578（head 6d1b761，必过全绿）",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/44 已合并 merge 6a15bb5c983769ced70866418211293e1e722120（head c9fab6f，必过全绿 + a10-docker 绿）"
       ],
       "history": [
         {
@@ -452,6 +454,11 @@
         {
           "state": "完成",
           "at": "2026-11-03T01:56:34+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T03:35:49+10:00",
+          "note": "Hao Yin 2026-11-03 03:20 批准；#43 c475c0f、#44 6a15bb5 合入 main"
         }
       ],
       "branch": "admin/admin-connect",
@@ -775,6 +782,16 @@
       "ci": "a10-docker 红：主分支缺 server/ admin/，exit 3 按设计报红 logs/pr7/",
       "blocked_on": "等 server-core/admin-connect 合入主分支后重跑 CI 再按组长合并",
       "updated_at": "2026-11-02T20:10:29+10:00"
+    },
+    "43": {
+      "state": "已合并",
+      "merge_commit": "c475c0fc79eeae20b39e900786a66311ea19d578",
+      "updated_at": "2026-11-03T03:35:49+10:00"
+    },
+    "44": {
+      "state": "已合并",
+      "merge_commit": "6a15bb5c983769ced70866418211293e1e722120",
+      "updated_at": "2026-11-03T03:35:49+10:00"
     }
   },
   "tasks": {
@@ -913,7 +930,7 @@
       "owner": "代码组长 · Osaka",
       "state": "豁免中",
       "started_at": "2026-11-02T23:02:59+10:00",
-      "updated_at": "2026-11-02T23:05:18+10:00",
+      "updated_at": "2026-11-03T03:35:49+10:00",
       "note": "Hao Yin 22:57：guards-acceptance 等产品代码上 main 再加；23:04：另外三项同样豁免至对应代码进仓库，之后必须报绿",
       "checks": {
         "guards-acceptance": {
@@ -933,7 +950,7 @@
             "windows/"
           ],
           "exempt_until": "对应产品代码进 main",
-          "state": "豁免中",
+          "state": "已取消豁免",
           "reminded_at": null,
           "note": "smoke.ps1 无 windows/ 即 exit 3；需 win-shell 入口 exe + win-diagnostics 测试"
         },
@@ -942,7 +959,7 @@
             "android/"
           ],
           "exempt_until": "对应产品代码进 main",
-          "state": "豁免中",
+          "state": "已取消豁免",
           "reminded_at": null,
           "note": "无 android/settings.gradle.kts 即 exit 3；需 android-shell + android-diagnostics"
         },
@@ -952,7 +969,7 @@
             "admin/"
           ],
           "exempt_until": "对应产品代码进 main",
-          "state": "豁免中",
+          "state": "已取消豁免",
           "reminded_at": null,
           "note": "run-a10.sh 缺 server/ 或 admin/ 即 exit 3；需 server-core + admin-connect"
         }
@@ -967,6 +984,11 @@
           "state": "豁免中",
           "at": "2026-11-02T23:05:18+10:00",
           "note": "Hao Yin 23:04：4 项产品依赖检查统一豁免；替换 guards-acceptance-required"
+        },
+        {
+          "state": "豁免中",
+          "at": "2026-11-03T03:35:49+10:00",
+          "note": "android-emulator、windows-acceptance、a10-docker 已取消豁免并加入必过；a10-docker 前后设置 logs/branch-protection/20261103T033519-a10-docker-{before,after}.json；guards-acceptance 仍豁免"
         }
       ],
       "next_step": "每次产品 PR 合入 main 后核对对应检查在 main 上是否变绿；变绿即填 reminded_at 并请 Hao Yin 批准加入必过"
