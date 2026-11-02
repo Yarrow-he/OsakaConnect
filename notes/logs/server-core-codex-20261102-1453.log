@@ -1,0 +1,554 @@
+Reading additional input from stdin...
+OpenAI Codex v0.166.0
+--------
+workdir: /home/box/osaka/wt/server-core
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: high
+reasoning summaries: none
+session id: 01a19a9b-6448-7f83-8c3c-01cbe92b421f
+--------
+user
+读取 notes/server-core-taskcard.md 并严格按其实现，按 ponytail full 执行。完成后在 server/ 运行 python3 -m pytest -q 确认通过。
+codex
+我会先读取任务卡、看板和相关记忆，再按 ponytail full 检查架构与实现范围。当前环境是只读；我会先确认任务要求，无法落盘的部分会明确说明。
+
+exec
+/bin/bash -lc 'cat notes/server-core-taskcard.md' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+# 任务卡：server-core（按 ponytail full 执行，见 .codex/skills/ponytail/SKILL.md）
+
+## 目标
+Python 3 标准库后台（http.server + ssl），监听 0.0.0.0:8443。证书/私钥路径与令牌取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN（缺失则启动失败并给出不含值的错误）。
+- GET /v1/health → {"status":"ok","routes":[{"id":..,"display_name":..}]}，routes 本期恰 1 条，取自配置/环境变量（如 OSAKA_ROUTE_ID / OSAKA_ROUTE_NAME，默认明显占位值），不硬编码真实线路
+- GET /v1/version → {"service":"osaka-server","version":"0.1.0","protocol":"admin.v1"}
+- 鉴权：Authorization: Bearer <token>。缺失→401 UNAUTHENTICATED；错误→403 FORBIDDEN（hmac.compare_digest）。错误体 {code,message}，message 取 shared/errors.json 的 zh。
+- 其他路径 404（可用 ErrorBody INTERNAL 以外的简单处理，不扩展协议）。
+- 响应出站前用手写校验函数按 openapi/admin.v1.yaml 的 HealthResponse/VersionResponse/ErrorBody 自检（additionalProperties:false、enum、const、pattern、minItems、长度）；自检失败返回 500 INTERNAL。
+- 邀请码格式函数 is_valid_invite_code / normalize：8 位 Crockford Base32（0-9A-Z 去 I L O U），大小写不敏感，去首尾空白后归一化为大写；非 str 返回无效；仅 ASCII。
+- 日志不打印令牌。
+
+## 只准改的文件
+server/ 目录下（建议 server/osaka_server/{__init__,app,schema,invite}.py、server/tests/test_*.py、server/README.md）。不得改其他任何文件。
+
+## 接口定义
+openapi/admin.v1.yaml；shared/errors.json；shared/test-vectors/admin-contract.json、invite-code.json（测试从仓库根相对路径读取，不复制）。
+
+## 验收标准（pytest，在 server/ 下 `python3 -m pytest -q`）
+1. 无凭证 401、错凭证 403、正确凭证 200（health/version），用测试内生成的临时自签证书（可用 subprocess 调 openssl，若不可用则测试 handler 于明文 HTTPServer），令牌用明显假值。
+2. admin-contract.json 全部 valid 通过、invalid 被拒（三个 schema）。
+3. invite-code.json 全向量。
+4. health routes 长度 == 1。
+5. 不新增运行时依赖；不建 requirements 或只放测试依赖。
+
+## 禁止
+联网；改 server/ 以外文件；改 .codex/ .claude/；git 任何写操作（commit/push/merge 等由人做）；真实密钥/IP/账号；跳过证书校验；新增依赖。
+
+exec
+/bin/bash -lc 'cat board.json' in /home/box/osaka/wt/server-core
+exec
+/bin/bash -lc 'cat memory/shared.md; cat memory/server-core.md' in /home/box/osaka/wt/server-core
+exec
+/bin/bash -lc 'cat /home/box/osaka/wt/server-core/.codex/skills/ponytail/SKILL.md' in /home/box/osaka/wt/server-core
+ exited 1 in 0ms:
+# memory/shared.md
+
+全员必读，组长维护，最多 10 条，其他人只读。
+
+1. 密钥、令牌只走环境变量，不进仓库、日志、聊天。
+2. 接口以 openapi/admin.v1.yaml 与 shared/ 为准，改接口先找组长。
+cat: memory/server-core.md: No such file or directory
+
+ succeeded in 0ms:
+{
+  "version": "0.1.0",
+  "updated_at": "2026-11-02T14:51:30+10:00",
+  "scope": {
+    "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
+    "global": [
+      "acceptance.md",
+      "board.json",
+      "docs/",
+      "openapi/",
+      "shared/",
+      "windows/",
+      "admin/",
+      "android/",
+      "server/",
+      "tests/",
+      "notes/",
+      "reports/",
+      "memory/",
+      "skills/",
+      "decisions/",
+      "scripts/",
+      ".github/",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      ".githooks/",
+      ".gitignore",
+      "ci/"
+    ],
+    "protected": [
+      ".codex/",
+      ".claude/"
+    ]
+  },
+  "processed_events": [],
+  "modules": [
+    {
+      "id": "shared-protocol",
+      "端": "共用",
+      "模块": "shared-protocol",
+      "state": "待写",
+      "owner": "代码组长 · Osaka",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "openapi/",
+        "shared/",
+        "tests/contract/"
+      ],
+      "acceptance": [
+        "A9",
+        "A11",
+        "A15",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "shared/shared-protocol",
+      "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
+      "brief": "notes/shared-protocol.md"
+    },
+    {
+      "id": "server-core",
+      "端": "服务端",
+      "模块": "server-core",
+      "state": "待写",
+      "owner": "写手 · 服务端",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "server/"
+      ],
+      "acceptance": [
+        "A8",
+        "A9",
+        "A15",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "server/server-core",
+      "summary": "Python 后台：标准库 http.server + ssl 监听 0.0.0.0:8443（证书/私钥路径与令牌均取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN）；GET /v1/health、/v1/version；无凭证 401、错凭证 403（hmac.compare_digest）；响应出站前手写 schema 自检；邀请码格式函数。",
+      "brief": "notes/server-core.md"
+    },
+    {
+      "id": "win-shell",
+      "端": "Windows",
+      "模块": "win-shell",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "windows/"
+      ],
+      "acceptance": [
+        "A1",
+        "A2",
+        "A16",
+        "A14"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "windows/win-shell",
+      "summary": ".NET 8 WPF 应用入口；侧栏导航与 连接(W1)/设置(W4) 占位页，页标识与设计稿编号一致；--self-test 启动自检退出码 0。",
+      "brief": "notes/win-shell.md"
+    },
+    {
+      "id": "win-diagnostics",
+      "端": "Windows",
+      "模块": "win-diagnostics",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "windows/"
+      ],
+      "acceptance": [
+        "A3",
+        "A4",
+        "A7",
+        "A15"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "windows/win-diagnostics",
+      "summary": "ErrorPresenter（errors.json 码→中文文案，不含堆栈）、LogRedactor、InviteCode.IsValid；均读 shared 测试向量做单测。",
+      "brief": "notes/win-diagnostics.md"
+    },
+    {
+      "id": "admin-connect",
+      "端": "管理端",
+      "模块": "admin-connect",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "admin/"
+      ],
+      "acceptance": [
+        "A10",
+        "A14"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "admin/admin-connect",
+      "summary": ".NET 8 WPF 管理连接页：输入后台地址，令牌只取环境变量 OSAKA_ADMIN_TOKEN；HttpClient 默认证书校验（禁止自定义放行回调）；System.Text.Json record+required+Disallow 未知字段做边界校验；被拒/证书失败/响应不合 schema 时显示错误且不显示已连接。",
+      "brief": "notes/admin-connect.md"
+    },
+    {
+      "id": "android-shell",
+      "端": "Android",
+      "模块": "android-shell",
+      "state": "待写",
+      "owner": "写手 · Android",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "android/"
+      ],
+      "acceptance": [
+        "A5",
+        "A6",
+        "A16",
+        "A14"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "android/android-shell",
+      "summary": "Kotlin 单 Activity；未激活(P1)/已激活(P2) 占位与导航；生命周期回调经 LogRedactor 记录。",
+      "brief": "notes/android-shell.md"
+    },
+    {
+      "id": "android-diagnostics",
+      "端": "Android",
+      "模块": "android-diagnostics",
+      "state": "待写",
+      "owner": "写手 · Android",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "android/"
+      ],
+      "acceptance": [
+        "A7",
+        "A15"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "android/android-diagnostics",
+      "summary": "LogRedactor、InviteCode.isValid、错误展示（errors.json 文案）；为 0.2.0 预留的响应校验用 org.json 手写，本期只做 admin-contract 解析校验函数及单测。",
+      "brief": "notes/android-diagnostics.md"
+    },
+    {
+      "id": "ci-guards",
+      "端": "共用",
+      "模块": "ci-guards",
+      "state": "待写",
+      "owner": "代码组长 · Osaka",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        ".github/",
+        "scripts/",
+        "ci/"
+      ],
+      "acceptance": [
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "ci/ci-guards",
+      "summary": "完善 CI：契约测试 job（已有初版）；A10 docker 端到端：ci/ 下用 openssl 生成临时 CA 与 SAN=osaka-server 证书、另一张不可信 CA 证书和 SAN 不匹配证书，server 容器以服务名 osaka-server 运行，探测容器经 docker 网络连接，覆盖四项必测；技术栈/互引路径/硬编码线路检查；PR 行数统计。",
+      "brief": "notes/ci-guards.md"
+    }
+  ]
+}
+ succeeded in 0ms:
+---
+name: ponytail
+description: >-
+  Use for any coding task: lazy senior dev mode, the smallest change that fully
+  solves it, never cutting validation, error handling, security or tests.
+  (Source: github.com/DietrichGebert/ponytail, MIT)
+---
+# Ponytail
+
+You are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+
+Active for the whole session until the user says "stop ponytail" or "normal mode". Switch level: `/ponytail lite|full|ultra`.
+
+## Before you write
+
+Read the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+## The smallest complete change
+
+Take the first option that fully works:
+
+1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request ("build me X") gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.
+3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.
+4. An installed dependency? Use it. Never add a dependency for a few lines.
+5. Can it be one line a reader gets at a glance? One line.
+6. Otherwise: the minimum code that works.
+
+- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- Between options of equal size, take the one that is correct on edge cases.
+- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.
+- A shortcut with a known limit gets a code comment in this form: `shortcut: <the limit>, <when to upgrade>`.
+
+Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.
+
+## Levels
+
+| Level | Behavior |
+|-------|----------|
+| **lite** | Build what was asked. Name the smaller option in one line and let the user pick. |
+| **full** | The rules above. Default. |
+| **ultra** | Also question the request: before building, push back on any part the need does not justify. |
+
+exec
+/bin/bash -lc 'cat openapi/admin.v1.yaml shared/errors.json shared/test-vectors/admin-contract.json shared/test-vectors/invite-code.json' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+openapi: 3.1.0
+info:
+  title: Osaka 管理协议
+  version: admin.v1
+  description: 唯一事实来源（Hao Yin 2026-11-02）。HTTPS 必须且客户端必须校验证书链与主机名。令牌只从环境变量读取。
+servers:
+  - url: https://osaka-server:8443
+security:
+  - bearer: []
+paths:
+  /v1/health:
+    get:
+      operationId: getHealth
+      responses:
+        "200": {description: ok, content: {application/json: {schema: {$ref: "#/components/schemas/HealthResponse"}}}}
+        "401": {$ref: "#/components/responses/Unauthenticated"}
+        "403": {$ref: "#/components/responses/Forbidden"}
+  /v1/version:
+    get:
+      operationId: getVersion
+      responses:
+        "200": {description: ok, content: {application/json: {schema: {$ref: "#/components/schemas/VersionResponse"}}}}
+        "401": {$ref: "#/components/responses/Unauthenticated"}
+        "403": {$ref: "#/components/responses/Forbidden"}
+components:
+  securitySchemes:
+    bearer: {type: http, scheme: bearer}
+  responses:
+    Unauthenticated: {description: 无凭证, content: {application/json: {schema: {$ref: "#/components/schemas/ErrorBody"}}}}
+    Forbidden: {description: 凭证错误, content: {application/json: {schema: {$ref: "#/components/schemas/ErrorBody"}}}}
+  schemas:
+    HealthResponse:
+      type: object
+      additionalProperties: false
+      required: [status, routes]
+      properties:
+        status: {type: string, enum: [ok, degraded]}
+        routes: {type: array, minItems: 1, items: {$ref: "#/components/schemas/Route"}}
+    Route:
+      type: object
+      additionalProperties: false
+      required: [id, display_name]
+      properties:
+        id: {type: string, minLength: 1, maxLength: 64}
+        display_name: {type: string, minLength: 1, maxLength: 64}
+    VersionResponse:
+      type: object
+      additionalProperties: false
+      required: [service, version, protocol]
+      properties:
+        service: {const: osaka-server}
+        version: {type: string, pattern: "^\\d+\\.\\d+\\.\\d+$"}
+        protocol: {const: admin.v1}
+    ErrorBody:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code: {type: string, enum: [UNAUTHENTICATED, FORBIDDEN, INVALID_INVITE_CODE, BACKEND_UNREACHABLE, INTERNAL]}
+        message: {type: string, maxLength: 200}
+{
+  "UNAUTHENTICATED": {"http": 401, "zh": "未提供管理凭证"},
+  "FORBIDDEN": {"http": 403, "zh": "管理凭证无效"},
+  "INVALID_INVITE_CODE": {"http": 400, "zh": "邀请码格式不正确"},
+  "BACKEND_UNREACHABLE": {"http": 0, "zh": "无法连接后台"},
+  "INTERNAL": {"http": 500, "zh": "发生内部错误，请稍后重试"}
+}
+{"_说明":"契约样例：valid 必须通过、invalid 必须被拒。三端边界校验与 CI 契约测试共用。",
+ "HealthResponse":{"valid":[{"status":"ok","routes":[{"id":"r1","display_name":"Osaka 01"}]}],
+  "invalid":[{"status":"ok","routes":[]},{"status":"up","routes":[{"id":"r1","display_name":"x"}]},{"routes":[{"id":"r1","display_name":"x"}]},
+   {"status":"ok","routes":[{"id":"","display_name":"x"}]},{"status":"ok","routes":[{"id":"r1","display_name":"x"}],"extra":1},{"status":"ok","routes":"r1"}]},
+ "VersionResponse":{"valid":[{"service":"osaka-server","version":"0.1.0","protocol":"admin.v1"}],
+  "invalid":[{"service":"osaka-server","version":"0.1","protocol":"admin.v1"},{"service":"other","version":"0.1.0","protocol":"admin.v1"},
+   {"service":"osaka-server","version":"0.1.0","protocol":"admin.v2"},{"service":"osaka-server","version":"0.1.0"},{"service":"osaka-server","version":"0.1.0","protocol":"admin.v1","debug":true}]},
+ "ErrorBody":{"valid":[{"code":"FORBIDDEN","message":"管理凭证无效"}],
+  "invalid":[{"code":"NOPE","message":"x"},{"code":"FORBIDDEN"},{"code":"INTERNAL","message":"x","stack":"at Foo()"}]}}
+{"valid": ["7X2KQ9MZ", "abcd1234", "00000000", " 7X2KQ9MZ "], "invalid": ["7X2KQ9M", "7X2KQ9MZ1", "7X2KQ9MI", "LLLLLLLL", "OOOO0000", "UUUU1111", "7X2K-Q9MZ", "", null, "7X2KQ9M!", "７X2KQ9MZ", "7X2K Q9MZ", "0x2KQ9MZ0"]}
+exec
+/bin/bash -lc 'cat docs/architecture.md' in /home/box/osaka/wt/server-core
+exec
+/bin/bash -lc 'cat notes/server-core.md' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+# 架构地图（0.1.0）
+
+动手前先查本文件；与代码不符就上报组长。接口以 `openapi/admin.v1.yaml`（唯一事实来源）和 `shared/` 为准。
+
+## 技术栈（A14）
+Windows 客户端、管理端：C#/.NET（WPF）。Android：Kotlin。后台：Python。
+
+## 目录与模块
+| 模块 | 端 | 目录 | 职责 | 对外接口 | 依赖 |
+|---|---|---|---|---|---|
+| shared-protocol | 共用 | `openapi/`、`shared/`、`tests/contract/` | OpenAPI 管理协议、错误码、邀请码规则、契约/脱敏/邀请码测试向量（含反例）、契约测试 | `openapi/admin.v1.yaml`、`shared/test-vectors/admin-contract.json`、`shared/errors.json`、`shared/invite-code.md`、`shared/test-vectors/*.json` | 无 |
+| server-core | 服务端 | `server/` | 后台独立启动；`/v1/health`、`/v1/version`；管理身份校验；邀请码格式校验函数 | 实现 openapi/admin.v1.yaml；响应出站前按 schema 自检（标准库手写校验） | shared-protocol |
+| win-shell | Windows | `windows/` | 应用入口；连接(W1)、设置(W4) 占位页与侧栏导航；启动自检 `--self-test` | 无（进程入口） | win-diagnostics |
+| win-diagnostics | Windows | `windows/` | 统一错误展示（错误码→可读文案，不含堆栈）；日志脱敏入口；邀请码格式校验 | `ErrorPresenter`、`LogRedactor`、`InviteCode.IsValid` | shared-protocol（只读 JSON 向量与错误码） |
+| admin-connect | 管理端 | `admin/` | 管理连接页：填后台地址，令牌只从环境变量 `OSAKA_ADMIN_TOKEN` 取；查询版本/健康；边界校验响应；强制证书链+主机名校验；被拒/证书失败时不显示已连接 | 无 | shared-protocol、server-core（运行时） |
+| android-shell | Android | `android/` | 应用入口；未激活(P1)/已激活(P2) 占位页与导航；生命周期记录 | 无 | android-diagnostics |
+| android-diagnostics | Android | `android/` | 日志脱敏、错误展示、邀请码格式校验（同一份向量） | `LogRedactor`、`InviteCode.isValid` | shared-protocol |
+| ci-guards | 共用 | `.github/`、`scripts/`、`ci/` | 构建测试 CI、契约测试 job、A10 docker 端到端（临时 CA、服务名 `osaka-server`）、改动范围检查、技术栈/引用路径/硬编码线路检查 | `scripts/check-scope.sh` | 全部 |
+
+## 边界规则
+1. 各端只读 `shared/`、`openapi/`，不互相引用其他端源码（A11）。
+2. 后台入口调用业务函数，业务不反向导入入口。
+3. 线路以列表表示，本期长度为 1，客户端不硬编码线路（A17）。
+4. 密钥、令牌只走环境变量，不进仓库、不进日志。
+
+## 工具链与模型（非产品依赖）
+写手：Codex gpt-6-astra high。审阅：Claude Code + GLM（`.claude/settings.json`）。测试：Claude Code + DeepSeek（`.claude/settings.tester.json`）。key 一律只引用环境变量。
+
+## 边界 schema 校验方式（Hao Yin 2026-11-02：不新增重依赖）
+| 端 | 做法 | 理由 |
+|---|---|---|
+| 服务端 Python | 标准库 `json` + 手写字段校验函数，单测用 `admin-contract.json` 正反例 | 两个接口、字段少，jsonschema 只作 CI 测试依赖，不进运行时 |
+| Windows/管理端 C# | `System.Text.Json` 反序列化到 `record` + `required` 成员 + `JsonUnmappedMemberHandling.Disallow`，再手写枚举/长度/正则检查 | .NET 8 内置，不加 NuGet 包 |
+| Android Kotlin | Android 内置 `org.json.JSONObject` 解析 + 手写校验（拒未知字段） | 平台自带，不加 Moshi/kotlinx-serialization 插件 |
+| CI | `tests/contract`：openapi-spec-validator 校验 spec，jsonschema 跑正反例 | 仅测试依赖，保证三端手写校验与 spec 同源 |
+TLS：三端都用平台默认证书校验（.NET `HttpClient` 默认、Android 默认 TrustManager），禁止 `ServerCertificateCustomValidationCallback` 返回 true 或自定义放行 TrustManager；CI 临时 CA 通过系统/测试信任库注入。
+
+ succeeded in 0ms:
+# 派活 brief：server-core（服务端）
+
+- owner：写手 · 服务端　分支：`server/server-core`（从 main 拉，审阅/测试只针对该分支）
+- 执行方式：用指定 CLI，**按 ponytail full 执行**；一个模块一个新会话。
+
+## 目标
+Python 后台：标准库 http.server + ssl 监听 0.0.0.0:8443（证书/私钥路径与令牌均取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN）；GET /v1/health、/v1/version；无凭证 401、错凭证 403（hmac.compare_digest）；响应出站前手写 schema 自检；邀请码格式函数。
+
+## 只准改的文件
+- `server/`
+- `notes/server-core.md`（追加交付证明）、`board.json`（本模块条目）、`reports/model-issues.md`（如有）
+
+## 接口引用
+openapi/admin.v1.yaml 全部；shared/errors.json；shared/test-vectors/{admin-contract,invite-code}.json。架构见 `docs/architecture.md`（含边界 schema 校验方式）。
+
+## 验收条目
+A8, A9, A15, A17（见 `acceptance.md`）。完成标准：pytest：401/403/200；响应用 admin-contract.json 的正反例验证自检函数；invite-code 全向量；routes 长度 1；不新增运行时依赖（无 requirements 或只含测试依赖）。
+
+## 禁止事项
+- 改清单外文件（`scripts/check-scope.sh` 会拦）；改 `.codex/`、`.claude/` 或任何规则/权限配置
+- 新增依赖（未经组长批准）；跳过证书校验；硬编码线路
+- 密钥、令牌、私钥写进代码/配置/日志/测试/提交；示例只用明显假值
+- `--no-verify`、git merge/push/rebase/强推/删分支；联网；登录或改动真实服务器
+
+## 交付要求
+交付时把看板 state 改为 待审测并追加 history；在本文件末尾追加：
+- 编译、lint、测试命令及各自输出文件路径
+- 本次 CLI 会话日志路径
+- 改动文件清单（`git diff --name-only main...`）与已知限制
+
+exec
+/bin/bash -lc "rg --files memory server -g '"'!__pycache__/**'"' -g '"'!*cache*'"'; rg --files -g AGENTS.md" in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+rg: server: No such file or directory (os error 2)
+memory/测试.md
+memory/审阅.md
+memory/组长.md
+memory/写手-android.md
+memory/写手-server.md
+memory/shared.md
+memory/写手-windows.md
+AGENTS.md
+
+codex
+已确认任务卡要求只改 `server/`，但当前仓库尚无该目录。实现需要新建服务代码和测试；本会话的只读权限禁止创建或修改文件，且不允许申请提权，因此目前无法落盘实现或完成验收。
+
+exec
+/bin/bash -lc 'cd server && python3 -m pytest -q' in /home/box/osaka/wt/server-core
+exec
+/bin/bash -lc 'cat memory/写手-server.md AGENTS.md' in /home/box/osaka/wt/server-core
+ exited 1 in 0ms:
+/bin/bash: line 1: cd: server: No such file or directory
+
+ succeeded in 0ms:
+# memory/写手-server.md
+
+只记本角色反复出现的教训，每条一行，最多 30 条。项目事实写进仓库文件，不写这里。
+
+# AGENTS.md — OsakaConnect 0.1.0
+
+醒来只读：`board.json`、自己的 `memory/<角色>.md`、`memory/shared.md`、本次任务需要的 `notes/<模块>.md`。动手前查 `docs/architecture.md`。
+
+硬规则：
+1. 最小修改：按 ponytail full 执行；只改任务卡列出的文件和 board.json scope 内路径；不顺手重构。
+2. 不新增依赖：新增第三方包须组长批准并写进决策文件。
+3. 交付带证明：编译、lint、测试命令与输出文件路径写进 `notes/<模块>.md`；没有证明不算交付。
+4. 禁止 `--no-verify`；pre-commit（`scripts/check-scope.sh`）和 CI 不通过就改代码，不改检查。
+5. 不改权限配置：`.codex/`、`.claude/` 及任何 bot 规则只由 Hao Yin 决定。
+6. 密钥只走环境变量：不写进代码、配置、日志、测试向量、提交或聊天；示例值用明显假值。
+7. 禁止：git merge、删除分支、强推、改历史、联网、登录或改动真实服务器。
+8. 状态流转与 history 记录按 board.json 规则；返工 3 次后上报。
+
+## 角色与模型（Hao Yin 2026-11-02 批准）
+| 角色 | CLI | 后端 | 项目配置 |
+|---|---|---|---|
+| 写手（Windows/Android/服务端） | Codex | gpt-6-astra，high | `.codex/config.toml` + `.codex/rules/osaka.rules` |
+| 审阅 | Claude Code | GLM（智谱 Anthropic 兼容接口），key 取 `GLM_API_KEY` | `.claude/settings.json`（只读 + git diff/log/show） |
+| 测试 | Claude Code | DeepSeek（Anthropic 兼容接口），key 取 `DEEPSEEK_API_KEY` | `.claude/settings.tester.json`（放行跑测试、虚拟机/模拟器；禁改宿主机路由、DNS、代理、防火墙） |
+| 决策评审会 | A：Codex gpt-6-astra high；B：DeepSeek v4-flash high | — | 新会话、互不可见 |
+
+codex
+已读取任务卡、ponytail full、架构和协议文件，但实现受阻：当前会话仅允许读取文件，且禁止提权；仓库尚无 `server/` 目录。
+
+尝试执行 `cd server && python3 -m pytest -q`，退出码为 1：`server: No such file or directory`，pytest 未启动。
+
+需要在允许写入此工作区的会话中继续。未修改任何文件；实现与测试验收均未完成。
+tokens used
+14,518
+已读取任务卡、ponytail full、架构和协议文件，但实现受阻：当前会话仅允许读取文件，且禁止提权；仓库尚无 `server/` 目录。
+
+尝试执行 `cd server && python3 -m pytest -q`，退出码为 1：`server: No such file or directory`，pytest 未启动。
+
+需要在允许写入此工作区的会话中继续。未修改任何文件；实现与测试验收均未完成。

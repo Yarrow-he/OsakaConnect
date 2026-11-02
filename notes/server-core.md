@@ -27,3 +27,13 @@ A8, A9, A15, A17（见 `acceptance.md`）。完成标准：pytest：401/403/200�
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 交付（写手 · 服务端，2026-11-02）
+- 模块：server-core，分支 `server/server-core`
+- 改动文件：server/{.gitignore,README.md,osaka_server/{__init__,app,schema,invite}.py,tests/{test_app,test_contract}.py,notes/server-core.md,reports/*.txt}（后两者为 Codex 沙箱内自测记录）；notes/server-core.md、notes/server-core-taskcard.md、notes/logs/*；reports/model-issues.md
+- 运行：`OSAKA_TLS_CERT=... OSAKA_TLS_KEY=... OSAKA_ADMIN_TOKEN=... python3 -m osaka_server.app`（在 server/ 下，见 server/README.md）
+- 编译：`python3 -m compileall -q server/osaka_server server/tests` → notes/logs/server-core-compile.log（EXIT 0）
+- lint：ruff/pyflakes 未安装，仅 AST 语法检查 → notes/logs/server-core-lint.log（EXIT 0）
+- 测试：`cd server && python3 -m pytest -q -rs -p no:cacheprovider` → notes/logs/server-core-pytest.log（181 passed，0 skipped，含真实本地 TLS 连接 401/403/200）
+- Codex 会话日志：notes/logs/server-core-codex-20261102-1455.log（成功）；1453（read-only 失败）、1454（中断）
+- 已知限制：无正式 lint 工具；Codex 沙箱禁 socket，其自测跳过 30 项，已在沙箱外重跑全过；routes 来自环境变量占位默认值；不含部署脚本（本期未要求）。

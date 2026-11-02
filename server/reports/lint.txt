@@ -1,0 +1,10 @@
+'osaka_server': listing directory
+'osaka_server/__init__.py': Clean bill of health.
+'osaka_server/invite.py': Clean bill of health.
+'osaka_server/__pycache__': listing directory
+'osaka_server/app.py': Clean bill of health.
+'osaka_server/schema.py': Clean bill of health.
+'tests': listing directory
+'tests/test_contract.py': Clean bill of health.
+'tests/__pycache__': listing directory
+'tests/test_app.py': Clean bill of health.
