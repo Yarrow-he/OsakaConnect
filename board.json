@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T02:22:00+10:00",
+  "updated_at": "2026-11-03T02:52:01+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -243,6 +243,11 @@
         {
           "state": "完成",
           "at": "2026-11-02T21:52:57+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T02:52:01+10:00",
+          "note": "Hao Yin 批准（t186u）；PR #21 合入 main 14fb649；windows-acceptance 加入必过（logs/branch-protection/20261103T025117-*）"
         }
       ],
       "branch": "windows/win-shell",
@@ -538,6 +543,11 @@
           "state": "完成",
           "at": "2026-11-03T00:47:52+10:00",
           "note": "PR #19 等 Hao Yin 批准"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T02:52:01+10:00",
+          "note": "Hao Yin 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
         }
       ],
       "branch": "android/android-shell",
