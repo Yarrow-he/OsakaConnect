@@ -22,3 +22,6 @@ Windows 客户端、管理端：C#/.NET（WPF）。Android：Kotlin。后台：P
 2. 后台入口调用业务函数，业务不反向导入入口。
 3. 线路以列表表示，本期长度为 1，客户端不硬编码线路（A17）。
 4. 密钥、令牌只走环境变量，不进仓库、不进日志。
+
+## 工具链与模型（非产品依赖）
+写手：Codex gpt-6-astra high。审阅：Claude Code + GLM（`.claude/settings.json`）。测试：Claude Code + DeepSeek（`.claude/settings.tester.json`）。key 一律只引用环境变量。
