@@ -11,3 +11,8 @@
 
 ## 档位
 1. 二类：按文件是否存在决定是否执行已有测试，属于有条件放宽（产品目录被改名/删掉时 diagnostics 验收会静默跳过，只留 warning）。需 Hao Yin 批准，组长不自行合并。
+
+## 评审（仅一轮，全文 logs/ci-android-diag-gate/review-A.log、review-B.log）
+1. A（codex gpt-6-astra high）：有条件同意。删除或改名 diagnostics 目录即可跳过两项验收、只留 warning；无密钥风险；无联网/权限操作。
+2. B（DeepSeek v4-flash high）：有条件同意。同样指出按路径 fail-open；建议 android-diagnostics 分支自身不豁免（缺目录即 error）、固定 $GITHUB_WORKSPACE 路径、两脚本独立执行不短路；无密钥风险；无联网/权限操作。
+3. 组长：确认二类，不自行合并；按规则只评一轮，未据评审修改，B 的补强建议交 Hao Yin 决定是否采纳。
