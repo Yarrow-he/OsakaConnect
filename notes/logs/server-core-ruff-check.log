@@ -1,0 +1,1 @@
+ruff 未运行：本机无 ruff，禁止联网安装；CI 日志被截断，只能确认 4 个错中的 2 个 (I001 tests/test_contract.py:1, PLW1510 tests/test_app.py:279)

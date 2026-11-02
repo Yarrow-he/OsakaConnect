@@ -3,13 +3,12 @@
 import hmac
 import json
 import os
-from pathlib import Path
 import ssl
 import sys
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
 
 from .schema import validate_response
-
 
 ERRORS = json.loads(
     (Path(__file__).resolve().parents[2] / "shared/errors.json").read_text(

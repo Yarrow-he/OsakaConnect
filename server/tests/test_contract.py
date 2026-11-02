@@ -6,7 +6,6 @@ import pytest
 from osaka_server.invite import is_valid_invite_code, normalize
 from osaka_server.schema import validate_response
 
-
 VECTORS = Path(__file__).resolve().parents[2] / "shared/test-vectors"
 CONTRACT = json.loads((VECTORS / "admin-contract.json").read_text(encoding="utf-8"))
 INVITES = json.loads((VECTORS / "invite-code.json").read_text(encoding="utf-8"))

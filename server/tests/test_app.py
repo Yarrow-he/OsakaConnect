@@ -1,22 +1,21 @@
-from contextlib import contextmanager
 import http.client
 import io
 import json
 import os
-from pathlib import Path
 import shutil
 import ssl
 import subprocess
 import sys
 import threading
+from contextlib import contextmanager
 from http.server import ThreadingHTTPServer
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 from osaka_server import app
 from osaka_server.schema import validate_response
-
 
 FAKE_TOKEN = "obviously-fake-test-token"
 SHARED_ERRORS = json.loads(
@@ -279,7 +278,7 @@ def test_module_entrypoint():
     result = subprocess.run(
         [sys.executable, "-m", "osaka_server.app"],
         cwd=Path(__file__).resolve().parents[1], env=environment,
-        capture_output=True, text=True,
+        capture_output=True, text=True, check=False,
     )
     assert result.returncode == 1
     assert result.stdout == ""
