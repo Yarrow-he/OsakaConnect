@@ -8,8 +8,8 @@
 | tests/windows/win-diagnostics/*.cs（WinDiagnostics.Tests.csproj） | A3、A4、A15 | Windows | `dotnet test`，windows-latest | 未跑（待 CI） |
 | tests/admin/admin-connect/{gen-certs,run-a10}.sh + docker-compose.yml | A10 ①②③④ | 管理端 | `bash tests/admin/admin-connect/run-a10.sh`，ubuntu + docker | 未跑（待 CI，本机无 docker） |
 | tests/admin/admin-connect/grep-guard.sh | A10（禁止放行回调）、A14 | 管理端 | `bash tests/admin/admin-connect/grep-guard.sh` | 未跑实测：2026-11-02 输出“待测：模块未交付” |
-| tests/android/android-shell/androidTest/ShellNavigationTest.kt + ci-run.sh | A5、A6、A16 | Android | 见文件头，ubuntu + 模拟器 | 未跑（待 CI） |
-| tests/android/android-shell/lang-guard.sh | A14、A17 | Android | `bash tests/android/android-shell/lang-guard.sh` | 未跑实测：2026-11-02 输出“待测：模块未交付” |
-| tests/android/android-diagnostics/DiagnosticsVectorsTest.kt + run.sh | A7、A15 | Android | `./gradlew testDebugUnitTest` | 未跑（待 CI） |
+| tests/android/android-shell/androidTest/ShellNavigationTest.kt + ci-run.sh | A5、A6、A16 | Android | 见文件头，ubuntu + 模拟器 | 阻塞：模块分支 workflow 无模拟器、不调用本脚本（2026-11-02） |
+| tests/android/android-shell/lang-guard.sh | A14、A17 | Android | `bash tests/android/android-shell/lang-guard.sh` | 2026-11-02 通过 @9e47998、@97d42d6 |
+| tests/android/android-diagnostics/DiagnosticsVectorsTest.kt + run.sh | A7、A15 | Android | `./gradlew testDebugUnitTest` | 阻塞：workflow 不调用 run.sh（2026-11-02） |
 
 未覆盖：A11（跨端引用路径检查，ci-guards）、A12（行数统计，ci-guards/审阅）、A13（main 全绿链接）；A14 的 server/ 只 Python 检查与 docs 一致性；A17 的 windows/admin 以外后台 routes 列表长度已由 server-core 覆盖。

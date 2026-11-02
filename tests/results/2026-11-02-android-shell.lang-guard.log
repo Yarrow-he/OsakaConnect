@@ -1,0 +1,3 @@
+$ ANDROID_DIR=<archive 9e47998>/android bash tests/android/android-shell/lang-guard.sh
+通过：A14/A17（android/）
+exit=0
