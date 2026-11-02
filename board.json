@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "完成",
+      "state": "待审阅",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T00:47:52+10:00",
+      "updated_at": "2026-11-03T04:55:38+10:00",
       "paths": [
         "android/"
       ],
@@ -519,6 +519,13 @@
           "ci_result": "测试v3 @454063d 通过：必需检查+guards+guards-acceptance+android-emulator 绿，A5 启动无崩溃；a10-docker/windows-acceptance exit 3 豁免",
           "commands": "gh run view 41455806499 --repo Yarrow-he/OsakaConnect; --log-failed; --job 125312041492 --log",
           "log": "logs/android-shell/2026-11-02-test-v3.log"
+        },
+        {
+          "commit": "0f57782",
+          "notes": "notes/android-shell.md#偶发失败修复",
+          "codex_logs": "/home/box/osaka/logs/android-shell-flaky/",
+          "local_build": "未执行：本机无 JDK/SDK，不联网",
+          "ci": "待组长推送 android/android-shell-flaky-1 后 android-emulator 连跑 3 次"
         }
       ],
       "history": [
@@ -563,9 +570,14 @@
           "state": "完成",
           "at": "2026-11-03T02:52:01+10:00",
           "note": "Hao Yin 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
+        },
+        {
+          "state": "待审阅",
+          "at": "2026-11-03T04:55:38+10:00",
+          "note": "组长派单修复偶发失败 MainActivityTest UUID 不一致；代码 0f57782；本地无工具链，待推送跑 CI"
         }
       ],
-      "branch": "android/android-shell",
+      "branch": "android/android-shell-flaky-1",
       "summary": "Kotlin 单 Activity；未激活(P1)/已激活(P2) 占位与导航；生命周期回调经 LogRedactor 记录。",
       "brief": "notes/android-shell.md",
       "nudges": 2,
@@ -577,7 +589,7 @@
       "review": "通过",
       "review_state": "通过",
       "test_state": "通过",
-      "next_step": "测试 · Osaka 按 run 41455806499 复测",
+      "next_step": "组长推送分支跑 CI；审阅/测试",
       "blocked_on": "PR #19 等 Hao Yin 批准"
     },
     {

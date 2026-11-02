@@ -66,3 +66,9 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 ## 2026-11-02 合入 main
 1. 合入 origin/main（9662b8e，含 PR #15）为 454063d，已推送。
 2. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499 ，待测试复测。
+
+## 偶发失败修复 android-shell-flaky-1 @0f57782（2026-11-03T04:55:38+10:00）
+1. 根因：测试假设回前台时仍是 rotatedId 同一实例；HOME 与 Activity 请求方向不同，回前台时方向切回可能触发系统再次重建，产生新 lifecycleId（CI 日志 /home/box/osaka/logs/main-ci/41492274773-failed.log:507、41494947318-failed.log:451）。属测试假设错误，产品代码无缺陷。
+2. 改动：仅 android/app/src/androidTest/java/com/osakaconnect/shell/MainActivityTest.kt。用 ActivityLifecycleMonitorRegistry 按实例记录回调；回前台后每个 resumed 实例都校验 P2 与导航；逐实例比对观察到的回调与 OsakaLifecycle 日志。未加重试/跳过，未删测试；原“rotatedId 固定 10 步序列”断言改为逐实例比对（请审阅确认不算放宽）。无新依赖（androidx.test:runner 已有）。
+3. Codex 日志：/home/box/osaka/logs/android-shell-flaky/codex-fix-*.log、/home/box/osaka/logs/android-shell-flaky/codex-nocomments-*.log；任务卡 /home/box/osaka/logs/android-shell-flaky/card1.md、card2.md；Codex 静态检查 /home/box/osaka/logs/android-shell-flaky/codex-static-checks/。
+4. 验证限制：本机无 JDK/Gradle/Android SDK，安装需联网（禁止），本地 assembleDebug/testDebugUnitTest/lint 与模拟器 3 连跑均未执行。证据路径改为 CI android 与 android-emulator job，需组长推送分支后触发；3 连跑需组长对同一提交 rerun 3 次。
