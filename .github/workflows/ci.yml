@@ -190,8 +190,8 @@ jobs:
           script: |
             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
             bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
-            bash tests/android/android-diagnostics/run.sh  # 缺脚本即失败
-            bash tests/android/android-diagnostics/run-instrumented.sh  # 缺脚本即失败
+            # 决策 009：android-diagnostics 产品目录不在本分支时不跑其验收（豁免同 exit 3 规则），并留 warning；在则照跑，缺脚本即失败
+            if [ -d android/app/src/main/java/com/osakaconnect/diagnostics ]; then bash tests/android/android-diagnostics/run.sh && bash tests/android/android-diagnostics/run-instrumented.sh; else echo "::warning::待测：android-diagnostics 未交付（无 android/app/src/main/java/com/osakaconnect/diagnostics），其验收未执行"; fi
       - if: always() && steps.has.outputs.code != ''
         uses: actions/upload-artifact@v4
         with:
