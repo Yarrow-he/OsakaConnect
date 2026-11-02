@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# 无冲突的自动合并不会触发 pre-commit，这里补上 scope 检查（禁止 --no-verify）。
+# 此时 git 尚未写 MERGE_HEAD，从 GIT_REFLOG_ACTION（"merge <ref>"）取对方分支。
+ref="${GIT_REFLOG_ACTION#merge }"
+CHECK_SCOPE_MERGE_REF="${ref%% *}" exec scripts/check-scope.sh --staged
