@@ -72,3 +72,15 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 2. 改动：仅 android/app/src/androidTest/java/com/osakaconnect/shell/MainActivityTest.kt。用 ActivityLifecycleMonitorRegistry 按实例记录回调；回前台后每个 resumed 实例都校验 P2 与导航；逐实例比对观察到的回调与 OsakaLifecycle 日志。未加重试/跳过，未删测试；原“rotatedId 固定 10 步序列”断言改为逐实例比对（请审阅确认不算放宽）。无新依赖（androidx.test:runner 已有）。
 3. Codex 日志：/home/box/osaka/logs/android-shell-flaky/codex-fix-*.log、/home/box/osaka/logs/android-shell-flaky/codex-nocomments-*.log；任务卡 /home/box/osaka/logs/android-shell-flaky/card1.md、card2.md；Codex 静态检查 /home/box/osaka/logs/android-shell-flaky/codex-static-checks/。
 4. 验证限制：本机无 JDK/Gradle/Android SDK，安装需联网（禁止），本地 assembleDebug/testDebugUnitTest/lint 与模拟器 3 连跑均未执行。证据路径改为 CI android 与 android-emulator job，需组长推送分支后触发；3 连跑需组长对同一提交 rerun 3 次。
+
+## 返工分析 0f57782 → 回前台为何重建（2026-11-03T05:18:32+10:00，未改代码，等组长定）
+1. 失败点：唯一比较 UUID 的断言是回前台后的 assertEquals(rotatedId, activity.lifecycleId)；main-ci/41492274773-failed.log:506-508、41494947318-failed.log:450-452，均为 Assert.java:117 ComparisonFailure，模拟器 API 30（同日志 api-level: 30，disable-animations: true）。
+2. 已确认事实：失败前 await("foreground activity must resume again") 已通过，即 rotatedId 第二次 onResume 已记录；之后 scenario.onActivity 拿到的是新实例。说明重建发生在回前台 resume 之后。
+3. 产品侧：MainActivity 无 configChanges、无 screenOrientation（AndroidManifest.xml），lifecycleId 每实例新 UUID；配置变化时重建是 Android 标准行为，不是缺陷。
+4. 推测（CI 日志无 OsakaLifecycle/方向 logcat，无法直接证实）：测试用 requestedOrientation 把 Activity 转到非自然方向；HOME（launcher）按竖屏显示；am start 回前台时 Activity 先以当前显示方向 resume，随后显示转回 Activity 请求的方向触发配置变化 → 再次重建。时序有快有慢，所以偶发。
+5. 结论：在“旋转后进 HOME 再回来”的场景里，“回前台 UUID 不变”这一前提在 Android 上不保证成立；断言未改。
+6. 可选方案（均保留全部原断言，待组长选）：
+   1. 用 settings 锁定显示旋转（accelerometer_rotation=0、user_rotation=目标方向）代替 requestedOrientation，finally 里恢复；风险：launcher 若强制竖屏仍会转回，需 CI 验证。
+   2. 后台改为切到 androidTest 内一个不锁方向的测试 Activity（新任务），不经 HOME；风险：不再是“真 HOME”后台。
+   3. 改产品 manifest configChanges：超范围，不做。
+7. 无法本地验证：本机无 JDK/SDK，不联网安装。
