@@ -63,6 +63,7 @@ jobs:
         shell: bash  # pwsh 外壳会把子进程退出码折成 1，用 bash 保留 exit 3
         run: pwsh -NoProfile -File tests/windows/win-shell/smoke.ps1
       - name: WinDiagnostics.Tests（A3、A4、A15）
+        if: ${{ !cancelled() }}  # smoke.ps1 失败也跑，win-diagnostics 单独可测；任一步失败任务仍红
         shell: bash
         run: dotnet test tests/windows/win-diagnostics/WinDiagnostics.Tests.csproj -c Release
   android:
