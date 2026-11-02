@@ -25,9 +25,13 @@ private val LOG_REDACTOR_CLASS = "$PRODUCT_PACKAGE.LogRedactor" // 待对齐；�
 private const val LOG_REDACT_METHOD = "redact" // 待对齐
 private val INVITE_CODE_CLASS = "$PRODUCT_PACKAGE.InviteCode" // 待对齐
 private const val INVITE_IS_VALID_METHOD = "isValid" // 待对齐；约定 (String?) -> Boolean
-private val ADMIN_CONTRACT_CLASS = "$PRODUCT_PACKAGE.AdminContract" // 待对齐
-private const val ADMIN_VALIDATE_METHOD = "validate" // 待对齐；约定 (rawJson: String, schemaName: String) -> Boolean?/对象/null
-private val ADMIN_SCHEMAS = listOf("HealthResponse", "VersionResponse", "ErrorBody")
+// 来源：android/android-diagnostics b691b21 AdminContract.kt:16/32/43（object 无 validate，按 schema 分方法，非法抛异常）
+private val ADMIN_CONTRACT_CLASS = "$PRODUCT_PACKAGE.AdminContract"
+private val ADMIN_SCHEMA_METHODS = mapOf(
+    "HealthResponse" to "parseHealth",
+    "VersionResponse" to "parseVersion",
+    "ErrorBody" to "parseError",
+)
 
 class DiagnosticsVectorsTest {
 
@@ -58,29 +62,26 @@ class DiagnosticsVectorsTest {
 
     @Test
     fun adminContractRejectsInvalidAndAcceptsValid() {
-        val validate = entry(ADMIN_CONTRACT_CLASS, ADMIN_VALIDATE_METHOD, 2)
         val root = vector("admin-contract.json") as Map<*, *>
-        for (schema in ADMIN_SCHEMAS) {
+        for ((schema, methodName) in ADMIN_SCHEMA_METHODS) {
+            val accept = entry(ADMIN_CONTRACT_CLASS, methodName, 1)
             val block = root[schema] as? Map<*, *> ?: error("admin-contract.json 缺 $schema")
             for (raw in block["valid"] as List<*>) {
                 val json = Json.stringify(raw)
-                assertTrue("$schema 合法样例被拒：$json", isAccepted(validate, json, schema))
+                assertTrue("$schema 合法样例被拒：$json", isAccepted(accept, json))
             }
             for (raw in block["invalid"] as List<*>) {
                 val json = Json.stringify(raw)
-                assertFalse("$schema 非法样例被收：$json", isAccepted(validate, json, schema))
+                assertFalse("$schema 非法样例被收：$json", isAccepted(accept, json))
             }
         }
     }
 }
 
-// 解析校验函数的返回约定待写手对齐：Boolean 直接采用；对象/null 按非空=收；抛异常=拒。
-private fun isAccepted(validate: Entry, rawJson: String, schema: String): Boolean =
+// 解析函数：不抛异常且返回非空=收；抛异常=拒。
+private fun isAccepted(parse: Entry, rawJson: String): Boolean =
     try {
-        when (val result = validate.invoke(rawJson, schema)) {
-            is Boolean -> result
-            else -> result != null
-        }
+        parse.invoke(rawJson) != null
     } catch (e: Exception) {
         false
     }
