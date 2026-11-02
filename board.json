@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T01:46:00+10:00",
+  "updated_at": "2026-11-03T02:22:00+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -266,10 +266,10 @@
       "id": "win-diagnostics",
       "端": "Windows",
       "模块": "win-diagnostics",
-      "state": "待测试",
+      "state": "上报",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T23:17:54+10:00",
+      "updated_at": "2026-11-03T02:22:00+10:00",
       "paths": [
         "windows/"
       ],
@@ -314,6 +314,10 @@
         {
           "state": "待测试",
           "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "上报",
+          "at": "2026-11-03T02:22:00+10:00"
         }
       ],
       "branch": "windows/win-diagnostics",
@@ -332,6 +336,11 @@
           "at": "2026-11-03T01:46:00+10:00",
           "to": "写手 · Windows",
           "note": "巡检催办第2次：待测试自 23:17 无更新约2.5小时"
+        },
+        {
+          "at": "2026-11-03T02:22:00+10:00",
+          "to": "Hao Yin",
+          "note": "巡检第3次：催办2次后自 2026-11-02T23:17 起无更新约3小时，按规则改为上报"
         }
       ],
       "test_result": "阻塞：A3、A4、A15 未验证（CI 不跑 WinDiagnostics.Tests）；A14 通过",
@@ -339,7 +348,7 @@
       "blocked_on": null,
       "review_state": "通过",
       "test_state": "阻塞",
-      "next_step": "已同步 main(含 PR #10) 到模块分支 @1211740，CI 41441446092：WinDiagnostics.Tests 3 项 Skipped（ProductProject 路径不对），smoke.ps1 找不到入口 exe（本分支无 win-shell）；待对齐"
+      "next_step": "已上报 Hao Yin（2026-11-03 02:22）。卡点推测：smoke.ps1 需 win-shell 入口 exe，win-shell PR #21 未合入 main（第2类等 Hao Yin 批准）；WinDiagnostics.Tests 路径待对齐。等组长或 Hao Yin 拍板后回到待写"
     },
     {
       "id": "admin-connect",
