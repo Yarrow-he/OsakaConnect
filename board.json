@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T02:22:00+10:00",
+  "updated_at": "2026-11-03T03:24:21+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -243,6 +243,11 @@
         {
           "state": "完成",
           "at": "2026-11-02T21:52:57+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T02:52:01+10:00",
+          "note": "Hao Yin 批准（t186u）；PR #21 合入 main 14fb649；windows-acceptance 加入必过（logs/branch-protection/20261103T025117-*）"
         }
       ],
       "branch": "windows/win-shell",
@@ -538,6 +543,11 @@
           "state": "完成",
           "at": "2026-11-03T00:47:52+10:00",
           "note": "PR #19 等 Hao Yin 批准"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T02:52:01+10:00",
+          "note": "Hao Yin 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
         }
       ],
       "branch": "android/android-shell",
@@ -717,6 +727,37 @@
       "brief": "notes/ci-guards.md",
       "review": "未审",
       "next_step": "部分完成：CI 已由 PR #5/#8/#10/#13/#14/#15 补齐各端 job 与 merge-scope；缺 A10 docker 证书（ci/ 目录不存在）、技术栈/硬编码线路检查、PR 行数统计。下一步：随 server-core 与 admin-connect 合入后开 ci/ci-guards 小 PR。ETA 2026-11-05"
+    },
+    {
+      "id": "pr-line-check",
+      "端": "共用",
+      "模块": "pr-line-check",
+      "state": "完成",
+      "owner": "测试·Osaka",
+      "rework": 2,
+      "updated_at": "2026-11-03T03:24:21+10:00",
+      "paths": [
+        "tests/ci/pr-line-check/",
+        "tests/INDEX.md"
+      ],
+      "branch": "tests/pr-line-check-1",
+      "review": "通过（7f197da）",
+      "artifacts": [
+        "https://github.com/Yarrow-he/OsakaConnect/pull/46",
+        "merge 80ebc4cfdce3766bebc472c706e77ecbb8656fc1",
+        "/home/box/osaka/logs/pr-line-check/review-7f197da-20261103T031247.log",
+        "logs/pr-line-check/2026-11-03-test-v3.log",
+        "logs/pr-line-check/2026-11-03-test-lead-verify.log",
+        "logs/pr-line-check/20261103T031039-cli.log",
+        "logs/pr-line-check/20261103T031117-cli-fix.log"
+      ],
+      "history": [
+        {
+          "state": "完成",
+          "at": "2026-11-03T03:24:21+10:00"
+        }
+      ],
+      "next_step": "未接入 CI；加入必过检查待 Hao Yin 批准"
     }
   ],
   "prs": {
