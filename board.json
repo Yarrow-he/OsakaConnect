@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待审阅",
+      "state": "写作中",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:13:07+10:00",
+      "updated_at": "2026-11-03T05:17:57+10:00",
       "paths": [
         "android/"
       ],
@@ -589,6 +589,15 @@
         {
           "state": "待审阅",
           "at": "2026-11-03T05:13:07+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-03T05:17:57+10:00",
+          "note": "测试打回 0f57782（放宽断言），见 tests 分支 12e6636；rework 计数沿用组长记录，不重复加"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-03T05:17:57+10:00"
         }
       ],
       "branch": "android/android-shell-flaky-1",
@@ -603,7 +612,7 @@
       "review": "通过",
       "review_state": "通过",
       "test_state": "通过",
-      "next_step": "组长推送分支跑 CI；审阅/测试",
+      "next_step": "等组长推送跑 CI x3",
       "blocked_on": "PR #19 等 Hao Yin 批准",
       "next": "等审阅和测试"
     },
