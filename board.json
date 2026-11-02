@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待审阅",
+      "state": "写作中",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T04:55:38+10:00",
+      "updated_at": "2026-11-03T04:56:31+10:00",
       "paths": [
         "android/"
       ],
@@ -575,6 +575,10 @@
           "state": "待审阅",
           "at": "2026-11-03T04:55:38+10:00",
           "note": "组长派单修复偶发失败 MainActivityTest UUID 不一致；代码 0f57782；本地无工具链，待推送跑 CI"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-03T04:56:31+10:00"
         }
       ],
       "branch": "android/android-shell-flaky-1",
@@ -590,7 +594,8 @@
       "review_state": "通过",
       "test_state": "通过",
       "next_step": "组长推送分支跑 CI；审阅/测试",
-      "blocked_on": "PR #19 等 Hao Yin 批准"
+      "blocked_on": "PR #19 等 Hao Yin 批准",
+      "next": "等组长推 android/android-shell-flaky-1 跑 CI（android + android-emulator ×3），全绿后改待审阅"
     },
     {
       "id": "android-diagnostics",
