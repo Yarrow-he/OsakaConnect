@@ -159,6 +159,8 @@ jobs:
       - uses: actions/checkout@v4
       - id: has
         run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+      - id: diag
+        run: echo "dir=$([ -d android/app/src/main/java/com/osakaconnect/diagnostics ] && echo yes || true)" >> "$GITHUB_OUTPUT"
       - if: steps.has.outputs.code == ''
         run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
       - if: steps.has.outputs.code != ''
@@ -181,6 +183,7 @@ jobs:
         env:
           OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
           OSAKA_BRANCH: ${{ github.head_ref || github.ref_name }}
+          OSAKA_DIAG: ${{ steps.diag.outputs.dir }}
         with:
           api-level: 30
           target: default
@@ -192,7 +195,7 @@ jobs:
             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
             bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
             # 决策 009：diagnostics 产品目录在则两脚本都跑、任一失败即红；不在时 android-diagnostics 分支报错，其他分支 warning 待测
-            d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ -d "$d" ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
+            d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ "$OSAKA_DIAG" = yes ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
       - if: always() && steps.has.outputs.code != ''
         uses: actions/upload-artifact@v4
         with:
@@ -202,3 +205,9 @@ jobs:
             tests/results/
             android/app/build/reports/androidTests/
           if-no-files-found: ignore
+      - if: always() && steps.has.outputs.code != '' && steps.diag.outputs.dir == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-jvm-unit-junit
+          path: android/app/build/test-results/testDebugUnitTest/*.xml
+          if-no-files-found: error
