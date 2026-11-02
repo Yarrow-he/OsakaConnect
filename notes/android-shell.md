@@ -27,3 +27,9 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 交付证明（2026-11-02）
+1. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403200131 ，结论 success，android job 跑 `gradle --no-daemon assembleDebug testDebugUnitTest lint`（Gradle 8.9，JDK 17）。
+2. sha：远端 9e47998（组长合入 origin/main 的合并提交），包含本地提交 ae5f609（gh compare：ahead 3，behind 0）。
+3. Codex 日志：/home/box/osaka/logs/android-shell-codex-20261102-145542.log ；/home/box/osaka/logs/android-shell-androidx-codex-20261102-165454.log
+4. 检查日志： ；CI 核实：/home/box/osaka/logs/android-ci-verify-20261102.log
