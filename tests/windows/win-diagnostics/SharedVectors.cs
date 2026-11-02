@@ -20,9 +20,11 @@ internal static class SharedVectors
         throw new InvalidOperationException("找不到仓库根：shared/test-vectors 不存在");
     }
 
+    internal static string LoadErrorsJson() =>
+        File.ReadAllText(Path.Combine(RepoRoot(), "shared", "errors.json"));
+
     internal static Dictionary<string, ErrorEntry> LoadErrors() =>
-        JsonSerializer.Deserialize<Dictionary<string, ErrorEntry>>(
-            File.ReadAllText(Path.Combine(RepoRoot(), "shared", "errors.json")), Options)
+        JsonSerializer.Deserialize<Dictionary<string, ErrorEntry>>(LoadErrorsJson(), Options)
         ?? throw new InvalidOperationException("shared/errors.json 解析为空");
 
     internal static RedactionVectors LoadRedaction() =>

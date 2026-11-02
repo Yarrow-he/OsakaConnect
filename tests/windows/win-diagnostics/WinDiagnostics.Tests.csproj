@@ -15,15 +15,18 @@
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
-  <!--
-    待写手交付后对齐：产品工程路径。文件存在才引用；不存在时测试在发现阶段
-    以“待测：模块未交付”跳过（退出码 0），不会伪装通过。
-    CI 也可用 -p:ProductProject=<路径> 覆盖。
-  -->
+  <!-- 待测产品：真实工程路径；CI 也可用 -p:ProductProject=<路径> 覆盖。 -->
   <PropertyGroup>
-    <ProductProject Condition="'$(ProductProject)' == ''">$(MSBuildThisFileDirectory)..\..\..\windows\OsakaConnect.Windows\OsakaConnect.Windows.csproj</ProductProject>
+    <ProductProject Condition="'$(ProductProject)' == ''">$(MSBuildThisFileDirectory)..\..\..\windows\OsakaConnect.Diagnostics\OsakaConnect.Diagnostics.csproj</ProductProject>
   </PropertyGroup>
-  <ItemGroup Condition="Exists('$(ProductProject)')">
+
+  <!-- 产品未交付时必须构建失败，不允许跳过成绿；Restore 先行也要报同一条消息。 -->
+  <Target Name="EnsureProductProject" BeforeTargets="Restore;PrepareForBuild">
+    <Error Condition="!Exists('$(ProductProject)')"
+           Text="待测：模块未交付（win-diagnostics；未找到 $(ProductProject)）" />
+  </Target>
+
+  <ItemGroup>
     <ProjectReference Include="$(ProductProject)" />
   </ItemGroup>
 
@@ -35,10 +38,4 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
   </ItemGroup>
-
-  <!-- 产品未交付时在 dotnet test 输出里明确提示，避免只看摘要时误以为已测。 -->
-  <Target Name="AnnounceProductMissing" BeforeTargets="VSTest">
-    <Message Importance="high" Condition="!Exists('$(ProductProject)')"
-             Text="待测：模块未交付（win-diagnostics；未找到 $(ProductProject)）" />
-  </Target>
 </Project>
