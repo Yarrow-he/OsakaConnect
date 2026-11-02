@@ -89,7 +89,7 @@ start_server() { # $1 = trusted|untrusted|wronghost
 run_probe() { # $1 = probe 使用的令牌
   set +e
   PROBE_OUT=$(PROBE_TOKEN="$1" docker compose -p "$COMPOSE_PROJECT" -f "$COMPOSE_FILE" \
-    run --rm -T "$PROBE_SERVICE" 2>&1)
+    run --rm --no-deps -T "$PROBE_SERVICE" 2>&1)
   PROBE_RC=$?
   set -e
   printf '%s\n' "$PROBE_OUT"
