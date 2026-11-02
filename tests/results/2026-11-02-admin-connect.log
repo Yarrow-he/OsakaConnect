@@ -1,0 +1,3 @@
+== bash tests/admin/admin-connect/grep-guard.sh（本地，对 tests/v0.1.0 工作树）
+待测：模块未交付（windows/ admin/ android/ server/ 均不存在）
+exit=0
