@@ -1,3 +1,8 @@
-== bash tests/admin/admin-connect/grep-guard.sh（本地，对 tests/v0.1.0 工作树）
-待测：模块未交付（windows/ admin/ android/ server/ 均不存在）
-exit=0
+# admin-connect 验收结论 2026-11-02 AEST｜分支 admin/admin-connect @93fba9d，CI run 41407456188
+结论：阻塞
+1. A10 ①②③④ 阻塞（按约定未验证）：a10-docker job 只输出“无 A10 脚本，跳过”（/home/box/osaka/logs/tests-ci-41407456188-full.log:803）；分支无 tests/admin/。
+2. A10 源码约束（无证书放行回调）通过：grep-guard（修复后）exit 0（/home/box/osaka/logs/tests-local-admin-connect-20261102.log:5-6）。
+3. A14 通过：同上 :5-6；admin/ 无线路字面量（同文件:7-8）。
+4. 写手 OsakaAdmin.Tests 67/67（/home/box/osaka/logs/tests-ci-41407456188-full.log:152）不作验收证据。
+脚本修复：grep-guard.sh 在 set -e 下无命中时 `|| return` 返回 1，干净代码误判失败（exit 1，无违例输出）；已用 Claude Code 改为 return 0，会话 /home/box/osaka/logs/test-admin-grepguard-fix-claude-20261102.log。
+需组长：CI PR 合入后在 a10-docker 跑 `bash tests/admin/admin-connect/run-a10.sh`，guards job 跑 `bash tests/admin/admin-connect/grep-guard.sh`。

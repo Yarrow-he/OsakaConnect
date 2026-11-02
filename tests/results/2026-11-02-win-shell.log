@@ -1,0 +1,9 @@
+# win-shell 验收结论 2026-11-02 18:0x AEST｜分支 windows/win-shell @02e2877（CI @2647a7c，差异仅 notes/win-shell.md）
+结论：阻塞
+1. A1 阻塞：CI run 41403138518 未执行启动自检；全日志无 self-test（/home/box/osaka/logs/tests-ci-41403138518-full.log，grep 无命中）。smoke.ps1 需 windows-latest。
+2. A2 阻塞：CI 只跑写手 OsakaConnect.Tests 1/1（/home/box/osaka/logs/tests-ci-41403138518-full.log:916），非 UI 自动化切页断言；smoke.ps1 未跑。
+3. A16 阻塞：同 A2，W1/W4 页面标识未经 UI 测试断言。
+4. A14 通过：grep-guard（修复后）exit 0（/home/box/osaka/logs/tests-local-win-shell-20261102.log:5-6）。
+5. A17（附加，smoke.ps1 覆盖）通过：windows/ 的 cs/xaml 无线路字面量（/home/box/osaka/logs/tests-local-win-shell-20261102.log:7-8）。
+原因：git ls-tree windows/win-shell 下 tests/ 只有 INDEX.md、contract/，无 tests/windows/；workflow 不调用 smoke.ps1。
+需组长：windows-dotnet job 构建后加 `pwsh -NoProfile -File tests/windows/win-shell/smoke.ps1`（windows-latest，需桌面会话做 UI 自动化），并把 tests/ 目录带上模块分支。

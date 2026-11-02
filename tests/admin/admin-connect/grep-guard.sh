@@ -71,11 +71,11 @@ check_callbacks() {
   for d in windows admin android server; do
     [ -d "$ROOT/$d" ] && dirs+=("$ROOT/$d")
   done
-  [ ${#dirs[@]} -eq 0 ] && return
+  [ ${#dirs[@]} -eq 0 ] && return 0
   hits=$(grep -RInE \
     --exclude-dir=bin --exclude-dir=obj --exclude-dir=build --exclude-dir=.gradle --exclude-dir=__pycache__ \
     "$CALLBACK_PATTERN" "${dirs[@]}" 2>/dev/null || true)
-  [ -n "$hits" ] || return
+  [ -n "$hits" ] || return 0
   while IFS= read -r line; do
     violation "证书校验放行回调：${line#"$ROOT"/}"
   done <<< "$hits"
