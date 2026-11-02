@@ -120,6 +120,19 @@ public sealed class AdminContractTests : IDisposable
     }
 
     [Fact]
+    public async Task ProbeCommandRejectsInvalidArgumentsWithoutOutput()
+    {
+        foreach (var args in new[] { Array.Empty<string>(), new[] { "--probe" },
+                     new[] { "--x", "y" }, new[] { "--probe", "y", "extra" } })
+        {
+            using var output = new StringWriter();
+
+            Assert.Equal((int)ProbeStatus.UsageError, await ProbeCommand.RunAsync(args, output));
+            Assert.Equal(string.Empty, output.ToString());
+        }
+    }
+
+    [Fact]
     public async Task SuccessRequiresBothEndpointsAndSendsBearerHeader()
     {
         var paths = new List<string>();

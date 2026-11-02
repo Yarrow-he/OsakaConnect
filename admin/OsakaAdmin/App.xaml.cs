@@ -9,17 +9,7 @@ public partial class App : Application
         base.OnStartup(e);
         if (e.Args.Length > 0)
         {
-            if (e.Args.Length != 2 || e.Args[0] != "--probe")
-            {
-                Shutdown((int)ProbeStatus.UsageError);
-                return;
-            }
-
-            using var probe = new AdminProbe();
-            var result = await probe.ProbeAsync(e.Args[1]);
-            if (result.Status == ProbeStatus.Success)
-                Console.WriteLine(ProbeResult.FormatSummary(result.Version!, result.Health!));
-            Shutdown((int)result.Status);
+            Shutdown(await ProbeCommand.RunAsync(e.Args, Console.Out));
             return;
         }
 

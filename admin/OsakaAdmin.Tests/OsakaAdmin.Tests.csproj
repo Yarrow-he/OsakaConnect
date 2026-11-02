@@ -15,6 +15,7 @@
     </PackageReference>
     <Compile Include="../OsakaAdmin/AdminContract.cs" Link="AdminContract.cs" />
     <Compile Include="../OsakaAdmin/AdminProbe.cs" Link="AdminProbe.cs" />
+    <Compile Include="../OsakaAdmin/ProbeCommand.cs" Link="ProbeCommand.cs" />
     <EmbeddedResource Include="../../shared/errors.json" LogicalName="OsakaAdmin.Errors.json" />
     <None Include="../../shared/**/*.json" CopyToOutputDirectory="PreserveNewest" LinkBase="shared" />
   </ItemGroup>
