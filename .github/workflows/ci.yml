@@ -68,6 +68,19 @@ jobs:
       - if: steps.has.outputs.code == 'gradle'
         working-directory: android
         run: gradle --no-daemon assembleDebug testDebugUnitTest lint
+      - if: always() && steps.has.outputs.code != ''
+        run: |
+          for f in $(find android -path '*/build/test-results/*' -name '*.xml'); do
+            grep -o '<testsuite [^>]*' "$f" | sed -E 's/.*name="([^"]*)".*tests="([0-9]+)".*failures="([0-9]+)".*/\1 tests=\2 failures=\3/'
+          done
+      - if: always() && steps.has.outputs.code != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-unit-test-results
+          path: |
+            android/**/build/test-results/**/*.xml
+            android/**/build/reports/
+          if-no-files-found: ignore
   python:
     runs-on: ubuntu-latest
     steps:
