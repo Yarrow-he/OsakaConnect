@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待审阅",
+      "state": "待测试",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:41:52+10:00",
+      "updated_at": "2026-11-03T05:47:00+10:00",
       "paths": [
         "android/"
       ],
@@ -610,6 +610,11 @@
         {
           "state": "待审阅",
           "at": "2026-11-03T05:41:52+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T05:47:00+10:00",
+          "note": "审阅通过 bb8da34（android-shell-flaky 返工1，CI 41509704835 android+android-emulator 3/3）；日志 /home/box/osaka/logs/android-shell-flaky/review-bb8da34-20261103T054245.log"
         }
       ],
       "branch": "android/android-shell-flaky-1",
