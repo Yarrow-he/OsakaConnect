@@ -100,7 +100,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') == ''
-        run: { echo "::error::缺少 tests/admin/admin-connect/run-a10.sh，A10 未验证"; exit 1; }
+        run: echo "::error::缺少 tests/admin/admin-connect/run-a10.sh，A10 未验证" && exit 1
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') != ''
         run: bash tests/admin/admin-connect/run-a10.sh
   android-emulator:
