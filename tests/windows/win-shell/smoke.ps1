@@ -7,7 +7,7 @@
 # 运行命令：pwsh -NoProfile -File tests/windows/win-shell/smoke.ps1
 # 覆盖 acceptance：A1、A2、A16、A14、A17。
 # 待 CI：本机无 .NET/桌面会话，未运行；目标 GitHub Actions windows-latest。
-# 产品未交付时输出“待测：模块未交付”并退出 0。
+# 产品未交付时输出“待测：模块未交付”并退出 3（CI 红）。
 
 $ErrorActionPreference = 'Stop'
 $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path
@@ -31,7 +31,7 @@ function Pass($Message) { Write-Host "PASS: $Message" -ForegroundColor Green }
 
 if (-not (Test-Path -LiteralPath $WindowsRoot -PathType Container)) {
     Write-Host '待测：模块未交付（windows/ 目录不存在）'
-    exit 0
+    exit 3
 }
 
 # A14：只允许 *.csproj/*.cs/*.xaml。

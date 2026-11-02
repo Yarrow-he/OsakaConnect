@@ -17,7 +17,7 @@ present=0
 for d in windows admin android server; do [ -d "$ROOT/$d" ] && present=1; done
 if [ "$present" -eq 0 ]; then
   echo "待测：模块未交付（windows/ admin/ android/ server/ 均不存在）"
-  exit 0
+  exit 3
 fi
 
 # A14 按“生产源码扩展名”判定；json/xml/png/gradle.properties 等资源与配置不在此列。
