@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T01:30:06+10:00",
+  "updated_at": "2026-11-03T01:46:00+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -319,7 +319,7 @@
       "branch": "windows/win-diagnostics",
       "summary": "ErrorPresenter（errors.json 码→中文文案，不含堆栈）、LogRedactor、InviteCode.IsValid；均读 shared 测试向量做单测。",
       "brief": "notes/win-diagnostics.md",
-      "nudges": 1,
+      "nudges": 2,
       "nudge_log": [
         "2026-11-02T17:20:00+10:00",
         "2026-11-02T18:46:00+10:00",
@@ -327,6 +327,11 @@
           "at": "2026-11-03T00:25:00+10:00",
           "to": "写手 · Windows",
           "note": "巡检催办：待测试停留约65分钟"
+        },
+        {
+          "at": "2026-11-03T01:46:00+10:00",
+          "to": "写手 · Windows",
+          "note": "巡检催办第2次：待测试自 23:17 无更新约2.5小时"
         }
       ],
       "test_result": "阻塞：A3、A4、A15 未验证（CI 不跑 WinDiagnostics.Tests）；A14 通过",
