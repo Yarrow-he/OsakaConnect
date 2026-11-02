@@ -1,0 +1,9 @@
+# win-diagnostics 验收结论 2026-11-02 AEST｜分支 windows/win-diagnostics @e700fe5（CI @1f6adf6，差异仅 notes）
+结论：阻塞
+1. A3 阻塞：我们的 ErrorPresenterTests.cs 未在 CI 跑；CI 只有写手 OsakaConnect.Diagnostics.Tests 61/61（/home/box/osaka/logs/tests-ci-41403148691-full.log:802），不作验收证据。
+2. A4 阻塞：同上（LogRedactorTests.cs 未跑）。旁证：写手测试读取 shared/test-vectors/redaction.json（windows/OsakaConnect.Diagnostics.Tests/DiagnosticsTests.cs:15）。
+3. A15 阻塞：InviteCodeTests.cs 未跑。旁证：写手测试读取 invite-code.json（同文件:58）。
+4. A7 不属 Windows 端（Android 脱敏），本模块不判。
+5. 附加 A14 通过：/home/box/osaka/logs/tests-local-win-diagnostics-20261102.log:5-6；A17 无字面量：同文件:7-8。
+原因：分支无 tests/windows/；workflow 不调用 WinDiagnostics.Tests.csproj。
+需组长：windows-dotnet job 加 `dotnet test tests/windows/win-diagnostics/WinDiagnostics.Tests.csproj`（windows-latest），并把 tests/ 带上分支。
