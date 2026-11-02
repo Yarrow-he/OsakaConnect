@@ -269,7 +269,7 @@
       "state": "待测试",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T23:17:54+10:00",
+      "updated_at": "2026-11-03T02:21:37+10:00",
       "paths": [
         "windows/"
       ],
@@ -296,7 +296,8 @@
         "/home/box/osaka/logs/tests-local-win-diagnostics-20261102.log",
         "PR #11 审阅 PASS @c56c80a（logs/win-diagnostics/review-pr11-20261102-221042.log）；按审阅意见，#11 暂缓合并，等 win-shell/win-diagnostics 产品分支上 main",
         "PR #11 @c56c80a：guards 红（分支未含 PR #14 拆分），尚不满足合并标准；且审阅要求等 win-shell/win-diagnostics 产品分支上 main",
-        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）"
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
+        "2026-11-03T02:21:37+10:00 测试核查 CI 41441446092 @1211740（logs/win-diagnostics/2026-11-03-ci-41441446092.log）：不判通过、不判返工，两处均为测试脚本问题。1. WinDiagnostics.Tests 3 项 Skipped（行800-811）：tests/windows/win-diagnostics/WinDiagnostics.Tests.csproj 的 ProductProject 指向 windows/OsakaConnect.Windows（win-shell 工程，本分支没有），产品实际在 windows/OsakaConnect.Diagnostics（行760-763 构建成功）；修法见 PR #11。2. smoke.ps1 未找到入口 exe（行787）：smoke.ps1 属 win-shell（A1/A2/A16），本分支无 win-shell 工程，不是本模块交付物。产品自带单测 windows-dotnet 61/61 通过（行983）。"
       ],
       "history": [
         {

@@ -41,3 +41,10 @@ A3, A4, A7, A15（见 `acceptance.md`）。完成标准：dotnet test：redactio
 2. board.json 中"已合并 main(PR #10)@1211740"与 git 不符（1211740 是 main 并入模块分支），请组长核对。
 3. 缺产品退出码为 1 非 3（PR 正文已说明，属 workflow，归 ci-guards）。
 日志：logs/win-diagnostics/review-pr11-20261102-221042.log
+
+## 测试核查 2026-11-03T02:21:37+10:00（版本 1211740，CI run 41441446092）
+1. 命令：gh run view 41441446092 --log > logs/win-diagnostics/2026-11-03-ci-41441446092.log
+2. 结论：未判定（不通过不计返工）。两处红/跳过都是测试脚本问题，不是产品代码问题。
+3. Skipped 3 项（日志行 800-811）：WinDiagnostics.Tests.csproj 引用 windows/OsakaConnect.Windows/OsakaConnect.Windows.csproj，本分支不存在；应指向 windows/OsakaConnect.Diagnostics（PR #11）。
+4. smoke.ps1 FAIL（行 787）：A1/A2/A16 是 win-shell 验收，本分支无 exe。
+5. 产品单测 windows-dotnet：61/61 通过（行 983）。
