@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T00:25:00+10:00",
+  "updated_at": "2026-11-03T00:47:52+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -100,7 +100,8 @@
         },
         "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
         "测试v2 @82abe4b 通过：必过+guards 绿，0 skip（旧6 skip=缺jsonschema）；logs/server-core/2026-11-02-test-v2.log；notes 提交 042d919",
-        "测试v2 通过证据：CI 41450034777 @82abe4b 必过+guards 绿，pytest 183 passed/23 passed 0 skip；logs/server-core/2026-11-02-test-v2.log；CLI /home/box/osaka/artifacts/cli-logs/retest-v2-3modules-2026-11-02.log"
+        "测试v2 通过证据：CI 41450034777 @82abe4b 必过+guards 绿，pytest 183 passed/23 passed 0 skip；logs/server-core/2026-11-02-test-v2.log；CLI /home/box/osaka/artifacts/cli-logs/retest-v2-3modules-2026-11-02.log",
+        "已合入 main：PR #22 合并提交 4aaf529（Hao Yin 聊天批准）"
       ],
       "history": [
         {
@@ -139,6 +140,11 @@
         {
           "state": "完成",
           "at": "2026-11-02T23:27:02+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T00:47:52+10:00",
+          "note": "PR #22 合并 4aaf529"
         }
       ],
       "branch": "server/server-core",
@@ -393,6 +399,11 @@
         {
           "state": "待测试",
           "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T00:47:52+10:00",
+          "note": "server-core 已上 main，解除阻塞；PR #26 待 a10-docker"
         }
       ],
       "branch": "admin/admin-connect",
@@ -404,7 +415,7 @@
       "nudge_log": [
         "2026-11-02T18:46:00+10:00"
       ],
-      "blocked_on": "等 server-core 上 main（a10-docker 需 server/ + admin/）",
+      "blocked_on": null,
       "review_state": "通过",
       "test_state": "阻塞",
       "next_step": "已合并 main（PR #8）@deda861 并推送；测试按看板跑验收"
@@ -416,7 +427,7 @@
       "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-02T23:53:02+10:00",
+      "updated_at": "2026-11-03T00:47:52+10:00",
       "paths": [
         "android/"
       ],
@@ -487,6 +498,11 @@
         {
           "state": "完成",
           "at": "2026-11-02T23:53:02+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T00:47:52+10:00",
+          "note": "PR #19 等 Hao Yin 批准"
         }
       ],
       "branch": "android/android-shell",
@@ -501,7 +517,8 @@
       "review": "通过",
       "review_state": "通过",
       "test_state": "通过",
-      "next_step": "测试 · Osaka 按 run 41455806499 复测"
+      "next_step": "测试 · Osaka 按 run 41455806499 复测",
+      "blocked_on": "PR #19 等 Hao Yin 批准"
     },
     {
       "id": "android-diagnostics",
