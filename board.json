@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待测试",
+      "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:47:00+10:00",
+      "updated_at": "2026-11-03T05:48:37+10:00",
       "paths": [
         "android/"
       ],
@@ -534,12 +534,6 @@
           "code_commit": "0f57782"
         },
         {
-          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41505317288",
-          "ci_result": "测试 android-shell-flaky @0f57782/ac22407 不通过：CI attempts 1-3 全绿（head ac22407），但 diff 删除回前台 UUID 一致性断言 assertEquals(rotatedId, lifecycleId)、rotatedId 精确生命周期序列与后台 scenario.state==CREATED 断言，属放宽断言，非根因修复",
-          "commands": "git diff origin/main...0f57782; gh run view 41505317288 --attempt {1,2,3} --log; claude --settings .claude/settings.test.json -p",
-          "log": "logs/android-shell-flaky/2026-11-03-ci-41505317288-verify.log; logs/android-shell-flaky/2026-11-03-claude-test-analysis.log; notes/android-shell-flaky.md"
-        },
-        {
           "commit": "bb8da34",
           "assert_check": "/home/box/osaka/logs/android-shell-flaky/assert-preservation-bb8da34.log PASS",
           "codex_logs": "/home/box/osaka/logs/android-shell-flaky/codex-card3-*.log, codex-card4-nocomments-*.log"
@@ -548,10 +542,15 @@
           "ci_bb8da34": "logs/android-shell-flaky/ci-41509704835-{1,2,3}.log android-emulator 3/3 pass (head e2082b9)"
         },
         {
-          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41509704835",
-          "ci_result": "测试 android-shell-flaky 返工版 @bb8da34/e2082b9 通过：只改 MainActivityTest.kt，UUID 一致、rotatedId 精确序列、后台 CREATED 断言全保留，finally 恢复旋转设置；android-emulator attempts 1-3 全绿。windows-dotnet 3 次 failure（NavigationTests.SidebarSwitchesBetweenConnectionAndSettings，Windows 端无关）",
-          "commands": "git show --stat bb8da34; git diff 0f57782 bb8da34; git diff origin/main...bb8da34; gh api runs/41509704835/attempts/{1,2,3}/jobs; gh run view 41509704835 --attempt {1,2,3} --log; claude --settings .claude/settings.test.json -p",
-          "log": "logs/android-shell-flaky/2026-11-03-diff-bb8da34.diff; logs/android-shell-flaky/2026-11-03-ci-41509704835-verify.log; logs/android-shell-flaky/2026-11-03-claude-test-analysis-bb8da34.log; notes/android-shell-flaky.md"
+          "test_commit": "bb8da34",
+          "ci_run": "41509704835",
+          "commands": "gh run view 41509704835 --repo Yarrow-he/OsakaConnect --log; git diff 0f57782 bb8da34 -- MainActivityTest.kt; claude --settings .claude/settings.test.json -p <断言保留分析>",
+          "logs": [
+            "logs/android-shell-flaky/2026-11-03-ci-41509704835-verify.log",
+            "logs/android-shell-flaky/2026-11-03-claude-test-analysis-bb8da34.log",
+            "logs/android-shell-flaky/2026-11-03-diff-bb8da34.diff"
+          ],
+          "notes": "notes/android-shell-flaky.md#测试"
         }
       ],
       "history": [
@@ -627,6 +626,10 @@
           "state": "待测试",
           "at": "2026-11-03T05:47:00+10:00",
           "note": "审阅通过 bb8da34（android-shell-flaky 返工1，CI 41509704835 android+android-emulator 3/3）；日志 /home/box/osaka/logs/android-shell-flaky/review-bb8da34-20261103T054245.log"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T05:48:37+10:00"
         }
       ],
       "branch": "android/android-shell-flaky-1",
@@ -640,7 +643,7 @@
       "test_result": "通过：A5/A6/A16 run 41455806499 @454063d，日志 logs/android-shell/2026-11-02-test-v3.log；A14 lang-guard 通过",
       "review": "通过",
       "review_state": "通过",
-      "test_state": "通过",
+      "test_state": "通过（版本 bb8da34；CI run 41509704835 android-emulator 3/3 通过；windows-dotnet 红为已知 WPF flaky，另线跟踪）",
       "next_step": "审阅+测试 bb8da34",
       "blocked_on": "PR #19 等 Hao Yin 批准",
       "next": "等审阅和测试"
