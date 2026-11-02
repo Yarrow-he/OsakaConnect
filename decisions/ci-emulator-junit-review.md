@@ -164,3 +164,128 @@ index bba5d16..5818532 100644
 
 **总体判断**：这是一处低风险、增量式的报告归档改动，不削弱门禁、不直接触碰密钥、不影响本机。建议确认 `steps.has`/`outputs.code` 真实存在（否则静默跳过），并考虑把 action 固定到完整 SHA、确认测试报告不含敏感输出。
 ````
+
+## 第三轮（diff 已改：新增 diag 步骤输出，run.sh 判定与上传条件共用 steps.diag.outputs.dir）
+
+1. A、B 各在新建空临时目录、新会话中运行；B 会话记录 /home/box/osaka/logs/ci-emulator-junit/B-session-r3.jsonl，model 字段 "deepseek-v4-flash"。
+
+### 输入（原文）
+
+````
+下面是一份 CI 改动的 diff。请分别回答：1. 有没有削弱或绕过检查；2. 有没有泄露密钥的风险；3. 有没有影响本机网络或权限的操作。每项给出结论和依据。
+
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index bba5d16..9255311 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -159,6 +159,8 @@ jobs:
+       - uses: actions/checkout@v4
+       - id: has
+         run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
++      - id: diag
++        run: echo "dir=$([ -d android/app/src/main/java/com/osakaconnect/diagnostics ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+       - if: steps.has.outputs.code == ''
+         run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
+       - if: steps.has.outputs.code != ''
+@@ -181,6 +183,7 @@ jobs:
+         env:
+           OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
+           OSAKA_BRANCH: ${{ github.head_ref || github.ref_name }}
++          OSAKA_DIAG: ${{ steps.diag.outputs.dir }}
+         with:
+           api-level: 30
+           target: default
+@@ -192,7 +195,7 @@ jobs:
+             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
+             bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
+             # 决策 009：diagnostics 产品目录在则两脚本都跑、任一失败即红；不在时 android-diagnostics 分支报错，其他分支 warning 待测
+-            d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ -d "$d" ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
++            d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ "$OSAKA_DIAG" = yes ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
+       - if: always() && steps.has.outputs.code != ''
+         uses: actions/upload-artifact@v4
+         with:
+@@ -202,3 +205,9 @@ jobs:
+             tests/results/
+             android/app/build/reports/androidTests/
+           if-no-files-found: ignore
++      - if: always() && steps.has.outputs.code != '' && steps.diag.outputs.dir == 'yes'
++        uses: actions/upload-artifact@v4
++        with:
++          name: android-jvm-unit-junit
++          path: android/app/build/test-results/testDebugUnitTest/*.xml
++          if-no-files-found: error
+````
+
+### 评审 A 输出（原文）
+
+````
+1. **有没有削弱或绕过检查：没有直接关闭检查，但存在条件性漏检风险。**
+   - 两个 diagnostics 脚本仍都会执行，任一失败仍返回非零；指定分支缺目录仍报错，其他分支仍只 warning。
+   - 变化在于：目录判断从执行脚本时的 `[ -d "$d" ]`，改为 checkout 后提前检测并保存结果。如果后续构建生成了该目录，提前记录的值仍为空，非 diagnostics 分支就可能跳过原本会执行的检查。目录状态始终不变时，两者基本等价。
+   - 新增上传步骤在匹配不到 XML 时会报错，增加了报告存在性约束；**它本身不会运行单元测试，也不会判断 XML 中的测试是否通过。**
+
+2. **有没有泄露密钥的风险：未见直接读取或输出密钥，但新增了报告内容泄露的可能。**
+   - 新增的 `OSAKA_DIAG` 只有 `yes` 或空值，不包含密钥。
+   - 新增上传 `testDebugUnitTest/*.xml`。如果报告中的测试输出、异常信息等包含 token、密码或其他敏感信息，这些内容会随 artifact 上传；`always()` 使失败情况下也可能上传。
+   - diff 没有显示读取 secrets、上传密钥文件或发往自定义外部地址，因此不能据此认定存在密钥窃取。
+
+3. **有没有影响本机网络或权限的操作：新增了 CI runner 的网络上传，没有看到修改网络配置或权限的操作。**
+   - `actions/upload-artifact@v4` 会将匹配的报告上传到 GitHub Actions artifact 服务，属于新增网络传输。
+   - 新增 shell 命令仅检查目录，并向 `$GITHUB_OUTPUT` 写入结果；未见 `sudo`、`chmod`、防火墙、路由、代理或 DNS 配置修改。
+   - 这些操作发生在 CI runner 上；若使用自托管 runner，就发生在该宿主机上。diff 本身不会直接操作开发者本机。
+````
+
+### 评审 B 输出（原文）
+
+````
+说明：当前工作目录 `/tmp/tmp.40sPVFu6MK` 是空目录，只有这段 diff，没有完整的 `ci.yml`、`run.sh`、`run-instrumented.sh`，因此以下判断仅基于 diff 本身；涉及“工作流其它部分是否调用单测”的结论会标注为条件性。
+
+---
+
+## 1. 是否削弱或绕过检查
+
+**结论：没有实质性削弱，也没有看到可被利用的绕过路径。** 新的门控与旧的直接目录探测在正常路径上语义等价，但确实引入了一个轻微的设计脆弱点。
+
+依据：
+
+- 旧逻辑：在模拟器步骤内、跑测试的同一时刻执行 `[ -d "$d" ]`。
+- 新逻辑：前一步 `diag` 执行 `[ -d android/app/src/main/java/com/osakaconnect/diagnostics ]`，把 `yes`/空写进 `GITHUB_OUTPUT`（`ci.yml` 新增第 162–163 行附近），运行时改判 `[ "$OSAKA_DIAG" = yes ]`（约第 198 行）。
+- 两者都在同一 job、同一次 checkout 之后、同一 workspace；`-d` 对符号链接的行为一致。目录不存在时输出为空，仍然落入原来的 `else` 分支（`android-diagnostics` 分支报 error，其它分支 warning），与原行为一致。
+- 若 `diag` 步骤本身失败，job 直接失败、模拟器步骤不会执行，属于 fail-closed，而不是静默跳过；因此不存在“探测失败 → 测试被跳过且 CI 仍绿”的路径。
+- `OSAKA_DIAG` 已加引号，取值只可能是 `yes` 或空，无命令注入；该值来自步骤输出，不是不可信输入。
+
+需要注意的两点（**不是本 diff 造成的绕过，但值得记录**）：
+
+- **TOCTOU 窗口**：判定从“跑测试时同一步探测”变成“前置步骤探测”。如果两步之间有脚本创建/删除 diagnostics 目录（例如 `ci-run.sh` 的副作用），新写法会与测试时的真实文件系统状态不一致。当前 diff 中两步之间没有这类操作，风险很低，但这是一个比原写法更脆弱的耦合。
+- **新增 artifact 的失败条件反而更严格**：新上传步骤用了 `if-no-files-found: error`，路径是 `android/app/build/test-results/testDebugUnitTest/*.xml`，而本 diff 里没有看到任何地方调用 `testDebugUnitTest`。如果工作流其它部分也没有调用它，那么只要 diagnostics 目录存在，该步骤就会因找不到文件而让 CI 变红——这是“误红/更严格”，不是削弱。是否真的会误红取决于 `run.sh` 内部是否执行了单测，我无法从 diff 确认。
+
+---
+
+## 2. 密钥泄露风险
+
+**结论：本 diff 没有引入新的密钥访问或密钥输出路径。** 仅有条件性的、与测试内容相关的间接暴露面。
+
+依据：
+
+- 没有新增 `secrets.*` 引用、没有新增带密钥的 `env`、没有 `set -x`、没有 `env`/`printenv` 之类的输出转储。新增的 `diag` 步骤只输出 `yes` 或空。
+- 新增的 artifact 路径是 JVM 单测结果 XML，不是凭证文件；而且上方本来就已有一个 `if: always()` 的 artifact 上传步骤在上传 `tests/results/` 和构建报告，本次只是多传一类测试结果。
+- 未改动触发条件（diff 中没有 `pull_request_target` 之类的变化），因此 fork PR 的信任边界没有变化。
+- 条件性提醒：JUnit XML 里可能包含测试打印的 stdout，如果诊断测试会输出环境变量或 token，那么 artifact 会对有仓库读权限的人可见。这属于“测试内容审计”问题，不是本次 diff 直接新增的泄露通道。
+
+---
+
+## 3. 本机网络或权限影响
+
+**结论：没有新增影响本机网络或权限的操作。** 新增的只有一个本地只读判断和一次 GitHub artifact 上传。
+
+依据：
+
+- `diag` 步骤只做 `test -d`，属只读文件系统访问。
+- 新增的 `actions/upload-artifact@v4` 是向 GitHub artifact 服务的出站上传，属于 CI 内正常网络行为，使用 Actions 运行时令牌，不需要显式 secret；该 action 在上方已被使用，不是新引入的第三方依赖。
+- 没有 `sudo`、`chmod`/`chown`、`iptables`/代理设置、端口监听、容器特权或宿主机权限变更。
+- diff 未触及 `permissions:` 块和 triggers；若工作流其余部分未变，则 `GITHUB_TOKEN` 权限范围不变（这里只能基于“未出现在 diff 中”判断）。
+
+---
+
+**总体**：这段改动是“把目录存在性判断前移并复用于新增的 artifact 上传条件”，不构成检查削弱、不新增密钥面、不改变本机网络/权限。唯一实质性的风险点是 TOCTOU 式的间接判定，以及新增 `if-no-files-found: error` 可能在未运行 `testDebugUnitTest` 时误红——两者都属于健壮性问题，而非安全问题。
+````
