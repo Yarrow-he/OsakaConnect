@@ -27,3 +27,27 @@ A1, A2, A16, A14（见 `acceptance.md`）。完成标准：dotnet build/test 通
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 交付证明（写手 · Windows，2026-11-02T17:22:07+10:00）
+1. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403138518，全部 job 成功，其中 windows-dotnet 跑在 windows-latest。
+2. 提交：2647a7c（origin 分支头，含组长合入 main 的 merge）。
+3. 构建：CI 里 dotnet build -c Release 输出 Build succeeded。
+4. 测试：dotnet test -c Release --no-build，OsakaConnect.Tests.dll 结果是 Passed 1、Failed 0、Skipped 0、Total 1。
+5. lint：本仓库没有单独的 .NET lint job，guards job 已通过（范围、依赖、硬编码线路检查）。
+6. CI 日志：/home/box/osaka/logs/win-shell-ci-41403138518.log
+7. 任务卡：/home/box/osaka/logs/win-shell-card.md
+8. CLI 会话日志：/home/box/osaka/logs/win-shell-codex-1.log、/home/box/osaka/logs/win-shell-codex-2.log
+9. 改动文件（git diff --name-only origin/main...HEAD，不含 notes 和 board.json）：
+   1. windows/OsakaConnect.Tests/NavigationTests.cs
+   2. windows/OsakaConnect.Tests/OsakaConnect.Tests.csproj
+   3. windows/OsakaConnect/App.xaml
+   4. windows/OsakaConnect/App.xaml.cs
+   5. windows/OsakaConnect/ConnectionPage.xaml
+   6. windows/OsakaConnect/ConnectionPage.xaml.cs
+   7. windows/OsakaConnect/MainWindow.xaml
+   8. windows/OsakaConnect/MainWindow.xaml.cs
+   9. windows/OsakaConnect/OsakaConnect.csproj
+   10. windows/OsakaConnect/SettingsPage.xaml
+   11. windows/OsakaConnect/SettingsPage.xaml.cs
+10. 运行方式：本机没有 .NET SDK，编译和测试只在 CI（windows-latest）上跑。
+11. 已知限制：只有 1 个导航单测；Codex 第 2 次会话被 kill（143），文件已人工核对齐全；界面只在 CI 上编译过，没在真机启动。
