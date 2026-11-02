@@ -15,6 +15,12 @@ jobs:
       - name: scope
         if: github.event_name == 'pull_request'
         run: scripts/check-scope.sh origin/${{ github.base_ref }}
+      - name: merge-scope（模块分支合并提交，决策 007）
+        env:
+          CHECK_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: scripts/check-merge-scope.sh origin/${{ github.base_ref || 'main' }} ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: merge-scope 自测
+        run: bash scripts/test-check-merge-scope.sh
       - name: grep-guard（A10、A14）
         run: bash tests/admin/admin-connect/grep-guard.sh
       - name: android lang-guard（A14、A17）
