@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T03:35:49+10:00",
+  "updated_at": "2026-11-03T03:44:54+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -928,9 +928,9 @@
     "exempt-checks-required": {
       "title": "产品依赖检查：豁免至产品进 main，之后必须绿并加入必过",
       "owner": "代码组长 · Osaka",
-      "state": "豁免中",
+      "state": "完成",
       "started_at": "2026-11-02T23:02:59+10:00",
-      "updated_at": "2026-11-03T03:35:49+10:00",
+      "updated_at": "2026-11-03T03:44:54+10:00",
       "note": "Hao Yin 22:57：guards-acceptance 等产品代码上 main 再加；23:04：另外三项同样豁免至对应代码进仓库，之后必须报绿",
       "checks": {
         "guards-acceptance": {
@@ -941,9 +941,11 @@
             "server/"
           ],
           "exempt_until": "对应产品代码进 main",
-          "state": "豁免中",
+          "state": "已取消豁免",
           "reminded_at": null,
-          "note": "lang-guard 无 android/ 即 exit 3；grep-guard 四个目录全缺才 exit 3，缺哪个跳哪个，四个都进 main 才算完整"
+          "note": "lang-guard 无 android/ 即 exit 3；grep-guard 四个目录全缺才 exit 3，缺哪个跳哪个，四个都进 main 才算完整",
+          "at": "2026-11-03T03:44:54+10:00",
+          "evidence": "logs/branch-protection/20261103T034454-guards-acceptance-{before,after}.json；main @5d816eb guards-acceptance=success；android/ windows/ admin/ server/ 均已在 main"
         },
         "windows-acceptance": {
           "depends_on_dirs": [
@@ -989,9 +991,14 @@
           "state": "豁免中",
           "at": "2026-11-03T03:35:49+10:00",
           "note": "android-emulator、windows-acceptance、a10-docker 已取消豁免并加入必过；a10-docker 前后设置 logs/branch-protection/20261103T033519-a10-docker-{before,after}.json；guards-acceptance 仍豁免"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T03:44:54+10:00",
+          "note": "巡检：四个产品目录均已进 main，guards-acceptance 取消豁免并加入必过（仅加此项），main @5d816eb 该项 success；四项豁免全部结束"
         }
       ],
-      "next_step": "每次产品 PR 合入 main 后核对对应检查在 main 上是否变绿；变绿即填 reminded_at 并请 Hao Yin 批准加入必过"
+      "next_step": "无；四项均已为必过检查，取消豁免写入周报"
     },
     "ci-wiring-audit": {
       "title": "核对 lead/ci-android-emulator 与 WinDiagnostics.Tests 接入",
