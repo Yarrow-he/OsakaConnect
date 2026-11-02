@@ -33,9 +33,9 @@ class OrgJsonDivergenceTest {
         Case("duplicate-keys", "{\"code\":\"INTERNAL\",\"code\":\"FORBIDDEN\",\"message\":\"x\"}", jvmOk = true, jvmValue = mapOf("code" to "FORBIDDEN")),
         Case("nan", "{\"v\":NaN}", jvmOk = false),
         Case("infinity", "{\"v\":Infinity}", jvmOk = false),
-        Case("bare-tab", "{\"v\":\"a\tb\"}", jvmOk = false),
-        Case("bare-nul", "{\"v\":\"a" + 0x0000.toChar() + "b\"}", jvmOk = false),
-        Case("bom", 0xFEFF.toChar().toString() + "{\"a\":1}", jvmOk = false),
+        Case("bare-tab", "{\"v\":\"a\tb\"}", jvmOk = true, jvmValue = mapOf("v" to "a\tb")),
+        Case("bare-nul", "{\"v\":\"a" + 0x0000.toChar() + "b\"}", jvmOk = true, jvmValue = mapOf("v" to "a" + 0x0000.toChar() + "b")),
+        Case("bom", 0xFEFF.toChar().toString() + "{\"a\":1}", jvmOk = true, jvmValue = mapOf("a" to 1)),
     )
 
     @Test
