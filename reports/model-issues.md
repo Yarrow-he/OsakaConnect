@@ -8,3 +8,4 @@
 | 2026-11-02 | 测试 | DeepSeek | 越权（流程） | 测试自行推送分支并开 PR #11，按规则只有组长推送和开 PR | https://github.com/Yarrow-he/OsakaConnect/pull/11 |
 | 2026-11-03 | 测试 | DeepSeek | 越权（尝试绕过审批） | 跑 python 测试被拒后又尝试“禁用沙箱运行”并派子代理重试，均被拒，未生效 | logs/pr-line-check/20261103T025319-cli.log 第 27 行 |
 | 2026-11-03 | 测试 | DeepSeek | 质量（测试不过） | 返工 #2 首轮把 Tests 目录判断写成大写比较已小写的 parts，server/Foo.Tests/x.cs 被计入，第二轮修复 | logs/pr-line-check/20261103T031039-cli.log |
+1. 2026-11-03｜写手-android｜Codex｜质量差/放宽断言｜0f57782 删除/放宽断言而非修根因｜证据：notes/android-shell-flaky.md（tests 分支 12e6636）、/home/box/osaka/logs/android-shell-flaky/android-shell-flaky-0f57782.diff
