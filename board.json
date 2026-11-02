@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "写作中",
+      "state": "待审阅",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T04:56:31+10:00",
+      "updated_at": "2026-11-03T05:13:07+10:00",
       "paths": [
         "android/"
       ],
@@ -526,6 +526,12 @@
           "codex_logs": "/home/box/osaka/logs/android-shell-flaky/",
           "local_build": "未执行：本机无 JDK/SDK，不联网",
           "ci": "待组长推送 android/android-shell-flaky-1 后 android-emulator 连跑 3 次"
+        },
+        {
+          "ci_run": "41505317288",
+          "ci_logs": "logs/android-shell-flaky/ci-41505317288-{1,2,3}.log",
+          "codex_logs": "logs/android-shell-flaky/",
+          "code_commit": "0f57782"
         }
       ],
       "history": [
@@ -579,6 +585,10 @@
         {
           "state": "写作中",
           "at": "2026-11-03T04:56:31+10:00"
+        },
+        {
+          "state": "待审阅",
+          "at": "2026-11-03T05:13:07+10:00"
         }
       ],
       "branch": "android/android-shell-flaky-1",
@@ -595,7 +605,7 @@
       "test_state": "通过",
       "next_step": "组长推送分支跑 CI；审阅/测试",
       "blocked_on": "PR #19 等 Hao Yin 批准",
-      "next": "等组长推 android/android-shell-flaky-1 跑 CI（android + android-emulator ×3），全绿后改待审阅"
+      "next": "等审阅和测试"
     },
     {
       "id": "android-diagnostics",
