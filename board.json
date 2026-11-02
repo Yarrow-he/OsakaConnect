@@ -482,7 +482,7 @@
       "state": "写作中",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:17:57+10:00",
+      "updated_at": "2026-11-03T05:24:04+10:00",
       "paths": [
         "android/"
       ],
@@ -532,6 +532,11 @@
           "ci_logs": "logs/android-shell-flaky/ci-41505317288-{1,2,3}.log",
           "codex_logs": "logs/android-shell-flaky/",
           "code_commit": "0f57782"
+        },
+        {
+          "commit": "bb8da34",
+          "assert_check": "/home/box/osaka/logs/android-shell-flaky/assert-preservation-bb8da34.log PASS",
+          "codex_logs": "/home/box/osaka/logs/android-shell-flaky/codex-card3-*.log, codex-card4-nocomments-*.log"
         }
       ],
       "history": [
@@ -612,7 +617,7 @@
       "review": "通过",
       "review_state": "通过",
       "test_state": "通过",
-      "next_step": "等组长推送跑 CI x3",
+      "next_step": "等组长推送跑 android-emulator x3",
       "blocked_on": "PR #19 等 Hao Yin 批准",
       "next": "等审阅和测试"
     },

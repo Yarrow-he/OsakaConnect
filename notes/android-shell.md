@@ -84,3 +84,9 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
    2. 后台改为切到 androidTest 内一个不锁方向的测试 Activity（新任务），不经 HOME；风险：不再是“真 HOME”后台。
    3. 改产品 manifest configChanges：超范围，不做。
 7. 无法本地验证：本机无 JDK/SDK，不联网安装。
+
+## 返工1 实现 bb8da34（组长定方案 A，2026-11-03T05:24:04+10:00）
+1. 改动：仅 MainActivityTest.kt（从 origin/main 版本重写）。旋转改为 settings 锁定显示旋转（accelerometer_rotation=0、user_rotation=目标），finally 恢复原值（原值 null 则 delete）；新增断言：本测试 lifecycleId 数 <= 3；Log tag OsakaLifecycleTest 记录旋转设置、方向和生命周期证据；保留真 HOME 注释。
+2. 原断言全部保留：/home/box/osaka/logs/android-shell-flaky/assert-preservation-bb8da34.log（RESULT: PASS，原 16 条 assert 全在，新 17 条；5 个 await 文案在）。
+3. Codex：/home/box/osaka/logs/android-shell-flaky/card3.md、codex-card3-*.log；去注释 /home/box/osaka/logs/android-shell-flaky/card4.md、codex-card4-nocomments-*.log。
+4. 风险：若 API 30 launcher 强制竖屏，回前台仍可能转回触发重建，需 CI android-emulator 连跑 3 次验证。本地无 JDK/SDK 未编译。
