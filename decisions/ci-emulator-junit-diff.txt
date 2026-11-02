@@ -1,5 +1,5 @@
 diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
-index bba5d16..dafe59c 100644
+index bba5d16..5818532 100644
 --- a/.github/workflows/ci.yml
 +++ b/.github/workflows/ci.yml
 @@ -202,3 +202,9 @@ jobs:
@@ -9,6 +9,6 @@ index bba5d16..dafe59c 100644
 +      - if: always() && steps.has.outputs.code != ''
 +        uses: actions/upload-artifact@v4
 +        with:
-+          name: android-emulator-junit
++          name: android-jvm-unit-junit
 +          path: android/app/build/test-results/testDebugUnitTest/*.xml
-+          if-no-files-found: ignore
++          if-no-files-found: error

@@ -205,6 +205,6 @@ jobs:
       - if: always() && steps.has.outputs.code != ''
         uses: actions/upload-artifact@v4
         with:
-          name: android-emulator-junit
+          name: android-jvm-unit-junit
           path: android/app/build/test-results/testDebugUnitTest/*.xml
-          if-no-files-found: ignore
+          if-no-files-found: error
