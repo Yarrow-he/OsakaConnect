@@ -408,10 +408,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待测试",
+      "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-02T23:47:29+10:00",
+      "updated_at": "2026-11-02T23:53:02+10:00",
       "paths": [
         "android/"
       ],
@@ -442,6 +442,12 @@
         {
           "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499",
           "ci_result": "进行中 @454063d（合入 main 9662b8e，含 PR #15），待测试复测"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499",
+          "ci_result": "测试v3 @454063d 通过：必需检查+guards+guards-acceptance+android-emulator 绿，A5 启动无崩溃；a10-docker/windows-acceptance exit 3 豁免",
+          "commands": "gh run view 41455806499 --repo Yarrow-he/OsakaConnect; --log-failed; --job 125312041492 --log",
+          "log": "logs/android-shell/2026-11-02-test-v3.log"
         }
       ],
       "history": [
@@ -472,6 +478,10 @@
         {
           "state": "待测试",
           "at": "2026-11-02T20:43:52+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-02T23:53:02+10:00"
         }
       ],
       "branch": "android/android-shell",
