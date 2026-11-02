@@ -562,6 +562,10 @@
         {
           "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455904368",
           "ci_result": "进行中 @0356475（a174c17 + 合入 main 4f8eccc，含 PR #16 向量修正）"
+        },
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41466092508",
+          "ci_result": "测试v4 @f66b7da0c7f5be0785220701fe99c6bd2088b48f 临时：OrgJson 通过，Jvm 证据不足。OrgJsonDivergenceTest 1 tests 0 failures 0 skipped（6 向量含 bare-tab/bare-nul/bom ok=true，向量同 9d14901）；MainActivityTest A5 通过；JvmJsonDivergenceTest 在 android-emulator job testDebugUnitTest 执行但无用例级报告；日志 logs/android-diagnostics/2026-11-03-test-v4.log"
         }
       ],
       "history": [
