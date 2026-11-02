@@ -13,9 +13,10 @@ import sys
 
 LIMIT = 200
 
-# 路径段（目录名）排除
-EXCLUDED_DIRS = {
-    "notes", "memory", "reports", "decisions", "logs",
+EXCLUDED_TOP_DIRS = {
+    "notes", "memory", "reports", "decisions", "logs", ".github", "scripts",
+}
+EXCLUDED_DIR_SEGMENTS = {
     "build", "bin", "obj", "generated",
     "testdata", "fixtures", "test-vectors",
 }
@@ -41,11 +42,11 @@ def is_excluded(path):
         return True
     if path == "board.json":
         return True
-    if any(part in EXCLUDED_DIRS for part in parts[:-1]):
+    if len(parts) > 1 and parts[0] in EXCLUDED_TOP_DIRS:
         return True
-    # 测试：目录 tests/ 或目录段 Tests、*.Tests，或 src/test/、androidTest/
-    dirs = path.split("/")[:-1]
-    if "tests" in parts[:-1] or any(d == "Tests" or d.endswith(".Tests") for d in dirs):
+    if any(part in EXCLUDED_DIR_SEGMENTS for part in parts[:-1]):
+        return True
+    if any(d == "tests" or d.endswith(".tests") for d in parts[:-1]):
         return True
     if "src/test/" in path or "androidTest/" in path:
         return True

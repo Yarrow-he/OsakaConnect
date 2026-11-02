@@ -114,6 +114,21 @@ class PrLineCheckTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertIn("计入行数：10", result.stdout)
 
+    def test_top_level_excluded_dirs_not_counted(self):
+        self.write(".github/workflows/x.yml", self.lines(300))
+        self.write("scripts/x.sh", self.lines(300))
+        self.commit()
+        result = self.run_check()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("计入行数：0", result.stdout)
+
+    def test_nested_notes_counted(self):
+        self.write("server/notes/x.py", self.lines(300))
+        self.commit()
+        result = self.run_check()
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("server/notes/x.py", result.stdout)
+
 
 if __name__ == "__main__":
     unittest.main()
