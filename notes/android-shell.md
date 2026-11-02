@@ -43,3 +43,23 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 1. 原始 CI 日志：/home/box/osaka/logs/ci-41403200131-android.log（run 41403200131 android job 125139336542）。第 264 行 `> Task :app:testDebugUnitTest`，第 278 行 `BUILD SUCCESSFUL in 2m 41s`。
 2. 单测数：日志里没有用例计数（Gradle 默认不打印 tests completed，workflow 也没上传测试结果 XML）。如实记为“无计数”。
 3. 原摘要 /home/box/osaka/logs/android-ci-verify-20261102.log 作废，以原始日志为准。
+
+## 审阅 返工1（审阅 · Osaka，2026-11-02）
+结论：通过（代码层面无必须改）。证明已接受：ci-41403200131-android.log 中 compileDebugKotlin(248)、compileDebugUnitTestKotlin(260)、testDebugUnitTest(264)、lintDebug/lint(274-275) 均真执行，无 NO-SOURCE/SKIPPED/UP-TO-DATE；BUILD SUCCESSFUL(278)。
+待组长：android/app/build.gradle.kts:28-32 的 junit 4.13.2、androidx.test core/runner/ext-junit 未在决策 002 中批准，需补进白名单（可机器化：依赖白名单扩到 gradle）。
+建议改：
+1. 日志无单测计数，由组长改 workflow 输出测试数（可机器化：CI 汇总 test-results XML）。
+2. settings.gradle.kts:16-19 的 useAndroidX 与 gradle.properties:1 重复，删前者及过时注释（可机器化：grep 检查）。
+3. build.gradle.kts:14 “These commands have NOT been run” 已过时，删除（不可机器化）。
+权限：Manifest 无 uses-permission，exported 仅 LAUNCHER；无密钥/IP/账号；scope 合规。
+日志：/home/box/osaka/logs/review-android-shell-20261102.log；diff：/home/box/osaka/logs/review-android-shell-diff.txt。
+
+## 测试 v2（测试 · Osaka，2026-11-02 23:25 AEST）@1b48848
+1. 结论：不通过，不判返工。定性：测试/CI 接线问题，不是 shell 产品 bug。
+2. CI：run 41450041148，android-emulator 失败。shell 自身项通过：connectedDebugAndroidTest「BUILD SUCCESSFUL in 1m 38s」，ci-run.sh「通过：A5 启动无崩溃」。
+3. 关键报错行：「JvmJsonDivergenceTest > jvmJsonMatchesVectorExpectations FAILED」「java.lang.RuntimeException at JvmJsonDivergenceTest.kt:61」「5 tests completed, 1 failed, 3 skipped」「> Task :app:testDebugUnitTest FAILED」。
+4. 根因：workflow 在 shell 分支也跑 tests/android/android-diagnostics/run.sh，run.sh 只拷 tests/android/android-diagnostics/*.kt；JvmJson.kt 只在 android-diagnostics 分支的 android/app/src/test，shell 分支没有，org.json 落到 android.jar 空桩，第61行 JSONTokener 抛 RuntimeException。3 个 skip 是 DiagnosticsVectorsTest 因 shell 无 LogRedactor/InviteCode 被 assume 跳过。
+5. 建议（测试侧/组长）：android-emulator 在 shell 分支不跑 diagnostics 两步，或 JvmJson 随测试目录提供；run.sh 缺依赖时明确报错。
+6. 命令：gh run view 41450041148 -R Yarrow-he/OsakaConnect --log-failed
+7. 日志：/home/box/osaka/repo/logs/android-shell/2026-11-02-test-v2.log；CLI 日志：/home/box/osaka/artifacts/cli-logs/retest-v2-3modules-2026-11-02.log
+8. 复现：android-shell 分支 CI android-emulator job，或 cd android && ./gradlew testDebugUnitTest（先执行 run.sh 拷入测试）。
