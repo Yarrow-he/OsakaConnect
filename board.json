@@ -347,8 +347,8 @@
       "模块": "admin-connect",
       "state": "返工",
       "owner": "写手 · Windows",
-      "rework": 2,
-      "updated_at": "2026-11-03T01:35:35+10:00",
+      "rework": 3,
+      "updated_at": "2026-11-03T01:50:17+10:00",
       "paths": [
         "admin/"
       ],
@@ -377,7 +377,8 @@
         "/home/box/osaka/logs/test-admin-grepguard-fix-claude-20261102.log",
         "https://github.com/Yarrow-he/OsakaConnect/pull/26 开启中；a10-docker 红：gen-certs.sh wronghost 自检误报",
         "https://github.com/Yarrow-he/OsakaConnect/pull/28 开启中：gen-certs 修复",
-        "测试不通过 @ff89420/ebd7f89：run 41472506117/41472494941 a10-docker 红，osaka-server exited(1) No module named server.__main__；日志 logs/admin-connect/ci-41472506117-a10.log、ci-41472506117-a10-summary.txt；返工单见 notes/admin-connect.md"
+        "测试不通过 @ff89420/ebd7f89：run 41472506117/41472494941 a10-docker 红，osaka-server exited(1) No module named server.__main__；日志 logs/admin-connect/ci-41472506117-a10.log、ci-41472506117-a10-summary.txt；返工单见 notes/admin-connect.md",
+        "测试不通过 @70a5d35：run 41473747556/41473734384 a10-docker 红 2/4，③非受信CA、④SAN不符均被客户端接受（TLS未校验）；日志 logs/admin-connect/ci-41473747556-failed.log 第202-233行；返工单见 notes/admin-connect.md"
       ],
       "history": [
         {
@@ -420,6 +421,10 @@
         {
           "state": "返工",
           "at": "2026-11-03T01:35:35+10:00"
+        },
+        {
+          "state": "返工",
+          "at": "2026-11-03T01:50:17+10:00"
         }
       ],
       "branch": "admin/admin-connect",

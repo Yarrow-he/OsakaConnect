@@ -40,3 +40,10 @@ A10, A14（见 `acceptance.md`）。完成标准：单测：admin-contract 正�
    1. gh run view 41472506117 --log > a10.log，grep -n "No module named" a10.log。
    2. 或在有 docker 的机器：git checkout ebd7f89 && bash tests/admin/admin-connect/run-a10.sh，失败时脚本会 dump docker compose logs。
 6. 推测原因（推测，未验证）：tests/admin/admin-connect/docker-compose.yml 第 15 行默认 SERVER_CMD 为 python -m server，而 ebd7f89 的 server/ 下只有 osaka_server/、tests/、README.md，没有 __main__.py；入口应为 python -m osaka_server（或类似），或由写手提供 __main__.py / 设置 SERVER_CMD。请写手 · 服务端定位。
+
+## 返工单（测试）@70a5d35，返工第 3 次（2026-11-03T01:50:17+10:00）
+1. 命令：CI a10-docker 跑 `bash tests/admin/admin-connect/run-a10.sh`，run 41473747556、41473734384。
+2. 结果：2/4。② 通过；③ 非受信 CA 证书被接受（退出码 0）；④ SAN 不含 osaka-server 被接受（退出码 0）。
+3. 结论：客户端未校验证书链与主机名，安全问题。修客户端 TLS 配置根因，不改测试。
+4. 日志：logs/admin-connect/ci-41473747556-failed.log 第 202-233 行。
+5. 豁免：guards-acceptance、windows-acceptance、android-emulator 为 exit 3（模块未交付），不计。
