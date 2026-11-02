@@ -180,6 +180,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@62dbb605bba737720e10b196cb4220d374026a6d # v2.33.0
         env:
           OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
+          OSAKA_BRANCH: ${{ github.head_ref || github.ref_name }}
         with:
           api-level: 30
           target: default
@@ -190,8 +191,8 @@ jobs:
           script: |
             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
             bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
-            # 决策 009：android-diagnostics 产品目录不在本分支时不跑其验收（豁免同 exit 3 规则），并留 warning；在则照跑，缺脚本即失败
-            if [ -d android/app/src/main/java/com/osakaconnect/diagnostics ]; then bash tests/android/android-diagnostics/run.sh && bash tests/android/android-diagnostics/run-instrumented.sh; else echo "::warning::待测：android-diagnostics 未交付（无 android/app/src/main/java/com/osakaconnect/diagnostics），其验收未执行"; fi
+            # 决策 009：diagnostics 产品目录在则两脚本都跑、任一失败即红；不在时 android-diagnostics 分支报错，其他分支 warning 待测
+            d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ -d "$d" ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
       - if: always() && steps.has.outputs.code != ''
         uses: actions/upload-artifact@v4
         with:
