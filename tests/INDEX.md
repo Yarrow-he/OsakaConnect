@@ -12,5 +12,6 @@
 | tests/android/android-shell/lang-guard.sh | A14、A17 | Android | `bash tests/android/android-shell/lang-guard.sh` | 2026-11-02 通过 @9e47998、@97d42d6 |
 | tests/android/android-diagnostics/DiagnosticsVectorsTest.kt + run.sh | A7、A15 | Android | `./gradlew testDebugUnitTest` | 阻塞：workflow 不调用 run.sh（2026-11-02） |
 | tests/android/android-diagnostics/{json-divergence.json,JvmJsonDivergenceTest.kt,androidTest/OrgJsonDivergenceTest.kt,run-instrumented.sh} | A9/A7 相关（JvmJson 与真机分歧，审阅 2026-11-02） | Android | `bash tests/android/android-diagnostics/run-instrumented.sh` | 待跑（等模拟器 CI） |
+| tests/ci/pr-line-check/{pr_line_check.py,test_pr_line_check.py} | A12（PR 行数统计） | 共用 | `python3 tests/ci/pr-line-check/test_pr_line_check.py` | 2026-11-03 本机 5 passed（未接入 CI） |
 
 未覆盖：A11（跨端引用路径检查，ci-guards）、A12（行数统计，ci-guards/审阅）、A13（main 全绿链接）；A14 的 server/ 只 Python 检查与 docs 一致性；A17 的 windows/admin 以外后台 routes 列表长度已由 server-core 覆盖。
