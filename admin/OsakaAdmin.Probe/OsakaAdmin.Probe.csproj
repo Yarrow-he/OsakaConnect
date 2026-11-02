@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <AssemblyName>probe</AssemblyName>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../OsakaAdmin/AdminContract.cs" Link="AdminContract.cs" />
+    <Compile Include="../OsakaAdmin/AdminProbe.cs" Link="AdminProbe.cs" />
+    <Compile Include="../OsakaAdmin/ProbeCommand.cs" Link="ProbeCommand.cs" />
+    <EmbeddedResource Include="../../shared/errors.json" LogicalName="OsakaAdmin.Errors.json" />
+  </ItemGroup>
+</Project>
