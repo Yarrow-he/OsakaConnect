@@ -274,7 +274,7 @@
       "state": "上报",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-03T02:22:00+10:00",
+      "updated_at": "2026-11-03T03:40:00+10:00",
       "paths": [
         "windows/"
       ],
@@ -301,7 +301,15 @@
         "/home/box/osaka/logs/tests-local-win-diagnostics-20261102.log",
         "PR #11 审阅 PASS @c56c80a（logs/win-diagnostics/review-pr11-20261102-221042.log）；按审阅意见，#11 暂缓合并，等 win-shell/win-diagnostics 产品分支上 main",
         "PR #11 @c56c80a：guards 红（分支未含 PR #14 拆分），尚不满足合并标准；且审阅要求等 win-shell/win-diagnostics 产品分支上 main",
-        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）"
+        "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
+        {
+          "ci_run": "https://github.com/Yarrow-he/OsakaConnect/actions/runs/41488380576",
+          "sha": "2d78194e60cf423839fb36c34ed45ef73ca173f2",
+          "command": "gh run view 41488380576 --log",
+          "log": "logs/win-diagnostics/2026-11-03-ci-41488380576.log",
+          "verdict": "blocked",
+          "ci_result": "smoke.ps1 PASS（log:2496-2502）；windows-dotnet 61/61 + 1/1 通过（log:531,535）；WinDiagnostics.Tests 3/3 Skipped（log:2511-2522，csproj 仍指向 OsakaConnect.Windows，PR #11 未合，不在 2d78194）；run 整体 failure 来自无关 a10-docker（log:1911）"
+        }
       ],
       "history": [
         {
@@ -348,12 +356,12 @@
           "note": "巡检第3次：催办2次后自 2026-11-02T23:17 起无更新约3小时，按规则改为上报"
         }
       ],
-      "test_result": "阻塞：A3、A4、A15 未验证（CI 不跑 WinDiagnostics.Tests）；A14 通过",
+      "test_result": "阻塞 @2d78194：smoke.ps1 通过、单测 61/61；A3、A4、A15 仍 3 项 Skipped，等 PR #11 合入后重跑",
       "review": "通过",
       "blocked_on": null,
       "review_state": "通过",
       "test_state": "阻塞",
-      "next_step": "已上报 Hao Yin（2026-11-03 02:22）。卡点推测：smoke.ps1 需 win-shell 入口 exe，win-shell PR #21 未合入 main（第2类等 Hao Yin 批准）；WinDiagnostics.Tests 路径待对齐。等组长或 Hao Yin 拍板后回到待写"
+      "next_step": "组长合 win-diagnostics 产品分支后合 PR #11（或先把 #11 并入模块分支），测试再重跑 WinDiagnostics.Tests"
     },
     {
       "id": "admin-connect",
