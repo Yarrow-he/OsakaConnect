@@ -15,6 +15,10 @@ jobs:
       - name: scope
         if: github.event_name == 'pull_request'
         run: scripts/check-scope.sh origin/${{ github.base_ref }}
+      - name: grep-guard（A10、A14）
+        run: bash tests/admin/admin-connect/grep-guard.sh
+      - name: android lang-guard（A14、A17）
+        run: bash tests/android/android-shell/lang-guard.sh
   contract:
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +48,23 @@ jobs:
           set -e
           for p in ${{ steps.has.outputs.code }}; do dotnet restore "$p"; dotnet build "$p" -c Release --no-restore; done
           for p in ${{ steps.has.outputs.code }}; do case "$p" in *Tests*.csproj) dotnet test "$p" -c Release --no-build;; esac; done
+  windows-acceptance:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+      - name: 构建 windows/ 产品（smoke.ps1 不自行构建）
+        shell: bash
+        run: |
+          set -e
+          for p in $(git ls-files 'windows/*.csproj'); do dotnet build "$p" -c Release; done
+      - name: win-shell smoke.ps1（A1、A2、A16、A14、A17）
+        shell: bash  # pwsh 外壳会把子进程退出码折成 1，用 bash 保留 exit 3
+        run: pwsh -NoProfile -File tests/windows/win-shell/smoke.ps1
+      - name: WinDiagnostics.Tests（A3、A4、A15）
+        shell: bash
+        run: dotnet test tests/windows/win-diagnostics/WinDiagnostics.Tests.csproj -c Release
   android:
     runs-on: ubuntu-latest
     steps:
@@ -59,7 +80,7 @@ jobs:
         uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
       - if: steps.has.outputs.code != ''
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
         # AGP 8.7.3（android/build.gradle.kts）要求 Gradle >= 8.9
         with: { gradle-version: "${{ steps.has.outputs.code == 'gradle' && '8.9' || 'wrapper' }}" }
       - if: steps.has.outputs.code == 'wrapper'
@@ -68,6 +89,21 @@ jobs:
       - if: steps.has.outputs.code == 'gradle'
         working-directory: android
         run: gradle --no-daemon assembleDebug testDebugUnitTest lint
+      - if: always() && steps.has.outputs.code != ''
+        run: |
+          files=$(find android -path '*/build/test-results/*' -name '*.xml')
+          [ -n "$files" ] || { echo "::error::0 个 test-results XML，单测未运行"; exit 1; }
+          for f in $files; do
+            grep -o '<testsuite [^>]*' "$f" | sed -E 's/.*name="([^"]*)".*tests="([0-9]+)".*failures="([0-9]+)".*/\1 tests=\2 failures=\3/'
+          done
+      - if: always() && steps.has.outputs.code != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-unit-test-results
+          path: |
+            android/**/build/test-results/**/*.xml
+            android/**/build/reports/
+          if-no-files-found: ignore
   python:
     runs-on: ubuntu-latest
     steps:
@@ -88,7 +124,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install pytest pyyaml jsonschema ruff
           ruff check .
-          pytest -q
+          python -m pytest -q  # python -m 把 server/ 加进 sys.path
       - if: steps.has.outputs.code != '' && hashFiles('tests/server/server-core/test_server_core.py') != ''
         env:
           OSAKA_SERVER_CMD: python3 -m osaka_server.app
@@ -100,6 +136,54 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') == ''
-        run: echo "无 A10 脚本，跳过"
+        run: echo "::error::缺少 tests/admin/admin-connect/run-a10.sh，A10 未验证" && exit 1
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') != ''
         run: bash tests/admin/admin-connect/run-a10.sh
+  android-emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: has
+        run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+      - if: steps.has.outputs.code == ''
+        run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
+      - if: steps.has.outputs.code != ''
+        uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - if: steps.has.outputs.code != ''
+        uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
+        with: { gradle-version: '8.9' }
+      # 测试脚本要求 android/gradlew；分支未提交 wrapper 时只在 CI 工作区生成
+      - if: steps.has.outputs.code != ''
+        working-directory: android
+        run: '[ -x gradlew ] || gradle --no-daemon wrapper --gradle-version 8.9'
+      - if: steps.has.outputs.code != ''
+        name: enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - if: steps.has.outputs.code != ''
+        uses: reactivecircus/android-emulator-runner@62dbb605bba737720e10b196cb4220d374026a6d # v2.33.0
+        env:
+          OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
+        with:
+          api-level: 30
+          target: default
+          arch: x86_64
+          emulator-boot-timeout: 900
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
+            bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
+            bash tests/android/android-diagnostics/run.sh  # 缺脚本即失败
+            bash tests/android/android-diagnostics/run-instrumented.sh  # 缺脚本即失败
+      - if: always() && steps.has.outputs.code != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-emulator-logs
+          path: |
+            tests/android/**/results/
+            tests/results/
+            android/app/build/reports/androidTests/
+          if-no-files-found: ignore

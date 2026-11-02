@@ -1,0 +1,1067 @@
+contract	Set up job	﻿2026-11-02T06:57:45.3199926Z Current runner version: '2.338.2'
+contract	Set up job	2026-11-02T06:57:45.3229725Z ##[group]Runner Image Provisioner
+contract	Set up job	2026-11-02T06:57:45.3230970Z Hosted Compute Agent
+contract	Set up job	2026-11-02T06:57:45.3231694Z Version: 20261021.618
+contract	Set up job	2026-11-02T06:57:45.3232601Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+contract	Set up job	2026-11-02T06:57:45.3233551Z Build Date: 2026-10-21T00:45:21Z
+contract	Set up job	2026-11-02T06:57:45.3234475Z Worker ID: {1ac6a4b6-8a67-4824-b4c6-0fa0c9a8715c}
+contract	Set up job	2026-11-02T06:57:45.3235406Z Region: westus
+contract	Set up job	2026-11-02T06:57:45.3236055Z Cloud: Azure
+contract	Set up job	2026-11-02T06:57:45.3236862Z ##[endgroup]
+contract	Set up job	2026-11-02T06:57:45.3238747Z ##[group]Operating System
+contract	Set up job	2026-11-02T06:57:45.3239632Z Ubuntu
+contract	Set up job	2026-11-02T06:57:45.3240734Z 24.04.5
+contract	Set up job	2026-11-02T06:57:45.3241434Z LTS
+contract	Set up job	2026-11-02T06:57:45.3242186Z ##[endgroup]
+contract	Set up job	2026-11-02T06:57:45.3242930Z ##[group]Runner Image
+contract	Set up job	2026-11-02T06:57:45.3243754Z Image: ubuntu-24.04
+contract	Set up job	2026-11-02T06:57:45.3244534Z Version: 20261025.353.1
+contract	Set up job	2026-11-02T06:57:45.3245859Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+contract	Set up job	2026-11-02T06:57:45.3248175Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+contract	Set up job	2026-11-02T06:57:45.3249850Z ##[endgroup]
+contract	Set up job	2026-11-02T06:57:45.3251478Z ##[group]GITHUB_TOKEN Permissions
+contract	Set up job	2026-11-02T06:57:45.3253590Z Contents: read
+contract	Set up job	2026-11-02T06:57:45.3254342Z Metadata: read
+contract	Set up job	2026-11-02T06:57:45.3255037Z ##[endgroup]
+contract	Set up job	2026-11-02T06:57:45.3257432Z Secret source: Actions
+contract	Set up job	2026-11-02T06:57:45.3258526Z Cache mode: write
+contract	Set up job	2026-11-02T06:57:45.3259437Z Prepare workflow directory
+contract	Set up job	2026-11-02T06:57:45.3679917Z Prepare all required actions
+contract	Set up job	2026-11-02T06:57:45.3736821Z Getting action download info
+contract	Set up job	2026-11-02T06:57:45.7540030Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+contract	Set up job	2026-11-02T06:57:46.1918910Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+contract	Set up job	2026-11-02T06:57:46.5086053Z Complete job name: contract
+contract	Run actions/checkout@v4	﻿2026-11-02T06:57:46.5774240Z ##[group]Run actions/checkout@v4
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5774994Z with:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5775376Z   repository: Yarrow-he/OsakaConnect
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5778399Z   token: ***
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5778767Z   ssh-strict: true
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5779141Z   ssh-user: git
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5779506Z   persist-credentials: true
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5779902Z   clean: true
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5780400Z   sparse-checkout-cone-mode: true
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5780826Z   fetch-depth: 1
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5781180Z   fetch-tags: false
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5781547Z   show-progress: true
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5781918Z   lfs: false
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5782262Z   submodules: false
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5782642Z   set-safe-directory: true
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5783047Z   allow-unsafe-pr-checkout: false
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.5783619Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9390784Z Syncing repository: Yarrow-he/OsakaConnect
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9393675Z ##[group]Getting Git version info
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9396971Z Working directory is '/home/runner/work/OsakaConnect/OsakaConnect'
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9439164Z [command]/usr/bin/git version
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9662269Z git version 2.56.0
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9695223Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9706717Z Temporarily overriding HOME='/home/runner/work/_temp/7fe53de3-6379-47c9-9b95-d5b6d79f2caa' before making global git config changes
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9709637Z Adding repository directory to the temporary git global config as a safe directory
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9712429Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9716297Z Deleting the contents of '/home/runner/work/OsakaConnect/OsakaConnect'
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9718922Z ##[group]Initializing the repository
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9720885Z [command]/usr/bin/git init /home/runner/work/OsakaConnect/OsakaConnect
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9900960Z hint: Using 'master' as the name for the initial branch. This default branch name
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9904434Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9908540Z hint: to use in all of your new repositories, which will suppress this warning,
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9925236Z hint: call:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9927123Z hint:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9929112Z hint: 	git config --global init.defaultBranch <name>
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9931699Z hint:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9933637Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9936965Z hint: 'development'. The just-created branch can be renamed via this command:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9940588Z hint:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9942203Z hint: 	git branch -m <name>
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9944527Z hint:
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9947040Z hint: Disable this message with "git config set advice.defaultBranchName false"
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9951846Z Initialized empty Git repository in /home/runner/work/OsakaConnect/OsakaConnect/.git/
+contract	Run actions/checkout@v4	2026-11-02T06:57:46.9959332Z [command]/usr/bin/git remote add origin https://github.com/Yarrow-he/OsakaConnect
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0049794Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0052652Z ##[group]Disabling automatic garbage collection
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0055333Z [command]/usr/bin/git config --local gc.auto 0
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0153680Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0178293Z ##[group]Setting up auth
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0182827Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.0190180Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1219549Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1268148Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1495064Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1535909Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1759908Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1808572Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1811692Z ##[group]Fetching the repository
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.1821487Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0:refs/remotes/origin/android/android-diagnostics
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6518454Z From https://github.com/Yarrow-he/OsakaConnect
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6522238Z  * [new ref]         97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0 -> origin/android/android-diagnostics
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6529003Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6531537Z ##[group]Determining the checkout info
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6534314Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6536659Z [command]/usr/bin/git sparse-checkout disable
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6594967Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6633726Z ##[group]Checking out the ref
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6639792Z [command]/usr/bin/git checkout --progress --force -B android/android-diagnostics refs/remotes/origin/android/android-diagnostics
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6740589Z Switched to a new branch 'android/android-diagnostics'
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6747229Z branch 'android/android-diagnostics' set up to track 'origin/android/android-diagnostics'.
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6755538Z ##[endgroup]
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6803999Z [command]/usr/bin/git log -1 --format=%H
+contract	Run actions/checkout@v4	2026-11-02T06:57:47.6837679Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+contract	Run actions/setup-python@v5	﻿2026-11-02T06:57:47.7230642Z ##[group]Run actions/setup-python@v5
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7231615Z with:
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7232305Z   python-version: 3.12
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7233096Z   check-latest: false
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7240036Z   token: ***
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7241266Z   update-environment: true
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7242139Z   allow-prereleases: false
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7243032Z   freethreaded: false
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.7243799Z ##[endgroup]
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.8442733Z ##[group]Installed versions
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.8549911Z (node:1978) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.8553207Z Successfully set up CPython (3.12.15)
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.8555385Z (Use `node --trace-deprecation ...` to show where the warning was created)
+contract	Run actions/setup-python@v5	2026-11-02T06:57:47.8557996Z ##[endgroup]
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	﻿2026-11-02T06:57:47.8805776Z ##[group]Run pip install pytest pyyaml jsonschema openapi-spec-validator
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8808113Z ^[[36;1mpip install pytest pyyaml jsonschema openapi-spec-validator^[[0m
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8883555Z shell: /usr/bin/bash -e {0}
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8884830Z env:
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8886124Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8888219Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8890418Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8892318Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8986596Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8988922Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:47.8990586Z ##[endgroup]
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:48.9867491Z Collecting pytest
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.0627274Z   Downloading pytest-9.2.0-py3-none-any.whl.metadata (7.9 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.2664484Z Collecting pyyaml
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.2747616Z   Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.3041769Z Collecting jsonschema
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.3146763Z   Downloading jsonschema-4.26.0-py3-none-any.whl.metadata (7.6 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.4906232Z Collecting openapi-spec-validator
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.5003433Z   Downloading openapi_spec_validator-0.9.0-py3-none-any.whl.metadata (6.5 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.5194532Z Collecting iniconfig>=2 (from pytest)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.5296898Z   Downloading iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.5766323Z Collecting packaging>=24 (from pytest)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.5869147Z   Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.6081307Z Collecting pluggy<2,>=1.6 (from pytest)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.6211465Z   Downloading pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.6475738Z Collecting pygments>=2.15 (from pytest)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.6580444Z   Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.6857136Z Collecting attrs>=22.2.0 (from jsonschema)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.6961097Z   Downloading attrs-26.1.0-py3-none-any.whl.metadata (8.8 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.7170837Z Collecting jsonschema-specifications>=2023.03.6 (from jsonschema)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.7279982Z   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl.metadata (2.9 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.7864164Z Collecting referencing>=0.28.4 (from jsonschema)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:49.7970399Z   Downloading referencing-0.37.0-py3-none-any.whl.metadata (2.8 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.0701030Z Collecting rpds-py>=0.25.0 (from jsonschema)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.0819689Z   Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.1 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.1035446Z Collecting jsonschema-path<0.6.0,>=0.5.0 (from openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.1136367Z   Downloading jsonschema_path-0.5.0-py3-none-any.whl.metadata (8.1 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.1537645Z Collecting lazy-object-proxy<2.0,>=1.7.1 (from openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.1639618Z   Downloading lazy_object_proxy-1.13.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (5.1 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.1997230Z Collecting openapi-schema-validator<0.10.0,>=0.9.0 (from openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.2100430Z   Downloading openapi_schema_validator-0.9.0-py3-none-any.whl.metadata (10 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.3227194Z Collecting pydantic<3.0.0,>=2.0.0 (from openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.3329988Z   Downloading pydantic-2.14.2-py3-none-any.whl.metadata (137 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.4074172Z Collecting pydantic-settings<3.0.0,>=2.0.0 (from openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.4177037Z   Downloading pydantic_settings-2.16.2-py3-none-any.whl.metadata (4.0 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.5534879Z Collecting pathable<0.7.0,>=0.6.0 (from jsonschema-path<0.6.0,>=0.5.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.5641537Z   Downloading pathable-0.6.0-py3-none-any.whl.metadata (7.2 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.5886387Z Collecting rfc3339-validator (from openapi-schema-validator<0.10.0,>=0.9.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.6000141Z   Downloading rfc3339_validator-0.1.4-py2.py3-none-any.whl.metadata (1.5 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.7450203Z Collecting annotated-types>=0.6.0 (from pydantic<3.0.0,>=2.0.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:50.7554780Z   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:51.5468901Z Collecting pydantic-core==2.50.2 (from pydantic<3.0.0,>=2.0.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:51.5570941Z   Downloading pydantic_core-2.50.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (6.5 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:52.6090721Z Collecting typing-extensions>=4.16.0 (from pydantic<3.0.0,>=2.0.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:52.6198806Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:52.9921922Z Collecting typing-inspection>=0.4.4 (from pydantic<3.0.0,>=2.0.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.0022107Z   Downloading typing_inspection-0.4.4-py3-none-any.whl.metadata (2.6 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.0279114Z Collecting python-dotenv>=1.2.2 (from pydantic-settings<3.0.0,>=2.0.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.0379138Z   Downloading python_dotenv-1.2.4-py3-none-any.whl.metadata (29 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.0667617Z Collecting six (from rfc3339-validator->openapi-schema-validator<0.10.0,>=0.9.0->openapi-spec-validator)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.0772037Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.0940104Z Downloading pytest-9.2.0-py3-none-any.whl (411 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.1211482Z Downloading pluggy-1.7.0-py3-none-any.whl (27 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.1354145Z Downloading pyyaml-6.0.3-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (807 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.1561270Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 807.9/807.9 kB 30.2 MB/s  0:00:00
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.1676631Z Downloading jsonschema-4.26.0-py3-none-any.whl (90 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.1815904Z Downloading openapi_spec_validator-0.9.0-py3-none-any.whl (50 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.1951497Z Downloading jsonschema_path-0.5.0-py3-none-any.whl (24 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.2072496Z Downloading lazy_object_proxy-1.13.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (71 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.2199881Z Downloading openapi_schema_validator-0.9.0-py3-none-any.whl (19 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.2355970Z Downloading pathable-0.6.0-py3-none-any.whl (18 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.2488637Z Downloading pydantic-2.14.2-py3-none-any.whl (490 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.2671439Z Downloading pydantic_core-2.50.2-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (2.2 MB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.3026851Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.2/2.2 MB 60.3 MB/s  0:00:00
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.3126620Z Downloading pydantic_settings-2.16.2-py3-none-any.whl (81 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.3256276Z Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.4811420Z Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.4951303Z Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.5086092Z Downloading iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.5212504Z Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.5851025Z Downloading packaging-26.3-py3-none-any.whl (129 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.5999862Z Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6172261Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 65.1 MB/s  0:00:00
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6280015Z Downloading python_dotenv-1.2.4-py3-none-any.whl (23 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6410840Z Downloading rpds_py-2026.9.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (371 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6569145Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6701184Z Downloading typing_inspection-0.4.4-py3-none-any.whl (14 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6821330Z Downloading rfc3339_validator-0.1.4-py2.py3-none-any.whl (3.5 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.6944733Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:53.7992466Z Installing collected packages: typing-extensions, six, rpds-py, pyyaml, python-dotenv, pygments, pluggy, pathable, packaging, lazy-object-proxy, iniconfig, attrs, annotated-types, typing-inspection, rfc3339-validator, referencing, pytest, pydantic-core, pydantic, jsonschema-specifications, jsonschema-path, pydantic-settings, jsonschema, openapi-schema-validator, openapi-spec-validator
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:55.4208548Z 
+contract	Run pip install pytest pyyaml jsonschema openapi-spec-validator	2026-11-02T06:57:55.4233189Z Successfully installed annotated-types-0.8.0 attrs-26.1.0 iniconfig-2.3.1 jsonschema-4.26.0 jsonschema-path-0.5.0 jsonschema-specifications-2025.9.1 lazy-object-proxy-1.13.0 openapi-schema-validator-0.9.0 openapi-spec-validator-0.9.0 packaging-26.3 pathable-0.6.0 pluggy-1.7.0 pydantic-2.14.2 pydantic-core-2.50.2 pydantic-settings-2.16.2 pygments-2.21.0 pytest-9.2.0 python-dotenv-1.2.4 pyyaml-6.0.3 referencing-0.37.0 rfc3339-validator-0.1.4 rpds-py-2026.9.1 six-1.17.0 typing-extensions-4.16.0 typing-inspection-0.4.4
+contract	Run pytest -q tests/contract	﻿2026-11-02T06:57:55.5257556Z ##[group]Run pytest -q tests/contract
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5257872Z ^[[36;1mpytest -q tests/contract^[[0m
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5276400Z shell: /usr/bin/bash -e {0}
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5276622Z env:
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5276851Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5277202Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib/pkgconfig
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5277546Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5277848Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5278146Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.15/x64
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5278441Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.15/x64/lib
+contract	Run pytest -q tests/contract	2026-11-02T06:57:55.5278698Z ##[endgroup]
+contract	Run pytest -q tests/contract	2026-11-02T06:57:56.4670122Z ..................                                                       [100%]
+contract	Run pytest -q tests/contract	2026-11-02T06:57:56.4671259Z 18 passed in 0.55s
+contract	Post Run actions/setup-python@v5	﻿2026-11-02T06:57:56.5168084Z Post job cleanup.
+contract	Post Run actions/setup-python@v5	2026-11-02T06:57:56.6208330Z (node:2024) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+contract	Post Run actions/setup-python@v5	2026-11-02T06:57:56.6209698Z (Use `node --trace-deprecation ...` to show where the warning was created)
+contract	Post Run actions/checkout@v4	﻿2026-11-02T06:57:56.6467391Z Post job cleanup.
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7381861Z [command]/usr/bin/git version
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7441336Z git version 2.56.0
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7525519Z Temporarily overriding HOME='/home/runner/work/_temp/5d575dd9-067d-4b2d-8b00-50880a78d4cb' before making global git config changes
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7543591Z Adding repository directory to the temporary git global config as a safe directory
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7562744Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7657887Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.7721345Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.8077536Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.8141024Z http.https://github.com/.extraheader
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.8164095Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.8233488Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.8593879Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+contract	Post Run actions/checkout@v4	2026-11-02T06:57:56.8638782Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+contract	Complete job	﻿2026-11-02T06:57:56.8998596Z Cleaning up orphan processes
+contract	Complete job	2026-11-02T06:57:56.9314128Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+windows-dotnet	Set up job	﻿2026-11-02T06:57:45.5718284Z Current runner version: '2.338.2'
+windows-dotnet	Set up job	2026-11-02T06:57:45.5785655Z ##[group]Runner Image Provisioner
+windows-dotnet	Set up job	2026-11-02T06:57:45.5787052Z Hosted Compute Agent
+windows-dotnet	Set up job	2026-11-02T06:57:45.5788059Z Version: 20261021.618
+windows-dotnet	Set up job	2026-11-02T06:57:45.5789057Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+windows-dotnet	Set up job	2026-11-02T06:57:45.5790311Z Build Date: 2026-10-21T00:45:21Z
+windows-dotnet	Set up job	2026-11-02T06:57:45.5791530Z Worker ID: {b2013aea-61b6-498d-be31-9250bd24235c}
+windows-dotnet	Set up job	2026-11-02T06:57:45.5792722Z Region: westus
+windows-dotnet	Set up job	2026-11-02T06:57:45.5794038Z Cloud: Azure
+windows-dotnet	Set up job	2026-11-02T06:57:45.5794896Z ##[endgroup]
+windows-dotnet	Set up job	2026-11-02T06:57:45.5797303Z ##[group]Operating System
+windows-dotnet	Set up job	2026-11-02T06:57:45.5798366Z Microsoft Windows Server 2025
+windows-dotnet	Set up job	2026-11-02T06:57:45.5799366Z 10.0.26100
+windows-dotnet	Set up job	2026-11-02T06:57:45.5800258Z Datacenter
+windows-dotnet	Set up job	2026-11-02T06:57:45.5801124Z ##[endgroup]
+windows-dotnet	Set up job	2026-11-02T06:57:45.5802137Z ##[group]Runner Image
+windows-dotnet	Set up job	2026-11-02T06:57:45.5803236Z Image: windows-2025-vs2026
+windows-dotnet	Set up job	2026-11-02T06:57:45.5804244Z Version: 20261021.278.1
+windows-dotnet	Set up job	2026-11-02T06:57:45.5806408Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20261021.278/images/windows/Windows2025-VS2026-Readme.md
+windows-dotnet	Set up job	2026-11-02T06:57:45.5810037Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20261021.278
+windows-dotnet	Set up job	2026-11-02T06:57:45.5811814Z ##[endgroup]
+windows-dotnet	Set up job	2026-11-02T06:57:45.5813979Z ##[group]GITHUB_TOKEN Permissions
+windows-dotnet	Set up job	2026-11-02T06:57:45.5816717Z Contents: read
+windows-dotnet	Set up job	2026-11-02T06:57:45.5817667Z Metadata: read
+windows-dotnet	Set up job	2026-11-02T06:57:45.5818631Z ##[endgroup]
+windows-dotnet	Set up job	2026-11-02T06:57:45.5821719Z Secret source: Actions
+windows-dotnet	Set up job	2026-11-02T06:57:45.5823240Z Cache mode: write
+windows-dotnet	Set up job	2026-11-02T06:57:45.5824344Z Prepare workflow directory
+windows-dotnet	Set up job	2026-11-02T06:57:45.6355012Z Prepare all required actions
+windows-dotnet	Set up job	2026-11-02T06:57:45.6427035Z Getting action download info
+windows-dotnet	Set up job	2026-11-02T06:57:46.0172495Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+windows-dotnet	Set up job	2026-11-02T06:57:46.1996475Z Download action repository 'actions/setup-dotnet@v4' (SHA:67a3573c9a986a3f9c594539f4ab511d57bb3ce9)
+windows-dotnet	Set up job	2026-11-02T06:57:46.8120409Z Complete job name: windows-dotnet
+windows-dotnet	Run actions/checkout@v4	﻿2026-11-02T06:57:46.9763751Z ##[group]Run actions/checkout@v4
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9764972Z with:
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9765584Z   repository: Yarrow-he/OsakaConnect
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9771725Z   token: ***
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9772352Z   ssh-strict: true
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9772928Z   ssh-user: git
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9773496Z   persist-credentials: true
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9774112Z   clean: true
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9774687Z   sparse-checkout-cone-mode: true
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9775230Z   fetch-depth: 1
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9775671Z   fetch-tags: false
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9776119Z   show-progress: true
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9776602Z   lfs: false
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9777024Z   submodules: false
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9777487Z   set-safe-directory: true
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9778007Z   allow-unsafe-pr-checkout: false
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:46.9778988Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8193773Z Syncing repository: Yarrow-he/OsakaConnect
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8195366Z ##[group]Getting Git version info
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8195957Z Working directory is 'D:\a\OsakaConnect\OsakaConnect'
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8196691Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8197065Z git version 2.56.0.windows.2
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8198149Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8202518Z Temporarily overriding HOME='D:\a\_temp\585d2bd6-6de5-47f8-812e-d409ca7c4376' before making global git config changes
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8203363Z Adding repository directory to the temporary git global config as a safe directory
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8204131Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\OsakaConnect\OsakaConnect
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8205276Z Deleting the contents of 'D:\a\OsakaConnect\OsakaConnect'
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8205933Z ##[group]Initializing the repository
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8206419Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\OsakaConnect\OsakaConnect
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8207034Z Initialized empty Git repository in D:/a/OsakaConnect/OsakaConnect/.git/
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8211416Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/Yarrow-he/OsakaConnect
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8212544Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8212993Z ##[group]Disabling automatic garbage collection
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8213446Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8214316Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8214696Z ##[group]Setting up auth
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8215172Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:48.8216617Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:49.7381775Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:49.7792394Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:50.4524035Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:50.4918649Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:51.1360025Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:51.1786279Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:51.1787442Z ##[group]Fetching the repository
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:51.1802640Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0:refs/remotes/origin/android/android-diagnostics
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.3509406Z From https://github.com/Yarrow-he/OsakaConnect
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.3518266Z  * [new ref]         97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0 -> origin/android/android-diagnostics
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.3605948Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.3610974Z ##[group]Determining the checkout info
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.3618493Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.3630571Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.4270530Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.4754059Z ##[group]Checking out the ref
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.4764866Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B android/android-diagnostics refs/remotes/origin/android/android-diagnostics
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.5671888Z Switched to a new branch 'android/android-diagnostics'
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.5696282Z branch 'android/android-diagnostics' set up to track 'origin/android/android-diagnostics'.
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.5748923Z ##[endgroup]
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.6314448Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+windows-dotnet	Run actions/checkout@v4	2026-11-02T06:57:52.6713844Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+windows-dotnet	Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')	﻿2026-11-02T06:57:52.7193123Z ##[group]Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')
+windows-dotnet	Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')	2026-11-02T06:57:52.7194110Z ^[[36;1mcode=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')^[[0m
+windows-dotnet	Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')	2026-11-02T06:57:52.7194660Z ^[[36;1mecho "code=$code" >> "$GITHUB_OUTPUT"^[[0m
+windows-dotnet	Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')	2026-11-02T06:57:52.7195534Z ^[[36;1mcase "android/android-diagnostics" in windows/*|admin/*) [ -n "$code" ] || { echo "::error::分支上没有 .NET 项目"; exit 1; };; esac^[[0m
+windows-dotnet	Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')	2026-11-02T06:57:52.7217503Z shell: C:\Program Files\Git\bin\bash.EXE --noprofile --norc -e -o pipefail {0}
+windows-dotnet	Run code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')	2026-11-02T06:57:52.7217960Z ##[endgroup]
+windows-dotnet	Run echo "无 .NET 代码，跳过"	﻿2026-11-02T06:57:53.0244741Z ##[group]Run echo "无 .NET 代码，跳过"
+windows-dotnet	Run echo "无 .NET 代码，跳过"	2026-11-02T06:57:53.0245854Z ^[[36;1mecho "无 .NET 代码，跳过"^[[0m
+windows-dotnet	Run echo "无 .NET 代码，跳过"	2026-11-02T06:57:53.0917723Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+windows-dotnet	Run echo "无 .NET 代码，跳过"	2026-11-02T06:57:53.0918358Z ##[endgroup]
+windows-dotnet	Run echo "无 .NET 代码，跳过"	2026-11-02T06:57:53.6825156Z 无 .NET 代码，跳过
+windows-dotnet	Post Run actions/checkout@v4	﻿2026-11-02T06:57:53.7855857Z Post job cleanup.
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.0796818Z [command]"C:\Program Files\Git\bin\git.exe" version
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.1397692Z git version 2.56.0.windows.2
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.1567774Z Temporarily overriding HOME='D:\a\_temp\bb1a9a2b-26c7-4915-896f-d51e8a9b7b9c' before making global git config changes
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.1576784Z Adding repository directory to the temporary git global config as a safe directory
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.1578544Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\OsakaConnect\OsakaConnect
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.2239930Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.2887113Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:54.9901737Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:55.0195860Z http.https://github.com/.extraheader
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:55.0255531Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:55.0678952Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:55.7596908Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+windows-dotnet	Post Run actions/checkout@v4	2026-11-02T06:57:55.8013662Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+windows-dotnet	Complete job	﻿2026-11-02T06:57:56.5063910Z Cleaning up orphan processes
+windows-dotnet	Complete job	2026-11-02T06:57:56.5168412Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+android	Set up job	﻿2026-11-02T06:57:47.9150310Z Current runner version: '2.338.2'
+android	Set up job	2026-11-02T06:57:47.9187673Z ##[group]Runner Image Provisioner
+android	Set up job	2026-11-02T06:57:47.9189011Z Hosted Compute Agent
+android	Set up job	2026-11-02T06:57:47.9190651Z Version: 20261021.618
+android	Set up job	2026-11-02T06:57:47.9191744Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+android	Set up job	2026-11-02T06:57:47.9193039Z Build Date: 2026-10-21T00:45:21Z
+android	Set up job	2026-11-02T06:57:47.9194309Z Worker ID: {4490965a-7084-419a-96f7-8c8cb1506d41}
+android	Set up job	2026-11-02T06:57:47.9195934Z Region: eastus
+android	Set up job	2026-11-02T06:57:47.9197074Z Cloud: Azure
+android	Set up job	2026-11-02T06:57:47.9198029Z ##[endgroup]
+android	Set up job	2026-11-02T06:57:47.9200576Z ##[group]Operating System
+android	Set up job	2026-11-02T06:57:47.9201642Z Ubuntu
+android	Set up job	2026-11-02T06:57:47.9202494Z 24.04.5
+android	Set up job	2026-11-02T06:57:47.9203515Z LTS
+android	Set up job	2026-11-02T06:57:47.9204395Z ##[endgroup]
+android	Set up job	2026-11-02T06:57:47.9205310Z ##[group]Runner Image
+android	Set up job	2026-11-02T06:57:47.9206760Z Image: ubuntu-24.04
+android	Set up job	2026-11-02T06:57:47.9207739Z Version: 20261025.353.1
+android	Set up job	2026-11-02T06:57:47.9209686Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+android	Set up job	2026-11-02T06:57:47.9212923Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+android	Set up job	2026-11-02T06:57:47.9214718Z ##[endgroup]
+android	Set up job	2026-11-02T06:57:47.9217122Z ##[group]GITHUB_TOKEN Permissions
+android	Set up job	2026-11-02T06:57:47.9220006Z Contents: read
+android	Set up job	2026-11-02T06:57:47.9221076Z Metadata: read
+android	Set up job	2026-11-02T06:57:47.9222234Z ##[endgroup]
+android	Set up job	2026-11-02T06:57:47.9225155Z Secret source: Actions
+android	Set up job	2026-11-02T06:57:47.9227175Z Cache mode: write
+android	Set up job	2026-11-02T06:57:47.9228658Z Prepare workflow directory
+android	Set up job	2026-11-02T06:57:47.9708469Z Prepare all required actions
+android	Set up job	2026-11-02T06:57:47.9779476Z Getting action download info
+android	Set up job	2026-11-02T06:57:48.2018040Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+android	Set up job	2026-11-02T06:57:48.3045896Z Download action repository 'actions/setup-java@v4' (SHA:cf277c60eb25467037889841efdb72551f06f6c3)
+android	Set up job	2026-11-02T06:57:48.5437675Z Download action repository 'gradle/actions@v4' (SHA:ed408507eac070d1f99cc633dbcf757c94c7933a)
+android	Set up job	2026-11-02T06:57:49.4081976Z Complete job name: android
+android	Run actions/checkout@v4	﻿2026-11-02T06:57:49.5874952Z ##[group]Run actions/checkout@v4
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5877649Z with:
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5879193Z   repository: Yarrow-he/OsakaConnect
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5896002Z   token: ***
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5897586Z   ssh-strict: true
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5899112Z   ssh-user: git
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5900680Z   persist-credentials: true
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5902476Z   clean: true
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5904174Z   sparse-checkout-cone-mode: true
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5906285Z   fetch-depth: 1
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5907850Z   fetch-tags: false
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5909509Z   show-progress: true
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5911229Z   lfs: false
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5912748Z   submodules: false
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5914414Z   set-safe-directory: true
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5916555Z   allow-unsafe-pr-checkout: false
+android	Run actions/checkout@v4	2026-11-02T06:57:49.5919058Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0669036Z Syncing repository: Yarrow-he/OsakaConnect
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0671289Z ##[group]Getting Git version info
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0672222Z Working directory is '/home/runner/work/OsakaConnect/OsakaConnect'
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0673508Z [command]/usr/bin/git version
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0877222Z git version 2.56.0
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0956807Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0964561Z Temporarily overriding HOME='/home/runner/work/_temp/b70dbf6b-9180-4a9b-99e7-c58d6ca99f79' before making global git config changes
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0966673Z Adding repository directory to the temporary git global config as a safe directory
+android	Run actions/checkout@v4	2026-11-02T06:57:50.0968332Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1057991Z Deleting the contents of '/home/runner/work/OsakaConnect/OsakaConnect'
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1071401Z ##[group]Initializing the repository
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1072503Z [command]/usr/bin/git init /home/runner/work/OsakaConnect/OsakaConnect
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1209301Z hint: Using 'master' as the name for the initial branch. This default branch name
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1215726Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1217311Z hint: to use in all of your new repositories, which will suppress this warning,
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1218899Z hint: call:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1219530Z hint:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1220255Z hint: 	git config --global init.defaultBranch <name>
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1221082Z hint:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1228419Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1229779Z hint: 'development'. The just-created branch can be renamed via this command:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1230870Z hint:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1249317Z hint: 	git branch -m <name>
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1251835Z hint:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1252802Z hint: Disable this message with "git config set advice.defaultBranchName false"
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1254209Z Initialized empty Git repository in /home/runner/work/OsakaConnect/OsakaConnect/.git/
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1257427Z [command]/usr/bin/git remote add origin https://github.com/Yarrow-he/OsakaConnect
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1412956Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1414080Z ##[group]Disabling automatic garbage collection
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1415098Z [command]/usr/bin/git config --local gc.auto 0
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1495003Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1496408Z ##[group]Setting up auth
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1497573Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+android	Run actions/checkout@v4	2026-11-02T06:57:50.1583058Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2123649Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2173955Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2440850Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2616127Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2796149Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2850317Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2851756Z ##[group]Fetching the repository
+android	Run actions/checkout@v4	2026-11-02T06:57:50.2864917Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0:refs/remotes/origin/android/android-diagnostics
+android	Run actions/checkout@v4	2026-11-02T06:57:50.4984271Z From https://github.com/Yarrow-he/OsakaConnect
+android	Run actions/checkout@v4	2026-11-02T06:57:50.4987650Z  * [new ref]         97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0 -> origin/android/android-diagnostics
+android	Run actions/checkout@v4	2026-11-02T06:57:50.4991845Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.4993066Z ##[group]Determining the checkout info
+android	Run actions/checkout@v4	2026-11-02T06:57:50.4994569Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5002252Z [command]/usr/bin/git sparse-checkout disable
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5071362Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5122451Z ##[group]Checking out the ref
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5126531Z [command]/usr/bin/git checkout --progress --force -B android/android-diagnostics refs/remotes/origin/android/android-diagnostics
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5240122Z Switched to a new branch 'android/android-diagnostics'
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5248384Z branch 'android/android-diagnostics' set up to track 'origin/android/android-diagnostics'.
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5258755Z ##[endgroup]
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5312383Z [command]/usr/bin/git log -1 --format=%H
+android	Run actions/checkout@v4	2026-11-02T06:57:50.5348747Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+android	Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)	﻿2026-11-02T06:57:50.5606693Z ##[group]Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)
+android	Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)	2026-11-02T06:57:50.5607855Z ^[[36;1mcode=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)^[[0m
+android	Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)	2026-11-02T06:57:50.5608476Z ^[[36;1mecho "code=$code" >> "$GITHUB_OUTPUT"^[[0m
+android	Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)	2026-11-02T06:57:50.5609108Z ^[[36;1mcase "android/android-diagnostics" in android/*) [ -n "$code" ] || { echo "::error::分支上没有 Gradle 项目"; exit 1; };; esac^[[0m
+android	Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)	2026-11-02T06:57:50.5632567Z shell: /usr/bin/bash -e {0}
+android	Run code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)	2026-11-02T06:57:50.5632927Z ##[endgroup]
+android	Run actions/setup-java@v4	﻿2026-11-02T06:57:50.5874049Z ##[group]Run actions/setup-java@v4
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5874424Z with:
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5874665Z   distribution: temurin
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5874940Z   java-version: 17
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5875200Z   java-package: jdk
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5875677Z   check-latest: false
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5875945Z   server-id: github
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5876210Z   server-username: GITHUB_ACTOR
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5876518Z   server-password: GITHUB_TOKEN
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5876822Z   overwrite-settings: true
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5877185Z   job-status: success
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5879598Z   token: ***
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.5879852Z ##[endgroup]
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8258031Z ##[warning]setup-java v4 is deprecated and will no longer receive updates. Please migrate to actions/setup-java@v5.
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8270232Z ##[group]Installed distributions
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8298475Z (node:2089) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8299719Z Resolved Java 17.0.21+9 from tool-cache
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8300458Z Setting Java 17.0.21+9 as the default
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8304292Z Creating toolchains.xml for JDK version 17 from temurin
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8308250Z (Use `node --trace-deprecation ...` to show where the warning was created)
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8394581Z Writing to /home/runner/.m2/toolchains.xml
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8421661Z 
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8424414Z Java configuration:
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8425836Z   Distribution: temurin
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8426755Z   Version: 17.0.21+9
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8427694Z   Path: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8428528Z 
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8429337Z ##[endgroup]
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8445775Z Creating settings.xml with server-id: github
+android	Run actions/setup-java@v4	2026-11-02T06:57:50.8476482Z Writing to /home/runner/.m2/settings.xml
+android	Run gradle/actions/setup-gradle@v4	﻿2026-11-02T06:57:50.9013801Z ##[group]Run gradle/actions/setup-gradle@v4
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9014451Z with:
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9014846Z   gradle-version: 8.9
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9015303Z   cache-disabled: false
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9015985Z   cache-read-only: true
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9016475Z   cache-write-only: false
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9017003Z   cache-overwrite-existing: false
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9017553Z   cache-cleanup: on-success
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9018128Z   gradle-home-cache-includes: caches
+android	Run gradle/actions/setup-gradle@v4	notifications
+android	Run gradle/actions/setup-gradle@v4	
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9018767Z   add-job-summary: always
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9019304Z   add-job-summary-as-pr-comment: never
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9019910Z   dependency-graph: disabled
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9020524Z   dependency-graph-report-dir: dependency-graph-reports
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9021314Z   dependency-graph-continue-on-failure: true
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9021905Z   build-scan-publish: false
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9022393Z   validate-wrappers: true
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9022879Z   allow-snapshot-wrappers: false
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9023483Z   gradle-home-cache-strict-match: false
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9024035Z   workflow-job-context: null
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9028750Z   github-token: ***
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9029184Z env:
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9029761Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9030696Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:50.9031419Z ##[endgroup]
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.7528414Z Merged default JDK locations into /home/runner/.m2/toolchains.xml
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.7530140Z ##[group]Restore Gradle state from cache
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.8490355Z Gradle User Home cache not found. Will initialize empty.
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.8499295Z ##[endgroup]
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.8642081Z ##[group]All Gradle Wrapper jars are valid
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.8667617Z 
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.8716042Z ##[endgroup]
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:51.9187686Z ##[group]Provision Gradle 8.9
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:55.2337173Z Gradle distribution 8.9 not found in cache. Will download.
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:55.9502445Z Downloaded https://services.gradle.org/distributions/gradle-8.9-bin.zip to /home/runner/work/_temp/.gradle-actions/gradle-installations/downloads/gradle-8.9-bin.zip (size 136114148)
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:55.9601899Z [command]/usr/bin/unzip -o -q /home/runner/work/_temp/.gradle-actions/gradle-installations/downloads/gradle-8.9-bin.zip
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:56.9321636Z Extracted Gradle 8.9 to /home/runner/work/_temp/.gradle-actions/gradle-installations/installs/gradle-8.9
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:56.9323625Z Provisioned Gradle executable /home/runner/work/_temp/.gradle-actions/gradle-installations/installs/gradle-8.9/bin/gradle
+android	Run gradle/actions/setup-gradle@v4	2026-11-02T06:57:56.9325806Z ##[endgroup]
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	﻿2026-11-02T06:57:56.9550009Z ##[group]Run gradle --no-daemon assembleDebug testDebugUnitTest lint
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9550548Z ^[[36;1mgradle --no-daemon assembleDebug testDebugUnitTest lint^[[0m
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9570905Z shell: /usr/bin/bash -e {0}
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9571213Z env:
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9571523Z   JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9572039Z   JAVA_HOME_17_X64: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.21-9/x64
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9572459Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9572775Z   GRADLE_USER_HOME: /home/runner/.gradle
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9573067Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9573369Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9573799Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9574282Z   DEVELOCITY_INJECTION_CUSTOM_VALUE: gradle-actions
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9574620Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:56.9574912Z ##[endgroup]
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8206412Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8383016Z Welcome to Gradle 8.9!
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8395848Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8406122Z Here are the highlights of this release:
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8408075Z  - Enhanced Error and Warning Messages
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8409180Z  - IDE Integration Improvements
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8409816Z  - Daemon JVM Information
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8410261Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8410889Z For more details see https://docs.gradle.org/8.9/release-notes.html
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:57.8411698Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:57:58.0087442Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.9/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:58:00.0986730Z Daemon will be stopped at the end of the build 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:25.7036361Z > Task :app:preBuild UP-TO-DATE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:25.7047573Z > Task :app:preDebugBuild UP-TO-DATE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:25.8006399Z > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:25.8007578Z > Task :app:checkKotlinGradlePluginConfigurationErrors SKIPPED
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.0977832Z > Task :app:generateDebugResValues
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.1016136Z > Task :app:checkDebugAarMetadata
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.1978095Z > Task :app:mapDebugSourceSetPaths
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.2016094Z > Task :app:generateDebugResources
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.4016848Z > Task :app:createDebugCompatibleScreenManifests
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.4031998Z > Task :app:extractDeepLinksDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.6974155Z > Task :app:processDebugMainManifest
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.7973478Z > Task :app:mergeDebugResources
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.8976391Z > Task :app:processDebugManifest
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:26.8978658Z > Task :app:packageDebugResources
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9003333Z > Task :app:processDebugManifestForPackage
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9076108Z > Task :app:javaPreCompileDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9976850Z > Task :app:mergeDebugShaders
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9979185Z > Task :app:compileDebugShaders NO-SOURCE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9979966Z > Task :app:generateDebugAssets UP-TO-DATE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9980721Z > Task :app:parseDebugLocalResources
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:27.9981381Z > Task :app:mergeDebugAssets
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:28.3985701Z > Task :app:compressDebugAssets
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:28.4036067Z > Task :app:desugarDebugFileDependencies
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:28.5976483Z > Task :app:checkDebugDuplicateClasses
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:28.6006057Z > Task :app:processDebugResources
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:46.9986356Z > Task :app:mergeExtDexDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:48.9976149Z > Task :app:mergeLibDexDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:48.9986283Z > Task :app:mergeDebugJniLibFolders
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:48.9990710Z > Task :app:mergeDebugNativeLibs NO-SOURCE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:49.0013971Z > Task :app:stripDebugDebugSymbols NO-SOURCE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6016585Z > Task :app:validateSigningDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6062093Z > Task :app:writeDebugAppMetadata
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6077995Z > Task :app:writeDebugSigningConfigVersions
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6116248Z > Task :app:preDebugUnitTestBuild UP-TO-DATE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6986489Z > Task :app:javaPreCompileDebugUnitTest
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6993230Z > Task :app:preDebugAndroidTestBuild SKIPPED
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.6997410Z > Task :app:generateDebugAndroidTestResValues
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:50.7003340Z > Task :app:extractProguardFiles
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:58.9976735Z > Task :app:compileDebugKotlin
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.0013995Z > Task :app:compileDebugJavaWithJavac NO-SOURCE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.2985117Z > Task :app:dexBuilderDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.3974210Z > Task :app:mergeDebugGlobalSynthetics
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.4008522Z > Task :app:processDebugJavaRes
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.5006704Z > Task :app:mergeProjectDexDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.5976892Z > Task :app:bundleDebugClassesToRuntimeJar
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.5996104Z > Task :app:bundleDebugClassesToCompileJar
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T06:59:59.7988757Z > Task :app:mergeDebugJavaResource
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:00.9016228Z > Task :app:packageDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:00.9034387Z > Task :app:createDebugApkListingFileRedirect
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:00.9076219Z > Task :app:assembleDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:05.1006572Z > Task :app:generateDebugAndroidTestLintModel
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:05.1046159Z > Task :app:generateDebugLintReportModel
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:05.1977518Z > Task :app:generateDebugUnitTestLintModel
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:05.6986242Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:05.7006430Z > Task :app:compileDebugUnitTestKotlin
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:05.7035209Z w: file:///home/runner/work/OsakaConnect/OsakaConnect/android/app/src/test/java/com/osakaconnect/diagnostics/SharedVectors.kt:10:42 Java type mismatch: inferred type is 'kotlin.String?', but 'kotlin.String' was expected.
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:11.3979943Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:11.3997270Z > Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:11.4977390Z > Task :app:processDebugUnitTestJavaRes
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:16.8976386Z > Task :app:testDebugUnitTest
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:30.9976390Z > Task :app:lintAnalyzeDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:34.4975795Z > Task :app:lintAnalyzeDebugAndroidTest
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:39.6976494Z > Task :app:lintAnalyzeDebugUnitTest
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:39.9981900Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:39.9991637Z > Task :app:lintReportDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0006645Z Wrote HTML report to file:///home/runner/work/OsakaConnect/OsakaConnect/android/app/build/reports/lint-results-debug.html
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0016135Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0016427Z > Task :app:lintDebug
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0027825Z > Task :app:lint
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0028910Z gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_3-1793602685974.json
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0943044Z 
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0968923Z BUILD SUCCESSFUL in 2m 43s
+android	Run gradle --no-daemon assembleDebug testDebugUnitTest lint	2026-11-02T07:00:40.0995967Z 49 actionable tasks: 49 executed
+android	Post Run gradle/actions/setup-gradle@v4	﻿2026-11-02T07:00:40.4500658Z Post job cleanup.
+android	Post Run gradle/actions/setup-gradle@v4	2026-11-02T07:00:40.8318088Z In post-action step
+android	Post Run gradle/actions/setup-gradle@v4	2026-11-02T07:00:40.8337709Z Cache is read-only: will not save state for use in subsequent builds.
+android	Post Run gradle/actions/setup-gradle@v4	2026-11-02T07:00:40.8349327Z Generating Job Summary
+android	Post Run gradle/actions/setup-gradle@v4	2026-11-02T07:00:40.8416201Z Completed post-action step
+android	Post Run actions/setup-java@v4	﻿2026-11-02T07:00:40.8948398Z Post job cleanup.
+android	Post Run actions/setup-java@v4	2026-11-02T07:00:41.0729094Z (node:2452) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+android	Post Run actions/setup-java@v4	2026-11-02T07:00:41.0730837Z (Use `node --trace-deprecation ...` to show where the warning was created)
+android	Post Run actions/checkout@v4	﻿2026-11-02T07:00:41.1154174Z Post job cleanup.
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2311684Z [command]/usr/bin/git version
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2396253Z git version 2.56.0
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2459734Z Temporarily overriding HOME='/home/runner/work/_temp/1ab04c3d-8d03-42a4-8a02-35d963b1b3fe' before making global git config changes
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2461837Z Adding repository directory to the temporary git global config as a safe directory
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2463407Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2516368Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.2579048Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.3007346Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.3042944Z http.https://github.com/.extraheader
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.3096321Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.3162480Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.3649592Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+android	Post Run actions/checkout@v4	2026-11-02T07:00:41.3707733Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+android	Complete job	﻿2026-11-02T07:00:41.4248436Z Cleaning up orphan processes
+android	Complete job	2026-11-02T07:00:41.4537390Z Terminate orphan process: pid (2334) (java)
+android	Complete job	2026-11-02T07:00:41.4654043Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-java@v4, gradle/actions/setup-gradle@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+a10-docker	Set up job	﻿2026-11-02T06:57:45.7221233Z Current runner version: '2.338.2'
+a10-docker	Set up job	2026-11-02T06:57:45.7251295Z ##[group]Runner Image Provisioner
+a10-docker	Set up job	2026-11-02T06:57:45.7252253Z Hosted Compute Agent
+a10-docker	Set up job	2026-11-02T06:57:45.7253450Z Version: 20261021.618
+a10-docker	Set up job	2026-11-02T06:57:45.7254251Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+a10-docker	Set up job	2026-11-02T06:57:45.7255192Z Build Date: 2026-10-21T00:45:21Z
+a10-docker	Set up job	2026-11-02T06:57:45.7256023Z Worker ID: {04456781-418d-4cd8-b167-328830a69dd8}
+a10-docker	Set up job	2026-11-02T06:57:45.7256876Z Region: westus2
+a10-docker	Set up job	2026-11-02T06:57:45.7257605Z Cloud: Azure
+a10-docker	Set up job	2026-11-02T06:57:45.7258347Z ##[endgroup]
+a10-docker	Set up job	2026-11-02T06:57:45.7260082Z ##[group]Operating System
+a10-docker	Set up job	2026-11-02T06:57:45.7260947Z Ubuntu
+a10-docker	Set up job	2026-11-02T06:57:45.7261593Z 24.04.5
+a10-docker	Set up job	2026-11-02T06:57:45.7262360Z LTS
+a10-docker	Set up job	2026-11-02T06:57:45.7263145Z ##[endgroup]
+a10-docker	Set up job	2026-11-02T06:57:45.7263797Z ##[group]Runner Image
+a10-docker	Set up job	2026-11-02T06:57:45.7264628Z Image: ubuntu-24.04
+a10-docker	Set up job	2026-11-02T06:57:45.7265317Z Version: 20261025.353.1
+a10-docker	Set up job	2026-11-02T06:57:45.7266686Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+a10-docker	Set up job	2026-11-02T06:57:45.7268926Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+a10-docker	Set up job	2026-11-02T06:57:45.7270252Z ##[endgroup]
+a10-docker	Set up job	2026-11-02T06:57:45.7271577Z ##[group]GITHUB_TOKEN Permissions
+a10-docker	Set up job	2026-11-02T06:57:45.7274709Z Contents: read
+a10-docker	Set up job	2026-11-02T06:57:45.7275514Z Metadata: read
+a10-docker	Set up job	2026-11-02T06:57:45.7276290Z ##[endgroup]
+a10-docker	Set up job	2026-11-02T06:57:45.7278757Z Secret source: Actions
+a10-docker	Set up job	2026-11-02T06:57:45.7279938Z Cache mode: write
+a10-docker	Set up job	2026-11-02T06:57:45.7280802Z Prepare workflow directory
+a10-docker	Set up job	2026-11-02T06:57:45.7757125Z Prepare all required actions
+a10-docker	Set up job	2026-11-02T06:57:45.7815544Z Getting action download info
+a10-docker	Set up job	2026-11-02T06:57:46.0864386Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+a10-docker	Set up job	2026-11-02T06:57:46.2805097Z Complete job name: a10-docker
+a10-docker	Run actions/checkout@v4	﻿2026-11-02T06:57:46.3602171Z ##[group]Run actions/checkout@v4
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3603033Z with:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3603416Z   repository: Yarrow-he/OsakaConnect
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3606821Z   token: ***
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3607208Z   ssh-strict: true
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3607586Z   ssh-user: git
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3607959Z   persist-credentials: true
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3608362Z   clean: true
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3608741Z   sparse-checkout-cone-mode: true
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3609168Z   fetch-depth: 1
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3609528Z   fetch-tags: false
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3609893Z   show-progress: true
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3610259Z   lfs: false
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3610602Z   submodules: false
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3610972Z   set-safe-directory: true
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3611387Z   allow-unsafe-pr-checkout: false
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.3612001Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.6245418Z Syncing repository: Yarrow-he/OsakaConnect
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.6250408Z ##[group]Getting Git version info
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.6251576Z Working directory is '/home/runner/work/OsakaConnect/OsakaConnect'
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.7214749Z [command]/usr/bin/git version
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.7352633Z git version 2.56.0
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.7926277Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9300448Z Temporarily overriding HOME='/home/runner/work/_temp/b0cd3d6b-bc3f-4293-8c9b-ea36115d82ac' before making global git config changes
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9302637Z Adding repository directory to the temporary git global config as a safe directory
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9304774Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9307367Z Deleting the contents of '/home/runner/work/OsakaConnect/OsakaConnect'
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9308981Z ##[group]Initializing the repository
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9310034Z [command]/usr/bin/git init /home/runner/work/OsakaConnect/OsakaConnect
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9311436Z hint: Using 'master' as the name for the initial branch. This default branch name
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9312989Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9314296Z hint: to use in all of your new repositories, which will suppress this warning,
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9315754Z hint: call:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9316338Z hint:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9317021Z hint: 	git config --global init.defaultBranch <name>
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9317967Z hint:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9318761Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9320048Z hint: 'development'. The just-created branch can be renamed via this command:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9321077Z hint:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9321639Z hint: 	git branch -m <name>
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9322277Z hint:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9323469Z hint: Disable this message with "git config set advice.defaultBranchName false"
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9324923Z Initialized empty Git repository in /home/runner/work/OsakaConnect/OsakaConnect/.git/
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9327248Z [command]/usr/bin/git remote add origin https://github.com/Yarrow-he/OsakaConnect
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9329578Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9330665Z ##[group]Disabling automatic garbage collection
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9331681Z [command]/usr/bin/git config --local gc.auto 0
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9334289Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9335313Z ##[group]Setting up auth
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9336364Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9339434Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9464909Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9548935Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9834373Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:46.9884540Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.0254338Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.0314324Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.0315843Z ##[group]Fetching the repository
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.0319006Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0:refs/remotes/origin/android/android-diagnostics
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4088550Z From https://github.com/Yarrow-he/OsakaConnect
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4099181Z  * [new ref]         97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0 -> origin/android/android-diagnostics
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4106696Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4108225Z ##[group]Determining the checkout info
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4111810Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4113131Z [command]/usr/bin/git sparse-checkout disable
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4116113Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4119475Z ##[group]Checking out the ref
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4121221Z [command]/usr/bin/git checkout --progress --force -B android/android-diagnostics refs/remotes/origin/android/android-diagnostics
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4236692Z Switched to a new branch 'android/android-diagnostics'
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4244877Z branch 'android/android-diagnostics' set up to track 'origin/android/android-diagnostics'.
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4252001Z ##[endgroup]
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4304126Z [command]/usr/bin/git log -1 --format=%H
+a10-docker	Run actions/checkout@v4	2026-11-02T06:57:47.4336748Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+a10-docker	Run echo "无 A10 脚本，跳过"	﻿2026-11-02T06:57:47.5254542Z ##[group]Run echo "无 A10 脚本，跳过"
+a10-docker	Run echo "无 A10 脚本，跳过"	2026-11-02T06:57:47.5255676Z ^[[36;1mecho "无 A10 脚本，跳过"^[[0m
+a10-docker	Run echo "无 A10 脚本，跳过"	2026-11-02T06:57:47.5278431Z shell: /usr/bin/bash -e {0}
+a10-docker	Run echo "无 A10 脚本，跳过"	2026-11-02T06:57:47.5279434Z ##[endgroup]
+a10-docker	Run echo "无 A10 脚本，跳过"	2026-11-02T06:57:47.5351090Z 无 A10 脚本，跳过
+a10-docker	Post Run actions/checkout@v4	﻿2026-11-02T06:57:47.6086909Z Post job cleanup.
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.6934387Z [command]/usr/bin/git version
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.6994367Z git version 2.56.0
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7059030Z Temporarily overriding HOME='/home/runner/work/_temp/7352f6bd-1804-4bca-a6d3-986f218e1201' before making global git config changes
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7062730Z Adding repository directory to the temporary git global config as a safe directory
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7068179Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7159664Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7185938Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7603066Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7676721Z http.https://github.com/.extraheader
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7705912Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.7785876Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.8098711Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+a10-docker	Post Run actions/checkout@v4	2026-11-02T06:57:47.8307134Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+a10-docker	Complete job	﻿2026-11-02T06:57:47.8623436Z Cleaning up orphan processes
+a10-docker	Complete job	2026-11-02T06:57:47.8956627Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+guards	Set up job	﻿2026-11-02T06:57:47.9585031Z Current runner version: '2.338.2'
+guards	Set up job	2026-11-02T06:57:47.9610633Z ##[group]Runner Image Provisioner
+guards	Set up job	2026-11-02T06:57:47.9611406Z Hosted Compute Agent
+guards	Set up job	2026-11-02T06:57:47.9611987Z Version: 20261021.618
+guards	Set up job	2026-11-02T06:57:47.9612544Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+guards	Set up job	2026-11-02T06:57:47.9613217Z Build Date: 2026-10-21T00:45:21Z
+guards	Set up job	2026-11-02T06:57:47.9613896Z Worker ID: {63402c86-a16b-4763-9ced-0b3232702cca}
+guards	Set up job	2026-11-02T06:57:47.9614860Z Region: southcentralus
+guards	Set up job	2026-11-02T06:57:47.9615425Z Cloud: Azure
+guards	Set up job	2026-11-02T06:57:47.9615915Z ##[endgroup]
+guards	Set up job	2026-11-02T06:57:47.9617592Z ##[group]Operating System
+guards	Set up job	2026-11-02T06:57:47.9618285Z Ubuntu
+guards	Set up job	2026-11-02T06:57:47.9618804Z 24.04.5
+guards	Set up job	2026-11-02T06:57:47.9619234Z LTS
+guards	Set up job	2026-11-02T06:57:47.9619745Z ##[endgroup]
+guards	Set up job	2026-11-02T06:57:47.9620265Z ##[group]Runner Image
+guards	Set up job	2026-11-02T06:57:47.9620865Z Image: ubuntu-24.04
+guards	Set up job	2026-11-02T06:57:47.9621431Z Version: 20261025.353.1
+guards	Set up job	2026-11-02T06:57:47.9622720Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+guards	Set up job	2026-11-02T06:57:47.9624600Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+guards	Set up job	2026-11-02T06:57:47.9625554Z ##[endgroup]
+guards	Set up job	2026-11-02T06:57:47.9626504Z ##[group]GITHUB_TOKEN Permissions
+guards	Set up job	2026-11-02T06:57:47.9628648Z Contents: read
+guards	Set up job	2026-11-02T06:57:47.9629215Z Metadata: read
+guards	Set up job	2026-11-02T06:57:47.9629773Z ##[endgroup]
+guards	Set up job	2026-11-02T06:57:47.9631806Z Secret source: Actions
+guards	Set up job	2026-11-02T06:57:47.9632713Z Cache mode: write
+guards	Set up job	2026-11-02T06:57:47.9633578Z Prepare workflow directory
+guards	Set up job	2026-11-02T06:57:48.0058269Z Prepare all required actions
+guards	Set up job	2026-11-02T06:57:48.0102346Z Getting action download info
+guards	Set up job	2026-11-02T06:57:48.2458762Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+guards	Set up job	2026-11-02T06:57:48.3966993Z Complete job name: guards
+guards	Run actions/checkout@v4	﻿2026-11-02T06:57:48.4661088Z ##[group]Run actions/checkout@v4
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4661541Z with:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4661781Z   fetch-depth: 0
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4662044Z   repository: Yarrow-he/OsakaConnect
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4664584Z   token: ***
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4664826Z   ssh-strict: true
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4665070Z   ssh-user: git
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4665324Z   persist-credentials: true
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4665598Z   clean: true
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4665848Z   sparse-checkout-cone-mode: true
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4666139Z   fetch-tags: false
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4666393Z   show-progress: true
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4666647Z   lfs: false
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4666879Z   submodules: false
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4667130Z   set-safe-directory: true
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4667488Z   allow-unsafe-pr-checkout: false
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.4667854Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6562246Z Syncing repository: Yarrow-he/OsakaConnect
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6563810Z ##[group]Getting Git version info
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6564474Z Working directory is '/home/runner/work/OsakaConnect/OsakaConnect'
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6567551Z [command]/usr/bin/git version
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6684585Z git version 2.56.0
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6686659Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6717019Z Temporarily overriding HOME='/home/runner/work/_temp/927a36d3-62c1-4ef1-9f3d-48f377722e56' before making global git config changes
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6735136Z Adding repository directory to the temporary git global config as a safe directory
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6738050Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6853496Z Deleting the contents of '/home/runner/work/OsakaConnect/OsakaConnect'
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6855495Z ##[group]Initializing the repository
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6856207Z [command]/usr/bin/git init /home/runner/work/OsakaConnect/OsakaConnect
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.6935771Z hint: Using 'master' as the name for the initial branch. This default branch name
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7131592Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7134279Z hint: to use in all of your new repositories, which will suppress this warning,
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7142309Z hint: call:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7142848Z hint:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7143523Z hint: 	git config --global init.defaultBranch <name>
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7144463Z hint:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7145321Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7146469Z hint: 'development'. The just-created branch can be renamed via this command:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7147384Z hint:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7147922Z hint: 	git branch -m <name>
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7148472Z hint:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7149175Z hint: Disable this message with "git config set advice.defaultBranchName false"
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7150482Z Initialized empty Git repository in /home/runner/work/OsakaConnect/OsakaConnect/.git/
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7152654Z [command]/usr/bin/git remote add origin https://github.com/Yarrow-he/OsakaConnect
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7154875Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7155784Z ##[group]Disabling automatic garbage collection
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7156526Z [command]/usr/bin/git config --local gc.auto 0
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7158142Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7158901Z ##[group]Setting up auth
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7159664Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7161937Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7517847Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7557052Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7766646Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7793581Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.7991203Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.8035559Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.8036207Z ##[group]Fetching the repository
+guards	Run actions/checkout@v4	2026-11-02T06:57:48.8043807Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6932098Z From https://github.com/Yarrow-he/OsakaConnect
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6934254Z  * [new branch]      admin/admin-connect     -> origin/admin/admin-connect
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6935865Z  * [new branch]      android/android-diagnostics -> origin/android/android-diagnostics
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6937524Z  * [new branch]      android/android-shell   -> origin/android/android-shell
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6938987Z  * [new branch]      lead/ci-check-android   -> origin/lead/ci-check-android
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6940238Z  * [new branch]      lead/ci-check-win       -> origin/lead/ci-check-win
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6941358Z  * [new branch]      lead/ci-fix-v0.1.0      -> origin/lead/ci-fix-v0.1.0
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6942467Z  * [new branch]      lead/ci-v0.1.0          -> origin/lead/ci-v0.1.0
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6943868Z  * [new branch]      lead/setup-v0.1.0       -> origin/lead/setup-v0.1.0
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6945171Z  * [new branch]      main                    -> origin/main
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6946465Z  * [new branch]      server/server-core      -> origin/server/server-core
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6948104Z  * [new branch]      tests/v0.1.0            -> origin/tests/v0.1.0
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6949809Z  * [new branch]      windows/win-diagnostics -> origin/windows/win-diagnostics
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6951635Z  * [new branch]      windows/win-shell       -> origin/windows/win-shell
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6957597Z [command]/usr/bin/git branch --list --remote origin/android/android-diagnostics
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6959865Z   origin/android/android-diagnostics
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6964899Z [command]/usr/bin/git rev-parse refs/remotes/origin/android/android-diagnostics
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6966990Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6972323Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6974700Z ##[group]Determining the checkout info
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6978291Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6979443Z [command]/usr/bin/git sparse-checkout disable
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.6982663Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7003921Z ##[group]Checking out the ref
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7016343Z [command]/usr/bin/git checkout --progress --force -B android/android-diagnostics refs/remotes/origin/android/android-diagnostics
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7089077Z Switched to a new branch 'android/android-diagnostics'
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7099765Z branch 'android/android-diagnostics' set up to track 'origin/android/android-diagnostics'.
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7103965Z ##[endgroup]
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7146318Z [command]/usr/bin/git log -1 --format=%H
+guards	Run actions/checkout@v4	2026-11-02T06:57:49.7179285Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+guards	Post Run actions/checkout@v4	﻿2026-11-02T06:57:49.7527081Z Post job cleanup.
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8314207Z [command]/usr/bin/git version
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8337420Z git version 2.56.0
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8393098Z Temporarily overriding HOME='/home/runner/work/_temp/6602f77c-da3f-49e5-ac48-4bf0e0a517bf' before making global git config changes
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8407564Z Adding repository directory to the temporary git global config as a safe directory
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8410285Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8415162Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8471339Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8850140Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8895659Z http.https://github.com/.extraheader
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8917094Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.8987479Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.9187922Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+guards	Post Run actions/checkout@v4	2026-11-02T06:57:49.9231842Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+guards	Complete job	﻿2026-11-02T06:57:49.9580303Z Cleaning up orphan processes
+guards	Complete job	2026-11-02T06:57:49.9985374Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+python	Set up job	﻿2026-11-02T06:57:45.2767522Z Current runner version: '2.338.2'
+python	Set up job	2026-11-02T06:57:45.2795189Z ##[group]Runner Image Provisioner
+python	Set up job	2026-11-02T06:57:45.2796032Z Hosted Compute Agent
+python	Set up job	2026-11-02T06:57:45.2796547Z Version: 20261021.618
+python	Set up job	2026-11-02T06:57:45.2797083Z Commit: 21505ad2541d5be6135ed84fc33697146cf75b8e
+python	Set up job	2026-11-02T06:57:45.2797769Z Build Date: 2026-10-21T00:45:21Z
+python	Set up job	2026-11-02T06:57:45.2798380Z Worker ID: {c1c3b0b2-190d-43e7-baea-91ba90221a20}
+python	Set up job	2026-11-02T06:57:45.2799066Z Region: westus2
+python	Set up job	2026-11-02T06:57:45.2799551Z Cloud: Azure
+python	Set up job	2026-11-02T06:57:45.2799999Z ##[endgroup]
+python	Set up job	2026-11-02T06:57:45.2801409Z ##[group]Operating System
+python	Set up job	2026-11-02T06:57:45.2801949Z Ubuntu
+python	Set up job	2026-11-02T06:57:45.2802784Z 24.04.5
+python	Set up job	2026-11-02T06:57:45.2803291Z LTS
+python	Set up job	2026-11-02T06:57:45.2803909Z ##[endgroup]
+python	Set up job	2026-11-02T06:57:45.2804417Z ##[group]Runner Image
+python	Set up job	2026-11-02T06:57:45.2805003Z Image: ubuntu-24.04
+python	Set up job	2026-11-02T06:57:45.2805603Z Version: 20261025.353.1
+python	Set up job	2026-11-02T06:57:45.2806604Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261025.353/images/ubuntu/Ubuntu2404-Readme.md
+python	Set up job	2026-11-02T06:57:45.2808243Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261025.353
+python	Set up job	2026-11-02T06:57:45.2809149Z ##[endgroup]
+python	Set up job	2026-11-02T06:57:45.2810110Z ##[group]GITHUB_TOKEN Permissions
+python	Set up job	2026-11-02T06:57:45.2811974Z Contents: read
+python	Set up job	2026-11-02T06:57:45.2812469Z Metadata: read
+python	Set up job	2026-11-02T06:57:45.2813063Z ##[endgroup]
+python	Set up job	2026-11-02T06:57:45.2815862Z Secret source: Actions
+python	Set up job	2026-11-02T06:57:45.2816788Z Cache mode: write
+python	Set up job	2026-11-02T06:57:45.2817617Z Prepare workflow directory
+python	Set up job	2026-11-02T06:57:45.3132514Z Prepare all required actions
+python	Set up job	2026-11-02T06:57:45.3187124Z Getting action download info
+python	Set up job	2026-11-02T06:57:45.6540546Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+python	Set up job	2026-11-02T06:57:45.7416473Z Download action repository 'actions/setup-python@v5' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+python	Set up job	2026-11-02T06:57:45.9758016Z Complete job name: python
+python	Run actions/checkout@v4	﻿2026-11-02T06:57:46.0250986Z ##[group]Run actions/checkout@v4
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0251444Z with:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0251677Z   repository: Yarrow-he/OsakaConnect
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0253601Z   token: ***
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0254073Z   ssh-strict: true
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0254396Z   ssh-user: git
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0254628Z   persist-credentials: true
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0254879Z   clean: true
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0255113Z   sparse-checkout-cone-mode: true
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0255382Z   fetch-depth: 1
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0255609Z   fetch-tags: false
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0255837Z   show-progress: true
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0256069Z   lfs: false
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0256289Z   submodules: false
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0256523Z   set-safe-directory: true
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0256785Z   allow-unsafe-pr-checkout: false
+python	Run actions/checkout@v4	2026-11-02T06:57:46.0257158Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2653101Z Syncing repository: Yarrow-he/OsakaConnect
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2655631Z ##[group]Getting Git version info
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2656548Z Working directory is '/home/runner/work/OsakaConnect/OsakaConnect'
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2657892Z [command]/usr/bin/git version
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2751117Z git version 2.56.0
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2767863Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2810661Z Temporarily overriding HOME='/home/runner/work/_temp/25ebc176-6f46-46dc-a691-a676a16658bf' before making global git config changes
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2812281Z Adding repository directory to the temporary git global config as a safe directory
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2827360Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2884555Z Deleting the contents of '/home/runner/work/OsakaConnect/OsakaConnect'
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2898369Z ##[group]Initializing the repository
+python	Run actions/checkout@v4	2026-11-02T06:57:46.2925262Z [command]/usr/bin/git init /home/runner/work/OsakaConnect/OsakaConnect
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3107747Z hint: Using 'master' as the name for the initial branch. This default branch name
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3113317Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3115679Z hint: to use in all of your new repositories, which will suppress this warning,
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3116562Z hint: call:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3117046Z hint:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3117952Z hint: 	git config --global init.defaultBranch <name>
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3118610Z hint:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3119228Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3120193Z hint: 'development'. The just-created branch can be renamed via this command:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3137974Z hint:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3138514Z hint: 	git branch -m <name>
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3139036Z hint:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3139710Z hint: Disable this message with "git config set advice.defaultBranchName false"
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3140893Z Initialized empty Git repository in /home/runner/work/OsakaConnect/OsakaConnect/.git/
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3142979Z [command]/usr/bin/git remote add origin https://github.com/Yarrow-he/OsakaConnect
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3190446Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3191330Z ##[group]Disabling automatic garbage collection
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3194005Z [command]/usr/bin/git config --local gc.auto 0
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3232091Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.3232868Z ##[group]Setting up auth
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4119659Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4122789Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4125796Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4128268Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4225232Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4259254Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4485030Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4538395Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4539175Z ##[group]Fetching the repository
+python	Run actions/checkout@v4	2026-11-02T06:57:46.4547609Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0:refs/remotes/origin/android/android-diagnostics
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8364358Z From https://github.com/Yarrow-he/OsakaConnect
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8366142Z  * [new ref]         97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0 -> origin/android/android-diagnostics
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8368986Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8369895Z ##[group]Determining the checkout info
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8371005Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8376032Z [command]/usr/bin/git sparse-checkout disable
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8436785Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8498904Z ##[group]Checking out the ref
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8500424Z [command]/usr/bin/git checkout --progress --force -B android/android-diagnostics refs/remotes/origin/android/android-diagnostics
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8587116Z Switched to a new branch 'android/android-diagnostics'
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8593556Z branch 'android/android-diagnostics' set up to track 'origin/android/android-diagnostics'.
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8597897Z ##[endgroup]
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8648938Z [command]/usr/bin/git log -1 --format=%H
+python	Run actions/checkout@v4	2026-11-02T06:57:46.8684648Z 97d42d65e2d5fd1699c7d1869c5b75a3211c2bd0
+python	Run code=$(git ls-files 'server/*.py' | head -1)	﻿2026-11-02T06:57:46.8899713Z ##[group]Run code=$(git ls-files 'server/*.py' | head -1)
+python	Run code=$(git ls-files 'server/*.py' | head -1)	2026-11-02T06:57:46.8900286Z ^[[36;1mcode=$(git ls-files 'server/*.py' | head -1)^[[0m
+python	Run code=$(git ls-files 'server/*.py' | head -1)	2026-11-02T06:57:46.8900672Z ^[[36;1mecho "code=$code" >> "$GITHUB_OUTPUT"^[[0m
+python	Run code=$(git ls-files 'server/*.py' | head -1)	2026-11-02T06:57:46.8901449Z ^[[36;1mcase "android/android-diagnostics" in server/*) [ -n "$code" ] || { echo "::error::分支上没有 Python 代码"; exit 1; };; esac^[[0m
+python	Run code=$(git ls-files 'server/*.py' | head -1)	2026-11-02T06:57:46.8921275Z shell: /usr/bin/bash -e {0}
+python	Run code=$(git ls-files 'server/*.py' | head -1)	2026-11-02T06:57:46.8921622Z ##[endgroup]
+python	Run echo "无 Python 代码，跳过"	﻿2026-11-02T06:57:46.9062879Z ##[group]Run echo "无 Python 代码，跳过"
+python	Run echo "无 Python 代码，跳过"	2026-11-02T06:57:46.9063273Z ^[[36;1mecho "无 Python 代码，跳过"^[[0m
+python	Run echo "无 Python 代码，跳过"	2026-11-02T06:57:46.9079327Z shell: /usr/bin/bash -e {0}
+python	Run echo "无 Python 代码，跳过"	2026-11-02T06:57:46.9079629Z ##[endgroup]
+python	Run echo "无 Python 代码，跳过"	2026-11-02T06:57:46.9117143Z 无 Python 代码，跳过
+python	Post Run actions/checkout@v4	﻿2026-11-02T06:57:46.9325533Z Post job cleanup.
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0093891Z [command]/usr/bin/git version
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0137088Z git version 2.56.0
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0182837Z Temporarily overriding HOME='/home/runner/work/_temp/ce591da5-d24e-4d17-ae63-8185ca749655' before making global git config changes
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0193240Z Adding repository directory to the temporary git global config as a safe directory
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0202190Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/OsakaConnect/OsakaConnect
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0272069Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0324098Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0667958Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0756426Z http.https://github.com/.extraheader
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0809717Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.0826734Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.1036257Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+python	Post Run actions/checkout@v4	2026-11-02T06:57:47.1079361Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+python	Complete job	﻿2026-11-02T06:57:47.1471382Z Cleaning up orphan processes
+python	Complete job	2026-11-02T06:57:47.1735399Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
