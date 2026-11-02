@@ -54,3 +54,9 @@ Hao Yin 2026-11-02 22:13 决定走 B 方案，PR #9（决策 005）关闭不合�
 3. 自测改为断言具体的拦截原因（不再把任意非零退出当作拦截）；新增用例 6（分支自行放宽 scope 仍拦截）、7（合入侧不在 main 上拦截），共 9 项全部通过。
 4. 同一套新用例在旧脚本上跑，6、7 失败，证明新用例确实覆盖了 A、B 共同指出的风险。
 5. 这是对评审共同风险的修补，不另开 A/B 评审轮；仍为二类，等 Hao Yin 批准。
+
+### 模型核对补记（2026-11-03，追加）
+1. 评审 B 的会话原始记录：~/.ds-claude/projects/-tmp-rvB7/cb99b0f0-7983-43e8-b744-9f6d47975eb9.jsonl（最后写入 2026-11-02 22:15:30 +10:00，内容含 check-merge-scope/MERGE_HEAD，对应本稿评审）。
+2. 该记录 7 处 model 字段均为 "deepseek-v4-flash"，与上文“deepseek-v4-flash”一致。
+3. ds-claude 包装脚本默认 ANTHROPIC_MODEL=deepseek-flash；同目录另有 2 个 deepseek-flash 会话（-tmp-rvA9*，2026-11-02 23:24/23:28），与本稿无关。
+4. 评审 A（codex）的模型未在此补核。
