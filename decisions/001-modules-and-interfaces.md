@@ -44,3 +44,21 @@ shared-protocol → (server-core ∥ win-diagnostics ∥ android-diagnostics) �
 
 ## 评审所需验收片段
 A1–A17 见 acceptance.md；关键：A9 身份校验、A10 被拒不显示已连接、A11 不互引源码、A12 不铺空框架与行数预算、A15 邀请码 8 位、A17 单线路列表。
+
+## 评审记录（2026-11-02，两者新会话、互不可见，只喂决策稿 + A9/A10/A11/A12/A15/A17）
+
+### 评审 A：codex exec，gpt-6-astra，reasoning high（日志 /home/box/osaka/logs/review-A.log）
+1. 反对：模块拆分基本合理，但 proto 与手写 JSON 的映射未明确，TLS 验收也缺少证书校验失败用例，尚不足以证明接口一致且连接安全。
+
+2. 最大风险：管理端跳过证书校验仍可能通过现有验收；401/403 只能证明后台校验令牌，无法证明管理端连接的是可信后台，存在令牌泄露风险。
+
+3. 更好的替代方案：保留职责划分，以 OpenAPI 明确 HTTP/JSON 契约并做契约测试；CI 配置临时可信证书，补测不可信证书、主机名不匹配均拒绝连接。
+
+### 评审 B：ds-claude -p --model deepseek-v4-flash（DeepSeek Anthropic 接口，effort high；日志 /home/box/osaka/logs/review-B.log；Claude Code 提示未识别该模型名，按 200k 窗口处理，接口正常返回）
+1. **反对**。proto 被定为唯一事实来源却不生成代码，只留下维护成本；三端手写 DTO 仅靠正例夹具对齐，字段名、可选性、未知字段必然漂移。
+
+2. **最大风险：验收可“自证”**。后台只听 127.0.0.1、用自签证书，A10 在同机 CI 即可全绿；真实隔离部署与证书校验（最易被跳过）从未被验证，安全目标可能落空。
+
+3. **更好替代**：契约改用 OpenAPI/JSON Schema，三端生成或边界校验 DTO，夹具补反例与未知字段；A10 增加一次强制证书校验、非回环的运行。
+
+### 结论：两位均反对现稿，共同点：①契约改 OpenAPI/JSON Schema + 契约测试（含反例）②验收须强制证书校验并补不可信证书/主机名不匹配拒绝用例。待组长修订后复审。
