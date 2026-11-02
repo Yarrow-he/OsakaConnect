@@ -2,7 +2,8 @@ name: ci
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, 'windows/**', 'android/**', 'admin/**', 'server/**', 'lead/**', 'tests/**']
+  workflow_dispatch:
 permissions:
   contents: read
 jobs:
@@ -37,7 +38,7 @@ jobs:
       - if: steps.has.outputs.code != ''
         shell: bash
         run: |
-          for d in windows admin; do [ -d "$d" ] && (cd "$d" && dotnet build -c Release && dotnet test -c Release --no-build); done
+          for d in windows admin; do [ -d "$d" ] && (cd "$d" && dotnet restore && dotnet build -c Release --no-restore && dotnet test -c Release --no-build); done
   android:
     runs-on: ubuntu-latest
     steps:
@@ -50,8 +51,10 @@ jobs:
         uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
       - if: steps.has.outputs.code != ''
+        uses: gradle/actions/setup-gradle@v4
+      - if: steps.has.outputs.code != ''
         working-directory: android
-        run: ./gradlew --no-daemon assembleDebug testDebugUnitTest
+        run: ./gradlew --no-daemon assembleDebug testDebugUnitTest lint
   python:
     runs-on: ubuntu-latest
     steps:
@@ -66,5 +69,21 @@ jobs:
       - if: steps.has.outputs.code != ''
         working-directory: server
         run: |
-          [ -f requirements.txt ] && pip install -r requirements.txt
-          pip install pytest && pytest -q
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          pip install pytest pyyaml jsonschema ruff
+          ruff check .
+          pytest -q
+      - if: steps.has.outputs.code != '' && hashFiles('tests/server/server-core/test_server_core.py') != ''
+        env:
+          OSAKA_SERVER_CMD: python3 -m osaka_server.app
+          OSAKA_INVITE_FN: osaka_server.invite.is_valid_invite_code
+          PYTHONPATH: server
+        run: pytest tests/server/server-core -q -rs
+  a10-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - if: hashFiles('tests/admin/admin-connect/run-a10.sh') == ''
+        run: echo "无 A10 脚本，跳过"
+      - if: hashFiles('tests/admin/admin-connect/run-a10.sh') != ''
+        run: bash tests/admin/admin-connect/run-a10.sh
