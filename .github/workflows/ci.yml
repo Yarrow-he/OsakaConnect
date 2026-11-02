@@ -15,6 +15,10 @@ jobs:
       - name: scope
         if: github.event_name == 'pull_request'
         run: scripts/check-scope.sh origin/${{ github.base_ref }}
+      - name: grep-guard（A10、A14）
+        run: bash tests/admin/admin-connect/grep-guard.sh
+      - name: android lang-guard（A14、A17）
+        run: bash tests/android/android-shell/lang-guard.sh
   contract:
     runs-on: ubuntu-latest
     steps:
@@ -44,6 +48,23 @@ jobs:
           set -e
           for p in ${{ steps.has.outputs.code }}; do dotnet restore "$p"; dotnet build "$p" -c Release --no-restore; done
           for p in ${{ steps.has.outputs.code }}; do case "$p" in *Tests*.csproj) dotnet test "$p" -c Release --no-build;; esac; done
+  windows-acceptance:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+      - name: 构建 windows/ 产品（smoke.ps1 不自行构建）
+        shell: bash
+        run: |
+          set -e
+          for p in $(git ls-files 'windows/*.csproj'); do dotnet build "$p" -c Release; done
+      - name: win-shell smoke.ps1（A1、A2、A16、A14、A17）
+        shell: bash  # pwsh 外壳会把子进程退出码折成 1，用 bash 保留 exit 3
+        run: pwsh -NoProfile -File tests/windows/win-shell/smoke.ps1
+      - name: WinDiagnostics.Tests（A3、A4、A15）
+        shell: bash
+        run: dotnet test tests/windows/win-diagnostics/WinDiagnostics.Tests.csproj -c Release
   android:
     runs-on: ubuntu-latest
     steps:
@@ -125,7 +146,7 @@ jobs:
       - id: has
         run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
       - if: steps.has.outputs.code == ''
-        run: echo "无 Android 代码，跳过"
+        run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
       - if: steps.has.outputs.code != ''
         uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '17' }
@@ -156,6 +177,7 @@ jobs:
             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
             bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
             bash tests/android/android-diagnostics/run.sh  # 缺脚本即失败
+            bash tests/android/android-diagnostics/run-instrumented.sh  # 缺脚本即失败
       - if: always() && steps.has.outputs.code != ''
         uses: actions/upload-artifact@v4
         with:

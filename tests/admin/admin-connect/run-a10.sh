@@ -42,7 +42,7 @@ missing=""
 [ -d "$ADMIN_DIR" ] || missing="$missing admin/"
 if [ -n "$missing" ]; then
   echo "待测：模块未交付（缺少$missing）"
-  exit 0
+  exit 3
 fi
 
 if ! command -v docker >/dev/null 2>&1 || ! docker compose version >/dev/null 2>&1; then

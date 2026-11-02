@@ -58,7 +58,7 @@ if [ "${1:-}" = "--self-test" ]; then
   exit 0
 fi
 
-[ -d "$ANDROID_DIR" ] || { echo "待测：模块未交付（android/ 目录不存在）"; exit 0; }
+[ -d "$ANDROID_DIR" ] || { echo "待测：模块未交付（android/ 目录不存在）"; exit 3; }
 
 scan "$ANDROID_DIR"
 [ "$fail" -eq 0 ] || exit 1

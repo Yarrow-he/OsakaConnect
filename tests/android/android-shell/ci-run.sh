@@ -22,9 +22,9 @@ MAIN_COMPONENT="$APP_ID/$MAIN_ACTIVITY"
 step() { echo "== $*"; }
 die() { echo "失败：$*"; exit 1; }
 
-# 产品代码未交付：明确提示后以退出码 0 结束，不伪装通过（此路径不创建产物）。
-[ -d "$ANDROID_DIR" ] || { echo "待测：模块未交付（android/ 目录不存在）"; exit 0; }
-[ -x "$ANDROID_DIR/gradlew" ] || { echo "待测：模块未交付（android/gradlew 不存在）"; exit 0; }
+# 产品代码未交付：明确提示后以退出码 3 结束（非 0，CI 不会显示为通过；此路径不创建产物）。
+[ -d "$ANDROID_DIR" ] || { echo "待测：模块未交付（android/ 目录不存在）"; exit 3; }
+[ -x "$ANDROID_DIR/gradlew" ] || { echo "待测：模块未交付（android/gradlew 不存在）"; exit 3; }
 
 mkdir -p "$RESULT_DIR"
 LOG="$RESULT_DIR/ci-run-$(date +%Y%m%d-%H%M%S).log"
