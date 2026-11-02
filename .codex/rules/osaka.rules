@@ -1,0 +1,13 @@
+# 禁止项（Codex execpolicy）
+prefix_rule(pattern=["git", "merge"], decision="forbidden")
+prefix_rule(pattern=["git", "rebase"], decision="forbidden")
+prefix_rule(pattern=["git", "reset", "--hard"], decision="forbidden")
+prefix_rule(pattern=["git", "commit", "--amend"], decision="forbidden")
+prefix_rule(pattern=["git", "filter-branch"], decision="forbidden")
+prefix_rule(pattern=["git", "push"], decision="forbidden")
+prefix_rule(pattern=["git", "branch", "-d"], decision="forbidden")
+prefix_rule(pattern=["git", "branch", "-D"], decision="forbidden")
+prefix_rule(pattern=["git", "commit", "--no-verify"], decision="forbidden")
+prefix_rule(pattern=["curl"], decision="forbidden")
+prefix_rule(pattern=["wget"], decision="forbidden")
+prefix_rule(pattern=["ssh"], decision="forbidden")

@@ -1,0 +1,11 @@
+# 项目级 Codex 配置。只由 Hao Yin 决定修改。
+model = "gpt-6-astra"
+model_reasoning_effort = "high"
+approval_policy = "on-request"
+sandbox_mode = "workspace-write"   # 只能写项目目录
+
+[sandbox_workspace_write]
+network_access = false
+writable_roots = []
+exclude_tmpdir_env_var = true
+exclude_slash_tmp = true

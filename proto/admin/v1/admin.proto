@@ -1,0 +1,28 @@
+// 管理协议 v1（A9）。传输：HTTPS + JSON（proto3 JSON 映射）。
+// 身份：请求头 Authorization: Bearer <令牌>；令牌只从环境变量读取（后台 OSAKA_ADMIN_TOKEN）。
+// 无凭证 → 401 UNAUTHENTICATED；凭证错误 → 403 FORBIDDEN；错误体为 ErrorBody。
+syntax = "proto3";
+package osaka.admin.v1;
+
+// GET /v1/health
+message HealthResponse {
+  string status = 1;            // "ok" | "degraded"
+  repeated Route routes = 2;    // 本期恰为 1 条（A17）
+}
+
+// GET /v1/version
+message VersionResponse {
+  string service = 1;           // "osaka-server"
+  string version = 2;           // 例 "0.1.0"
+  string protocol = 3;          // "admin.v1"
+}
+
+message Route {
+  string id = 1;                // 不透明标识，客户端不得硬编码
+  string display_name = 2;
+}
+
+message ErrorBody {
+  string code = 1;              // 见 shared/errors.json
+  string message = 2;           // 用户可读，不含堆栈和密钥
+}

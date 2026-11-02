@@ -1,0 +1,194 @@
+{
+  "version": "0.1.0",
+  "updated_at": "2026-11-02T14:44:14+10:00",
+  "scope": {
+    "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
+    "global": [
+      "acceptance.md",
+      "board.json",
+      "docs/",
+      "proto/",
+      "shared/",
+      "windows/",
+      "admin/",
+      "android/",
+      "server/",
+      "tests/",
+      "notes/",
+      "reports/",
+      "memory/",
+      "skills/",
+      "decisions/",
+      "scripts/",
+      ".github/",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      ".githooks/",
+      ".gitignore"
+    ],
+    "protected": [
+      ".codex/",
+      ".claude/"
+    ]
+  },
+  "processed_events": [],
+  "modules": [
+    {
+      "id": "shared-protocol",
+      "端": "共用",
+      "模块": "shared-protocol",
+      "state": "待写",
+      "owner": "代码组长 · Osaka",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "proto/",
+        "shared/"
+      ],
+      "acceptance": [
+        "A9",
+        "A11",
+        "A15",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "server-core",
+      "端": "服务端",
+      "模块": "server-core",
+      "state": "待写",
+      "owner": "写手 · 服务端",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "server/"
+      ],
+      "acceptance": [
+        "A8",
+        "A9",
+        "A15",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "win-shell",
+      "端": "Windows",
+      "模块": "win-shell",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "windows/"
+      ],
+      "acceptance": [
+        "A1",
+        "A2",
+        "A16"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "win-diagnostics",
+      "端": "Windows",
+      "模块": "win-diagnostics",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "windows/"
+      ],
+      "acceptance": [
+        "A3",
+        "A4",
+        "A7",
+        "A15"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "admin-connect",
+      "端": "管理端",
+      "模块": "admin-connect",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "admin/"
+      ],
+      "acceptance": [
+        "A10"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "android-shell",
+      "端": "Android",
+      "模块": "android-shell",
+      "state": "待写",
+      "owner": "写手 · Android",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "android/"
+      ],
+      "acceptance": [
+        "A5",
+        "A6",
+        "A16"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "android-diagnostics",
+      "端": "Android",
+      "模块": "android-diagnostics",
+      "state": "待写",
+      "owner": "写手 · Android",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        "android/"
+      ],
+      "acceptance": [
+        "A7",
+        "A15"
+      ],
+      "artifacts": [],
+      "history": []
+    },
+    {
+      "id": "ci-guards",
+      "端": "共用",
+      "模块": "ci-guards",
+      "state": "待写",
+      "owner": "代码组长 · Osaka",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:44:14+10:00",
+      "paths": [
+        ".github/",
+        "scripts/"
+      ],
+      "acceptance": [
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": []
+    }
+  ]
+}
