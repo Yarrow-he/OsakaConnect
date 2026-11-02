@@ -5,22 +5,23 @@
 # 前置环境：GitHub Actions ubuntu-latest + docker compose（待 CI）；本机不跑构建、不装 .NET/JDK。
 # 运行命令：tests/admin/admin-connect/run-a10.sh（本文件不要单独起）。
 # 覆盖 acceptance：A10（①可信证书+正确令牌、②错误令牌、③非受信 CA、④主机名不匹配）、A14（probe 为 .NET 入口）。
-# 待写手交付后对齐：SERVER_CMD、PROBE_DOCKERFILE、PROBE_BUILD_CONTEXT、PROBE_BIN 的默认值
+# SERVER_CMD 默认从 /workspace/server 运行 python -m osaka_server.app；PROBE_DOCKERFILE、PROBE_BUILD_CONTEXT、PROBE_BIN 的默认值
 # 以 server/、admin/ 实际入口为准。
 
 services:
   osaka-server:
     image: python:3.12-slim
-    working_dir: /workspace
-    command: ["sh", "-c", "exec ${SERVER_CMD:-python -m server}"]
+    working_dir: /workspace/server
+    command: ["sh", "-c", "exec ${SERVER_CMD:-python -m osaka_server.app}"]
     environment:
       PYTHONUNBUFFERED: "1"
-      PYTHONPATH: /workspace
+      PYTHONPATH: /workspace/server
       OSAKA_TLS_CERT: /certs/${OSAKA_CERT_SET:-trusted}/server.crt
       OSAKA_TLS_KEY: /certs/${OSAKA_CERT_SET:-trusted}/server.key
       OSAKA_ADMIN_TOKEN: "${OSAKA_ADMIN_TOKEN:?OSAKA_ADMIN_TOKEN required}"
     volumes:
       - "${OSAKA_ROOT:-../../..}/server:/workspace/server:ro"
+      - "${OSAKA_ROOT:-../../..}/shared:/workspace/shared:ro"
       - "${CERTS_DIR:?CERTS_DIR required}:/certs:ro"
     # 仅探 TCP 端口，不做 TLS 校验，保证 ③④ 场景下也能等到后台就绪
     healthcheck:
