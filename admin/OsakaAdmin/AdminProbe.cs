@@ -19,7 +19,11 @@ public enum ProbeStatus
 }
 
 public sealed record ProbeResult(ProbeStatus Status, string Message,
-    VersionResponse? Version = null, HealthResponse? Health = null);
+    VersionResponse? Version = null, HealthResponse? Health = null)
+{
+    public static string FormatSummary(VersionResponse version, HealthResponse health) =>
+        $"version={version.Version} health={health.Status} routes={health.Routes.Length}";
+}
 
 public sealed class AdminProbe : IDisposable
 {

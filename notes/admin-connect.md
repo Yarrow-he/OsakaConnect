@@ -48,4 +48,22 @@ A10, A14（见 `acceptance.md`）。完成标准：单测：admin-contract 正�
    8. admin/OsakaAdmin/MainWindow.xaml.cs
    9. admin/OsakaAdmin/OsakaAdmin.csproj
 10. 运行方式：本机没有 .NET SDK，编译和测试只在 CI（windows-latest）上跑。
-11. 已知限制：A10 的 TLS 四项必测由 ci-guards 的 a10-docker 端到端驱动（该 job 本 run 成功），模块自身单测不覆盖真实 TLS；测试项目用了 3 个测试包，需组长确认；WPF 界面没在真机启动过。
+11. 已知限制（rework1 更正）：A10 目前未验证。CI 41403156768 的 a10-docker 实际没有跑 A10：ci.yml:102-105 找不到 tests/admin/admin-connect/run-a10.sh 而跳过，全程无 --probe 调用。A10 端到端脚本归测试补；模块自身单测不覆盖真实 TLS；测试项目用了 3 个测试包，需组长确认；WPF 界面没在真机启动过。
+
+## 审阅（审阅 · Osaka，2026-11-02）
+结论：必须改。
+必须改：
+1. A10 未执行：CI 41403156768 的 a10-docker 只跑了 echo "无 A10 脚本，跳过"（ci.yml:102-105，tests/admin/admin-connect/run-a10.sh 不存在），没有任何 --probe 调用；notes 第 11 条“由 a10-docker 端到端驱动”与事实不符，需更正，A10 不能算有证据（可机器化：a10-docker 缺脚本时改为失败而非跳过，需组长定）。
+2. App.xaml.cs:18-20 --probe 成功只返回退出码，丢弃版本/健康，A10 ① “显示版本/健康”无法断言；最小改法：成功时向 stdout 输出一行版本/健康摘要（可机器化：e2e grep 版本串）。
+建议改：
+1. AdminContract.cs:57 正则 $ 允许尾随换行，改 \z 或补向量反例（可机器化：向量/单测）。
+2. AdminProbe.cs:77-79 FormatException 分支无用例，补 InlineData("abc def")（可机器化：单测）。
+3. AdminContract.cs:17、:56 冗余 JsonPropertyName 与 null 判断可删。
+4. OsakaAdmin.Tests.csproj:11-13 测试包待组长补批。
+证据：日志 /home/box/osaka/logs/admin-connect-ci-41403156768.log（a10-docker 段）；审阅日志 /home/box/osaka/logs/review-admin-connect-20261102.log；diff /home/box/osaka/logs/review-admin-connect-diff.txt。
+
+## rework1 交付（2026-11-02）
+1. 改动：--probe 成功时 stdout 输出一行 `version=<x.y.z> health=<status> routes=<n>`（ProbeResult.FormatSummary），失败只返回退出码不变；版本正则改 `^[0-9]+\.[0-9]+\.[0-9]+\z`（去掉 ECMAScript 选项）；删 Route.DisplayName 冗余 JsonPropertyName 与 `version is not null`。
+2. 新增测试：SummaryIncludesVersionAndHealth；RejectsVersionWithTrailingNewlineOrNonAsciiDigits（2 例）；FormatExceptionDuringRequestReturnsUsageError（桩注入 FormatException）。
+3. 任务卡 /home/box/osaka/logs/admin-connect-rework1-card.md；Codex 日志 /home/box/osaka/logs/admin-connect-codex-rework1.log。
+4. 本机无 .NET SDK，未编译未跑测试：本次待 CI 验证（组长 push 后）。

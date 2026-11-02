@@ -14,7 +14,6 @@ public sealed record HealthResponse
 public sealed record Route
 {
     public required string Id { get; init; }
-    [JsonPropertyName("display_name")]
     public required string DisplayName { get; init; }
 }
 
@@ -53,8 +52,8 @@ public static class AdminContract
                 health.Routes is { Length: >= 1 } && health.Routes.All(ValidRoute),
             Route route => ValidRoute(route),
             VersionResponse version => version.Service == "osaka-server" &&
-                version.Protocol == "admin.v1" && version.Version is not null &&
-                Regex.IsMatch(version.Version, @"^\d+\.\d+\.\d+$", RegexOptions.ECMAScript,
+                version.Protocol == "admin.v1" &&
+                Regex.IsMatch(version.Version ?? string.Empty, @"^[0-9]+\.[0-9]+\.[0-9]+\z", RegexOptions.None,
                     TimeSpan.FromSeconds(1)),
             ErrorBody error => (error.Code is "UNAUTHENTICATED" or "FORBIDDEN" or
                 "INVALID_INVITE_CODE" or "BACKEND_UNREACHABLE" or "INTERNAL") &&

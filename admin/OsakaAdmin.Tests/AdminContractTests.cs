@@ -65,6 +65,15 @@ public sealed class AdminContractTests : IDisposable
         Assert.Throws<JsonException>(() => Parse(schema, json));
 
     [Theory]
+    [InlineData("0.1.0\n")]
+    [InlineData("٠.١.٠")]
+    public void RejectsVersionWithTrailingNewlineOrNonAsciiDigits(string version)
+    {
+        var json = JsonSerializer.Serialize(new { service = "osaka-server", version, protocol = "admin.v1" });
+        Assert.Throws<JsonException>(() => AdminContract.Parse<VersionResponse>(json));
+    }
+
+    [Theory]
     [InlineData(0, false)]
     [InlineData(1, true)]
     [InlineData(64, true)]
@@ -95,6 +104,19 @@ public sealed class AdminContractTests : IDisposable
             Assert.Null(error);
         else
             Assert.IsType<JsonException>(error);
+    }
+
+    [Fact]
+    public void SummaryIncludesVersionAndHealth()
+    {
+        var version = new VersionResponse { Service = "osaka-server", Version = "0.1.0", Protocol = "admin.v1" };
+        var health = new HealthResponse
+        {
+            Status = "ok",
+            Routes = [new Route { Id = "r1", DisplayName = "Test route" }]
+        };
+
+        Assert.Equal("version=0.1.0 health=ok routes=1", ProbeResult.FormatSummary(version, health));
     }
 
     [Fact]
@@ -215,6 +237,23 @@ public sealed class AdminContractTests : IDisposable
         Environment.SetEnvironmentVariable("OSAKA_ADMIN_TOKEN", token);
         using var probe = NoRequestsProbe();
         AssertFailure(await probe.ProbeAsync("https://backend.invalid"), ProbeStatus.UsageError);
+    }
+
+    [Fact]
+    public async Task FormatExceptionDuringRequestReturnsUsageError()
+    {
+        var requestReachedHandler = false;
+        using var probe = new AdminProbe(new StubHandler(_ =>
+        {
+            requestReachedHandler = true;
+            throw new FormatException("fake header format failure");
+        }));
+
+        var result = await probe.ProbeAsync("https://backend.invalid");
+
+        Assert.True(requestReachedHandler);
+        AssertFailure(result, ProbeStatus.UsageError);
+        Assert.Equal("管理凭证环境变量格式无效。", result.Message);
     }
 
     private static AdminProbe NoRequestsProbe() => new(new StubHandler(_ =>

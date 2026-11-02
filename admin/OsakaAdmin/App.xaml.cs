@@ -17,6 +17,8 @@ public partial class App : Application
 
             using var probe = new AdminProbe();
             var result = await probe.ProbeAsync(e.Args[1]);
+            if (result.Status == ProbeStatus.Success)
+                Console.WriteLine(ProbeResult.FormatSummary(result.Version!, result.Health!));
             Shutdown((int)result.Status);
             return;
         }
