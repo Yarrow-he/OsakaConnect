@@ -159,3 +159,25 @@ exec
 
 ## Hao Yin 决定
 1. Hao Yin 2026-11-02 21:31 决定采纳 A/B 建议，6 脚本无产品时 exit 3。
+
+## 3b9eac4 评审（smoke.ps1 步骤 pwsh→bash，2026-11-02，新会话、互不可见，只喂该提交 diff + 上下各 2 行）
+
+### 评审 A：codex exec，gpt-6-astra，reasoning high（日志 logs/ci-acceptance/review-A-3b9eac4.log）
+1. 同意：bash 可保留子进程退出码 3，仍判失败。
+2. 最大风险：新增对运行器安装并可用 bash 的依赖。
+3. 更好替代方案：保留 pwsh，调用脚本后显式 `exit $LASTEXITCODE`。
+4. 未见削弱或绕过检查，非零退出仍失败。
+5. 此 diff 未见密钥读取、输出或外传。
+6. 此 diff 未新增修改本机网络或权限的操作；脚本内部行为无法据此判断。
+
+### 评审 B：ds-claude -p --model deepseek-v4-flash，effort high（日志 logs/ci-acceptance/review-B-3b9eac4.log）
+1. 同意方向，但换外壳只能解决表面问题，建议先复现，确认 `pwsh -File` 真的会把退出码折叠。
+2. 最大风险：丢失 Actions pwsh 外壳注入的 `ErrorActionPreference=stop` 与 `LASTEXITCODE` 收尾，导致非终止错误不再必然失败；`exit 3` 现在会真的判定失败。
+3. 更优方案：保留 `shell: pwsh`，命令写 `& script; exit $LASTEXITCODE`；或在 bash 中显式映射 rc，并注明 3 的语义。
+4. 有轻微削弱：对错误的严格性下降，可能漏检非终止错误。
+5. 无密钥泄露，diff 中没有 secret 或回显。
+6. 无网络、提权或本机权限操作。
+
+### 组长备注
+1. B 说的 ErrorActionPreference 只作用于 Actions 外层壳；smoke.ps1 第 12 行自带 $ErrorActionPreference = 'Stop'，子进程内的严格性不变。
+2. A、B 都提出可改为保留 pwsh 并显式 exit $LASTEXITCODE，是否改由 Hao Yin 决定。
