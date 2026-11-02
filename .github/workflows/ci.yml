@@ -60,7 +60,7 @@ jobs:
           set -e
           for p in $(git ls-files 'windows/*.csproj'); do dotnet build "$p" -c Release; done
       - name: win-shell smoke.ps1（A1、A2、A16、A14、A17）
-        shell: pwsh
+        shell: bash  # pwsh 外壳会把子进程退出码折成 1，用 bash 保留 exit 3
         run: pwsh -NoProfile -File tests/windows/win-shell/smoke.ps1
       - name: WinDiagnostics.Tests（A3、A4、A15）
         shell: bash
