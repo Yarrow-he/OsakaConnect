@@ -1,0 +1,9 @@
+<UserControl x:Class="OsakaConnect.SettingsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             AutomationProperties.AutomationId="W4">
+    <StackPanel>
+        <TextBlock Text="设置" FontSize="24" />
+        <TextBlock Text="设置页面占位" Margin="0,16,0,0" />
+    </StackPanel>
+</UserControl>
