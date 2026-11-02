@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OsakaConnect</string>
+    <string name="inactive">未激活（占位页）</string>
+    <string name="active">已激活（占位页）</string>
+    <string name="go_to_p2">前往 P2</string>
+    <string name="back_to_p1">返回 P1</string>
+</resources>

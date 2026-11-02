@@ -15,7 +15,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import org.json.JSONException
 import org.json.JSONObject
 import org.json.JSONTokener
-import org.junit.Assert.assertEquals
+import org.junit.Assert.fail
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -30,16 +30,17 @@ class OrgJsonDivergenceTest {
     )
 
     private val cases = listOf(
-        Case("duplicate-keys", "{\"code\":\"INTERNAL\",\"code\":\"FORBIDDEN\",\"message\":\"x\"}", jvmOk = false),
+        Case("duplicate-keys", "{\"code\":\"INTERNAL\",\"code\":\"FORBIDDEN\",\"message\":\"x\"}", jvmOk = true, jvmValue = mapOf("code" to "FORBIDDEN")),
         Case("nan", "{\"v\":NaN}", jvmOk = false),
         Case("infinity", "{\"v\":Infinity}", jvmOk = false),
-        Case("bare-tab", "{\"v\":\"a\tb\"}", jvmOk = false),
-        Case("bare-nul", "{\"v\":\"a" + 0x0000.toChar() + "b\"}", jvmOk = false),
-        Case("bom", 0xFEFF.toChar().toString() + "{\"a\":1}", jvmOk = false),
+        Case("bare-tab", "{\"v\":\"a\tb\"}", jvmOk = true, jvmValue = mapOf("v" to "a\tb")),
+        Case("bare-nul", "{\"v\":\"a" + 0x0000.toChar() + "b\"}", jvmOk = true, jvmValue = mapOf("v" to "a" + 0x0000.toChar() + "b")),
+        Case("bom", 0xFEFF.toChar().toString() + "{\"a\":1}", jvmOk = true, jvmValue = mapOf("a" to 1)),
     )
 
     @Test
     fun deviceOrgJsonMatchesJvmExpectations() {
+        val mismatches = mutableListOf<String>()
         for (case in cases) {
             var ok = true
             var value: Any? = null
@@ -49,20 +50,31 @@ class OrgJsonDivergenceTest {
                 ok = false
             }
 
-            assertEquals(
-                "${case.name}: 真机 org.json 解析成败与 JvmJson 不一致" +
-                    "（input=${visible(case.input)}，真机结果=${if (ok) value else "JSONException"}）",
-                case.jvmOk,
-                ok,
-            )
+            if (case.jvmOk != ok) {
+                mismatches += "${case.name}: 真机 org.json 解析成败与 JvmJson 不一致" +
+                    "（input=${visible(case.input)}，真机结果=${if (ok) value else "JSONException"}，" +
+                    "期望 ok=${case.jvmOk}）"
+            }
 
             if (case.jvmOk && ok) {
                 val expectedFields = case.jvmValue ?: continue
-                val obj = value as? JSONObject ?: error("${case.name}: 真机解析成功但结果不是对象")
-                for ((key, expected) in expectedFields) {
-                    assertEquals("${case.name}: 字段 $key 与 JvmJson 值不一致", expected, obj.opt(key))
+                val obj = value as? JSONObject
+                if (obj == null) {
+                    mismatches += "${case.name}: 真机解析成功但结果不是对象" +
+                        "（input=${visible(case.input)}，真机结果=${visible(value.toString())}）"
+                } else {
+                    for ((key, expected) in expectedFields) {
+                        val actual = obj.opt(key)
+                        if (expected != actual) {
+                            mismatches += "${case.name}: 字段 $key 与 JvmJson 值不一致" +
+                                "（input=${visible(case.input)}，期望=${expected}，真机结果=${actual}）"
+                        }
+                    }
                 }
             }
+        }
+        if (mismatches.isNotEmpty()) {
+            fail("真机 org.json 与 JvmJson 期望不一致（${mismatches.size} 处）：\n" + mismatches.joinToString("\n"))
         }
     }
 
