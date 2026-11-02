@@ -14,6 +14,14 @@ jobs:
       - name: scope
         if: github.event_name == 'pull_request'
         run: scripts/check-scope.sh origin/${{ github.base_ref }}
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - run: pip install pytest pyyaml jsonschema openapi-spec-validator
+      - run: pytest -q tests/contract
   windows-dotnet:
     runs-on: windows-latest
     steps:

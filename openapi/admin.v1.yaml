@@ -1,0 +1,60 @@
+openapi: 3.1.0
+info:
+  title: Osaka 管理协议
+  version: admin.v1
+  description: 唯一事实来源（Hao Yin 2026-11-02）。HTTPS 必须且客户端必须校验证书链与主机名。令牌只从环境变量读取。
+servers:
+  - url: https://osaka-server:8443
+security:
+  - bearer: []
+paths:
+  /v1/health:
+    get:
+      operationId: getHealth
+      responses:
+        "200": {description: ok, content: {application/json: {schema: {$ref: "#/components/schemas/HealthResponse"}}}}
+        "401": {$ref: "#/components/responses/Unauthenticated"}
+        "403": {$ref: "#/components/responses/Forbidden"}
+  /v1/version:
+    get:
+      operationId: getVersion
+      responses:
+        "200": {description: ok, content: {application/json: {schema: {$ref: "#/components/schemas/VersionResponse"}}}}
+        "401": {$ref: "#/components/responses/Unauthenticated"}
+        "403": {$ref: "#/components/responses/Forbidden"}
+components:
+  securitySchemes:
+    bearer: {type: http, scheme: bearer}
+  responses:
+    Unauthenticated: {description: 无凭证, content: {application/json: {schema: {$ref: "#/components/schemas/ErrorBody"}}}}
+    Forbidden: {description: 凭证错误, content: {application/json: {schema: {$ref: "#/components/schemas/ErrorBody"}}}}
+  schemas:
+    HealthResponse:
+      type: object
+      additionalProperties: false
+      required: [status, routes]
+      properties:
+        status: {type: string, enum: [ok, degraded]}
+        routes: {type: array, minItems: 1, items: {$ref: "#/components/schemas/Route"}}
+    Route:
+      type: object
+      additionalProperties: false
+      required: [id, display_name]
+      properties:
+        id: {type: string, minLength: 1, maxLength: 64}
+        display_name: {type: string, minLength: 1, maxLength: 64}
+    VersionResponse:
+      type: object
+      additionalProperties: false
+      required: [service, version, protocol]
+      properties:
+        service: {const: osaka-server}
+        version: {type: string, pattern: "^\\d+\\.\\d+\\.\\d+$"}
+        protocol: {const: admin.v1}
+    ErrorBody:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code: {type: string, enum: [UNAUTHENTICATED, FORBIDDEN, INVALID_INVITE_CODE, BACKEND_UNREACHABLE, INTERNAL]}
+        message: {type: string, maxLength: 200}

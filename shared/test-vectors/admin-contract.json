@@ -1,0 +1,9 @@
+{"_说明":"契约样例：valid 必须通过、invalid 必须被拒。三端边界校验与 CI 契约测试共用。",
+ "HealthResponse":{"valid":[{"status":"ok","routes":[{"id":"r1","display_name":"Osaka 01"}]}],
+  "invalid":[{"status":"ok","routes":[]},{"status":"up","routes":[{"id":"r1","display_name":"x"}]},{"routes":[{"id":"r1","display_name":"x"}]},
+   {"status":"ok","routes":[{"id":"","display_name":"x"}]},{"status":"ok","routes":[{"id":"r1","display_name":"x"}],"extra":1},{"status":"ok","routes":"r1"}]},
+ "VersionResponse":{"valid":[{"service":"osaka-server","version":"0.1.0","protocol":"admin.v1"}],
+  "invalid":[{"service":"osaka-server","version":"0.1","protocol":"admin.v1"},{"service":"other","version":"0.1.0","protocol":"admin.v1"},
+   {"service":"osaka-server","version":"0.1.0","protocol":"admin.v2"},{"service":"osaka-server","version":"0.1.0"},{"service":"osaka-server","version":"0.1.0","protocol":"admin.v1","debug":true}]},
+ "ErrorBody":{"valid":[{"code":"FORBIDDEN","message":"管理凭证无效"}],
+  "invalid":[{"code":"NOPE","message":"x"},{"code":"FORBIDDEN"},{"code":"INTERNAL","message":"x","stack":"at Foo()"}]}}

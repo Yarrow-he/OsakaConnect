@@ -1,13 +1,13 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-02T14:44:14+10:00",
+  "updated_at": "2026-11-02T14:51:30+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
       "acceptance.md",
       "board.json",
       "docs/",
-      "proto/",
+      "openapi/",
       "shared/",
       "windows/",
       "admin/",
@@ -25,7 +25,8 @@
       "CLAUDE.md",
       "README.md",
       ".githooks/",
-      ".gitignore"
+      ".gitignore",
+      "ci/"
     ],
     "protected": [
       ".codex/",
@@ -41,10 +42,11 @@
       "state": "待写",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
-        "proto/",
-        "shared/"
+        "openapi/",
+        "shared/",
+        "tests/contract/"
       ],
       "acceptance": [
         "A9",
@@ -53,7 +55,10 @@
         "A17"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "shared/shared-protocol",
+      "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
+      "brief": "notes/shared-protocol.md"
     },
     {
       "id": "server-core",
@@ -62,7 +67,7 @@
       "state": "待写",
       "owner": "写手 · 服务端",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         "server/"
       ],
@@ -73,7 +78,10 @@
         "A17"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "server/server-core",
+      "summary": "Python 后台：标准库 http.server + ssl 监听 0.0.0.0:8443（证书/私钥路径与令牌均取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN）；GET /v1/health、/v1/version；无凭证 401、错凭证 403（hmac.compare_digest）；响应出站前手写 schema 自检；邀请码格式函数。",
+      "brief": "notes/server-core.md"
     },
     {
       "id": "win-shell",
@@ -82,17 +90,21 @@
       "state": "待写",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         "windows/"
       ],
       "acceptance": [
         "A1",
         "A2",
-        "A16"
+        "A16",
+        "A14"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "windows/win-shell",
+      "summary": ".NET 8 WPF 应用入口；侧栏导航与 连接(W1)/设置(W4) 占位页，页标识与设计稿编号一致；--self-test 启动自检退出码 0。",
+      "brief": "notes/win-shell.md"
     },
     {
       "id": "win-diagnostics",
@@ -101,7 +113,7 @@
       "state": "待写",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         "windows/"
       ],
@@ -112,7 +124,10 @@
         "A15"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "windows/win-diagnostics",
+      "summary": "ErrorPresenter（errors.json 码→中文文案，不含堆栈）、LogRedactor、InviteCode.IsValid；均读 shared 测试向量做单测。",
+      "brief": "notes/win-diagnostics.md"
     },
     {
       "id": "admin-connect",
@@ -121,15 +136,19 @@
       "state": "待写",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         "admin/"
       ],
       "acceptance": [
-        "A10"
+        "A10",
+        "A14"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "admin/admin-connect",
+      "summary": ".NET 8 WPF 管理连接页：输入后台地址，令牌只取环境变量 OSAKA_ADMIN_TOKEN；HttpClient 默认证书校验（禁止自定义放行回调）；System.Text.Json record+required+Disallow 未知字段做边界校验；被拒/证书失败/响应不合 schema 时显示错误且不显示已连接。",
+      "brief": "notes/admin-connect.md"
     },
     {
       "id": "android-shell",
@@ -138,17 +157,21 @@
       "state": "待写",
       "owner": "写手 · Android",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         "android/"
       ],
       "acceptance": [
         "A5",
         "A6",
-        "A16"
+        "A16",
+        "A14"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "android/android-shell",
+      "summary": "Kotlin 单 Activity；未激活(P1)/已激活(P2) 占位与导航；生命周期回调经 LogRedactor 记录。",
+      "brief": "notes/android-shell.md"
     },
     {
       "id": "android-diagnostics",
@@ -157,7 +180,7 @@
       "state": "待写",
       "owner": "写手 · Android",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         "android/"
       ],
@@ -166,7 +189,10 @@
         "A15"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "android/android-diagnostics",
+      "summary": "LogRedactor、InviteCode.isValid、错误展示（errors.json 文案）；为 0.2.0 预留的响应校验用 org.json 手写，本期只做 admin-contract 解析校验函数及单测。",
+      "brief": "notes/android-diagnostics.md"
     },
     {
       "id": "ci-guards",
@@ -175,12 +201,14 @@
       "state": "待写",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T14:44:14+10:00",
+      "updated_at": "2026-11-02T14:51:30+10:00",
       "paths": [
         ".github/",
-        "scripts/"
+        "scripts/",
+        "ci/"
       ],
       "acceptance": [
+        "A10",
         "A11",
         "A12",
         "A13",
@@ -188,7 +216,10 @@
         "A17"
       ],
       "artifacts": [],
-      "history": []
+      "history": [],
+      "branch": "ci/ci-guards",
+      "summary": "完善 CI：契约测试 job（已有初版）；A10 docker 端到端：ci/ 下用 openssl 生成临时 CA 与 SAN=osaka-server 证书、另一张不可信 CA 证书和 SAN 不匹配证书，server 容器以服务名 osaka-server 运行，探测容器经 docker 网络连接，覆盖四项必测；技术栈/互引路径/硬编码线路检查；PR 行数统计。",
+      "brief": "notes/ci-guards.md"
     }
   ]
 }
