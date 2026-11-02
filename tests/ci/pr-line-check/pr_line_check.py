@@ -4,7 +4,7 @@
 # 运行：python3 tests/ci/pr-line-check/pr_line_check.py [base]
 #   1. 统计 `git diff --numstat <base>...HEAD`。
 #   2. 排除记账、文档、测试、锁、生成、测试数据和二进制文件。
-#   3. PR_LABELS 含 scaffold 或 PR_TITLE 以“脚手架”/“scaffold”开头时，构建配置不计入。
+#   3. 豁免只用于初始脚手架/构建配置，由受权限保护的标签控制：仅 PR_LABELS 含 scaffold 时构建配置不计入。
 #   4. 计入行数 >200 时打印明细并以 1 退出，否则打印总数并以 0 退出。
 import fnmatch
 import os
@@ -17,9 +17,12 @@ LIMIT = 200
 EXCLUDED_DIRS = {
     "notes", "memory", "reports", "decisions", "logs",
     "build", "bin", "obj", "generated",
-    "testdata", "fixtures",
+    "testdata", "fixtures", "test-vectors",
 }
-LOCK_NAMES = {"package-lock.json", "gradle.lockfile", "packages.lock.json"}
+LOCK_NAMES = {
+    "package-lock.json", "gradle.lockfile", "packages.lock.json",
+    "pnpm-lock.yaml", "go.sum",
+}
 GENERATED_GLOBS = ("*.g.cs", "*.min.js")
 TEST_GLOBS = ("*_test.*", "*.test.*")
 BUILD_GLOBS = (
@@ -40,17 +43,16 @@ def is_excluded(path):
         return True
     if any(part in EXCLUDED_DIRS for part in parts[:-1]):
         return True
-    # 测试：目录 tests/ 或路径含 Tests，或 src/test/、androidTest/
-    if "tests" in parts[:-1] or "Tests" in path:
+    # 测试：目录 tests/ 或目录段 Tests、*.Tests，或 src/test/、androidTest/
+    dirs = path.split("/")[:-1]
+    if "tests" in parts[:-1] or any(d == "Tests" or d.endswith(".Tests") for d in dirs):
         return True
     if "src/test/" in path or "androidTest/" in path:
         return True
     if any(fnmatch.fnmatch(name, glob) for glob in TEST_GLOBS):
         return True
-    # 锁文件
     if name in LOCK_NAMES or fnmatch.fnmatch(name, "*.lock"):
         return True
-    # 生成文件
     if any(fnmatch.fnmatch(name, glob) for glob in GENERATED_GLOBS):
         return True
     return False
@@ -63,17 +65,14 @@ def is_build_config(path):
 
 def scaffold_exempt():
     labels = os.environ.get("PR_LABELS", "")
-    if "scaffold" in {label.strip().lower() for label in labels.split(",")}:
-        return True
-    title = os.environ.get("PR_TITLE", "").lower()
-    return title.startswith("脚手架") or title.startswith("scaffold")
+    return "scaffold" in {label.strip().lower() for label in labels.split(",")}
 
 
 def main():
     base = sys.argv[1] if len(sys.argv) > 1 else "origin/main"
     try:
         out = subprocess.run(
-            ["git", "diff", "--numstat", f"{base}...HEAD"],
+            ["git", "diff", "--numstat", "--no-renames", f"{base}...HEAD"],
             check=True, capture_output=True, text=True,
         ).stdout
     except subprocess.CalledProcessError as exc:
@@ -84,7 +83,7 @@ def main():
     counted = {}
     for line in out.splitlines():
         added, deleted, path = line.split("\t", 2)
-        if added == "-" or deleted == "-":  # 二进制
+        if added == "-" or deleted == "-":
             continue
         if is_excluded(path):
             continue

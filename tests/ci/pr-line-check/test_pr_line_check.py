@@ -5,7 +5,8 @@
 #   1. 未超 200 行时通过。
 #   2. 超 200 行时失败并列出明细。
 #   3. 被排除文件（记账、测试、锁、生成、二进制）不计入。
-#   4. PR_LABELS/PR_TITLE 的脚手架豁免生效。
+#   4. 仅 PR_LABELS 的 scaffold 标签豁免构建配置，仅设置 PR_TITLE 不豁免。
+#   5. 文件名含 Tests 不再排除，目录段 Tests、*.Tests 仍排除。
 import os
 import pathlib
 import subprocess
@@ -79,8 +80,9 @@ class PrLineCheckTest(unittest.TestCase):
         self.write("notes/x.md", self.lines(300))
         self.write("skills/INDEX.md", self.lines(300))
         self.write("tests/ci/x.py", self.lines(300))
-        self.write("server/App.Tests.cs", self.lines(300))
+        self.write("server/Foo.Tests/x.cs", self.lines(300))
         self.write("server/thing_test.py", self.lines(300))
+        self.write("shared/test-vectors/x.json", self.lines(300))
         self.write("server/package-lock.json", self.lines(300))
         self.write("server/obj/gen.cs", self.lines(300))
         (self.repo / "server" / "blob.bin").write_bytes(b"\x00" * 64)
@@ -98,14 +100,19 @@ class PrLineCheckTest(unittest.TestCase):
         self.assertEqual(allowed.returncode, 0, allowed.stdout + allowed.stderr)
         self.assertIn("计入行数：0", allowed.stdout)
 
-    def test_scaffold_title_exempts_build_config(self):
+    def test_scaffold_title_does_not_exempt_build_config(self):
         self.write("server/pyproject.toml", self.lines(300))
         self.commit()
-        blocked = self.run_check()
-        self.assertEqual(blocked.returncode, 1, blocked.stdout + blocked.stderr)
-        allowed = self.run_check(PR_TITLE="脚手架：初始化服务端")
-        self.assertEqual(allowed.returncode, 0, allowed.stdout + allowed.stderr)
-        self.assertIn("计入行数：0", allowed.stdout)
+        result = self.run_check(PR_TITLE="scaffold service")
+        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)
+        self.assertIn("计入行数：300", result.stdout)
+
+    def test_tests_filename_not_excluded(self):
+        self.write("server/App.Tests.cs", self.lines(10))
+        self.commit()
+        result = self.run_check()
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("计入行数：10", result.stdout)
 
 
 if __name__ == "__main__":
