@@ -29,7 +29,10 @@ jobs:
       - uses: actions/checkout@v4
       - id: has
         shell: bash
-        run: echo "code=$(ls windows/*.sln admin/*.sln windows/**/*.csproj admin/**/*.csproj 2>/dev/null | head -1)" >> "$GITHUB_OUTPUT"
+        run: |
+          code=$(git ls-files 'windows/*.sln' 'windows/*.csproj' 'admin/*.sln' 'admin/*.csproj' | tr '\n' ' ')
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          case "${{ github.ref_name }}" in windows/*|admin/*) [ -n "$code" ] || { echo "::error::分支上没有 .NET 项目"; exit 1; };; esac
       - if: steps.has.outputs.code == ''
         run: echo "无 .NET 代码，跳过"
       - if: steps.has.outputs.code != ''
@@ -38,13 +41,18 @@ jobs:
       - if: steps.has.outputs.code != ''
         shell: bash
         run: |
-          for d in windows admin; do [ -d "$d" ] && (cd "$d" && dotnet restore && dotnet build -c Release --no-restore && dotnet test -c Release --no-build); done
+          set -e
+          for p in ${{ steps.has.outputs.code }}; do dotnet restore "$p"; dotnet build "$p" -c Release --no-restore; done
+          for p in ${{ steps.has.outputs.code }}; do case "$p" in *Tests*.csproj) dotnet test "$p" -c Release --no-build;; esac; done
   android:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - id: has
-        run: echo "code=$([ -f android/gradlew ] && echo y)" >> "$GITHUB_OUTPUT"
+        run: |
+          code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          case "${{ github.ref_name }}" in android/*) [ -n "$code" ] || { echo "::error::分支上没有 Gradle 项目"; exit 1; };; esac
       - if: steps.has.outputs.code == ''
         run: echo "无 Android 代码，跳过"
       - if: steps.has.outputs.code != ''
@@ -52,15 +60,23 @@ jobs:
         with: { distribution: temurin, java-version: '17' }
       - if: steps.has.outputs.code != ''
         uses: gradle/actions/setup-gradle@v4
-      - if: steps.has.outputs.code != ''
+        # AGP 8.7.3（android/build.gradle.kts）要求 Gradle >= 8.9
+        with: { gradle-version: "${{ steps.has.outputs.code == 'gradle' && '8.9' || 'wrapper' }}" }
+      - if: steps.has.outputs.code == 'wrapper'
         working-directory: android
         run: ./gradlew --no-daemon assembleDebug testDebugUnitTest lint
+      - if: steps.has.outputs.code == 'gradle'
+        working-directory: android
+        run: gradle --no-daemon assembleDebug testDebugUnitTest lint
   python:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - id: has
-        run: echo "code=$([ -d server ] && ls server/*.py server/**/*.py 2>/dev/null | head -1)" >> "$GITHUB_OUTPUT"
+        run: |
+          code=$(git ls-files 'server/*.py' | head -1)
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          case "${{ github.ref_name }}" in server/*) [ -n "$code" ] || { echo "::error::分支上没有 Python 代码"; exit 1; };; esac
       - if: steps.has.outputs.code == ''
         run: echo "无 Python 代码，跳过"
       - if: steps.has.outputs.code != ''
