@@ -27,3 +27,7 @@ A5, A6, A16, A14（见 `acceptance.md`）。完成标准：./gradlew assembleDeb
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 2026-11-02 合入 main
+1. 合入 origin/main（9662b8e，含 PR #15）为 454063d，已推送。
+2. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41455806499 ，待测试复测。
