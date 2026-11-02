@@ -1,3 +1,0 @@
-/usr/bin/python3: No module named pyflakes
-ast-parse ok (pyflakes/ruff 未安装，仅语法级检查)
-EXIT 0
