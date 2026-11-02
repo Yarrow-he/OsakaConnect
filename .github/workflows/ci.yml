@@ -103,3 +103,48 @@ jobs:
         run: echo "无 A10 脚本，跳过"
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') != ''
         run: bash tests/admin/admin-connect/run-a10.sh
+  android-emulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - id: has
+        run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+      - if: steps.has.outputs.code == ''
+        run: echo "无 Android 代码，跳过"
+      - if: steps.has.outputs.code != ''
+        uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17' }
+      - if: steps.has.outputs.code != ''
+        uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: '8.9' }
+      # 测试脚本要求 android/gradlew；分支未提交 wrapper 时只在 CI 工作区生成
+      - if: steps.has.outputs.code != ''
+        working-directory: android
+        run: '[ -x gradlew ] || gradle --no-daemon wrapper --gradle-version 8.9'
+      - if: steps.has.outputs.code != ''
+        name: enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - if: steps.has.outputs.code != ''
+        uses: reactivecircus/android-emulator-runner@v2.33.0
+        env:
+          OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          disable-animations: true
+          script: |
+            (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
+            if [ -f tests/android/android-shell/ci-run.sh ]; then bash tests/android/android-shell/ci-run.sh; fi
+            if [ -f tests/android/android-diagnostics/run.sh ]; then bash tests/android/android-diagnostics/run.sh; fi
+      - if: always() && steps.has.outputs.code != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-emulator-logs
+          path: |
+            tests/android/**/results/
+            tests/results/
+            android/app/build/reports/androidTests/
+          if-no-files-found: ignore
