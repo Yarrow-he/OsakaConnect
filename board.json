@@ -87,10 +87,10 @@
       "id": "win-shell",
       "端": "Windows",
       "模块": "win-shell",
-      "state": "待写",
+      "state": "写作中",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-02T14:51:30+10:00",
+      "updated_at": "2026-11-02T14:53:12+10:00",
       "paths": [
         "windows/"
       ],
@@ -101,7 +101,12 @@
         "A14"
       ],
       "artifacts": [],
-      "history": [],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-02T14:53:12+10:00"
+        }
+      ],
       "branch": "windows/win-shell",
       "summary": ".NET 8 WPF 应用入口；侧栏导航与 连接(W1)/设置(W4) 占位页，页标识与设计稿编号一致；--self-test 启动自检退出码 0。",
       "brief": "notes/win-shell.md"
