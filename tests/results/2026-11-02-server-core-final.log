@@ -1,0 +1,14 @@
+server-core 测试结论（2026-11-02，测试 · Osaka）
+run: https://github.com/Yarrow-he/OsakaConnect/actions/runs/41406112495
+gh run view: headBranch=server/server-core headSha=872a57a680f7651e6fd6b4c18e7507f4709e9337 conclusion=success event=push
+CI 日志: tests/results/2026-11-02-server-core.ci-41406112495.log（下称 CI）
+总结论: 阻塞（不判通过）
+
+1. 上次 6 个 skip（rework1.log:7, test_server_core.py:138 缺 jsonschema）: 未验证。tests/server/server-core 不在 872a57a 树内（git ls-tree 只有 server/tests/*、tests/contract），CI 无任何 test_server_core 执行行；python job 只跑 server/ 下 `python -m pytest -q`（CI:387-391）= 写手自测 183 passed（CI:450）。
+2. A8: 未验证（仅写手自测 CI:450，测试脚本 tests/server/server-core 未在 CI 跑）。
+3. A9: 契约部分通过——tests/contract 18 passed（CI:694）；后台 401/403/schema 部分未验证（同第 1 条）。
+4. A10: 未验证——a10-docker job 只执行 echo "无 A10 脚本，跳过"（CI:240-244），无 --probe 执行。
+5. A15（后台）: 未验证（同第 1 条）。
+6. A17（后台）: 未验证（同第 1 条）。
+7. 组长所给 /home/box/osaka/logs/ci-server-core-20261102-run4.log 仅 1 行 "Run ci (41406112495) has already completed with 'success'"，不是测试日志。
+需组长: 把 tests/server/server-core 与 tests/admin/admin-connect 带上 server/server-core 分支（或 workflow 增加对应步骤）后重跑。

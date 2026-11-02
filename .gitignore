@@ -6,3 +6,4 @@ obj/
 build/
 __pycache__/
 .venv/
+tests/results/cli-logs/
