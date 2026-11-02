@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T03:44:54+10:00",
+  "updated_at": "2026-11-03T05:55:19+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -39,10 +39,10 @@
       "id": "shared-protocol",
       "端": "共用",
       "模块": "shared-protocol",
-      "state": "待写",
+      "state": "写作中",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T23:47:29+10:00",
+      "updated_at": "2026-11-03T05:55:19+10:00",
       "paths": [
         "openapi/",
         "shared/",
@@ -54,13 +54,21 @@
         "A15",
         "A17"
       ],
-      "artifacts": [],
-      "history": [],
+      "artifacts": [
+        "decisions/004-shared-protocol-freeze.md（决策草稿）, decisions/004-lead.md（组长意见）"
+      ],
+      "history": [
+        {
+          "state": "写作中",
+          "at": "2026-11-03T05:55:19+10:00"
+        }
+      ],
       "branch": "shared/shared-protocol",
       "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
       "brief": "notes/shared-protocol.md",
       "review": "未审",
-      "next_step": "未完成：main 仅有骨架初版（4dbde21、bb9fce9），无评审冻结记录。下一步：组长对 openapi/shared/tests/contract 做一次评审，补反例后冻结，开 shared/shared-protocol 小 PR。ETA 2026-11-04"
+      "next_step": "未完成：main 仅有骨架初版（4dbde21、bb9fce9），无评审冻结记录。下一步：组长对 openapi/shared/tests/contract 做一次评审，补反例后冻结，开 shared/shared-protocol 小 PR。ETA 2026-11-04",
+      "next": "评审：A（Codex）与 B（DeepSeek）按固定模板独立评审 decisions/004；预计今天（2026-11-03）"
     },
     {
       "id": "server-core",
@@ -727,7 +735,7 @@
       "state": "待写",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T23:47:29+10:00",
+      "updated_at": "2026-11-03T05:55:19+10:00",
       "paths": [
         ".github/",
         "scripts/",
@@ -747,7 +755,8 @@
       "summary": "完善 CI：契约测试 job（已有初版）；A10 docker 端到端：ci/ 下用 openssl 生成临时 CA 与 SAN=osaka-server 证书、另一张不可信 CA 证书和 SAN 不匹配证书，server 容器以服务名 osaka-server 运行，探测容器经 docker 网络连接，覆盖四项必测；技术栈/互引路径/硬编码线路检查；PR 行数统计。",
       "brief": "notes/ci-guards.md",
       "review": "未审",
-      "next_step": "部分完成：CI 已由 PR #5/#8/#10/#13/#14/#15 补齐各端 job 与 merge-scope；缺 A10 docker 证书（ci/ 目录不存在）、技术栈/硬编码线路检查、PR 行数统计。下一步：随 server-core 与 admin-connect 合入后开 ci/ci-guards 小 PR。ETA 2026-11-05"
+      "next_step": "部分完成：CI 已由 PR #5/#8/#10/#13/#14/#15 补齐各端 job 与 merge-scope；缺 A10 docker 证书（ci/ 目录不存在）、技术栈/硬编码线路检查、PR 行数统计。下一步：随 server-core 与 admin-connect 合入后开 ci/ci-guards 小 PR。ETA 2026-11-05",
+      "next": "排在 shared-protocol 之后（决策 004 评审中），state 不变"
     },
     {
       "id": "pr-line-check",
