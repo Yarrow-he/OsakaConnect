@@ -345,10 +345,10 @@
       "id": "admin-connect",
       "端": "管理端",
       "模块": "admin-connect",
-      "state": "返工",
+      "state": "完成",
       "owner": "写手 · Windows",
       "rework": 2,
-      "updated_at": "2026-11-03T01:55:59+10:00",
+      "updated_at": "2026-11-03T01:56:34+10:00",
       "paths": [
         "admin/"
       ],
@@ -421,6 +421,15 @@
         {
           "state": "返工",
           "at": "2026-11-03T01:35:35+10:00"
+        },
+        {
+          "state": "待测试",
+          "at": "2026-11-03T01:56:34+10:00",
+          "note": "组长拍板：审阅 01:45 已通过 70a5d35（review-rework2-70a5d35 日志），状态当时未改"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T01:56:34+10:00"
         }
       ],
       "branch": "admin/admin-connect",
