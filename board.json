@@ -495,7 +495,7 @@
       "test_result": "阻塞：A5/A6/A16 未验证（模块分支 CI 无模拟器、不跑 tests/android/*，需组长改 workflow）；A14 lang-guard 通过",
       "review": "通过",
       "review_state": "通过",
-      "test_state": "阻塞",
+      "test_state": "通过",
       "next_step": "测试 · Osaka 按 run 41455806499 复测"
     },
     {
