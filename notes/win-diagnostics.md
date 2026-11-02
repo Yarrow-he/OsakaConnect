@@ -46,3 +46,16 @@ A3, A4, A7, A15（见 `acceptance.md`）。完成标准：dotnet test：redactio
    6. windows/OsakaConnect.Diagnostics/OsakaConnect.Diagnostics.csproj
 10. 运行方式：本机没有 .NET SDK，编译和测试只在 CI（windows-latest）上跑。
 11. 已知限制：Diagnostics 是独立类库，还没接进 OsakaConnect 主程序，接入方式待组长定；LogRedactor 只覆盖 token、Bearer、invite、api_key、password 这几个键。
+## 审阅 PR #11 @c56c80a（2026-11-02 22:16 AEST）
+结论：通过
+1. 证据：PR 附 CLI 日志 artifacts/cli-logs/fix-windiag-falsegreen-2026-11-02.log；CI 已跑，windows-acceptance 红，符合"缺产品必红"预期（main 尚无 windows/ 产品）。
+2. 断言未削弱：ErrorPresenterTests.cs:22-30、LogRedactorTests.cs:20-23、InviteCodeTests.cs:26-29 仅反射改直调，断言保留。
+3. 无删测试：3 个测试方法全在；ProductSurface.cs 只删反射与 Skip 逻辑。
+4. 路径：WinDiagnostics.Tests.csproj:20 指向 windows/OsakaConnect.Diagnostics/OsakaConnect.Diagnostics.csproj，符合 architecture.md:14；签名已对照分支 windows/win-diagnostics 源码一致。
+5. 缺产品必失败：csproj:24-27 EnsureProductProject 报 Error；:30 无条件 ProjectReference；无 Skip。
+6. 范围仅 tests/windows/win-diagnostics/ 7 文件；无权限配置改动；无密钥。
+建议改：
+1. 合并顺序：须先合 win-shell、win-diagnostics 产品分支再合 PR #11，否则 windows-acceptance 按设计红。
+2. board.json 中"已合并 main(PR #10)@1211740"与 git 不符（1211740 是 main 并入模块分支），请组长核对。
+3. 缺产品退出码为 1 非 3（PR 正文已说明，属 workflow，归 ci-guards）。
+日志：logs/win-diagnostics/review-pr11-20261102-221042.log

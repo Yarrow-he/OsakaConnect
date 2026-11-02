@@ -15,6 +15,19 @@ jobs:
       - name: scope
         if: github.event_name == 'pull_request'
         run: scripts/check-scope.sh origin/${{ github.base_ref }}
+      - name: merge-scope（模块分支合并提交，决策 007）
+        env:
+          CHECK_BRANCH: ${{ github.head_ref || github.ref_name }}
+        run: scripts/check-merge-scope.sh origin/${{ github.base_ref || 'main' }} ${{ github.event.pull_request.head.sha || github.sha }}
+      - name: merge-scope 自测
+        run: bash scripts/test-check-merge-scope.sh
+      - name: guards 拆分自测（决策 008）
+        run: python3 scripts/test-ci-guards-split.py
+  # 决策 008：产品验收类守卫单独成任务；无产品代码时照旧 exit 3（红），不放宽。
+  guards-acceptance:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
       - name: grep-guard（A10、A14）
         run: bash tests/admin/admin-connect/grep-guard.sh
       - name: android lang-guard（A14、A17）
@@ -146,6 +159,8 @@ jobs:
       - uses: actions/checkout@v4
       - id: has
         run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+      - id: diag
+        run: echo "dir=$([ -d android/app/src/main/java/com/osakaconnect/diagnostics ] && echo yes || true)" >> "$GITHUB_OUTPUT"
       - if: steps.has.outputs.code == ''
         run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
       - if: steps.has.outputs.code != ''
@@ -167,6 +182,8 @@ jobs:
         uses: reactivecircus/android-emulator-runner@62dbb605bba737720e10b196cb4220d374026a6d # v2.33.0
         env:
           OSAKA_ANDROID_APP_ID: com.osakaconnect.shell
+          OSAKA_BRANCH: ${{ github.head_ref || github.ref_name }}
+          OSAKA_DIAG: ${{ steps.diag.outputs.dir }}
         with:
           api-level: 30
           target: default
@@ -177,8 +194,8 @@ jobs:
           script: |
             (cd android && ./gradlew --no-daemon connectedDebugAndroidTest)
             bash tests/android/android-shell/ci-run.sh  # 缺脚本即失败
-            bash tests/android/android-diagnostics/run.sh  # 缺脚本即失败
-            bash tests/android/android-diagnostics/run-instrumented.sh  # 缺脚本即失败
+            # 决策 009：diagnostics 产品目录在则两脚本都跑、任一失败即红；不在时 android-diagnostics 分支报错，其他分支 warning 待测
+            d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ "$OSAKA_DIAG" = yes ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
       - if: always() && steps.has.outputs.code != ''
         uses: actions/upload-artifact@v4
         with:
@@ -188,3 +205,9 @@ jobs:
             tests/results/
             android/app/build/reports/androidTests/
           if-no-files-found: ignore
+      - if: always() && steps.has.outputs.code != '' && steps.diag.outputs.dir == 'yes'
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-jvm-unit-junit
+          path: android/app/build/test-results/testDebugUnitTest/*.xml
+          if-no-files-found: error

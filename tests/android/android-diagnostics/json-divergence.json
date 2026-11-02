@@ -1,10 +1,10 @@
 {
-  "description": "android-diagnostics 分歧向量：同一输入分别喂给真机 org.json 与 JVM 单测源集内的 org.json 替身 JvmJson（/tmp/JvmJson-97d42d6.kt @97d42d6）。jvm 期望按 JvmJson 源码推导：重复键、NaN/Infinity、字符串内裸控制字符、开头 BOM 在 JvmJson 均失败。本文件是 JVM 测试的输入；androidTest/OrgJsonDivergenceTest.kt 内嵌同一组数据，改一处必须改两处。",
+  "description": "android-diagnostics 分歧向量：同一输入分别喂给真机 org.json 与 JVM 单测源集内的 org.json 替身 JvmJson（见 JvmJsonDivergenceTest.kt）。jvm 期望按真机结果（run 41455904368）对齐：NaN/Infinity 失败；真机接受字符串内裸控制字符（制表符、U+0000）、跳过开头 BOM，故这三例 ok=true；重复键按真机 org.json 后值覆盖（code=FORBIDDEN）。本文件是 JVM 测试的输入；androidTest/OrgJsonDivergenceTest.kt 内嵌同一组数据，改一处必须改两处。",
   "cases": [
     {
       "name": "duplicate-keys",
       "input": "{\"code\":\"INTERNAL\",\"code\":\"FORBIDDEN\",\"message\":\"x\"}",
-      "jvm": { "ok": false }
+      "jvm": { "ok": true, "value": { "code": "FORBIDDEN" } }
     },
     {
       "name": "nan",
@@ -19,18 +19,18 @@
     {
       "name": "bare-tab",
       "input": "{\"v\":\"a\tb\"}",
-      "jvm": { "ok": false }
+      "jvm": { "ok": true, "value": { "v": "a\tb" } }
     },
     {
       "name": "bare-nul",
       "input": "{\"v\":\"a\u0000b\"}",
-      "jvm": { "ok": false }
+      "jvm": { "ok": true, "value": { "v": "a\u0000b" } }
     },
     {
       "name": "bom",
       "input": "﻿{\"a\":1}",
       "note": "input 以 U+FEFF BOM 开头（文件里为字面 BOM 字符）",
-      "jvm": { "ok": false }
+      "jvm": { "ok": true, "value": { "a": 1 } }
     }
   ]
 }

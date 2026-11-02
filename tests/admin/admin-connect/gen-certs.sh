@@ -14,6 +14,17 @@ command -v openssl >/dev/null || { echo "需要 openssl" >&2; exit 2; }
 
 die() { echo "gen-certs 失败：$*" >&2; exit 1; }
 
+# OpenSSL 3.0 的 x509 -checkhost 在主机名不匹配时退出码仍为 0（只打印 "does NOT match"），
+# 因此不能看退出码，改为看输出：含 "does match certificate" 才算匹配。
+host_matches() { # $1=证书 $2=主机名
+  local out
+  out=$(openssl x509 -in "$1" -noout -checkhost "$2" 2>&1) || true
+  case "$out" in
+    *"does match certificate"*) return 0 ;;
+  esac
+  return 1
+}
+
 mkdir -p "$OUT/ca" "$OUT/trusted" "$OUT/untrusted" "$OUT/wronghost"
 
 make_ca() { # $1=输出目录 $2=CA 名称
@@ -51,16 +62,16 @@ issue "$OUT/ca" "$OUT/wronghost" other-host "DNS:other-host"
 # 自检：三套证书的性质与 A10 预期一致，否则后续四项必测没有意义。
 openssl verify -CAfile "$OUT/trusted/ca.crt" "$OUT/trusted/server.crt" >/dev/null 2>&1 \
   || die "trusted/server.crt 无法被可信 CA 验证"
-openssl x509 -in "$OUT/trusted/server.crt" -noout -checkhost osaka-server >/dev/null 2>&1 \
+host_matches "$OUT/trusted/server.crt" osaka-server \
   || die "trusted/server.crt 的 SAN 不含 osaka-server"
 if openssl verify -CAfile "$OUT/trusted/ca.crt" "$OUT/untrusted/server.crt" >/dev/null 2>&1; then
   die "untrusted/server.crt 被可信 CA 验证通过"
 fi
 openssl verify -CAfile "$OUT/wronghost/ca.crt" "$OUT/wronghost/server.crt" >/dev/null 2>&1 \
   || die "wronghost/server.crt 无法被可信 CA 验证（应为可信链）"
-openssl x509 -in "$OUT/wronghost/server.crt" -noout -checkhost other-host >/dev/null 2>&1 \
+host_matches "$OUT/wronghost/server.crt" other-host \
   || die "wronghost/server.crt 的 SAN 不含 other-host"
-if openssl x509 -in "$OUT/wronghost/server.crt" -noout -checkhost osaka-server >/dev/null 2>&1; then
+if host_matches "$OUT/wronghost/server.crt" osaka-server; then
   die "wronghost/server.crt 的 SAN 仍匹配 osaka-server"
 fi
 
