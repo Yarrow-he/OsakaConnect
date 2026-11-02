@@ -55,3 +55,12 @@ A8, A9, A15, A17（见 `acceptance.md`）。完成标准：pytest：401/403/200�
 - 未做：admin-contract.json 反例（组长定归 ci-guards）；invite.py strip（涉三端，待 shared-protocol 补向量）；test_app 简化（非必须）；rebase（禁改历史，组长定不 rebase）。
 - 编译：notes/logs/server-core-rework1-compile.log；测试：`cd server && python3 -m pytest -q -rs -p no:cacheprovider` → notes/logs/server-core-rework1-pytest.log
 - Codex：notes/logs/server-core-rework1-codex-20261102-1509.log；任务卡 notes/server-core-rework1-taskcard.md
+
+### 审阅 · 返工1（83ec2c7，2026-11-02 15:14 AEST）
+结论：通过。
+- 证明：compile EXIT 0；pytest 183 passed（沙箱 152+31 skipped，数目自洽）；Codex 日志在。
+- schema.py:33 fullmatch [0-9]，与 openapi/admin.v1.yaml:52（ECMA）一致，尾换行与非 ASCII 数字拒绝；test_contract.py:94 两反例断言 False。
+- app.py:26-27 version_string 返回 osaka-server，不泄露版本；删除文件与 README.md:40 链接一致。
+- 无硬编码密钥/IP/账号；未动 .claude/.codex；无范围外文件；无新依赖。
+- 建议改：test_app.py:188 "Python" 断言被 :187 覆盖，冗余，可留。
+- 日志：/home/box/osaka/logs/review-server-core-rework1-20261102-1511.log；diff：/home/box/osaka/logs/review-server-core-rework1-diff.txt
