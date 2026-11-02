@@ -27,3 +27,22 @@ A3, A4, A7, A15（见 `acceptance.md`）。完成标准：dotnet test：redactio
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 交付证明（写手 · Windows，2026-11-02T17:22:07+10:00）
+1. CI：https://github.com/Yarrow-he/OsakaConnect/actions/runs/41403148691，全部 job 成功，其中 windows-dotnet 跑在 windows-latest。
+2. 提交：1f6adf6（origin 分支头，含组长合入 main 的 merge）。
+3. 构建：CI 里 dotnet build -c Release 输出 Build succeeded。
+4. 测试：dotnet test -c Release --no-build，OsakaConnect.Diagnostics.Tests.dll 结果是 Passed 61、Failed 0、Skipped 0、Total 61。
+5. lint：本仓库没有单独的 .NET lint job，guards job 已通过（范围、依赖、硬编码线路检查）。
+6. CI 日志：/home/box/osaka/logs/win-diagnostics-ci-41403148691.log
+7. 任务卡：/home/box/osaka/logs/win-diagnostics-card.md
+8. CLI 会话日志：/home/box/osaka/logs/win-diagnostics-codex-1.log
+9. 改动文件（git diff --name-only origin/main...HEAD，不含 notes 和 board.json）：
+   1. windows/OsakaConnect.Diagnostics.Tests/DiagnosticsTests.cs
+   2. windows/OsakaConnect.Diagnostics.Tests/OsakaConnect.Diagnostics.Tests.csproj
+   3. windows/OsakaConnect.Diagnostics/ErrorPresenter.cs
+   4. windows/OsakaConnect.Diagnostics/InviteCode.cs
+   5. windows/OsakaConnect.Diagnostics/LogRedactor.cs
+   6. windows/OsakaConnect.Diagnostics/OsakaConnect.Diagnostics.csproj
+10. 运行方式：本机没有 .NET SDK，编译和测试只在 CI（windows-latest）上跑。
+11. 已知限制：Diagnostics 是独立类库，还没接进 OsakaConnect 主程序，接入方式待组长定；LogRedactor 只覆盖 token、Bearer、invite、api_key、password 这几个键。
