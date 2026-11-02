@@ -1,0 +1,1558 @@
+Reading additional input from stdin...
+OpenAI Codex v0.166.0
+--------
+workdir: /home/box/osaka/wt/server-core
+model: gpt-6-astra
+provider: openai
+approval: never
+sandbox: workspace-write [workdir]
+reasoning effort: high
+reasoning summaries: none
+session id: 01a19aa9-5ed8-7e30-9045-da0cf8c5ebc4
+--------
+user
+按 notes/server-core-rework1-taskcard.md 执行，按 ponytail full 执行。不要提交 git。
+codex
+我会先读任务卡、看板和服务端记忆，再按 ponytail full 做最小修改和验证；不会提交 git。
+
+exec
+/bin/bash -lc 'cat board.json memory/server-core.md memory/shared.md notes/server-core-rework1-taskcard.md' in /home/box/osaka/wt/server-core
+ exited 1 in 0ms:
+{
+  "version": "0.1.0",
+  "updated_at": "2026-11-02T14:51:30+10:00",
+  "scope": {
+    "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
+    "global": [
+      "acceptance.md",
+      "board.json",
+      "docs/",
+      "openapi/",
+      "shared/",
+      "windows/",
+      "admin/",
+      "android/",
+      "server/",
+      "tests/",
+      "notes/",
+      "reports/",
+      "memory/",
+      "skills/",
+      "decisions/",
+      "scripts/",
+      ".github/",
+      "AGENTS.md",
+      "CLAUDE.md",
+      "README.md",
+      ".githooks/",
+      ".gitignore",
+      "ci/"
+    ],
+    "protected": [
+      ".codex/",
+      ".claude/"
+    ]
+  },
+  "processed_events": [],
+  "modules": [
+    {
+      "id": "shared-protocol",
+      "端": "共用",
+      "模块": "shared-protocol",
+      "state": "待写",
+      "owner": "代码组长 · Osaka",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "openapi/",
+        "shared/",
+        "tests/contract/"
+      ],
+      "acceptance": [
+        "A9",
+        "A11",
+        "A15",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "shared/shared-protocol",
+      "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
+      "brief": "notes/shared-protocol.md"
+    },
+    {
+      "id": "server-core",
+      "端": "服务端",
+      "模块": "server-core",
+      "state": "待写",
+      "owner": "写手 · 服务端",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "server/"
+      ],
+      "acceptance": [
+        "A8",
+        "A9",
+        "A15",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "server/server-core",
+      "summary": "Python 后台：标准库 http.server + ssl 监听 0.0.0.0:8443（证书/私钥路径与令牌均取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN）；GET /v1/health、/v1/version；无凭证 401、错凭证 403（hmac.compare_digest）；响应出站前手写 schema 自检；邀请码格式函数。",
+      "brief": "notes/server-core.md"
+    },
+    {
+      "id": "win-shell",
+      "端": "Windows",
+      "模块": "win-shell",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "windows/"
+      ],
+      "acceptance": [
+        "A1",
+        "A2",
+        "A16",
+        "A14"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "windows/win-shell",
+      "summary": ".NET 8 WPF 应用入口；侧栏导航与 连接(W1)/设置(W4) 占位页，页标识与设计稿编号一致；--self-test 启动自检退出码 0。",
+      "brief": "notes/win-shell.md"
+    },
+    {
+      "id": "win-diagnostics",
+      "端": "Windows",
+      "模块": "win-diagnostics",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "windows/"
+      ],
+      "acceptance": [
+        "A3",
+        "A4",
+        "A7",
+        "A15"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "windows/win-diagnostics",
+      "summary": "ErrorPresenter（errors.json 码→中文文案，不含堆栈）、LogRedactor、InviteCode.IsValid；均读 shared 测试向量做单测。",
+      "brief": "notes/win-diagnostics.md"
+    },
+    {
+      "id": "admin-connect",
+      "端": "管理端",
+      "模块": "admin-connect",
+      "state": "待写",
+      "owner": "写手 · Windows",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "admin/"
+      ],
+      "acceptance": [
+        "A10",
+        "A14"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "admin/admin-connect",
+      "summary": ".NET 8 WPF 管理连接页：输入后台地址，令牌只取环境变量 OSAKA_ADMIN_TOKEN；HttpClient 默认证书校验（禁止自定义放行回调）；System.Text.Json record+required+Disallow 未知字段做边界校验；被拒/证书失败/响应不合 schema 时显示错误且不显示已连接。",
+      "brief": "notes/admin-connect.md"
+    },
+    {
+      "id": "android-shell",
+      "端": "Android",
+      "模块": "android-shell",
+      "state": "待写",
+      "owner": "写手 · Android",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "android/"
+      ],
+      "acceptance": [
+        "A5",
+        "A6",
+        "A16",
+        "A14"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "android/android-shell",
+      "summary": "Kotlin 单 Activity；未激活(P1)/已激活(P2) 占位与导航；生命周期回调经 LogRedactor 记录。",
+      "brief": "notes/android-shell.md"
+    },
+    {
+      "id": "android-diagnostics",
+      "端": "Android",
+      "模块": "android-diagnostics",
+      "state": "待写",
+      "owner": "写手 · Android",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        "android/"
+      ],
+      "acceptance": [
+        "A7",
+        "A15"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "android/android-diagnostics",
+      "summary": "LogRedactor、InviteCode.isValid、错误展示（errors.json 文案）；为 0.2.0 预留的响应校验用 org.json 手写，本期只做 admin-contract 解析校验函数及单测。",
+      "brief": "notes/android-diagnostics.md"
+    },
+    {
+      "id": "ci-guards",
+      "端": "共用",
+      "模块": "ci-guards",
+      "state": "待写",
+      "owner": "代码组长 · Osaka",
+      "rework": 0,
+      "updated_at": "2026-11-02T14:51:30+10:00",
+      "paths": [
+        ".github/",
+        "scripts/",
+        "ci/"
+      ],
+      "acceptance": [
+        "A10",
+        "A11",
+        "A12",
+        "A13",
+        "A14",
+        "A17"
+      ],
+      "artifacts": [],
+      "history": [],
+      "branch": "ci/ci-guards",
+      "summary": "完善 CI：契约测试 job（已有初版）；A10 docker 端到端：ci/ 下用 openssl 生成临时 CA 与 SAN=osaka-server 证书、另一张不可信 CA 证书和 SAN 不匹配证书，server 容器以服务名 osaka-server 运行，探测容器经 docker 网络连接，覆盖四项必测；技术栈/互引路径/硬编码线路检查；PR 行数统计。",
+      "brief": "notes/ci-guards.md"
+    }
+  ]
+}cat: # memory/shared.md
+
+全员必读，组长维护，最多 10 条，其他人只读。
+
+1. 密钥、令牌只走环境变量，不进仓库、日志、聊天。
+2. 接口以 openapi/admin.v1.yaml 与 shared/ 为准，改接口先找组长。
+# 任务卡：server-core 返工1（按 ponytail full 执行）
+## 目标
+1. server/osaka_server/schema.py:33 version 校验改为 `re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", v)`（ECMA 语义，拒 Unicode 数字和尾部换行），与 openapi/admin.v1.yaml:52 一致。
+2. server/tests/test_contract.py:94 中 "1.2.3\n" 与 "١.٢.٣" 期望改为 False。
+3. server/osaka_server/app.py 的 handler 覆写 `version_string()` 返回 "osaka-server"（不带 Python 版本）；在 server/tests/test_app.py 加一条最小测试断言 Server 头不含 "Python"（若现有测试结构可方便取头，否则只直接调用 handler 的 version_string）。
+4. 删除 server/notes/server-core.md 与 server/reports/*.txt；server/README.md:40 链接改为 `../notes/server-core.md`。
+## 只准改的文件
+server/osaka_server/schema.py, server/osaka_server/app.py, server/tests/test_contract.py, server/tests/test_app.py（仅新增一条测试）, server/README.md, 删除 server/notes/server-core.md、server/reports/*.txt
+## 验收
+`python3 -m compileall -q server/osaka_server server/tests` 通过；`cd server && python3 -m pytest -q -p no:cacheprovider` 通过（沙箱 socket 跳过可接受）。
+## 禁止
+改清单外文件（尤其 shared/、admin-contract.json、invite.py、board.json）；改 .codex/.claude/~/.codex/config.toml；git 任何提交/rebase/push；联网；新增依赖；真实密钥/IP。
+memory/server-core.md: No such file or directory
+
+exec
+/bin/bash -lc 'cat /home/box/osaka/wt/server-core/.codex/skills/ponytail/SKILL.md' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+---
+name: ponytail
+description: >-
+  Use for any coding task: lazy senior dev mode, the smallest change that fully
+  solves it, never cutting validation, error handling, security or tests.
+  (Source: github.com/DietrichGebert/ponytail, MIT)
+---
+# Ponytail
+
+You are a lazy senior developer. The best code is the code never written. You solve the whole problem with the least new code. End your reply with one or two lines: what you skipped or did not check, and any risk the user must know.
+
+Active for the whole session until the user says "stop ponytail" or "normal mode". Switch level: `/ponytail lite|full|ultra`.
+
+## Before you write
+
+Read the task and the code it touches. List every place your change must reach: callers, tests, fixtures, config, exports. Check what your change could break for users: data it would destroy or expose, callers that stop working. That is scope. Extra features are not.
+
+## The smallest complete change
+
+Take the first option that fully works:
+
+1. Does it need to exist? Skip features, options and flexibility nobody asked for, and name them in one line. A vague request ("build me X") gets the smallest version that does the core job.
+2. Already in this codebase (a helper, component, service, pattern)? Use it the way the surrounding code does.
+3. Standard library or a platform feature? Use it, unless the project has its own. A house component beats a native widget.
+4. An installed dependency? Use it. Never add a dependency for a few lines.
+5. Can it be one line a reader gets at a glance? One line.
+6. Otherwise: the minimum code that works.
+
+- Be lazy about the solution, never about the change itself: finish every part the task needs, including the callers, tests and fixtures your change breaks.
+- No abstraction, wrapper, type conversion, option, config, boilerplate or "for later" code nobody asked for. Keep values in the form the platform already gives you. Deletion beats addition. Keep the structure the codebase already has: its layers, interfaces and conventions.
+- The shortest working diff wins, once you know everything it must touch. A one-liner that needs decoding is not short.
+- Comment only the why the code cannot show, in one line.
+- Bug fix: before you edit, grep every caller of the function you touch, then fix the root cause once in the shared code.
+- Code you move or merge keeps its error handling and validation.
+- Between options of equal size, take the one that is correct on edge cases.
+- Lazy code without its check is unfinished: new non-trivial logic (a branch, a loop, a parser, money or security, or a whole new script or app) leaves one small test or an assert-based self-check. Trivial changes need none.
+- A shortcut with a known limit gets a code comment in this form: `shortcut: <the limit>, <when to upgrade>`.
+
+Never cut: validation at trust boundaries, error handling that prevents data loss, security, accessibility, the calibration real hardware needs, anything the user asked for.
+
+## Levels
+
+| Level | Behavior |
+|-------|----------|
+| **lite** | Build what was asked. Name the smaller option in one line and let the user pick. |
+| **full** | The rules above. Default. |
+| **ultra** | Also question the request: before building, push back on any part the need does not justify. |
+
+exec
+/bin/bash -lc "rg --files memory notes server -g 'AGENTS.md' -g '*.md'" in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+memory/写手-windows.md
+memory/写手-server.md
+memory/shared.md
+memory/审阅.md
+memory/组长.md
+memory/测试.md
+memory/写手-android.md
+notes/shared-protocol.md
+notes/android-shell.md
+notes/admin-connect.md
+notes/ci-guards.md
+notes/win-shell.md
+notes/server-core.md
+notes/cli-config.md
+notes/server-core-taskcard.md
+notes/README.md
+notes/server-core-rework1-taskcard.md
+notes/win-diagnostics.md
+notes/android-diagnostics.md
+server/README.md
+server/notes/server-core.md
+
+exec
+/bin/bash -lc 'cat docs/architecture.md notes/server-core.md' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+# 架构地图（0.1.0）
+
+动手前先查本文件；与代码不符就上报组长。接口以 `openapi/admin.v1.yaml`（唯一事实来源）和 `shared/` 为准。
+
+## 技术栈（A14）
+Windows 客户端、管理端：C#/.NET（WPF）。Android：Kotlin。后台：Python。
+
+## 目录与模块
+| 模块 | 端 | 目录 | 职责 | 对外接口 | 依赖 |
+|---|---|---|---|---|---|
+| shared-protocol | 共用 | `openapi/`、`shared/`、`tests/contract/` | OpenAPI 管理协议、错误码、邀请码规则、契约/脱敏/邀请码测试向量（含反例）、契约测试 | `openapi/admin.v1.yaml`、`shared/test-vectors/admin-contract.json`、`shared/errors.json`、`shared/invite-code.md`、`shared/test-vectors/*.json` | 无 |
+| server-core | 服务端 | `server/` | 后台独立启动；`/v1/health`、`/v1/version`；管理身份校验；邀请码格式校验函数 | 实现 openapi/admin.v1.yaml；响应出站前按 schema 自检（标准库手写校验） | shared-protocol |
+| win-shell | Windows | `windows/` | 应用入口；连接(W1)、设置(W4) 占位页与侧栏导航；启动自检 `--self-test` | 无（进程入口） | win-diagnostics |
+| win-diagnostics | Windows | `windows/` | 统一错误展示（错误码→可读文案，不含堆栈）；日志脱敏入口；邀请码格式校验 | `ErrorPresenter`、`LogRedactor`、`InviteCode.IsValid` | shared-protocol（只读 JSON 向量与错误码） |
+| admin-connect | 管理端 | `admin/` | 管理连接页：填后台地址，令牌只从环境变量 `OSAKA_ADMIN_TOKEN` 取；查询版本/健康；边界校验响应；强制证书链+主机名校验；被拒/证书失败时不显示已连接 | 无 | shared-protocol、server-core（运行时） |
+| android-shell | Android | `android/` | 应用入口；未激活(P1)/已激活(P2) 占位页与导航；生命周期记录 | 无 | android-diagnostics |
+| android-diagnostics | Android | `android/` | 日志脱敏、错误展示、邀请码格式校验（同一份向量） | `LogRedactor`、`InviteCode.isValid` | shared-protocol |
+| ci-guards | 共用 | `.github/`、`scripts/`、`ci/` | 构建测试 CI、契约测试 job、A10 docker 端到端（临时 CA、服务名 `osaka-server`）、改动范围检查、技术栈/引用路径/硬编码线路检查 | `scripts/check-scope.sh` | 全部 |
+
+## 边界规则
+1. 各端只读 `shared/`、`openapi/`，不互相引用其他端源码（A11）。
+2. 后台入口调用业务函数，业务不反向导入入口。
+3. 线路以列表表示，本期长度为 1，客户端不硬编码线路（A17）。
+4. 密钥、令牌只走环境变量，不进仓库、不进日志。
+
+## 工具链与模型（非产品依赖）
+写手：Codex gpt-6-astra high。审阅：Claude Code + GLM（`.claude/settings.json`）。测试：Claude Code + DeepSeek（`.claude/settings.tester.json`）。key 一律只引用环境变量。
+
+## 边界 schema 校验方式（Hao Yin 2026-11-02：不新增重依赖）
+| 端 | 做法 | 理由 |
+|---|---|---|
+| 服务端 Python | 标准库 `json` + 手写字段校验函数，单测用 `admin-contract.json` 正反例 | 两个接口、字段少，jsonschema 只作 CI 测试依赖，不进运行时 |
+| Windows/管理端 C# | `System.Text.Json` 反序列化到 `record` + `required` 成员 + `JsonUnmappedMemberHandling.Disallow`，再手写枚举/长度/正则检查 | .NET 8 内置，不加 NuGet 包 |
+| Android Kotlin | Android 内置 `org.json.JSONObject` 解析 + 手写校验（拒未知字段） | 平台自带，不加 Moshi/kotlinx-serialization 插件 |
+| CI | `tests/contract`：openapi-spec-validator 校验 spec，jsonschema 跑正反例 | 仅测试依赖，保证三端手写校验与 spec 同源 |
+TLS：三端都用平台默认证书校验（.NET `HttpClient` 默认、Android 默认 TrustManager），禁止 `ServerCertificateCustomValidationCallback` 返回 true 或自定义放行 TrustManager；CI 临时 CA 通过系统/测试信任库注入。
+# 派活 brief：server-core（服务端）
+
+- owner：写手 · 服务端　分支：`server/server-core`（从 main 拉，审阅/测试只针对该分支）
+- 执行方式：用指定 CLI，**按 ponytail full 执行**；一个模块一个新会话。
+
+## 目标
+Python 后台：标准库 http.server + ssl 监听 0.0.0.0:8443（证书/私钥路径与令牌均取环境变量 OSAKA_TLS_CERT、OSAKA_TLS_KEY、OSAKA_ADMIN_TOKEN）；GET /v1/health、/v1/version；无凭证 401、错凭证 403（hmac.compare_digest）；响应出站前手写 schema 自检；邀请码格式函数。
+
+## 只准改的文件
+- `server/`
+- `notes/server-core.md`（追加交付证明）、`board.json`（本模块条目）、`reports/model-issues.md`（如有）
+
+## 接口引用
+openapi/admin.v1.yaml 全部；shared/errors.json；shared/test-vectors/{admin-contract,invite-code}.json。架构见 `docs/architecture.md`（含边界 schema 校验方式）。
+
+## 验收条目
+A8, A9, A15, A17（见 `acceptance.md`）。完成标准：pytest：401/403/200；响应用 admin-contract.json 的正反例验证自检函数；invite-code 全向量；routes 长度 1；不新增运行时依赖（无 requirements 或只含测试依赖）。
+
+## 禁止事项
+- 改清单外文件（`scripts/check-scope.sh` 会拦）；改 `.codex/`、`.claude/` 或任何规则/权限配置
+- 新增依赖（未经组长批准）；跳过证书校验；硬编码线路
+- 密钥、令牌、私钥写进代码/配置/日志/测试/提交；示例只用明显假值
+- `--no-verify`、git merge/push/rebase/强推/删分支；联网；登录或改动真实服务器
+
+## 交付要求
+交付时把看板 state 改为 待审测并追加 history；在本文件末尾追加：
+- 编译、lint、测试命令及各自输出文件路径
+- 本次 CLI 会话日志路径
+- 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 交付（写手 · 服务端，2026-11-02）
+- 模块：server-core，分支 `server/server-core`
+- 改动文件：server/{.gitignore,README.md,osaka_server/{__init__,app,schema,invite}.py,tests/{test_app,test_contract}.py,notes/server-core.md,reports/*.txt}（后两者为 Codex 沙箱内自测记录）；notes/server-core.md、notes/server-core-taskcard.md、notes/logs/*；reports/model-issues.md
+- 运行：`OSAKA_TLS_CERT=... OSAKA_TLS_KEY=... OSAKA_ADMIN_TOKEN=... python3 -m osaka_server.app`（在 server/ 下，见 server/README.md）
+- 编译：`python3 -m compileall -q server/osaka_server server/tests` → notes/logs/server-core-compile.log（EXIT 0）
+- lint：ruff/pyflakes 未安装，仅 AST 语法检查 → notes/logs/server-core-lint.log（EXIT 0）
+- 测试：`cd server && python3 -m pytest -q -rs -p no:cacheprovider` → notes/logs/server-core-pytest.log（181 passed，0 skipped，含真实本地 TLS 连接 401/403/200）
+- Codex 会话日志：notes/logs/server-core-codex-20261102-1455.log（成功）；1453（read-only 失败）、1454（中断）
+- 已知限制：无正式 lint 工具；Codex 沙箱禁 socket，其自测跳过 30 项，已在沙箱外重跑全过；routes 来自环境变量占位默认值；不含部署脚本（本期未要求）。
+
+## 审阅（审阅 · Osaka，2026-11-02，提交 94c35f3）
+- 结论：必须改 1 条，其余通过。CLI：Claude Code + GLM，日志 /home/box/osaka/logs/review-server-core-20261102-1501.log
+- 通过：无硬编码密钥/IP/账号/token（0.0.0.0:8443 为任务卡指定，测试只用假值）；Bearer 鉴权 401/403 用 hmac.compare_digest（app.py:45）；invite.py 正则与 shared 规范一致；无新增依赖；未改 .claude/.codex；未提交 board.json；与 docs/architecture.md 一致。
+- 必须改：
+  1. server/osaka_server/schema.py:33 version 校验用 `\d` 与 `$`，会放过 Unicode 数字和尾部换行，与 openapi/admin.v1.yaml:52 不同源；server/tests/test_contract.py:94 把这两例断言为 True，固化了偏差。改为 fullmatch + [0-9]，测试两例改 False。能否机器化：能（契约向量 admin-contract.json 补这两条 invalid，CI 契约 job 覆盖）。
+- 建议改：
+  1. 删 server/notes/server-core.md 与 server/reports/*.txt：与根 notes 及 notes/logs 重复且过期（pytest.txt 记 151 passed/30 skipped；server/notes/server-core.md:5 与事实矛盾），删后核对 server/README.md:40 链接。
+  2. server/osaka_server/invite.py:10 `strip()` 剥离范围与 .NET/Android trim 可能不一致（A15 三端一致），建议限定字符集或补边界向量。
+  3. app.py 未覆写 version_string()，响应带 Python 版本 Server 头。
+  4. server/tests/test_app.py:98-137 内存传输层仅为沙箱服务，可简化，非阻塞。
+
+exec
+/bin/bash -lc 'git status --short' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+ M notes/server-core.md
+?? notes/logs/server-core-rework1-codex-20261102-1509.log
+?? notes/server-core-rework1-taskcard.md
+
+exec
+/bin/bash -lc 'cat memory/写手-server.md server/osaka_server/schema.py server/osaka_server/app.py' in /home/box/osaka/wt/server-core
+exec
+/bin/bash -lc 'cat server/tests/test_contract.py server/tests/test_app.py server/README.md server/.gitignore scripts/check-scope.sh' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+import json
+from pathlib import Path
+
+import pytest
+
+from osaka_server.invite import is_valid_invite_code, normalize
+from osaka_server.schema import validate_response
+
+
+VECTORS = Path(__file__).resolve().parents[2] / "shared/test-vectors"
+CONTRACT = json.loads((VECTORS / "admin-contract.json").read_text(encoding="utf-8"))
+INVITES = json.loads((VECTORS / "invite-code.json").read_text(encoding="utf-8"))
+
+
+@pytest.mark.parametrize("schema,value,expected", [
+    (schema, value, group == "valid")
+    for schema, cases in CONTRACT.items() if not schema.startswith("_")
+    for group, values in cases.items() for value in values
+])
+def test_contract_vectors(schema, value, expected):
+    assert validate_response(schema, value) is expected
+
+
+@pytest.mark.parametrize("value,expected", [
+    (value, group == "valid")
+    for group, values in INVITES.items() for value in values
+])
+def test_invite_vectors(value, expected):
+    assert is_valid_invite_code(value) is expected
+    assert normalize(value) == (value.strip().upper() if expected else None)
+
+
+@pytest.mark.parametrize("value", [
+    12345678, True, [], {}, b"12345678", "ß234567", "ſ2345678",
+    "\u00a012345678", "1234\n5678", "1234567\n",
+])
+def test_invite_rejects_non_ascii_and_non_strings(value):
+    assert normalize(value) is None
+    assert not is_valid_invite_code(value)
+
+
+def test_invite_ascii_whitespace():
+    assert normalize("\t abcd1234\r\n") == "ABCD1234"
+
+
+@pytest.mark.parametrize("schema", ["HealthResponse", "VersionResponse", "ErrorBody"])
+@pytest.mark.parametrize("value", [None, [], True, 1, "body"])
+def test_schema_rejects_non_objects(schema, value):
+    assert not validate_response(schema, value)
+
+
+@pytest.mark.parametrize("field", ["id", "display_name"])
+@pytest.mark.parametrize("value,expected", [
+    ("", False), ("x", True), ("界" * 64, True), ("x" * 65, False),
+    (1, False), (None, False), ([], False),
+])
+def test_route_lengths_and_types(field, value, expected):
+    route = {"id": "placeholder", "display_name": "Placeholder"}
+    route[field] = value
+    assert validate_response("HealthResponse", {
+        "status": "degraded", "routes": [route],
+    }) is expected
+
+
+@pytest.mark.parametrize("route", [
+    None, [], "route", {"id": "x"}, {"display_name": "x"},
+    {"id": "x", "display_name": "x", "extra": 1},
+])
+def test_route_shape(route):
+    assert not validate_response("HealthResponse", {"status": "ok", "routes": [route]})
+
+
+@pytest.mark.parametrize("value,expected", [
+    ("", True), ("界" * 200, True), ("x" * 201, False),
+    (None, False), (1, False), ([], False),
+])
+def test_error_message(value, expected):
+    assert validate_response("ErrorBody", {"code": "INTERNAL", "message": value}) is expected
+
+
+@pytest.mark.parametrize("schema,field", [
+    ("HealthResponse", "status"), ("VersionResponse", "service"),
+    ("VersionResponse", "version"), ("VersionResponse", "protocol"),
+    ("ErrorBody", "code"),
+])
+@pytest.mark.parametrize("value", [None, [], {}, True, 1])
+def test_schema_field_types(schema, field, value):
+    body = dict(CONTRACT[schema]["valid"][0])
+    body[field] = value
+    assert not validate_response(schema, body)
+
+
+@pytest.mark.parametrize("version,expected", [
+    ("1.2.3\n", True), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", True),
+])
+def test_version_pattern(version, expected):
+    assert validate_response("VersionResponse", {
+        "service": "osaka-server", "version": version, "protocol": "admin.v1",
+    }) is expected
+
+
+def test_unknown_schema():
+    assert not validate_response("Unknown", {})
+from contextlib import contextmanager
+import http.client
+import io
+import json
+import os
+from pathlib import Path
+import shutil
+import ssl
+import subprocess
+import sys
+import threading
+from http.server import ThreadingHTTPServer
+from types import SimpleNamespace
+
+import pytest
+
+from osaka_server import app
+from osaka_server.schema import validate_response
+
+
+FAKE_TOKEN = "obviously-fake-test-token"
+SHARED_ERRORS = json.loads(
+    (Path(__file__).resolve().parents[2] / "shared/errors.json").read_text(encoding="utf-8")
+)
+
+
+@pytest.fixture(scope="module")
+def tls_files(tmp_path_factory):
+    if not shutil.which("openssl"):
+        yield None
+        return
+    directory = tmp_path_factory.mktemp("tls")
+    cert, key = directory / "cert.pem", directory / "key.pem"
+    try:
+        subprocess.run([
+            "openssl", "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-days", "1",
+            "-subj", "/CN=localhost", "-addext", "subjectAltName=DNS:localhost",
+            "-keyout", str(key), "-out", str(cert),
+        ], check=True, capture_output=True)
+        yield cert, key
+    finally:
+        cert.unlink(missing_ok=True)
+        key.unlink(missing_ok=True)
+
+
+@pytest.fixture
+def configured_env(monkeypatch, tls_files):
+    monkeypatch.setenv("OSAKA_ADMIN_TOKEN", FAKE_TOKEN)
+    monkeypatch.setenv("OSAKA_TLS_CERT", str(tls_files[0]) if tls_files else "fake-cert")
+    monkeypatch.setenv("OSAKA_TLS_KEY", str(tls_files[1]) if tls_files else "fake-key")
+    monkeypatch.delenv("OSAKA_ROUTE_ID", raising=False)
+    monkeypatch.delenv("OSAKA_ROUTE_NAME", raising=False)
+
+
+@contextmanager
+def running(server):
+    thread = threading.Thread(target=server.serve_forever, kwargs={"poll_interval": 0.01})
+    thread.start()
+    try:
+        yield server
+    finally:
+        server.shutdown()
+        thread.join()
+        server.server_close()
+
+
+@pytest.fixture(params=["handler", "https"])
+def server(configured_env, tls_files, request):
+    if request.param == "handler":
+        yield SimpleNamespace(
+            token=FAKE_TOKEN.encode(),
+            route={"id": "placeholder-route", "display_name": "Placeholder route"},
+        )
+        return
+    with network_server(tls_files) as instance:
+        yield instance
+
+
+@contextmanager
+def network_server(tls_files):
+    try:
+        instance = make_network_server(tls_files)
+    except PermissionError:
+        pytest.skip("sandbox denies local sockets; HTTP handler tested separately in memory")
+    with running(instance):
+        yield instance
+
+
+def make_network_server(tls_files):
+    if tls_files:
+        return app.create_server(("127.0.0.1", 0))
+    instance = ThreadingHTTPServer(("127.0.0.1", 0), app.Handler)
+    instance.token = os.environ["OSAKA_ADMIN_TOKEN"].encode("utf-8")
+    instance.route = {"id": "placeholder-route", "display_name": "Placeholder route"}
+    return instance
+
+
+class MemoryRequest:
+    def __init__(self, data):
+        self.data = io.BytesIO(data)
+        self.response = io.BytesIO()
+
+    def makefile(self, *args):
+        return self.data
+
+    def sendall(self, data):
+        self.response.write(data)
+
+
+class MemoryConnection:
+    """Pass real HTTP request bytes through the handler without a socket."""
+
+    def __init__(self, server):
+        self.server = server
+        self.data = bytearray()
+
+    def sendall(self, data):
+        self.data.extend(data)
+
+    def makefile(self, *args):
+        request = MemoryRequest(self.data)
+        app.Handler(request, ("127.0.0.1", 0), self.server)
+        return io.BytesIO(request.response.getvalue())
+
+    def close(self):
+        pass
+
+
+def connection(server, tls_files, host="localhost", context=None):
+    if isinstance(server, SimpleNamespace):
+        conn = http.client.HTTPConnection("localhost")
+        conn.sock = MemoryConnection(server)
+        return conn
+    if tls_files:
+        context = context or ssl.create_default_context(cafile=str(tls_files[0]))
+        return http.client.HTTPSConnection(host, server.server_port, context=context, timeout=3)
+    return http.client.HTTPConnection(host, server.server_port, timeout=3)
+
+
+def request(server, tls_files, path, authorization=None):
+    conn = connection(server, tls_files)
+    try:
+        headers = {} if authorization is None else {"Authorization": authorization}
+        conn.request("GET", path, headers=headers)
+        response = conn.getresponse()
+        data = response.read()
+        assert int(response.getheader("Content-Length")) == len(data)
+        if response.status == 401:
+            assert response.getheader("WWW-Authenticate") == "Bearer"
+        if data:
+            assert response.getheader("Content-Type") == "application/json; charset=utf-8"
+        return response.status, json.loads(data) if data else None
+    finally:
+        conn.close()
+
+
+@pytest.mark.parametrize("path,schema", [
+    ("/v1/health", "HealthResponse"), ("/v1/version", "VersionResponse"),
+])
+@pytest.mark.parametrize("authorization,status,code", [
+    (None, 401, "UNAUTHENTICATED"),
+    ("Bearer obviously-fake-wrong-token", 403, "FORBIDDEN"),
+    ("Basic obviously-fake-test-token", 403, "FORBIDDEN"),
+    ("Bearer", 403, "FORBIDDEN"), ("Bearer ", 403, "FORBIDDEN"),
+    ("Bearer é", 403, "FORBIDDEN"),
+    (f"Bearer {FAKE_TOKEN}", 200, None),
+    (f"bearer {FAKE_TOKEN}", 200, None),
+])
+def test_authentication(server, tls_files, path, schema, authorization, status, code):
+    actual, body = request(server, tls_files, path, authorization)
+    assert actual == status
+    assert validate_response("ErrorBody" if code else schema, body)
+    if code:
+        assert body == {"code": code, "message": SHARED_ERRORS[code]["zh"]}
+    elif schema == "HealthResponse":
+        assert body == {"status": "ok", "routes": [server.route]}
+        assert len(body["routes"]) == 1
+    else:
+        assert body["version"] == "0.1.0"
+
+
+def test_duplicate_credentials_rejected(server, tls_files):
+    conn = connection(server, tls_files)
+    try:
+        conn.putrequest("GET", "/v1/health")
+        conn.putheader("Authorization", f"Bearer {FAKE_TOKEN}")
+        conn.putheader("Authorization", "Bearer obviously-fake-wrong-token")
+        conn.endheaders()
+        response = conn.getresponse()
+        assert response.status == 403
+        assert json.loads(response.read())["code"] == "FORBIDDEN"
+    finally:
+        conn.close()
+
+
+def test_constant_time_comparison(server, tls_files, monkeypatch):
+    original = app.hmac.compare_digest
+    calls = []
+
+    def compare(left, right):
+        calls.append((left, right))
+        return original(left, right)
+
+    monkeypatch.setattr(app.hmac, "compare_digest", compare)
+    assert request(server, tls_files, "/v1/health", f"Bearer {FAKE_TOKEN}")[0] == 200
+    assert calls == [(FAKE_TOKEN.encode(), FAKE_TOKEN.encode())]
+
+
+@pytest.mark.parametrize("path", ["/missing", "/v1/health/", "/"])
+def test_unknown_path(server, tls_files, path):
+    assert request(server, tls_files, path) == (404, None)
+
+
+def test_logs_do_not_contain_credentials(server, tls_files, capfd):
+    request(server, tls_files, f"/v1/health?token={FAKE_TOKEN}", f"Bearer {FAKE_TOKEN}")
+    request(server, tls_files, f"/missing/{FAKE_TOKEN}")
+    captured = capfd.readouterr()
+    assert FAKE_TOKEN not in captured.out + captured.err
+
+
+@pytest.mark.parametrize("route", [
+    {"id": "", "display_name": "Placeholder"},
+    {"id": "x", "display_name": "x" * 65},
+    {"id": "x", "display_name": "Placeholder", "extra": True},
+])
+def test_bad_outbound_response_returns_internal(server, tls_files, route):
+    server.route = route
+    assert request(server, tls_files, "/v1/health", f"Bearer {FAKE_TOKEN}") == (
+        500, {"code": "INTERNAL", "message": SHARED_ERRORS["INTERNAL"]["zh"]},
+    )
+
+
+def test_invalid_outbound_error_is_replaced(server, tls_files, monkeypatch):
+    monkeypatch.setitem(app.ERRORS, "UNAUTHENTICATED", {"zh": "x" * 201})
+    assert request(server, tls_files, "/v1/version") == (
+        500, {"code": "INTERNAL", "message": SHARED_ERRORS["INTERNAL"]["zh"]},
+    )
+
+
+def test_invalid_internal_body_is_not_sent(server, tls_files, monkeypatch):
+    server.route = {}
+    monkeypatch.setitem(app.ERRORS, "INTERNAL", {"zh": "x" * 201})
+    assert request(server, tls_files, "/v1/health", f"Bearer {FAKE_TOKEN}") == (500, None)
+
+
+@pytest.mark.parametrize("name", ["OSAKA_TLS_CERT", "OSAKA_TLS_KEY", "OSAKA_ADMIN_TOKEN"])
+@pytest.mark.parametrize("value", [None, ""])
+def test_missing_environment_fails_safely(configured_env, monkeypatch, capsys, name, value):
+    if value is None:
+        monkeypatch.delenv(name)
+    else:
+        monkeypatch.setenv(name, value)
+    assert app.main() == 1
+    error = capsys.readouterr().err
+    assert error.strip() == f"Missing required environment variable: {name}"
+    assert FAKE_TOKEN not in error
+
+
+def test_bad_certificate_fails_safely(configured_env, monkeypatch, capsys):
+    monkeypatch.setenv("OSAKA_TLS_CERT", "/obviously-fake-private-path/no-cert")
+    assert app.main() == 1
+    assert capsys.readouterr().err.strip() == "Unable to load OSAKA_TLS_CERT / OSAKA_TLS_KEY"
+
+
+def test_module_entrypoint():
+    environment = dict(os.environ)
+    environment.pop("OSAKA_TLS_CERT", None)
+    result = subprocess.run(
+        [sys.executable, "-m", "osaka_server.app"],
+        cwd=Path(__file__).resolve().parents[1], env=environment,
+        capture_output=True, text=True,
+    )
+    assert result.returncode == 1
+    assert result.stdout == ""
+    assert result.stderr.strip() == "Missing required environment variable: OSAKA_TLS_CERT"
+
+
+def test_environment_route(configured_env, tls_files, monkeypatch):
+    if not tls_files:
+        pytest.skip("openssl unavailable; handler tests use HTTP fallback")
+    monkeypatch.setenv("OSAKA_ROUTE_ID", "fake-configured-route")
+    monkeypatch.setenv("OSAKA_ROUTE_NAME", "测试占位线路")
+    with network_server(tls_files) as instance:
+        status, body = request(instance, tls_files, "/v1/health", f"Bearer {FAKE_TOKEN}")
+    assert status == 200
+    assert body["routes"] == [{"id": "fake-configured-route", "display_name": "测试占位线路"}]
+
+
+@pytest.mark.parametrize("host,trust_cert", [("localhost", False), ("127.0.0.1", True)])
+@pytest.mark.parametrize("server", ["https"], indirect=True)
+def test_tls_rejects_untrusted_cert_or_wrong_hostname(server, tls_files, host, trust_cert):
+    if not tls_files:
+        pytest.skip("openssl unavailable; handler tests use HTTP fallback")
+    context = ssl.create_default_context(cafile=str(tls_files[0]) if trust_cert else None)
+    conn = connection(server, tls_files, host=host, context=context)
+    try:
+        with pytest.raises(ssl.SSLCertVerificationError):
+            conn.request("GET", "/v1/health")
+    finally:
+        conn.close()
+# Osaka server 0.1.0
+
+运行时仅使用 Python 3 标准库。在仓库中保留 `shared/errors.json`，然后从
+`server/` 启动：
+
+```sh
+python3 -m osaka_server.app
+```
+
+启动前通过环境变量提供 `OSAKA_TLS_CERT`（证书链文件路径）、
+`OSAKA_TLS_KEY`（未加密私钥文件路径）和 `OSAKA_ADMIN_TOKEN`。
+缺失或空值会导致启动失败；错误仅包含变量名，不包含环境变量的值。
+服务监听 `0.0.0.0:8443`，仅接受 HTTPS。
+
+可选变量 `OSAKA_ROUTE_ID`、`OSAKA_ROUTE_NAME` 分别配置唯一线路的标识和名称，
+各为 1–64 个字符，默认值为 `placeholder-route` 和 `Placeholder route`。
+不合协议的线路配置会使 health 返回 `500 INTERNAL`。
+
+`GET /v1/health` 和 `GET /v1/version` 要求 `Authorization: Bearer <token>`。
+无 Authorization 返回 401，错误或格式不正确的凭证返回 403。
+错误文案来自 `shared/errors.json`。未知路径返回无响应体的 404。
+响应发送前按 OpenAPI 手写校验，不合格则返回 `500 INTERNAL`。
+不记录访问日志，避免请求路径或头部泄露凭证。
+
+`osaka_server.invite.normalize(value)` 对有效 ASCII 邀请码去首尾空白、转大写；
+无效值返回 `None`。`is_valid_invite_code(value)` 返回布尔值。
+
+测试使用已有的 pytest，不需要新增运行时依赖：
+
+```sh
+python3 -m pytest -q
+```
+
+测试直接读取仓库中的共享向量。HTTP handler 同时有内存和真实连接测试；
+真实 HTTPS 测试用 OpenSSL 生成临时自签证书，客户端显式信任该证书并校验主机名，
+测试后清除证书和私钥。没有 OpenSSL 时，接口测试退回本地明文 HTTPServer，
+证书测试跳过。沙箱禁止本地 socket 时，真实连接测试明确跳过，内存 handler
+测试仍运行；此时不能据此认定真实 HTTPS 验收完成。
+
+验证命令、输出路径和环境限制见 [交付记录](notes/server-core.md)。
+/.pytest_cache/
+/pytest-of-*/
+#!/usr/bin/env bash
+# 按 board.json scope 检查改动范围。用法：check-scope.sh [--staged | <base-ref>]
+# 受保护配置只允许在 lead/setup-* 分支（须 Hao Yin 批 PR）改；skills 目录例外。
+# 模块分支（<端>/<模块>）还要求改动落在该模块 paths 内。
+set -euo pipefail
+cd "$(git rev-parse --show-toplevel)"
+if [ "${1:-}" = "--staged" ] || [ -z "${1:-}" ]; then range=(--cached); else range=("$1"...HEAD); fi
+files=$(git -c core.quotepath=false diff --name-only "${range[@]}")
+deleted=$(git -c core.quotepath=false diff --name-only --diff-filter=D "${range[@]}")
+[ -z "$files" ] && exit 0
+branch=$(git rev-parse --abbrev-ref HEAD)
+DELETED="$deleted" FILES="$files" BRANCH="$branch" python3 - <<'PY'
+import json, os, sys
+b = json.load(open("board.json"))
+sc = b["scope"]; files = os.environ["FILES"].split("\n"); br = os.environ["BRANCH"]
+mod = next((m for m in b["modules"] if br.endswith("/" + m["id"])), None)
+dele = set(os.environ["DELETED"].split("\n")) - {""}
+bad = []
+for f in files:
+    # 删除 scope 外的旧路径允许（如移除废弃目录），受保护配置的删除仍拦截
+    if f in dele and not any(f.startswith(p) for p in sc["protected"]): continue
+    skill = f.startswith((".codex/skills/", ".claude/skills/"))
+    prot = any(f.startswith(p) for p in sc["protected"])
+    if prot and br.startswith("lead/setup-"): continue
+    if not skill and any(f.startswith(p) for p in sc["protected"]) and not br.startswith("lead/setup-"): bad.append(f + "（受保护配置）")
+    elif not skill and not any(f == p or f.startswith(p) for p in sc["global"]): bad.append(f + "（不在 scope）")
+    elif mod and not any(f.startswith(p) for p in mod["paths"] + ["notes/", "board.json", "reports/", "memory/", "tests/INDEX.md"]):
+        bad.append(f + f"（超出模块 {mod['id']}）")
+if bad:
+    print("check-scope 失败：\n  " + "\n  ".join(bad)); sys.exit(1)
+PY
+
+ succeeded in 0ms:
+# memory/写手-server.md
+
+只记本角色反复出现的教训，每条一行，最多 30 条。项目事实写进仓库文件，不写这里。
+
+"""Handwritten checks for openapi/admin.v1.yaml response schemas."""
+
+import re
+
+
+def _fields(value, names):
+    return isinstance(value, dict) and value.keys() == set(names)
+
+
+def _route(value):
+    return _fields(value, ("id", "display_name")) and all(
+        isinstance(item, str) and 1 <= len(item) <= 64
+        for item in value.values()
+    )
+
+
+def validate_response(schema, value):
+    """Return False for unknown schemas or any invalid response field."""
+    if schema == "HealthResponse":
+        return (
+            _fields(value, ("status", "routes"))
+            and value["status"] in ("ok", "degraded")
+            and isinstance(value["routes"], list)
+            and len(value["routes"]) >= 1
+            and all(_route(route) for route in value["routes"])
+        )
+    if schema == "VersionResponse":
+        return (
+            _fields(value, ("service", "version", "protocol"))
+            and value["service"] == "osaka-server"
+            and value["protocol"] == "admin.v1"
+            and isinstance(value["version"], str)
+            and re.search(r"^\d+\.\d+\.\d+$", value["version"]) is not None
+        )
+    if schema == "ErrorBody":
+        return (
+            _fields(value, ("code", "message"))
+            and value["code"] in (
+                "UNAUTHENTICATED", "FORBIDDEN", "INVALID_INVITE_CODE",
+                "BACKEND_UNREACHABLE", "INTERNAL",
+            )
+            and isinstance(value["message"], str)
+            and len(value["message"]) <= 200
+        )
+    return False
+"""Run with python3 -m osaka_server.app from server/."""
+
+import hmac
+import json
+import os
+from pathlib import Path
+import ssl
+import sys
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+from .schema import validate_response
+
+
+ERRORS = json.loads(
+    (Path(__file__).resolve().parents[2] / "shared/errors.json").read_text(
+        encoding="utf-8"
+    )
+)
+
+
+def error_body(code):
+    return {"code": code, "message": ERRORS[code]["zh"]}
+
+
+class Handler(BaseHTTPRequestHandler):
+    def log_message(self, format, *args):
+        # Request targets and headers may contain credentials; omit access logs.
+        pass
+
+    def do_GET(self):
+        path = self.path.partition("?")[0]
+        if path not in ("/v1/health", "/v1/version"):
+            self.send_response(404)
+            self.send_header("Content-Length", "0")
+            self.end_headers()
+            return
+
+        credentials = self.headers.get_all("Authorization", [])
+        if not credentials:
+            self.respond(401, "ErrorBody", error_body("UNAUTHENTICATED"))
+            return
+        scheme, separator, token = credentials[0].partition(" ")
+        if (
+            len(credentials) != 1 or scheme.lower() != "bearer" or not separator
+            or not hmac.compare_digest(token.encode("utf-8"), self.server.token)
+        ):
+            self.respond(403, "ErrorBody", error_body("FORBIDDEN"))
+            return
+
+        if path == "/v1/health":
+            self.respond(200, "HealthResponse", {
+                "status": "ok", "routes": [self.server.route],
+            })
+        else:
+            self.respond(200, "VersionResponse", {
+                "service": "osaka-server", "version": "0.1.0", "protocol": "admin.v1",
+            })
+
+    def respond(self, status, schema, body):
+        if not validate_response(schema, body):
+            status, body = 500, error_body("INTERNAL")
+            if not validate_response("ErrorBody", body):
+                self.send_response(500)
+                self.send_header("Content-Length", "0")
+                self.end_headers()
+                return
+        data = json.dumps(body, ensure_ascii=True).encode("utf-8")
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json; charset=utf-8")
+        self.send_header("Content-Length", str(len(data)))
+        if status == 401:
+            self.send_header("WWW-Authenticate", "Bearer")
+        self.end_headers()
+        self.wfile.write(data)
+
+
+class ConfigurationError(ValueError):
+    """A configuration error safe to display without environment values."""
+
+
+def create_server(address=("0.0.0.0", 8443)):
+    required = ("OSAKA_TLS_CERT", "OSAKA_TLS_KEY", "OSAKA_ADMIN_TOKEN")
+    for name in required:
+        if not os.environ.get(name):
+            raise ConfigurationError(f"Missing required environment variable: {name}")
+    context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+    try:
+        context.load_cert_chain(
+            os.environ["OSAKA_TLS_CERT"], os.environ["OSAKA_TLS_KEY"],
+            password=lambda: "",
+        )
+    except (OSError, ValueError):
+        raise ConfigurationError(
+            "Unable to load OSAKA_TLS_CERT / OSAKA_TLS_KEY"
+        ) from None
+    server = ThreadingHTTPServer(address, Handler)
+    server.token = os.environ["OSAKA_ADMIN_TOKEN"].encode("utf-8")
+    server.route = {
+        "id": os.environ.get("OSAKA_ROUTE_ID", "placeholder-route"),
+        "display_name": os.environ.get("OSAKA_ROUTE_NAME", "Placeholder route"),
+    }
+    try:
+        server.socket = context.wrap_socket(server.socket, server_side=True)
+    except Exception:
+        server.server_close()
+        raise
+    return server
+
+
+def main():
+    try:
+        with create_server() as server:
+            server.serve_forever()
+    except ConfigurationError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    except OSError:
+        print("Unable to start or run HTTPS server", file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        pass
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+exec
+/bin/bash -lc "rg -n 'validate_response|version_string|HealthResponse|VersionResponse|re\\.search|re\\.match' server openapi/admin.v1.yaml; rg --files server/reports" in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+openapi/admin.v1.yaml:15:        "200": {description: ok, content: {application/json: {schema: {$ref: "#/components/schemas/HealthResponse"}}}}
+openapi/admin.v1.yaml:22:        "200": {description: ok, content: {application/json: {schema: {$ref: "#/components/schemas/VersionResponse"}}}}
+openapi/admin.v1.yaml:32:    HealthResponse:
+openapi/admin.v1.yaml:46:    VersionResponse:
+server/osaka_server/schema.py:17:def validate_response(schema, value):
+server/osaka_server/schema.py:19:    if schema == "HealthResponse":
+server/osaka_server/schema.py:27:    if schema == "VersionResponse":
+server/osaka_server/schema.py:33:            and re.search(r"^\d+\.\d+\.\d+$", value["version"]) is not None
+server/osaka_server/app.py:11:from .schema import validate_response
+server/osaka_server/app.py:51:            self.respond(200, "HealthResponse", {
+server/osaka_server/app.py:55:            self.respond(200, "VersionResponse", {
+server/osaka_server/app.py:60:        if not validate_response(schema, body):
+server/osaka_server/app.py:62:            if not validate_response("ErrorBody", body):
+server/tests/test_app.py:18:from osaka_server.schema import validate_response
+server/tests/test_app.py:158:    ("/v1/health", "HealthResponse"), ("/v1/version", "VersionResponse"),
+server/tests/test_app.py:172:    assert validate_response("ErrorBody" if code else schema, body)
+server/tests/test_app.py:175:    elif schema == "HealthResponse":
+server/tests/test_contract.py:7:from osaka_server.schema import validate_response
+server/tests/test_contract.py:21:    assert validate_response(schema, value) is expected
+server/tests/test_contract.py:46:@pytest.mark.parametrize("schema", ["HealthResponse", "VersionResponse", "ErrorBody"])
+server/tests/test_contract.py:49:    assert not validate_response(schema, value)
+server/tests/test_contract.py:60:    assert validate_response("HealthResponse", {
+server/tests/test_contract.py:70:    assert not validate_response("HealthResponse", {"status": "ok", "routes": [route]})
+server/tests/test_contract.py:78:    assert validate_response("ErrorBody", {"code": "INTERNAL", "message": value}) is expected
+server/tests/test_contract.py:82:    ("HealthResponse", "status"), ("VersionResponse", "service"),
+server/tests/test_contract.py:83:    ("VersionResponse", "version"), ("VersionResponse", "protocol"),
+server/tests/test_contract.py:90:    assert not validate_response(schema, body)
+server/tests/test_contract.py:97:    assert validate_response("VersionResponse", {
+server/tests/test_contract.py:103:    assert not validate_response("Unknown", {})
+server/reports/pytest.txt
+server/reports/lint.txt
+server/reports/compile.txt
+
+codex
+已确认修改只涉及版本格式校验、Server 响应头、对应测试及重复记录清理。现有测试能直接读取响应头，会复用它新增一条回归测试。返工卡明确禁止修改根目录 notes 和 board.json，因此保留它们的现有状态，验证结果会在交付回复中列出。
+
+apply patch
+patch: completed
+/home/box/osaka/wt/server-core/server/tests/test_app.py
+/home/box/osaka/wt/server-core/server/tests/test_contract.py
+diff --git a/server/tests/test_app.py b/server/tests/test_app.py
+index 9222f182f9cb92613548ed28f01c9763b00bafa6..abc4ca78859561348930a9f493338422e1a245fb
+--- a/server/tests/test_app.py
++++ b/server/tests/test_app.py
+@@ -179,6 +179,17 @@
+         assert body["version"] == "0.1.0"
+ 
+ 
++def test_server_header_does_not_expose_python(server, tls_files):
++    conn = connection(server, tls_files)
++    try:
++        conn.request("GET", "/v1/health")
++        response = conn.getresponse()
++        assert response.getheader("Server") == "osaka-server"
++        assert "Python" not in response.getheader("Server")
++    finally:
++        conn.close()
++
++
+ def test_duplicate_credentials_rejected(server, tls_files):
+     conn = connection(server, tls_files)
+     try:
+diff --git a/server/tests/test_contract.py b/server/tests/test_contract.py
+index 76b62296af935b6d454d6f5a0039179fa6599201..3d55487877fb4284e9abac203e0f3b96de7d2009
+--- a/server/tests/test_contract.py
++++ b/server/tests/test_contract.py
+@@ -91,7 +91,7 @@
+ 
+ 
+ @pytest.mark.parametrize("version,expected", [
+-    ("1.2.3\n", True), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", True),
++    ("1.2.3\n", False), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", False),
+ ])
+ def test_version_pattern(version, expected):
+     assert validate_response("VersionResponse", {
+
+exec
+/bin/bash -lc 'python3 -m pytest -q -p no:cacheprovider tests/test_contract.py::test_version_pattern tests/test_app.py::test_server_header_does_not_expose_python' in /home/box/osaka/wt/server-core/server
+ exited 1 in 143ms:
+F..FFs                                                                   [100%]
+=================================== FAILURES ===================================
+_____________________ test_version_pattern[1.2.3\n-False] ______________________
+
+version = '1.2.3\n', expected = False
+
+    @pytest.mark.parametrize("version,expected", [
+        ("1.2.3\n", False), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", False),
+    ])
+    def test_version_pattern(version, expected):
+>       assert validate_response("VersionResponse", {
+            "service": "osaka-server", "version": version, "protocol": "admin.v1",
+        }) is expected
+E       AssertionError: assert True is False
+E        +  where True = validate_response('VersionResponse', {'service': 'osaka-server', 'version': '1.2.3\n', 'protocol': 'admin.v1'})
+
+tests/test_contract.py:97: AssertionError
+_______________ test_version_pattern[\u0661.\u0662.\u0663-False] _______________
+
+version = '١.٢.٣', expected = False
+
+    @pytest.mark.parametrize("version,expected", [
+        ("1.2.3\n", False), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", False),
+    ])
+    def test_version_pattern(version, expected):
+>       assert validate_response("VersionResponse", {
+            "service": "osaka-server", "version": version, "protocol": "admin.v1",
+        }) is expected
+E       AssertionError: assert True is False
+E        +  where True = validate_response('VersionResponse', {'service': 'osaka-server', 'version': '١.٢.٣', 'protocol': 'admin.v1'})
+
+tests/test_contract.py:97: AssertionError
+______________ test_server_header_does_not_expose_python[handler] ______________
+
+server = namespace(token=b'obviously-fake-test-token', route={'id': 'placeholder-route', 'display_name': 'Placeholder route'})
+tls_files = (PosixPath('/home/box/osaka/wt/server-core/server/pytest-of-box/pytest-3/tls0/cert.pem'), PosixPath('/home/box/osaka/wt/server-core/server/pytest-of-box/pytest-3/tls0/key.pem'))
+
+    def test_server_header_does_not_expose_python(server, tls_files):
+        conn = connection(server, tls_files)
+        try:
+            conn.request("GET", "/v1/health")
+            response = conn.getresponse()
+>           assert response.getheader("Server") == "osaka-server"
+E           AssertionError: assert 'BaseHTTP/0.6 Python/3.13.5' == 'osaka-server'
+E             
+E             - osaka-server
+E             + BaseHTTP/0.6 Python/3.13.5
+
+tests/test_app.py:187: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_contract.py::test_version_pattern[1.2.3\n-False] - Assertio...
+FAILED tests/test_contract.py::test_version_pattern[\u0661.\u0662.\u0663-False]
+FAILED tests/test_app.py::test_server_header_does_not_expose_python[handler]
+3 failed, 2 passed, 1 skipped in 0.08s
+
+apply patch
+patch: completed
+/home/box/osaka/wt/server-core/server/README.md
+/home/box/osaka/wt/server-core/server/notes/server-core.md
+/home/box/osaka/wt/server-core/server/osaka_server/app.py
+/home/box/osaka/wt/server-core/server/osaka_server/schema.py
+/home/box/osaka/wt/server-core/server/reports/compile.txt
+/home/box/osaka/wt/server-core/server/reports/lint.txt
+/home/box/osaka/wt/server-core/server/reports/pytest.txt
+diff --git a/server/README.md b/server/README.md
+index 60b49916fae372be66073366c17cc412114c8620..d7518daa1613d006a2757331f79f99bc9bf1ecb7
+--- a/server/README.md
++++ b/server/README.md
+@@ -37,4 +37,4 @@
+ 证书测试跳过。沙箱禁止本地 socket 时，真实连接测试明确跳过，内存 handler
+ 测试仍运行；此时不能据此认定真实 HTTPS 验收完成。
+ 
+-验证命令、输出路径和环境限制见 [交付记录](notes/server-core.md)。
++验证命令、输出路径和环境限制见 [交付记录](../notes/server-core.md)。
+diff --git a/server/notes/server-core.md b/server/notes/server-core.md
+deleted file mode 100644
+index 54f3cfeceb1c01dca05c64341e63c28ccba8afa6..0000000000000000000000000000000000000000
+--- a/server/notes/server-core.md
++++ /dev/null
+@@ -1,29 +0,0 @@
+-# server-core 实现及验证记录
+-
+-2026-11-02，按 `notes/server-core-taskcard.md` 和 ponytail full 实现。
+-任务卡禁止修改 `server/` 以外文件，故记录放在此处；未更新根目录的
+-`notes/server-core.md`、`board.json` 或已有用户改动。
+-
+-实现：标准库 HTTPS 入口、health/version、Bearer 鉴权、共享错误文案、
+-手写出站 schema 校验、ASCII 邀请码归一化。测试直接读取共享 JSON 向量，
+-覆盖字段类型、长度、未知字段、枚举、版本格式、凭证、日志及启动配置错误。
+-未增加依赖或执行 Git 写操作。
+-
+-从 `server/` 执行的验证命令：
+-
+-| 检查 | 命令 | 输出路径（仓库根相对） | 结果 |
+-| --- | --- | --- | --- |
+-| 编译 | `python3 -m compileall -f osaka_server tests` | `server/reports/compile.txt` | 退出码 0 |
+-| 缩进静态检查 | `python3 -m tabnanny -v osaka_server tests` | `server/reports/lint.txt` | 退出码 0；仅检查缩进 |
+-| 测试 | `python3 -m pytest -q` | `server/reports/pytest.txt` | 151 passed, 30 skipped；退出码 0 |
+-
+-本环境没有 ruff、flake8、pyflakes 或 pylint；未联网安装。
+-首轮真实连接测试因创建本地 socket 返回 `PermissionError: [Errno 1] Operation not permitted`
+-而失败。已保留真实连接测试并明确跳过受限项，同时补充内存 HTTP 传输，使用真正的
+-HTTP 请求解析及 handler 覆盖功能。30 个跳过项包括真实连接的鉴权、响应、线路配置
+-和 TLS 信任链/主机名验证；需在允许本地 socket 的环境重跑同一命令完成 HTTPS 验收。
+-未连接或修改真实服务器。
+-
+-新增文件范围：`server/osaka_server/{__init__,app,schema,invite}.py`、
+-`server/tests/test_{app,contract}.py`、`server/README.md`、`server/.gitignore`、
+-本文件及 `server/reports/` 验证输出。CLI 会话未另行导出，工具输出保留在本次会话中。
+diff --git a/server/osaka_server/app.py b/server/osaka_server/app.py
+index 61e87abf8e3ac949af72b855e520f1e19b4c42a8..541606ee3c6fb7b7fe23d90df3551e8d34bac199
+--- a/server/osaka_server/app.py
++++ b/server/osaka_server/app.py
+@@ -23,6 +23,9 @@
+ 
+ 
+ class Handler(BaseHTTPRequestHandler):
++    def version_string(self):
++        return "osaka-server"
++
+     def log_message(self, format, *args):
+         # Request targets and headers may contain credentials; omit access logs.
+         pass
+diff --git a/server/osaka_server/schema.py b/server/osaka_server/schema.py
+index 206f724984ae167139c349170237585758215517..95ea8a9f211c1df4915903f2d1d629b8aa8b4062
+--- a/server/osaka_server/schema.py
++++ b/server/osaka_server/schema.py
+@@ -30,7 +30,7 @@
+             and value["service"] == "osaka-server"
+             and value["protocol"] == "admin.v1"
+             and isinstance(value["version"], str)
+-            and re.search(r"^\d+\.\d+\.\d+$", value["version"]) is not None
++            and re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", value["version"]) is not None
+         )
+     if schema == "ErrorBody":
+         return (
+diff --git a/server/reports/compile.txt b/server/reports/compile.txt
+deleted file mode 100644
+index 5684cb9f937efc309d827761e36e90af577587f7..0000000000000000000000000000000000000000
+--- a/server/reports/compile.txt
++++ /dev/null
+@@ -1,8 +0,0 @@
+-Listing 'osaka_server'...
+-Compiling 'osaka_server/__init__.py'...
+-Compiling 'osaka_server/app.py'...
+-Compiling 'osaka_server/invite.py'...
+-Compiling 'osaka_server/schema.py'...
+-Listing 'tests'...
+-Compiling 'tests/test_app.py'...
+-Compiling 'tests/test_contract.py'...
+diff --git a/server/reports/lint.txt b/server/reports/lint.txt
+deleted file mode 100644
+index 1957b0076c400cb711fb8cdaafc67b1398683234..0000000000000000000000000000000000000000
+--- a/server/reports/lint.txt
++++ /dev/null
+@@ -1,10 +0,0 @@
+-'osaka_server': listing directory
+-'osaka_server/__init__.py': Clean bill of health.
+-'osaka_server/invite.py': Clean bill of health.
+-'osaka_server/__pycache__': listing directory
+-'osaka_server/app.py': Clean bill of health.
+-'osaka_server/schema.py': Clean bill of health.
+-'tests': listing directory
+-'tests/test_contract.py': Clean bill of health.
+-'tests/__pycache__': listing directory
+-'tests/test_app.py': Clean bill of health.
+diff --git a/server/reports/pytest.txt b/server/reports/pytest.txt
+deleted file mode 100644
+index 88f606f57d0530f325aae0d95518ce46c256786a..0000000000000000000000000000000000000000
+--- a/server/reports/pytest.txt
++++ /dev/null
+@@ -1,4 +0,0 @@
+-................ssssssssssssssss.s.s...sss.s...sss.s.s........sss....... [ 39%]
+-........................................................................ [ 79%]
+-.....................................                                    [100%]
+-151 passed, 30 skipped in 0.24s
+diff --git a/server/tests/test_app.py b/server/tests/test_app.py
+index 9222f182f9cb92613548ed28f01c9763b00bafa6..abc4ca78859561348930a9f493338422e1a245fb
+--- a/server/tests/test_app.py
++++ b/server/tests/test_app.py
+@@ -179,6 +179,17 @@
+         assert body["version"] == "0.1.0"
+ 
+ 
++def test_server_header_does_not_expose_python(server, tls_files):
++    conn = connection(server, tls_files)
++    try:
++        conn.request("GET", "/v1/health")
++        response = conn.getresponse()
++        assert response.getheader("Server") == "osaka-server"
++        assert "Python" not in response.getheader("Server")
++    finally:
++        conn.close()
++
++
+ def test_duplicate_credentials_rejected(server, tls_files):
+     conn = connection(server, tls_files)
+     try:
+diff --git a/server/tests/test_contract.py b/server/tests/test_contract.py
+index 76b62296af935b6d454d6f5a0039179fa6599201..3d55487877fb4284e9abac203e0f3b96de7d2009
+--- a/server/tests/test_contract.py
++++ b/server/tests/test_contract.py
+@@ -91,7 +91,7 @@
+ 
+ 
+ @pytest.mark.parametrize("version,expected", [
+-    ("1.2.3\n", True), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", True),
++    ("1.2.3\n", False), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", False),
+ ])
+ def test_version_pattern(version, expected):
+     assert validate_response("VersionResponse", {
+
+exec
+/bin/bash -lc 'python3 -m compileall -q server/osaka_server server/tests' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+exec
+/bin/bash -lc 'python3 -m pytest -q -rs -p no:cacheprovider' in /home/box/osaka/wt/server-core/server
+ succeeded in 314ms:
+................ssssssssssssssss.s.s.s...sss.s...sss.s.s........sss..... [ 39%]
+........................................................................ [ 78%]
+.......................................                                  [100%]
+=========================== short test summary info ============================
+SKIPPED [16] tests/test_app.py:157: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:182: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:193: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:207: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [3] tests/test_app.py:220: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:225: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [3] tests/test_app.py:232: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:244: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:251: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [1] tests/test_app.py:84: sandbox denies local sockets; HTTP handler tested separately in memory
+SKIPPED [2] tests/test_app.py:300: sandbox denies local sockets; HTTP handler tested separately in memory
+152 passed, 31 skipped in 0.25s
+
+exec
+/bin/bash -lc 'git diff --check' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+exec
+/bin/bash -lc 'git diff -- server/osaka_server/schema.py server/osaka_server/app.py server/tests/test_contract.py server/tests/test_app.py server/README.md; git diff --stat; git status --short' in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+diff --git a/server/README.md b/server/README.md
+index 60b4991..d7518da 100644
+--- a/server/README.md
++++ b/server/README.md
+@@ -37,4 +37,4 @@ python3 -m pytest -q
+ 证书测试跳过。沙箱禁止本地 socket 时，真实连接测试明确跳过，内存 handler
+ 测试仍运行；此时不能据此认定真实 HTTPS 验收完成。
+ 
+-验证命令、输出路径和环境限制见 [交付记录](notes/server-core.md)。
++验证命令、输出路径和环境限制见 [交付记录](../notes/server-core.md)。
+diff --git a/server/osaka_server/app.py b/server/osaka_server/app.py
+index 61e87ab..541606e 100644
+--- a/server/osaka_server/app.py
++++ b/server/osaka_server/app.py
+@@ -23,6 +23,9 @@ def error_body(code):
+ 
+ 
+ class Handler(BaseHTTPRequestHandler):
++    def version_string(self):
++        return "osaka-server"
++
+     def log_message(self, format, *args):
+         # Request targets and headers may contain credentials; omit access logs.
+         pass
+diff --git a/server/osaka_server/schema.py b/server/osaka_server/schema.py
+index 206f724..95ea8a9 100644
+--- a/server/osaka_server/schema.py
++++ b/server/osaka_server/schema.py
+@@ -30,7 +30,7 @@ def validate_response(schema, value):
+             and value["service"] == "osaka-server"
+             and value["protocol"] == "admin.v1"
+             and isinstance(value["version"], str)
+-            and re.search(r"^\d+\.\d+\.\d+$", value["version"]) is not None
++            and re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", value["version"]) is not None
+         )
+     if schema == "ErrorBody":
+         return (
+diff --git a/server/tests/test_app.py b/server/tests/test_app.py
+index 9222f18..abc4ca7 100644
+--- a/server/tests/test_app.py
++++ b/server/tests/test_app.py
+@@ -179,6 +179,17 @@ def test_authentication(server, tls_files, path, schema, authorization, status,
+         assert body["version"] == "0.1.0"
+ 
+ 
++def test_server_header_does_not_expose_python(server, tls_files):
++    conn = connection(server, tls_files)
++    try:
++        conn.request("GET", "/v1/health")
++        response = conn.getresponse()
++        assert response.getheader("Server") == "osaka-server"
++        assert "Python" not in response.getheader("Server")
++    finally:
++        conn.close()
++
++
+ def test_duplicate_credentials_rejected(server, tls_files):
+     conn = connection(server, tls_files)
+     try:
+diff --git a/server/tests/test_contract.py b/server/tests/test_contract.py
+index 76b6229..3d55487 100644
+--- a/server/tests/test_contract.py
++++ b/server/tests/test_contract.py
+@@ -91,7 +91,7 @@ def test_schema_field_types(schema, field, value):
+ 
+ 
+ @pytest.mark.parametrize("version,expected", [
+-    ("1.2.3\n", True), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", True),
++    ("1.2.3\n", False), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", False),
+ ])
+ def test_version_pattern(version, expected):
+     assert validate_response("VersionResponse", {
+ notes/server-core.md          | 11 +++++++++++
+ server/README.md              |  2 +-
+ server/notes/server-core.md   | 29 -----------------------------
+ server/osaka_server/app.py    |  3 +++
+ server/osaka_server/schema.py |  2 +-
+ server/reports/compile.txt    |  8 --------
+ server/reports/lint.txt       | 10 ----------
+ server/reports/pytest.txt     |  4 ----
+ server/tests/test_app.py      | 11 +++++++++++
+ server/tests/test_contract.py |  2 +-
+ 10 files changed, 28 insertions(+), 54 deletions(-)
+ M notes/server-core.md
+ M server/README.md
+ D server/notes/server-core.md
+ M server/osaka_server/app.py
+ M server/osaka_server/schema.py
+ D server/reports/compile.txt
+ D server/reports/lint.txt
+ D server/reports/pytest.txt
+ M server/tests/test_app.py
+ M server/tests/test_contract.py
+?? notes/logs/server-core-rework1-codex-20261102-1509.log
+?? notes/server-core-rework1-taskcard.md
+
+exec
+/bin/bash -lc "python3 - <<'PY'
+import json
+from pathlib import Path
+import subprocess
+
+allowed = {
+    'server/osaka_server/schema.py', 'server/osaka_server/app.py',
+    'server/tests/test_contract.py', 'server/tests/test_app.py',
+    'server/README.md', 'server/notes/server-core.md',
+    'server/reports/compile.txt', 'server/reports/lint.txt', 'server/reports/pytest.txt',
+}
+changed = set(subprocess.check_output(['git', 'diff', '--name-only'], text=True).splitlines())
+assert changed - {'notes/server-core.md'} == allowed, changed
+module = next(m for m in json.loads(Path('board.json').read_text())['modules'] if m['id'] == 'server-core')
+assert all(any(p.startswith(prefix) for prefix in module['paths']) for p in allowed)
+assert Path('server/../notes/server-core.md').is_file()
+assert not Path('server/notes/server-core.md').exists()
+assert not list(Path('server/reports').glob('*.txt'))
+print('PASS: task-card file scope, module scope, README target, requested deletions')
+PY" in /home/box/osaka/wt/server-core
+ succeeded in 0ms:
+PASS: task-card file scope, module scope, README target, requested deletions
+
+codex
+已按任务卡及 ponytail full 完成，未提交 git。
+
+- 版本校验改为 ASCII 数字全匹配，拒绝尾部换行和 Unicode 数字。
+- Server 头固定为 `osaka-server`，新增回归测试。
+- 删除指定重复记录，修正 README 链接。
+- 编译通过；pytest：**152 passed，31 skipped**；差异格式及修改范围检查通过。
+
+限制：沙箱禁止 socket，31 项真实连接测试跳过；未运行独立 lint。按返工卡要求未修改 notes、board.json，验证输出保留在本次会话中。
+tokens used
+22,847
+已按任务卡及 ponytail full 完成，未提交 git。
+
+- 版本校验改为 ASCII 数字全匹配，拒绝尾部换行和 Unicode 数字。
+- Server 头固定为 `osaka-server`，新增回归测试。
+- 删除指定重复记录，修正 README 链接。
+- 编译通过；pytest：**152 passed，31 skipped**；差异格式及修改范围检查通过。
+
+限制：沙箱禁止 socket，31 项真实连接测试跳过；未运行独立 lint。按返工卡要求未修改 notes、board.json，验证输出保留在本次会话中。

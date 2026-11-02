@@ -37,4 +37,4 @@ python3 -m pytest -q
 证书测试跳过。沙箱禁止本地 socket 时，真实连接测试明确跳过，内存 handler
 测试仍运行；此时不能据此认定真实 HTTPS 验收完成。
 
-验证命令、输出路径和环境限制见 [交付记录](notes/server-core.md)。
+验证命令、输出路径和环境限制见 [交付记录](../notes/server-core.md)。

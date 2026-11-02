@@ -91,7 +91,7 @@ def test_schema_field_types(schema, field, value):
 
 
 @pytest.mark.parametrize("version,expected", [
-    ("1.2.3\n", True), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", True),
+    ("1.2.3\n", False), ("v1.2.3", False), ("1.2.3-beta", False), ("١.٢.٣", False),
 ])
 def test_version_pattern(version, expected):
     assert validate_response("VersionResponse", {

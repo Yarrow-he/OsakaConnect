@@ -37,3 +37,21 @@ A8, A9, A15, A17（见 `acceptance.md`）。完成标准：pytest：401/403/200�
 - 测试：`cd server && python3 -m pytest -q -rs -p no:cacheprovider` → notes/logs/server-core-pytest.log（181 passed，0 skipped，含真实本地 TLS 连接 401/403/200）
 - Codex 会话日志：notes/logs/server-core-codex-20261102-1455.log（成功）；1453（read-only 失败）、1454（中断）
 - 已知限制：无正式 lint 工具；Codex 沙箱禁 socket，其自测跳过 30 项，已在沙箱外重跑全过；routes 来自环境变量占位默认值；不含部署脚本（本期未要求）。
+
+## 审阅（审阅 · Osaka，2026-11-02，提交 94c35f3）
+- 结论：必须改 1 条，其余通过。CLI：Claude Code + GLM，日志 /home/box/osaka/logs/review-server-core-20261102-1501.log
+- 通过：无硬编码密钥/IP/账号/token（0.0.0.0:8443 为任务卡指定，测试只用假值）；Bearer 鉴权 401/403 用 hmac.compare_digest（app.py:45）；invite.py 正则与 shared 规范一致；无新增依赖；未改 .claude/.codex；未提交 board.json；与 docs/architecture.md 一致。
+- 必须改：
+  1. server/osaka_server/schema.py:33 version 校验用 `\d` 与 `$`，会放过 Unicode 数字和尾部换行，与 openapi/admin.v1.yaml:52 不同源；server/tests/test_contract.py:94 把这两例断言为 True，固化了偏差。改为 fullmatch + [0-9]，测试两例改 False。能否机器化：能（契约向量 admin-contract.json 补这两条 invalid，CI 契约 job 覆盖）。
+- 建议改：
+  1. 删 server/notes/server-core.md 与 server/reports/*.txt：与根 notes 及 notes/logs 重复且过期（pytest.txt 记 151 passed/30 skipped；server/notes/server-core.md:5 与事实矛盾），删后核对 server/README.md:40 链接。
+  2. server/osaka_server/invite.py:10 `strip()` 剥离范围与 .NET/Android trim 可能不一致（A15 三端一致），建议限定字符集或补边界向量。
+  3. app.py 未覆写 version_string()，响应带 Python 版本 Server 头。
+  4. server/tests/test_app.py:98-137 内存传输层仅为沙箱服务，可简化，非阻塞。
+
+## 返工1（写手 · 服务端，2026-11-02）
+- 必须改已修：schema.py version 改 re.fullmatch + [0-9]；test_contract.py 两例改 False。
+- 建议已做：app.py 覆写 version_string()（Server: osaka-server，加测试）；删 server/notes/server-core.md、server/reports/*.txt，README 链接改 ../notes/server-core.md。
+- 未做：admin-contract.json 反例（组长定归 ci-guards）；invite.py strip（涉三端，待 shared-protocol 补向量）；test_app 简化（非必须）；rebase（禁改历史，组长定不 rebase）。
+- 编译：notes/logs/server-core-rework1-compile.log；测试：`cd server && python3 -m pytest -q -rs -p no:cacheprovider` → notes/logs/server-core-rework1-pytest.log
+- Codex：notes/logs/server-core-rework1-codex-20261102-1509.log；任务卡 notes/server-core-rework1-taskcard.md

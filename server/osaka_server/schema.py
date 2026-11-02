@@ -30,7 +30,7 @@ def validate_response(schema, value):
             and value["service"] == "osaka-server"
             and value["protocol"] == "admin.v1"
             and isinstance(value["version"], str)
-            and re.search(r"^\d+\.\d+\.\d+$", value["version"]) is not None
+            and re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", value["version"]) is not None
         )
     if schema == "ErrorBody":
         return (

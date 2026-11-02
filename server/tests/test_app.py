@@ -179,6 +179,17 @@ def test_authentication(server, tls_files, path, schema, authorization, status, 
         assert body["version"] == "0.1.0"
 
 
+def test_server_header_does_not_expose_python(server, tls_files):
+    conn = connection(server, tls_files)
+    try:
+        conn.request("GET", "/v1/health")
+        response = conn.getresponse()
+        assert response.getheader("Server") == "osaka-server"
+        assert "Python" not in response.getheader("Server")
+    finally:
+        conn.close()
+
+
 def test_duplicate_credentials_rejected(server, tls_files):
     conn = connection(server, tls_files)
     try:

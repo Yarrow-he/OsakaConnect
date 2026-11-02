@@ -23,6 +23,9 @@ def error_body(code):
 
 
 class Handler(BaseHTTPRequestHandler):
+    def version_string(self):
+        return "osaka-server"
+
     def log_message(self, format, *args):
         # Request targets and headers may contain credentials; omit access logs.
         pass
