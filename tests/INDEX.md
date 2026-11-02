@@ -8,7 +8,7 @@
 | tests/windows/win-diagnostics/*.cs（WinDiagnostics.Tests.csproj） | A3、A4、A15 | Windows | `dotnet test`，windows-latest | 阻塞：run 41403148691 未调用（2026-11-02） |
 | tests/admin/admin-connect/{gen-certs,run-a10}.sh + docker-compose.yml | A10 ①②③④ | 管理端 | `bash tests/admin/admin-connect/run-a10.sh`，ubuntu + docker | 未跑：run 41406112495、41407456188 a10-docker 均输出“无 A10 脚本，跳过” |
 | tests/admin/admin-connect/grep-guard.sh | A10（禁止放行回调）、A14 | 管理端 | `bash tests/admin/admin-connect/grep-guard.sh` | 2026-11-02 通过 @93fba9d、@02e2877、@e700fe5（修复 set -e 误判后） |
-| tests/android/android-shell/androidTest/ShellNavigationTest.kt + ci-run.sh | A5、A6、A16 | Android | 见文件头，ubuntu + 模拟器 | 阻塞：模块分支 workflow 无模拟器、不调用本脚本（2026-11-02） |
+| tests/android/android-shell/androidTest/ShellNavigationTest.kt + ci-run.sh | A5、A6、A16 | Android | 见文件头，ubuntu + 模拟器 | run 41455806499 @454063d |
 | tests/android/android-shell/lang-guard.sh | A14、A17 | Android | `bash tests/android/android-shell/lang-guard.sh` | 2026-11-02 通过 @9e47998、@97d42d6 |
 | tests/android/android-diagnostics/DiagnosticsVectorsTest.kt + run.sh | A7、A15 | Android | `./gradlew testDebugUnitTest` | 阻塞：workflow 不调用 run.sh（2026-11-02） |
 | tests/android/android-diagnostics/{json-divergence.json,JvmJsonDivergenceTest.kt,androidTest/OrgJsonDivergenceTest.kt,run-instrumented.sh} | A9/A7 相关（JvmJson 与真机分歧，审阅 2026-11-02） | Android | `bash tests/android/android-diagnostics/run-instrumented.sh` | 待跑（等模拟器 CI） |
