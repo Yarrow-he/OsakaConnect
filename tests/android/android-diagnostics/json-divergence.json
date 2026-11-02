@@ -1,10 +1,10 @@
 {
-  "description": "android-diagnostics 分歧向量：同一输入分别喂给真机 org.json 与 JVM 单测源集内的 org.json 替身 JvmJson（/tmp/JvmJson-97d42d6.kt @97d42d6）。jvm 期望按 JvmJson 源码推导：重复键、NaN/Infinity、字符串内裸控制字符、开头 BOM 在 JvmJson 均失败。本文件是 JVM 测试的输入；androidTest/OrgJsonDivergenceTest.kt 内嵌同一组数据，改一处必须改两处。",
+  "description": "android-diagnostics 分歧向量：同一输入分别喂给真机 org.json 与 JVM 单测源集内的 org.json 替身 JvmJson（/tmp/JvmJson-97d42d6.kt @97d42d6）。jvm 期望按 JvmJson 源码推导：NaN/Infinity、字符串内裸控制字符、开头 BOM 在 JvmJson 均失败；重复键按真机 org.json 后值覆盖（code=FORBIDDEN）。本文件是 JVM 测试的输入；androidTest/OrgJsonDivergenceTest.kt 内嵌同一组数据，改一处必须改两处。",
   "cases": [
     {
       "name": "duplicate-keys",
       "input": "{\"code\":\"INTERNAL\",\"code\":\"FORBIDDEN\",\"message\":\"x\"}",
-      "jvm": { "ok": false }
+      "jvm": { "ok": true, "value": { "code": "FORBIDDEN" } }
     },
     {
       "name": "nan",
