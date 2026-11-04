@@ -1,4 +1,4 @@
-# acceptance.md — 第 1 期：0.1.0 可启动工程（已确认 Hao Yin 2026-11-02）
+# acceptance.md — 第 1 期：0.1.0 可启动工程（已确认 Yarrow 2026-11-02）
 
 来源：REBUILD-PLAN.md 第 1、2（0.1.0 行）、3、4 节。仓库：Yarrow-he/OsakaConnect。
 技术栈（沿用旧工程，计划第 1.2 条“不更换技术栈”）：Windows 客户端与管理端 C#/.NET；Android Kotlin；后台 Python。← 已确认，见 A14
@@ -20,11 +20,11 @@
 | A12 | 只建本期所需模块，不铺空框架；单 PR 手写生产逻辑 200–600 行 | 审阅逐 PR 核对；CI 统计行数（测试/生成/资源分开） |
 | A13 | 四部分构建与测试都在 GitHub Actions 上跑通 | main 上最近一次 workflow 全绿的链接 |
 
-## Hao Yin 已定决策（2026-11-02 确认，替代上文“← 已确认，见 A14”）
+## Yarrow 已定决策（2026-11-02 确认，替代上文“← 已确认，见 A14”）
 
 | 编号 | 验收条目 | 怎么验证 |
 |---|---|---|
 | A14 | 技术栈锁定：Windows 客户端与管理端为 C#/.NET，Android 为 Kotlin，后台为 Python；不出现其他语言的生产代码 | CI 脚本：`windows/`、`admin/` 下只允许 `*.csproj`/`*.cs`/`*.xaml`；`android/` 下只允许 Kotlin/Gradle(KTS)；`server/` 下只允许 Python；违例即失败。另查 `docs/architecture.md` 技术栈一节与此一致 |
-| A15 | 邀请码固定 8 位：字符集 Crockford Base32（`0-9A-Z` 去 I、L、O、U），大小写不敏感，输入归一化为大写；规则只在 `shared/invite-code.md` 与 `shared/test-vectors/invite-code.json` 定义一次，三端共用 | 共用测试向量（合法/非法/长度 7 与 9/含 I、L、O、U/小写）在 Windows、Android、后台三处单测中全部通过；本期只交付格式校验，激活流程在 0.2.0；字符集 Crockford Base32 由 Hao Yin 2026-11-02 确定 |
-| A16 | UI 按 Hao Yin 的 Figma 设计：本期占位页的页面结构、页面名称与导航顺序取自 `design/`（Windows：连接/连接记录/邀请码/设置 中本期只做 连接、设置；Android：未激活/已激活两态入口） | 审阅逐页对照 `design/inventory.md` 页面编号（W1、W4、P1、P2）核对标题与导航顺序；UI 测试断言页面标识与设计稿编号一致。视觉还原不在本期 |
+| A15 | 邀请码固定 8 位：字符集 Crockford Base32（`0-9A-Z` 去 I、L、O、U），大小写不敏感，输入归一化为大写；规则只在 `shared/invite-code.md` 与 `shared/test-vectors/invite-code.json` 定义一次，三端共用 | 共用测试向量（合法/非法/长度 7 与 9/含 I、L、O、U/小写）在 Windows、Android、后台三处单测中全部通过；本期只交付格式校验，激活流程在 0.2.0；字符集 Crockford Base32 由 Yarrow 2026-11-02 确定 |
+| A16 | UI 按 Yarrow 的 Figma 设计：本期占位页的页面结构、页面名称与导航顺序取自 `design/`（Windows：连接/连接记录/邀请码/设置 中本期只做 连接、设置；Android：未激活/已激活两态入口） | 审阅逐页对照 `design/inventory.md` 页面编号（W1、W4、P1、P2）核对标题与导航顺序；UI 测试断言页面标识与设计稿编号一致。视觉还原不在本期 |
 | A17 | 一期单线路但可扩展：协议与数据模型用线路列表（`routes[]`，本期长度恰为 1），客户端不得硬编码线路地址或名称 | proto 中线路字段为 repeated；后台单测断言返回列表长度 1；CI grep 客户端源码不含线路地址/“Line 01”/“OSA · 01”字面量（仅允许资源文件） |

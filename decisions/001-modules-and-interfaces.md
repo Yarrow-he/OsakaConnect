@@ -40,7 +40,7 @@ shared-protocol → (server-core ∥ win-diagnostics ∥ android-diagnostics) �
 2. 手写 DTO 可能三端漂移；靠共用 JSON 样例测试缓解。
 3. CI 中 WPF UI 自动化与 Android 模拟器不稳定、耗时。
 4. 自签 TLS 在 CI 中的信任配置可能被偷懒成“跳过校验”，违反计划 1.6。
-5. 邀请码字符集来自手机设计稿推断，需 Hao Yin 确认。
+5. 邀请码字符集来自手机设计稿推断，需 Yarrow 确认。
 
 ## 评审所需验收片段
 A1–A17 见 acceptance.md；关键：A9 身份校验、A10 被拒不显示已连接、A11 不互引源码、A12 不铺空框架与行数预算、A15 邀请码 8 位、A17 单线路列表。
@@ -63,9 +63,9 @@ A1–A17 见 acceptance.md；关键：A9 身份校验、A10 被拒不显示已�
 
 ### 结论：两位均反对现稿，共同点：①契约改 OpenAPI/JSON Schema + 契约测试（含反例）②验收须强制证书校验并补不可信证书/主机名不匹配拒绝用例。待组长修订后复审。
 
-## 拍板（Hao Yin，2026-11-02 14:49 Brisbane）
-流程：评审 A、B 均反对 → 组长上报 Hao Yin → Hao Yin 决定：
+## 拍板（Yarrow，2026-11-02 14:49 Brisbane）
+流程：评审 A、B 均反对 → 组长上报 Yarrow → Yarrow 决定：
 1. 接口改为 OpenAPI，`openapi/admin.v1.yaml` 为唯一事实来源；删除 `proto/`。三端在边界做 schema 校验，不新增重依赖（Python 标准库手写校验；C# System.Text.Json + required + 禁未知字段；Kotlin org.json 手写校验），理由见 `docs/architecture.md`。`shared/test-vectors` 补反例（新增 `admin-contract.json`，邀请码与脱敏向量加反例），CI 新增契约测试 job（`tests/contract`）。
 2. A10 加必测：证书不可信、主机名不匹配必须拒绝连接；测试不走本机回环（CI 临时 CA + docker 网络服务名 `osaka-server`）。
-3. A15 字符集定为 Crockford Base32；acceptance 改为“已确认 Hao Yin 2026-11-02”。
+3. A15 字符集定为 Crockford Base32；acceptance 改为“已确认 Yarrow 2026-11-02”。
 其余模块拆分与 owner 维持原方案；各模块派活 brief 见 `notes/<模块>.md`。

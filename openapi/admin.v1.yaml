@@ -2,7 +2,7 @@ openapi: 3.1.0
 info:
   title: Osaka 管理协议
   version: admin.v1
-  description: 唯一事实来源（Hao Yin 2026-11-02）。HTTPS 必须且客户端必须校验证书链与主机名。令牌只从环境变量读取。
+  description: 唯一事实来源（Yarrow 2026-11-02）。HTTPS 必须且客户端必须校验证书链与主机名。令牌只从环境变量读取。
 servers:
   - url: https://osaka-server:8443
 security:
