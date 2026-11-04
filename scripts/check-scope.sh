@@ -34,3 +34,4 @@ for f in files:
 if bad:
     print("check-scope 失败：\n  " + "\n  ".join(bad)); sys.exit(1)
 PY
+# rt1
