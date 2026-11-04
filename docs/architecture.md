@@ -26,7 +26,7 @@ Windows 客户端、管理端：C#/.NET（WPF）。Android：Kotlin。后台：P
 ## 工具链与模型（非产品依赖）
 写手：Codex gpt-6-astra high。审阅：Claude Code + GLM（`.claude/settings.json`）。测试：Claude Code + DeepSeek（`.claude/settings.tester.json`）。key 一律只引用环境变量。
 
-## 边界 schema 校验方式（Hao Yin 2026-11-02：不新增重依赖）
+## 边界 schema 校验方式（Yarrow 2026-11-02：不新增重依赖）
 | 端 | 做法 | 理由 |
 |---|---|---|
 | 服务端 Python | 标准库 `json` + 手写字段校验函数，单测用 `admin-contract.json` 正反例 | 两个接口、字段少，jsonschema 只作 CI 测试依赖，不进运行时 |
