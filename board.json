@@ -26,7 +26,8 @@
       "README.md",
       ".githooks/",
       ".gitignore",
-      "ci/"
+      "ci/",
+      ".codex/"
     ],
     "protected": [
       ".codex/",
