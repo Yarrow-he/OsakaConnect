@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T03:44:54+10:00",
+  "updated_at": "2026-11-04T23:45:00+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
