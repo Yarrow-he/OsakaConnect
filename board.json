@@ -101,7 +101,7 @@
         "2026-11-02T23:17 组长核对：CI 接入阻塞已解除，main ci.yml 已接入（PR #5 android-emulator、PR #8 windows-acceptance、PR #10 WinDiagnostics.Tests !cancelled()）",
         "测试v2 @82abe4b 通过：必过+guards 绿，0 skip（旧6 skip=缺jsonschema）；logs/server-core/2026-11-02-test-v2.log；notes 提交 042d919",
         "测试v2 通过证据：CI 41450034777 @82abe4b 必过+guards 绿，pytest 183 passed/23 passed 0 skip；logs/server-core/2026-11-02-test-v2.log；CLI /home/box/osaka/artifacts/cli-logs/retest-v2-3modules-2026-11-02.log",
-        "已合入 main：PR #22 合并提交 4aaf529（Hao Yin 聊天批准）"
+        "已合入 main：PR #22 合并提交 4aaf529（Yarrow 聊天批准）"
       ],
       "history": [
         {
@@ -247,7 +247,7 @@
         {
           "state": "完成",
           "at": "2026-11-03T02:52:01+10:00",
-          "note": "Hao Yin 批准（t186u）；PR #21 合入 main 14fb649；windows-acceptance 加入必过（logs/branch-protection/20261103T025117-*）"
+          "note": "Yarrow 批准（t186u）；PR #21 合入 main 14fb649；windows-acceptance 加入必过（logs/branch-protection/20261103T025117-*）"
         }
       ],
       "branch": "windows/win-shell",
@@ -352,7 +352,7 @@
         },
         {
           "at": "2026-11-03T02:22:00+10:00",
-          "to": "Hao Yin",
+          "to": "Yarrow",
           "note": "巡检第3次：催办2次后自 2026-11-02T23:17 起无更新约3小时，按规则改为上报"
         }
       ],
@@ -458,7 +458,7 @@
         {
           "state": "完成",
           "at": "2026-11-03T03:35:49+10:00",
-          "note": "Hao Yin 2026-11-03 03:20 批准；#43 c475c0f、#44 6a15bb5 合入 main"
+          "note": "Yarrow 2026-11-03 03:20 批准；#43 c475c0f、#44 6a15bb5 合入 main"
         }
       ],
       "branch": "admin/admin-connect",
@@ -563,12 +563,12 @@
         {
           "state": "完成",
           "at": "2026-11-03T00:47:52+10:00",
-          "note": "PR #19 等 Hao Yin 批准"
+          "note": "PR #19 等 Yarrow 批准"
         },
         {
           "state": "完成",
           "at": "2026-11-03T02:52:01+10:00",
-          "note": "Hao Yin 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
+          "note": "Yarrow 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
         }
       ],
       "branch": "android/android-shell",
@@ -584,7 +584,7 @@
       "review_state": "通过",
       "test_state": "不通过",
       "next_step": "测试 · Osaka 按 run 41455806499 复测",
-      "blocked_on": "PR #19 等 Hao Yin 批准"
+      "blocked_on": "PR #19 等 Yarrow 批准"
     },
     {
       "id": "android-diagnostics",
@@ -778,7 +778,7 @@
           "at": "2026-11-03T03:24:21+10:00"
         }
       ],
-      "next_step": "未接入 CI；加入必过检查待 Hao Yin 批准"
+      "next_step": "未接入 CI；加入必过检查待 Yarrow 批准"
     }
   ],
   "prs": {
@@ -824,7 +824,7 @@
           "at": "2026-11-02T21:48:34+10:00",
           "to": "已合并",
           "by": "代码组长 · Osaka",
-          "note": "Hao Yin 21:47 批准（二类），PR #8 merge commit ab2eee4"
+          "note": "Yarrow 21:47 批准（二类），PR #8 merge commit ab2eee4"
         }
       ]
     },
@@ -848,7 +848,7 @@
           "at": "2026-11-02T22:15:58+10:00",
           "to": "已关闭",
           "by": "代码组长 · Osaka",
-          "note": "Hao Yin 22:13 选 B 方案，PR #9 关闭未合并，分支保留"
+          "note": "Yarrow 22:13 选 B 方案，PR #9 关闭未合并，分支保留"
         }
       ],
       "next_step": "无"
@@ -892,7 +892,7 @@
           "at": "2026-11-02T22:45:28+10:00",
           "to": "已批准（待 CI 全绿）",
           "by": "代码组长 · Osaka",
-          "note": "Hao Yin 22:44 原话「批」，修订 b5a667a"
+          "note": "Yarrow 22:44 原话「批」，修订 b5a667a"
         },
         {
           "state": "已合并",
@@ -925,7 +925,7 @@
           "at": "2026-11-02T23:02:59+10:00",
           "to": "已合并",
           "by": "代码组长 · Osaka",
-          "note": "Hao Yin 22:57 批准；merge commit d34b595；guards 已加入必过"
+          "note": "Yarrow 22:57 批准；merge commit d34b595；guards 已加入必过"
         }
       ],
       "next_step": "无；guards-acceptance 必过见 tasks.guards-acceptance-required",
@@ -937,7 +937,7 @@
       "state": "完成",
       "started_at": "2026-11-02T23:02:59+10:00",
       "updated_at": "2026-11-03T03:44:54+10:00",
-      "note": "Hao Yin 22:57：guards-acceptance 等产品代码上 main 再加；23:04：另外三项同样豁免至对应代码进仓库，之后必须报绿",
+      "note": "Yarrow 22:57：guards-acceptance 等产品代码上 main 再加；23:04：另外三项同样豁免至对应代码进仓库，之后必须报绿",
       "checks": {
         "guards-acceptance": {
           "depends_on_dirs": [
@@ -986,12 +986,12 @@
         {
           "state": "待写",
           "at": "2026-11-02T23:02:59+10:00",
-          "note": "Hao Yin 22:57"
+          "note": "Yarrow 22:57"
         },
         {
           "state": "豁免中",
           "at": "2026-11-02T23:05:18+10:00",
-          "note": "Hao Yin 23:04：4 项产品依赖检查统一豁免；替换 guards-acceptance-required"
+          "note": "Yarrow 23:04：4 项产品依赖检查统一豁免；替换 guards-acceptance-required"
         },
         {
           "state": "豁免中",
@@ -1019,7 +1019,7 @@
           "note": "lead/ci-android-emulator 相对 main 无新提交，PR #5 已合并，已过时，无需新 PR；WinDiagnostics.Tests 已在 windows-acceptance（PR #8/#10），无需新 PR"
         }
       ],
-      "next_step": "无；远端分支 lead/ci-android-emulator 仍在，删除需 Hao Yin 点头"
+      "next_step": "无；远端分支 lead/ci-android-emulator 仍在，删除需 Yarrow 点头"
     },
     "ci-android-diag-gate": {
       "title": "android-emulator 按 diagnostics 产品目录执行其验收",
@@ -1044,7 +1044,7 @@
         {
           "state": "完成",
           "at": "2026-11-02T23:47:29+10:00",
-          "note": "Hao Yin 聊天内批准，PR #15 合并 9662b8e"
+          "note": "Yarrow 聊天内批准，PR #15 合并 9662b8e"
         }
       ],
       "next_step": "无",

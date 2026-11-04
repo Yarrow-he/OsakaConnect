@@ -1,4 +1,4 @@
-# 项目级 Codex 配置。只由 Hao Yin 决定修改。
+# 项目级 Codex 配置。只由 Yarrow 决定修改。
 model = "gpt-6-astra"
 model_reasoning_effort = "high"
 approval_policy = "on-request"

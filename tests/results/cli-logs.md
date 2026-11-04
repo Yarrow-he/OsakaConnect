@@ -1,6 +1,6 @@
 # CLI 会话日志位置
 
-按 Hao Yin 决定（2026-11-02），CLI 会话日志不进仓库，已移到本机：
+按 Yarrow 决定（2026-11-02），CLI 会话日志不进仓库，已移到本机：
 
 1. `/home/box/osaka/artifacts/cli-logs/admin-connect-2026-11-02.log`
 2. `/home/box/osaka/artifacts/cli-logs/android-diagnostics-2026-11-02.log`

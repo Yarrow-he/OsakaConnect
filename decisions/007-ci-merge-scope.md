@@ -1,6 +1,6 @@
 # 007 CI 校验模块分支的合并提交（B 方案，分支 lead/ci-merge-scope）
 
-Hao Yin 2026-11-02 22:13 决定走 B 方案，PR #9（决策 005）关闭不合并。
+Yarrow 2026-11-02 22:13 决定走 B 方案，PR #9（决策 005）关闭不合并。
 
 ## 问题
 1. main 合入模块分支时，本地 pre-commit 的 check-scope 把 main 带来的文件当成越界，冲突合并无法提交。
@@ -45,15 +45,15 @@ Hao Yin 2026-11-02 22:13 决定走 B 方案，PR #9（决策 005）关闭不合�
 ### 组长备注
 1. 按规则只评一轮，本稿未据评审修改。
 2. B 的浅克隆顾虑不成立：guards 任务 checkout 已设 fetch-depth: 0。
-3. A、B 都指出 board.json 取自被检查提交、可被本分支改宽规则，这是本方案最大的未解决风险，交 Hao Yin 决定是否先改为读 base 的 board.json。
+3. A、B 都指出 board.json 取自被检查提交、可被本分支改宽规则，这是本方案最大的未解决风险，交 Yarrow 决定是否先改为读 base 的 board.json。
 4. 档位：改动检查且涉及合并豁免，二类。
 
-## 修订（2026-11-02 22:23 Hao Yin：先改成从 main 读 board.json，补好再交我批）
+## 修订（2026-11-02 22:23 Yarrow：先改成从 main 读 board.json，补好再交我批）
 1. check-merge-scope.sh 的 scope 与受保护清单一律读 origin/main 的 board.json（MAIN_REF，默认 origin/main），不再读被检提交里的副本。
 2. 新增：合并提交的合入侧 M^2 必须在 origin/main 上，否则拦截。
 3. 自测改为断言具体的拦截原因（不再把任意非零退出当作拦截）；新增用例 6（分支自行放宽 scope 仍拦截）、7（合入侧不在 main 上拦截），共 9 项全部通过。
 4. 同一套新用例在旧脚本上跑，6、7 失败，证明新用例确实覆盖了 A、B 共同指出的风险。
-5. 这是对评审共同风险的修补，不另开 A/B 评审轮；仍为二类，等 Hao Yin 批准。
+5. 这是对评审共同风险的修补，不另开 A/B 评审轮；仍为二类，等 Yarrow 批准。
 
 ### 模型核对补记（2026-11-03，追加）
 1. 评审 B 的会话原始记录：~/.ds-claude/projects/-tmp-rvB7/cb99b0f0-7983-43e8-b744-9f6d47975eb9.jsonl（最后写入 2026-11-02 22:15:30 +10:00，内容含 check-merge-scope/MERGE_HEAD，对应本稿评审）。

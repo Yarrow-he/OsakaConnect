@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 按 board.json scope 检查改动范围。用法：check-scope.sh [--staged | <base-ref>]
-# 受保护配置只允许在 lead/setup-* 分支（须 Hao Yin 批 PR）改；skills 目录例外。
+# 受保护配置只允许在 lead/setup-* 分支（须 Yarrow 批 PR）改；skills 目录例外。
 # 模块分支（<端>/<模块>）还要求改动落在该模块 paths 内。
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"

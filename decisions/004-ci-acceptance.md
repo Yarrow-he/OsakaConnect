@@ -155,10 +155,10 @@ exec
 6. 无本机网络或权限影响；仅 CI runner 会联网下载 .NET SDK、NuGet 等依赖。
 
 ## 档位
-1. A、B 均反对按现状合并，不满足一类（两人同意且只加检查）条件，按二类处理，等 Hao Yin 拍板。
+1. A、B 均反对按现状合并，不满足一类（两人同意且只加检查）条件，按二类处理，等 Yarrow 拍板。
 
-## Hao Yin 决定
-1. Hao Yin 2026-11-02 21:31 决定采纳 A/B 建议，6 脚本无产品时 exit 3。
+## Yarrow 决定
+1. Yarrow 2026-11-02 21:31 决定采纳 A/B 建议，6 脚本无产品时 exit 3。
 
 ## 3b9eac4 评审（smoke.ps1 步骤 pwsh→bash，2026-11-02，新会话、互不可见，只喂该提交 diff + 上下各 2 行）
 
@@ -180,4 +180,4 @@ exec
 
 ### 组长备注
 1. B 说的 ErrorActionPreference 只作用于 Actions 外层壳；smoke.ps1 第 12 行自带 $ErrorActionPreference = 'Stop'，子进程内的严格性不变。
-2. A、B 都提出可改为保留 pwsh 并显式 exit $LASTEXITCODE，是否改由 Hao Yin 决定。
+2. A、B 都提出可改为保留 pwsh 并显式 exit $LASTEXITCODE，是否改由 Yarrow 决定。

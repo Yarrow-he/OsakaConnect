@@ -1,6 +1,6 @@
-# 改检查器脚本的提案 PR 上，拿固定样例跑候选脚本。改本文件算权限类（Hao Yin 档②）。
+# 改检查器脚本的提案 PR 上，拿固定样例跑候选脚本。改本文件算权限类（Yarrow 档②）。
 # prepare 只有 contents:read，只把候选脚本存成 artifact；policy-selftest 没有任何权限、不用 secrets，只跑脚本自带的测试。
-# 托管 runner 默认能联网（Hao Yin 已接受）。check 名字 policy-selftest 由 gate-summary 核对。
+# 托管 runner 默认能联网（Yarrow 已接受）。check 名字 policy-selftest 由 gate-summary 核对。
 name: policy-selftest
 on:
   pull_request:
