@@ -479,10 +479,10 @@
       "id": "android-shell",
       "端": "Android",
       "模块": "android-shell",
-      "state": "待测试",
+      "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:47:00+10:00",
+      "updated_at": "2026-11-03T05:48:37+10:00",
       "paths": [
         "android/"
       ],
@@ -540,6 +540,17 @@
         },
         {
           "ci_bb8da34": "logs/android-shell-flaky/ci-41509704835-{1,2,3}.log android-emulator 3/3 pass (head e2082b9)"
+        },
+        {
+          "test_commit": "bb8da34",
+          "ci_run": "41509704835",
+          "commands": "gh run view 41509704835 --repo Yarrow-he/OsakaConnect --log; git diff 0f57782 bb8da34 -- MainActivityTest.kt; claude --settings .claude/settings.test.json -p <断言保留分析>",
+          "logs": [
+            "logs/android-shell-flaky/2026-11-03-ci-41509704835-verify.log",
+            "logs/android-shell-flaky/2026-11-03-claude-test-analysis-bb8da34.log",
+            "logs/android-shell-flaky/2026-11-03-diff-bb8da34.diff"
+          ],
+          "notes": "notes/android-shell-flaky.md#测试"
         }
       ],
       "history": [
@@ -615,6 +626,10 @@
           "state": "待测试",
           "at": "2026-11-03T05:47:00+10:00",
           "note": "审阅通过 bb8da34（android-shell-flaky 返工1，CI 41509704835 android+android-emulator 3/3）；日志 /home/box/osaka/logs/android-shell-flaky/review-bb8da34-20261103T054245.log"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-03T05:48:37+10:00"
         }
       ],
       "branch": "android/android-shell-flaky-1",
@@ -628,7 +643,7 @@
       "test_result": "通过：A5/A6/A16 run 41455806499 @454063d，日志 logs/android-shell/2026-11-02-test-v3.log；A14 lang-guard 通过",
       "review": "通过",
       "review_state": "通过",
-      "test_state": "通过",
+      "test_state": "通过（版本 bb8da34；CI run 41509704835 android-emulator 3/3 通过；windows-dotnet 红为已知 WPF flaky，另线跟踪）",
       "next_step": "审阅+测试 bb8da34",
       "blocked_on": "PR #19 等 Hao Yin 批准",
       "next": "等审阅和测试"
