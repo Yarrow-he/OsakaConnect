@@ -69,7 +69,14 @@ jobs:
       - uses: actions/checkout@v4
       - id: has
         run: |
-          code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)
+          set -e
+          if [ -f android/gradlew ]; then
+            code=wrapper
+          elif [ -f android/settings.gradle.kts ]; then
+            code=gradle
+          else
+            code=
+          fi
           echo "code=$code" >> "$GITHUB_OUTPUT"
           case "${{ github.ref_name }}" in android/*) [ -n "$code" ] || { echo "::error::分支上没有 Gradle 项目"; exit 1; };; esac
       - if: steps.has.outputs.code == ''
