@@ -482,7 +482,7 @@
       "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:48:37+10:00",
+      "updated_at": "2026-11-03T18:41:17+10:00",
       "paths": [
         "android/"
       ],
@@ -646,7 +646,8 @@
       "test_state": "通过（版本 bb8da34；CI run 41509704835 android-emulator 3/3 通过；windows-dotnet 红为已知 WPF flaky，另线跟踪）",
       "next_step": "审阅+测试 bb8da34",
       "blocked_on": "PR #19 等 Hao Yin 批准",
-      "next": "等审阅和测试"
+      "next": "等审阅和测试",
+      "notes": "暂停中：本地无未提交改动；分支 android/android-shell-flaky-1 已本地提交（bb8da34 等），等 GitHub App 上线、组长通知后由写手按规则推送。"
     },
     {
       "id": "android-diagnostics",
