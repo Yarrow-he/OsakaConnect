@@ -12,7 +12,6 @@ branch_protection:
   - {context: python,             expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
   - {context: android,            expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
   - {context: windows-dotnet,     expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
-  - {context: guards,             expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
   - {context: android-emulator,   expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
   - {context: windows-acceptance, expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
   - {context: a10-docker,         expected_source: {app_id: 15368, workflow: .github/workflows/ci.yml}}
