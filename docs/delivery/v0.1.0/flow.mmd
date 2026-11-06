@@ -1,0 +1,21 @@
+flowchart TD
+  shared["shared-protocol<br/>openapi/ + shared/ + tests/contract"]
+
+  shared --> winDiag["win-diagnostics<br/>windows/OsakaConnect.Diagnostics"]
+  shared --> andDiag["android-diagnostics<br/>android/.../diagnostics"]
+  shared --> server["server-core<br/>server/osaka_server"]
+  shared --> admin["admin-connect<br/>admin/OsakaAdmin"]
+
+  winDiag --> winShell["win-shell<br/>windows/OsakaConnect"]
+  andDiag --> andShell["android-shell<br/>android/.../shell"]
+
+  server -.->|"运行时 HTTPS<br/>health / version"| admin
+
+  winShell --> ci["ci-guards<br/>.github/workflows + scripts/"]
+  andShell --> ci
+  server --> ci
+  admin --> ci
+  shared --> ci
+
+  ci --> accept["验收 A1–A17<br/>tests/INDEX.md + acceptance-check"]
+  accept --> delivery["交付闸口二<br/>code-map / flow / A-B 审<br/>（项目图谱本期不交）"]
