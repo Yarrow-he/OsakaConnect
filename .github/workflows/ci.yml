@@ -11,23 +11,33 @@ jobs:
   guards-acceptance:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - name: grep-guard（A10、A14）
         run: bash tests/admin/admin-connect/grep-guard.sh
       - name: android lang-guard（A14、A17）
         run: bash tests/android/android-shell/lang-guard.sh
+      - name: cross-refs（A11）
+        run: bash scripts/ci/check-cross-refs.sh
+      - name: cross-refs 回归（A11）
+        run: bash scripts/ci/test-check-cross-refs.sh
   contract:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with: { python-version: '3.12' }
       - run: pip install pytest pyyaml jsonschema openapi-spec-validator
-      - run: pytest -q tests/contract
+      - run: pytest -v tests/contract --junitxml=tests/results/contract.junit.xml
+      - if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: contract-junit
+          path: tests/results/contract.junit.xml
+          if-no-files-found: error
   windows-dotnet:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - id: has
         shell: bash
         run: |
@@ -37,7 +47,7 @@ jobs:
       - if: steps.has.outputs.code == ''
         run: echo "无 .NET 代码，跳过"
       - if: steps.has.outputs.code != ''
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
         with: { dotnet-version: '8.0.x' }
       - if: steps.has.outputs.code != ''
         shell: bash
@@ -45,11 +55,19 @@ jobs:
           set -e
           for p in ${{ steps.has.outputs.code }}; do dotnet restore "$p"; dotnet build "$p" -c Release --no-restore; done
           for p in ${{ steps.has.outputs.code }}; do case "$p" in *Tests*.csproj) dotnet test "$p" -c Release --no-build;; esac; done
+      - name: dotnet format --verify-no-changes
+        if: steps.has.outputs.code != ''
+        shell: bash
+        run: |
+          set -e
+          for p in ${{ steps.has.outputs.code }}; do
+            dotnet format "$p" --verify-no-changes --no-restore
+          done
   windows-acceptance:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-dotnet@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
         with: { dotnet-version: '8.0.x' }
       - name: 构建 windows/ 产品（smoke.ps1 不自行构建）
         shell: bash
@@ -66,16 +84,23 @@ jobs:
   android:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - id: has
         run: |
-          code=$([ -f android/gradlew ] && echo wrapper || ([ -f android/settings.gradle.kts ] && echo gradle) || true)
+          set -e
+          if [ -f android/gradlew ]; then
+            code=wrapper
+          elif [ -f android/settings.gradle.kts ]; then
+            code=gradle
+          else
+            code=
+          fi
           echo "code=$code" >> "$GITHUB_OUTPUT"
           case "${{ github.ref_name }}" in android/*) [ -n "$code" ] || { echo "::error::分支上没有 Gradle 项目"; exit 1; };; esac
       - if: steps.has.outputs.code == ''
         run: echo "无 Android 代码，跳过"
       - if: steps.has.outputs.code != ''
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
         with: { distribution: temurin, java-version: '17' }
       - if: steps.has.outputs.code != ''
         uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
@@ -95,7 +120,7 @@ jobs:
             grep -o '<testsuite [^>]*' "$f" | sed -E 's/.*name="([^"]*)".*tests="([0-9]+)".*failures="([0-9]+)".*/\1 tests=\2 failures=\3/'
           done
       - if: always() && steps.has.outputs.code != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: android-unit-test-results
           path: |
@@ -105,7 +130,7 @@ jobs:
   python:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - id: has
         run: |
           code=$(git ls-files 'server/*.py' | head -1)
@@ -114,7 +139,7 @@ jobs:
       - if: steps.has.outputs.code == ''
         run: echo "无 Python 代码，跳过"
       - if: steps.has.outputs.code != ''
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with: { python-version: '3.12' }
       - if: steps.has.outputs.code != ''
         working-directory: server
@@ -128,11 +153,17 @@ jobs:
           OSAKA_SERVER_CMD: python3 -m osaka_server.app
           OSAKA_INVITE_FN: osaka_server.invite.is_valid_invite_code
           PYTHONPATH: server
-        run: pytest tests/server/server-core -q -rs
+        run: pytest tests/server/server-core -v -rs --junitxml=tests/results/server-core.junit.xml
+      - if: always() && steps.has.outputs.code != '' && hashFiles('tests/server/server-core/test_server_core.py') != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: server-core-junit
+          path: tests/results/server-core.junit.xml
+          if-no-files-found: error
   a10-docker:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') == ''
         run: echo "::error::缺少 tests/admin/admin-connect/run-a10.sh，A10 未验证" && exit 1
       - if: hashFiles('tests/admin/admin-connect/run-a10.sh') != ''
@@ -140,15 +171,25 @@ jobs:
   android-emulator:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - id: has
-        run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ -f android/settings.gradle.kts ]; then
+            echo "code=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "code=" >> "$GITHUB_OUTPUT"
+          fi
       - id: diag
-        run: echo "dir=$([ -d android/app/src/main/java/com/osakaconnect/diagnostics ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ -d android/app/src/main/java/com/osakaconnect/diagnostics ]; then
+            echo "dir=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=" >> "$GITHUB_OUTPUT"
+          fi
       - if: steps.has.outputs.code == ''
         run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
       - if: steps.has.outputs.code != ''
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4.9.1
         with: { distribution: temurin, java-version: '17' }
       - if: steps.has.outputs.code != ''
         uses: gradle/actions/setup-gradle@ed408507eac070d1f99cc633dbcf757c94c7933a # v4
@@ -181,7 +222,7 @@ jobs:
             # 决策 009：diagnostics 产品目录在则两脚本都跑、任一失败即红；不在时 android-diagnostics 分支报错，其他分支 warning 待测
             d="$GITHUB_WORKSPACE/android/app/src/main/java/com/osakaconnect/diagnostics"; t="$GITHUB_WORKSPACE/tests/android/android-diagnostics"; if [ "$OSAKA_DIAG" = yes ]; then rc=0; bash "$t/run.sh" || rc=1; bash "$t/run-instrumented.sh" || rc=1; exit $rc; elif [ "$OSAKA_BRANCH" = android/android-diagnostics ]; then echo "::error::android-diagnostics 分支缺少 $d"; exit 1; else echo "::warning::待测：android-diagnostics 未交付（无 $d），其验收未执行"; fi
       - if: always() && steps.has.outputs.code != ''
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: android-emulator-logs
           path: |
@@ -190,7 +231,7 @@ jobs:
             android/app/build/reports/androidTests/
           if-no-files-found: ignore
       - if: always() && steps.has.outputs.code != '' && steps.diag.outputs.dir == 'yes'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: android-jvm-unit-junit
           path: android/app/build/test-results/testDebugUnitTest/*.xml

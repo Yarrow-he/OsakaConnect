@@ -1,7 +1,3 @@
-// 用途：按相对仓库根路径读取 shared/errors.json 与 shared/test-vectors/*.json。
-// 前置环境：Windows + .NET 8 SDK；仓库结构保持 shared/ 在根目录。
-// 运行命令：dotnet test tests/windows/win-diagnostics -c Release
-// 覆盖 acceptance：A3（errors.json）、A4（redaction.json）、A15（invite-code.json）。
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -20,9 +16,12 @@ internal static class SharedVectors
         throw new InvalidOperationException("找不到仓库根：shared/test-vectors 不存在");
     }
 
+    internal static string ReadErrorsJson() =>
+        File.ReadAllText(Path.Combine(RepoRoot(), "shared", "errors.json"));
+
     internal static Dictionary<string, ErrorEntry> LoadErrors() =>
         JsonSerializer.Deserialize<Dictionary<string, ErrorEntry>>(
-            File.ReadAllText(Path.Combine(RepoRoot(), "shared", "errors.json")), Options)
+            ReadErrorsJson(), Options)
         ?? throw new InvalidOperationException("shared/errors.json 解析为空");
 
     internal static RedactionVectors LoadRedaction() =>
