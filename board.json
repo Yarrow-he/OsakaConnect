@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-07T07:09:31+10:00",
+  "updated_at": "2026-11-07T07:55:44+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -1126,9 +1126,9 @@
       "owner": "代码组长 · Osaka",
       "state": "进行中",
       "started_at": "2026-11-07T03:55:16+10:00",
-      "updated_at": "2026-11-07T07:09:31+10:00",
+      "updated_at": "2026-11-07T07:55:44+10:00",
       "branch": "lead/delivery-v010-prep",
-      "next_step": "预构建已就绪（PLUGIN_ROOT + S clone）；已 priority 通知写手·服务端立刻断网生成图谱；交回后收进 docs/delivery/v0.1.0/ 再送 A/B",
+      "next_step": "催办第 2/2 次已发（priority）；等图谱交回后收进 docs/delivery/v0.1.0/ 再送 A/B；若下一巡检仍无产物则标上报并告 Yarrow",
       "unblocks": [],
       "history": [
         {
@@ -1160,6 +1160,12 @@
           "to": "进行中",
           "by": "代码组长 · Osaka",
           "note": "pipeline-watchdog 续：UA 预构建完成；priority 告知写手·服务端 PLUGIN_ROOT 与 S 路径，催立刻生成"
+        },
+        {
+          "at": "2026-11-07T07:55:44+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：无开放 PR、9 模块完成；图谱仍缺；催办第 2/2；未 pause、未打扰 Yarrow"
         }
       ],
       "artifacts": [
@@ -1180,13 +1186,19 @@
       "ua_test": "通过",
       "ua_review": "通过（档C有条件：独立clone、UNDERSTAND_NO_WORKTREE_REDIRECT=1、禁dashboard/install）",
       "waiting_on": "写手 · 服务端（断网跑图谱）",
-      "nudge_count": 1,
+      "nudge_count": 2,
       "nudge_history": [
         {
           "at": "2026-11-07T07:03:18+10:00",
           "to": "写手 · 服务端",
           "by": "代码组长 · Osaka",
           "note": "pipeline-watchdog：preflight STOP 已解（下载+预构建授权）；priority 催办第 1 次"
+        },
+        {
+          "at": "2026-11-07T07:55:44+10:00",
+          "to": "写手 · 服务端",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：催办第 2/2 次；预构建就绪后仍无图谱；再无产物下一巡检上报"
         }
       ],
       "prebuild": {
