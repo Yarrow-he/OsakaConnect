@@ -84,7 +84,7 @@ Codex CLI 日志：实现 `/home/box/osaka/logs/shared-protocol/codex-1-20261106
 
 ### 文件清单
 
-`git diff --name-only origin/main...HEAD`：
+以下清单记录的是原功能 head `98a398c65d879b16706b83021081fc3b48fe5c71` 当时的 `git diff --name-only origin/main...HEAD`（历史记录；不是本 notes 分支当前相对新 main 的差异）：
 
 ```text
 notes/shared-protocol.md
