@@ -3,7 +3,7 @@
 | 测试 | 覆盖验收 | 端 | 命令 | 最后通过 |
 |---|---|---|---|---|
 | tests/contract/test_contract.py | A9（契约） | 共用 | `pytest tests/contract` | 2026-11-07 main @9de8988 run 42257087460 contract success |
-| tests/server/server-core/test_server_core.py | A8、A9（后台）、A15（后台）、A17（后台） | 服务端 | `OSAKA_SERVER_CMD="python3 -m osaka_server.app" OSAKA_INVITE_FN=osaka_server.invite.is_valid_invite_code PYTHONPATH=server pytest tests/server/server-core -q -rs` | 2026-11-07 main @9de8988 run 42257087460 python job：server-core **23 passed / 0 skipped**（`-rs` 无 skip）；同 job `python -m pytest -q` 另 **191 passed / 0 skipped** |
+| tests/server/server-core/test_server_core.py | A8、A9（后台）、A15（后台）、A17（后台） | 服务端 | `OSAKA_SERVER_CMD="python3 -m osaka_server.app" OSAKA_INVITE_FN=osaka_server.invite.is_valid_invite_code PYTHONPATH=server pytest tests/server/server-core -v -rs` | 2026-11-07 main @9de8988 run 42257087460 python job：server-core **23 passed / 0 skipped**（`-rs` 无 skip）；同 job `python -m pytest -q` 另 **191 passed / 0 skipped** |
 | tests/windows/win-shell/smoke.ps1 | A1、A2、A16、A14、A17 | Windows | 见文件头，windows-latest | 2026-11-07 main @9de8988 run 42257087460 windows-acceptance success |
 | tests/windows/win-diagnostics/*.cs（WinDiagnostics.Tests.csproj） | A3、A4、A15 | Windows | `dotnet test`，windows-latest | 2026-11-07 main @9de8988 run 42257087460 windows-dotnet / windows-acceptance success |
 | tests/admin/admin-connect/{gen-certs,run-a10}.sh + docker-compose.yml | A10 ①②③④ | 管理端 | `bash tests/admin/admin-connect/run-a10.sh`，ubuntu + docker | 2026-11-07 main @9de8988 run 42257087460 a10-docker success |
