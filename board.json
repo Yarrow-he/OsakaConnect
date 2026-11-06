@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-07T01:43:45+10:00",
+  "updated_at": "2026-11-07T03:55:16+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -830,11 +830,10 @@
   ],
   "prs": {
     "7": {
-      "state": "待合并",
-      "review": "通过 notes/pr7-tests.md",
-      "ci": "a10-docker 红：主分支缺 server/ admin/，exit 3 按设计报红 logs/pr7/",
-      "blocked_on": "等 server-core/admin-connect 合入主分支后重跑 CI 再按组长合并",
-      "updated_at": "2026-11-02T20:10:29+10:00"
+      "state": "已关闭（未合并）",
+      "closed_at": "2026-11-06T13:06:18Z",
+      "note": "pipeline-watchdog：GitHub state=CLOSED mergedAt=null；原 board 待合并已过时",
+      "updated_at": "2026-11-07T03:55:16+10:00"
     },
     "43": {
       "state": "已合并",
@@ -857,6 +856,12 @@
       "merge_commit": "44f3f70ea075a28541a01b881f997923f530d16c",
       "head": "d999a2cb407cb67ce8aea8de252567901dc9d4bd",
       "updated_at": "2026-11-07T01:41:32+10:00"
+    },
+    "105": {
+      "state": "已合并",
+      "merge_commit": "9de89880ea77459b16da87369a23e3285fe7262b",
+      "head": "9e5c254f6d69b6b59e1208f40599993b2c97bcf1",
+      "updated_at": "2026-11-07T03:55:16+10:00"
     }
   },
   "tasks": {
@@ -1115,6 +1120,24 @@
         },
         "https://github.com/Yarrow-he/OsakaConnect/pull/15#issuecomment-6578710611"
       ]
+    },
+    "delivery-v010": {
+      "title": "第1期 0.1.0 闸口二交付（验收核对+交付三件套）",
+      "owner": "代码组长 · Osaka",
+      "state": "进行中",
+      "started_at": "2026-11-07T03:55:16+10:00",
+      "updated_at": "2026-11-07T03:55:16+10:00",
+      "branch": "lead/delivery-v010-prep",
+      "next_step": "等测试刷新 tests/INDEX.md（A7/A15）；同时写 code-map 与 flow.mmd",
+      "unblocks": [],
+      "history": [
+        {
+          "at": "2026-11-07T03:55:16+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：模块全完成，开工闸口二；产物 docs/delivery/v0.1.0/acceptance-check.md"
+        }
+      ]
     }
   },
   "decisions_log": [
@@ -1133,6 +1156,15 @@
       "topic": "shared-protocol、ci-guards 状态核对",
       "ruling": "两者内容未完全进 main，保持待写，记 next_step 与 ETA，不开大活",
       "evidence": "git log origin/main -- openapi shared tests/contract .github scripts；origin/main 无 ci/"
+    },
+    {
+      "at": "2026-11-07T03:55:16+10:00",
+      "topic": "第1期模块全完成，进入闸口二",
+      "ruling": "9 模块均为完成；main CI @9de8988 全绿；开工 docs/delivery/v0.1.0；A7/A15 待 INDEX 刷新后定论",
+      "evidence": "board modules 全完成；Actions run 42257087460；PR#104/#105 已合",
+      "dispatched_to": [
+        "测试 · Osaka"
+      ]
     }
   ]
 }
