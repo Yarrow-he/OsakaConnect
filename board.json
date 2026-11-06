@@ -56,7 +56,7 @@
       ],
       "artifacts": [],
       "history": [],
-      "branch": "shared/shared-protocol",
+      "branch": "server/shared-protocol-1",
       "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
       "brief": "notes/shared-protocol.md",
       "review": "未审",
