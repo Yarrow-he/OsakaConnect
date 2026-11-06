@@ -2,16 +2,20 @@
 
 | 测试 | 覆盖验收 | 端 | 命令 | 最后通过 |
 |---|---|---|---|---|
-| tests/contract/test_contract.py | A9（契约） | 共用 | `pytest tests/contract` | 2026-11-02 @872a57a run 41406112495 18 passed |
-| tests/server/server-core/test_server_core.py | A8、A9（后台）、A15（后台）、A17（后台） | 服务端 | `OSAKA_SERVER_CMD="python3 -m osaka_server.app" OSAKA_INVITE_FN=osaka_server.invite.is_valid_invite_code PYTHONPATH=server pytest tests/server/server-core -q -rs` | 部分：2026-11-02 @94c35f3 17 过、6 skip；@872a57a run 41406112495 未执行本脚本（不在分支上），6 项仍未验证 |
-| tests/windows/win-shell/smoke.ps1 | A1、A2、A16、A14、A17 | Windows | 见文件头，windows-latest | 阻塞：run 41403138518 未调用（2026-11-02）；A14/A17 本机静态检查通过 @02e2877 |
-| tests/windows/win-diagnostics/*.cs（WinDiagnostics.Tests.csproj） | A3、A4、A15 | Windows | `dotnet test`，windows-latest | 阻塞：run 41403148691 未调用（2026-11-02） |
-| tests/admin/admin-connect/{gen-certs,run-a10}.sh + docker-compose.yml | A10 ①②③④ | 管理端 | `bash tests/admin/admin-connect/run-a10.sh`，ubuntu + docker | 未跑：run 41406112495、41407456188 a10-docker 均输出“无 A10 脚本，跳过” |
-| tests/admin/admin-connect/grep-guard.sh | A10（禁止放行回调）、A14 | 管理端 | `bash tests/admin/admin-connect/grep-guard.sh` | 2026-11-02 通过 @93fba9d、@02e2877、@e700fe5（修复 set -e 误判后） |
-| tests/android/android-shell/androidTest/ShellNavigationTest.kt + ci-run.sh | A5、A6、A16 | Android | 见文件头，ubuntu + 模拟器 | run 41455806499 @454063d |
-| tests/android/android-shell/lang-guard.sh | A14、A17 | Android | `bash tests/android/android-shell/lang-guard.sh` | 2026-11-02 通过 @9e47998、@97d42d6 |
-| tests/android/android-diagnostics/DiagnosticsVectorsTest.kt + run.sh | A7、A15 | Android | `./gradlew testDebugUnitTest` | 阻塞：workflow 不调用 run.sh（2026-11-02） |
-| tests/android/android-diagnostics/{json-divergence.json,JvmJsonDivergenceTest.kt,androidTest/OrgJsonDivergenceTest.kt,run-instrumented.sh} | A9/A7 相关（JvmJson 与真机分歧，审阅 2026-11-02） | Android | `bash tests/android/android-diagnostics/run-instrumented.sh` | 待跑（等模拟器 CI） |
-| tests/ci/pr-line-check/{pr_line_check.py,test_pr_line_check.py} | A12（PR 行数统计） | 共用 | `python3 tests/ci/pr-line-check/test_pr_line_check.py` | 2026-11-03 本机 5 passed（未接入 CI） |
+| tests/contract/test_contract.py | A9（契约） | 共用 | `pytest tests/contract` | 2026-11-06 main @674017f run 42202140900 contract success |
+| tests/server/server-core/test_server_core.py | A8、A9（后台）、A15（后台）、A17（后台） | 服务端 | `OSAKA_SERVER_CMD="python3 -m osaka_server.app" OSAKA_INVITE_FN=osaka_server.invite.is_valid_invite_code PYTHONPATH=server pytest tests/server/server-core -q -rs` | 部分：2026-11-06 main @674017f run 42202140900 python job 绿，但 skip 数没核（pytest 有 skip 也是 exit 0）；以前 17 过、6 skip，这 6 项仍算未验证 |
+| tests/windows/win-shell/smoke.ps1 | A1、A2、A16、A14、A17 | Windows | 见文件头，windows-latest | 2026-11-06 main @674017f run 42202140900 windows-acceptance success |
+| tests/windows/win-diagnostics/*.cs（WinDiagnostics.Tests.csproj） | A3、A4、A15 | Windows | `dotnet test`，windows-latest | 2026-11-06 main @674017f run 42202140900 windows-dotnet / windows-acceptance success |
+| tests/admin/admin-connect/{gen-certs,run-a10}.sh + docker-compose.yml | A10 ①②③④ | 管理端 | `bash tests/admin/admin-connect/run-a10.sh`，ubuntu + docker | 2026-11-06 main @674017f run 42202140900 a10-docker success |
+| tests/admin/admin-connect/grep-guard.sh | A10（禁止放行回调）、A14 | 管理端 | `bash tests/admin/admin-connect/grep-guard.sh` | 2026-11-06 main @674017f run 42202140900 guards-acceptance success |
+| scripts/ci/check-cross-refs.sh + test-check-cross-refs.sh | A11 | 共用 | `bash scripts/ci/check-cross-refs.sh`；`bash scripts/ci/test-check-cross-refs.sh` | 2026-11-06 main @674017f run 42202140900 guards-acceptance success（#82 已合） |
+| tests/android/android-shell/androidTest + ci-run | A5、A6、A16 | Android | 见 workflow android / android-emulator | 2026-11-06 main @674017f run 42202140900 android + android-emulator success |
+| tests/android/android-shell/lang-guard.sh | A14、A17 | Android | `bash tests/android/android-shell/lang-guard.sh` | 2026-11-06 main @674017f run 42202140900 guards-acceptance success |
+| tests/android/android-diagnostics unit + instrumented | A7、A15 | Android | workflow 内 gradle / emulator | 未执行：产品 android diagnostics 目录在 @674017f 还不存在，决策 009 那步目前只报 warning，run 42202140900 的绿不包含 A7、A15 |
+| tests/ci/pr-line-check/{pr_line_check.py,test_pr_line_check.py} | A12（PR 行数统计，提案侧） | 共用 | `python3 tests/ci/pr-line-check/test_pr_line_check.py`；线上由策略仓 `pr-size` 必过 | 策略仓 pr-size 在 PR 上跑；业务仓脚本仍作本地回归 |
 
-未覆盖：A11（跨端引用路径检查，ci-guards）、A12（行数统计，ci-guards/审阅）、A13（main 全绿链接）；A14 的 server/ 只 Python 检查与 docs 一致性；A17 的 windows/admin 以外后台 routes 列表长度已由 server-core 覆盖。
+A13（main 全绿）：[run 42202140900](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42202140900) @ `674017f`（2026-11-06）conclusion=success。
+
+补充：A14 的 server/ 只有 Python 检查和 docs 一致性，没有别的覆盖。
+
+刷新说明：pipeline-watchdog 2026-11-06 20:54 Australia/Brisbane 按 main CI 实况更新「最后通过」；旧「未跑/跳过」条目已过时。
