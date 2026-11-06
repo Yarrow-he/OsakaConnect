@@ -16,6 +16,10 @@ jobs:
         run: bash tests/admin/admin-connect/grep-guard.sh
       - name: android lang-guard（A14、A17）
         run: bash tests/android/android-shell/lang-guard.sh
+      - name: cross-refs（A11）
+        run: bash scripts/ci/check-cross-refs.sh
+      - name: cross-refs 回归（A11）
+        run: bash scripts/ci/test-check-cross-refs.sh
   contract:
     runs-on: ubuntu-latest
     steps:
@@ -23,7 +27,13 @@ jobs:
       - uses: actions/setup-python@v5
         with: { python-version: '3.12' }
       - run: pip install pytest pyyaml jsonschema openapi-spec-validator
-      - run: pytest -q tests/contract
+      - run: pytest -v tests/contract --junitxml=tests/results/contract.junit.xml
+      - if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: contract-junit
+          path: tests/results/contract.junit.xml
+          if-no-files-found: error
   windows-dotnet:
     runs-on: windows-latest
     steps:
@@ -136,7 +146,13 @@ jobs:
           OSAKA_SERVER_CMD: python3 -m osaka_server.app
           OSAKA_INVITE_FN: osaka_server.invite.is_valid_invite_code
           PYTHONPATH: server
-        run: pytest tests/server/server-core -q -rs
+        run: pytest tests/server/server-core -v -rs --junitxml=tests/results/server-core.junit.xml
+      - if: always() && steps.has.outputs.code != '' && hashFiles('tests/server/server-core/test_server_core.py') != ''
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9  # v7.0.2
+        with:
+          name: server-core-junit
+          path: tests/results/server-core.junit.xml
+          if-no-files-found: error
   a10-docker:
     runs-on: ubuntu-latest
     steps:
