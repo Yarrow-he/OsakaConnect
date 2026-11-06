@@ -43,4 +43,10 @@ A10, A11, A12, A13, A14, A17（见 `acceptance.md`）。完成标准：PR 上 wo
 5. A13 main workflow 全绿：同上 [42202140900](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42202140900) @ `674017f` conclusion=success（8/8 jobs）。
 6. A17 硬编码线路：android `lang-guard.sh`；后台 routes 数组由 server-core / openapi（#77/#81）覆盖。
 
-已知限制：看板 `ci-guards` 仍为「待写」，等 #96 合并后再单独开看板收口 PR 标完成。`tests/INDEX.md` 本轮按上面证据刷新「最后通过」列。
+已知限制（已过时，见下方看板收口）：曾等 #96 后再开看板收口；现 #96/#100 已合。
+
+## 看板收口（pipeline-watchdog 2026-11-06 23:03 Australia/Brisbane）
+
+1. #96、#100 已合入 main；A10–A14、A17 接线证据仍以 notes 上文与 run 42202140900 为准。
+2. 本 PR 只改 `board.json`：`ci-guards` 待写→完成，并刷新 next_step。
+3. 已知限制更新：不再等 #96；android-diagnostics 的 A7/A15 真跑不在本模块范围（见 tests/INDEX.md）。
