@@ -9,7 +9,8 @@ public sealed class DiagnosticsTests
 {
     private static string ReadShared(string path) => File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "shared", path));
 
-    public static IEnumerable<object[]> RedactionCases() {
+    public static IEnumerable<object[]> RedactionCases()
+    {
         using var document = JsonDocument.Parse(ReadShared("test-vectors/redaction.json"));
         var cases = document.RootElement.GetProperty("cases");
         Assert.NotEmpty(cases.EnumerateArray());
@@ -25,18 +26,21 @@ public sealed class DiagnosticsTests
     [InlineData("password=\"hunter2 hunter2", "password=***")]
     [InlineData("token: abc.def.ghi\nconnected route=r1", "token: ***\nconnected route=r1")]
     [InlineData("", ""), InlineData("token_count=0 invitation=none", "token_count=0 invitation=none")]
-    public void RedactsSharedVectors(string input, string expected) {
+    public void RedactsSharedVectors(string input, string expected)
+    {
         Assert.Equal(expected, LogRedactor.Redact(input));
         Assert.Equal(expected, LogRedactor.Redact(expected));
         var previousCulture = CultureInfo.CurrentCulture;
-        try {
+        try
+        {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("tr-TR");
             Assert.Equal(expected.ToUpperInvariant(), LogRedactor.Redact(input.ToUpperInvariant()));
         }
         finally { CultureInfo.CurrentCulture = previousCulture; }
     }
 
-    public static IEnumerable<object?[]> InviteCases() {
+    public static IEnumerable<object?[]> InviteCases()
+    {
         using var document = JsonDocument.Parse(ReadShared("test-vectors/invite-code.json"));
         foreach (var (key, expected) in new[] { ("valid", true), ("invalid", false) })
         {
@@ -53,7 +57,8 @@ public sealed class DiagnosticsTests
     public void ValidatesSharedInviteVectors(string? input, bool expected) => Assert.Equal(expected, InviteCode.IsValid(input));
 
     [Fact]
-    public void PresentsAllSharedChineseMessages() {
+    public void PresentsAllSharedChineseMessages()
+    {
         var json = ReadShared("errors.json");
         var presenter = new ErrorPresenter(json);
         using var document = JsonDocument.Parse(json);
@@ -63,14 +68,16 @@ public sealed class DiagnosticsTests
     }
 
     [Theory, InlineData(null), InlineData(""), InlineData("UNKNOWN")]
-    public void UnknownCodesUseCatalogInternalMessage(string? code) {
+    public void UnknownCodesUseCatalogInternalMessage(string? code)
+    {
         const string internalMessage = "内部服务暂不可用";
         var presenter = new ErrorPresenter("{\"INTERNAL\":{\"zh\":\"" + internalMessage + "\"}}");
         Assert.Equal(internalMessage, presenter.GetMessage(code));
     }
 
     [Fact]
-    public void ExceptionWithStackTraceUsesOnlyInternalMessage() {
+    public void ExceptionWithStackTraceUsesOnlyInternalMessage()
+    {
         var presenter = new ErrorPresenter(ReadShared("errors.json"));
         Action fail = () => throw new InvalidOperationException("diagnostic failure detail");
         var exception = Assert.Throws<InvalidOperationException>(fail);
@@ -91,7 +98,8 @@ public sealed class DiagnosticsTests
     [InlineData("{\"FORBIDDEN\":{\"zh\":\"管理凭证无效\"}}")]
     [InlineData("{\"INTERNAL\":{\"zh\":\"内部服务暂不可用\"},\"FORBIDDEN\":null}")]
     [InlineData("{\"INTERNAL\":{\"zh\":\"内部服务暂不可用\"},\"INTERNAL\":{\"zh\":\"重复\"}}")]
-    public void InvalidCatalogFallsBackSafely(string? json) {
+    public void InvalidCatalogFallsBackSafely(string? json)
+    {
         var presenter = new ErrorPresenter(json!);
         Assert.Equal("发生内部错误，请稍后重试", presenter.GetMessage("FORBIDDEN"));
         Assert.Equal("发生内部错误，请稍后重试", presenter.GetMessage("INTERNAL"));
