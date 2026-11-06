@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.osakaconnect.diagnostics.LogRedactor
 import java.util.UUID
 
 class MainActivity : Activity() {
@@ -65,7 +66,6 @@ class MainActivity : Activity() {
     }
 
     private fun recordLifecycle(callback: String) {
-        // shortcut: 尚未接入 LogRedactor，android-diagnostics 交付后改为经 LogRedactor
-        Log.i("OsakaLifecycle", "$lifecycleId $callback")
+        Log.i("OsakaLifecycle", LogRedactor.redact("$lifecycleId $callback"))
     }
 }
