@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-03T03:44:54+10:00",
+  "updated_at": "2026-11-06T19:03:47+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -39,10 +39,10 @@
       "id": "shared-protocol",
       "端": "共用",
       "模块": "shared-protocol",
-      "state": "待写",
+      "state": "完成",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T23:47:29+10:00",
+      "updated_at": "2026-11-06T19:03:47+10:00",
       "paths": [
         "openapi/",
         "shared/",
@@ -55,12 +55,18 @@
         "A17"
       ],
       "artifacts": [],
-      "history": [],
+      "history": [
+        {
+          "state": "完成",
+          "at": "2026-11-06T19:03:47+10:00",
+          "note": "PR #81/#90/#91 已合；原待写收口"
+        }
+      ],
       "branch": "server/shared-protocol-1",
       "summary": "定稿 openapi/admin.v1.yaml、errors.json、邀请码规则与三份测试向量（含反例）、契约测试。骨架提交已有初版，本模块负责评审后补全与冻结。",
       "brief": "notes/shared-protocol.md",
-      "review": "未审",
-      "next_step": "未完成：main 仅有骨架初版（4dbde21、bb9fce9），无评审冻结记录。下一步：组长对 openapi/shared/tests/contract 做一次评审，补反例后冻结，开 shared/shared-protocol 小 PR。ETA 2026-11-04"
+      "review": "通过",
+      "next_step": "已合入：功能 PR #81、看板分支修正 #90、notes #91。看板由 pipeline-watchdog 2026-11-06T19:03:47+10:00 更新。"
     },
     {
       "id": "server-core",
@@ -271,10 +277,10 @@
       "id": "win-diagnostics",
       "端": "Windows",
       "模块": "win-diagnostics",
-      "state": "上报",
+      "state": "完成",
       "owner": "写手 · Windows",
       "rework": 0,
-      "updated_at": "2026-11-03T03:40:00+10:00",
+      "updated_at": "2026-11-06T19:03:47+10:00",
       "paths": [
         "windows/"
       ],
@@ -309,7 +315,8 @@
           "log": "logs/win-diagnostics/2026-11-03-ci-41488380576.log",
           "verdict": "blocked",
           "ci_result": "smoke.ps1 PASS（log:2496-2502）；windows-dotnet 61/61 + 1/1 通过（log:531,535）；WinDiagnostics.Tests 3/3 Skipped（log:2511-2522，csproj 仍指向 OsakaConnect.Windows，PR #11 未合，不在 2d78194）；run 整体 failure 来自无关 a10-docker（log:1911）"
-        }
+        },
+        "https://github.com/Yarrow-he/OsakaConnect/pull/94 已合并 merge f1ff74c2e40a2082e14d460cdc9eec0af27d28d3"
       ],
       "history": [
         {
@@ -331,9 +338,14 @@
         {
           "state": "上报",
           "at": "2026-11-03T02:22:00+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-06T19:03:47+10:00",
+          "note": "PR #94 合入 f1ff74c；原上报由 win-diagnostics-2 接手完成"
         }
       ],
-      "branch": "windows/win-diagnostics",
+      "branch": "windows/win-diagnostics-2",
       "summary": "ErrorPresenter（errors.json 码→中文文案，不含堆栈）、LogRedactor、InviteCode.IsValid；均读 shared 测试向量做单测。",
       "brief": "notes/win-diagnostics.md",
       "nudges": 2,
@@ -360,8 +372,8 @@
       "review": "通过",
       "blocked_on": null,
       "review_state": "通过",
-      "test_state": "阻塞",
-      "next_step": "组长合 win-diagnostics 产品分支后合 PR #11（或先把 #11 并入模块分支），测试再重跑 WinDiagnostics.Tests"
+      "test_state": "通过",
+      "next_step": "已合入 main：PR #94 merge f1ff74c（head 217f8b1 返工2）。看板由 pipeline-watchdog 2026-11-06T19:03:47+10:00 更新。"
     },
     {
       "id": "admin-connect",
@@ -727,7 +739,7 @@
       "state": "待写",
       "owner": "代码组长 · Osaka",
       "rework": 0,
-      "updated_at": "2026-11-02T23:47:29+10:00",
+      "updated_at": "2026-11-06T19:03:47+10:00",
       "paths": [
         ".github/",
         "scripts/",
@@ -747,7 +759,7 @@
       "summary": "完善 CI：契约测试 job（已有初版）；A10 docker 端到端：ci/ 下用 openssl 生成临时 CA 与 SAN=osaka-server 证书、另一张不可信 CA 证书和 SAN 不匹配证书，server 容器以服务名 osaka-server 运行，探测容器经 docker 网络连接，覆盖四项必测；技术栈/互引路径/硬编码线路检查；PR 行数统计。",
       "brief": "notes/ci-guards.md",
       "review": "未审",
-      "next_step": "部分完成：CI 已由 PR #5/#8/#10/#13/#14/#15 补齐各端 job 与 merge-scope；缺 A10 docker 证书（ci/ 目录不存在）、技术栈/硬编码线路检查、PR 行数统计。下一步：随 server-core 与 admin-connect 合入后开 ci/ci-guards 小 PR。ETA 2026-11-05"
+      "next_step": "部分完成：#82 跨端引用守卫已合；pr-size/必过清单此前已接入。余项若有（A10 docker 证书矩阵等）另开小 PR。本轮不标完成。"
     },
     {
       "id": "pr-line-check",
