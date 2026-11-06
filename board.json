@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-07T04:53:40+10:00",
+  "updated_at": "2026-11-07T06:02:23+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -1126,9 +1126,9 @@
       "owner": "代码组长 · Osaka",
       "state": "进行中",
       "started_at": "2026-11-07T03:55:16+10:00",
-      "updated_at": "2026-11-07T04:53:40+10:00",
+      "updated_at": "2026-11-07T06:02:23+10:00",
       "branch": "lead/delivery-v010-prep",
-      "next_step": "等服务端写手交项目图谱；齐后送 A/B 审",
+      "next_step": "已派服务端写手按 ops-v1 生成项目图谱（UA T=98d6dca 测试+审阅均通过）；交回后收进 docs/delivery/v0.1.0/ 再送 A/B 审",
       "unblocks": [],
       "history": [
         {
@@ -1142,14 +1142,27 @@
           "to": "进行中",
           "by": "代码组长 · Osaka",
           "note": "合入 main@f7c8aba（merge，因 as_work 禁 force）；A7/A15 标通过（证据 INDEX + run 42257087460 @9de8988）；补 code-map.md 与 flow.mmd；缺口仅剩项目图谱与 A/B 审"
+        },
+        {
+          "at": "2026-11-07T06:02:23+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：UA T=98d6dca 测试+审阅通过；priority 派写手·服务端按 ops-v1 生成图谱（S=f7c8aba）；未开交付 PR"
         }
       ],
       "artifacts": [
         "docs/delivery/v0.1.0/acceptance-check.md",
         "docs/delivery/v0.1.0/code-map.md",
         "docs/delivery/v0.1.0/flow.mmd",
-        "docs/delivery/v0.1.0/README.md"
-      ]
+        "docs/delivery/v0.1.0/README.md",
+        "logs/delivery-v010/ua-security-scan-98d6dca-20261107-045303.md（测试扫描：通过）",
+        "logs/delivery-v010/understand-anything-review/review-cli-understand-anything-T-98d6dca-20261107-045521.result.md（审阅：通过，档 C 有条件）"
+      ],
+      "dispatched_graph_at": "2026-11-07T06:02:23+10:00",
+      "ua_T": "98d6dca712407b8cbf0bca21b539c197e5a7825c",
+      "ua_S": "f7c8abaa04dc7378e3f7588a0af6f65302e94922",
+      "ua_test": "通过",
+      "ua_review": "通过（档C有条件：独立clone、UNDERSTAND_NO_WORKTREE_REDIRECT=1、禁dashboard/install）"
     }
   },
   "decisions_log": [

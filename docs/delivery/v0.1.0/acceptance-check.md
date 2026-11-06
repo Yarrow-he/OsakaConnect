@@ -27,9 +27,9 @@
 | A17 | routes[] 可扩展 | 通过 | server-core + lang-guard + windows smoke；run 42257087460 |
 
 ## 阻塞/缺口
-1. 项目图谱尚未生成（等服务端写手按 ops/graph-steps.md、有效标签 ops-v1）。
+1. 项目图谱尚未生成（服务端写手已派；ops-v1；UA T=98d6dca 测试+审阅已通过）。
 2. A/B 评审未开工（三件套齐后再送）。
 
 ## 下一步
-1. 服务端写手交项目图谱。
-2. 交付三件套齐后送 A/B 审一轮，再交 Yarrow。
+1. 等服务端写手交 `knowledge-graph.json`（含 T/S/会话日志路径）。
+2. 收进 `docs/delivery/v0.1.0/` 后送 A/B 审一轮，再交 Yarrow。
