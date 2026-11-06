@@ -27,3 +27,9 @@ A7, A15（见 `acceptance.md`）。完成标准：JVM 单测读同一份向量�
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+## 看板收口（pipeline-watchdog 2026-11-07T01:41:33+1000）
+
+1. PR #104 已合入 main（merge `44f3f70`，head `d999a2c`）。
+2. 过时重开 PR #103 已用 `as_lead.sh close` 关闭（被 #104 取代）。
+3. ErrorMessages 反向断言建议留后续小 PR。

@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-06T23:03:22+10:00",
+  "updated_at": "2026-11-07T01:43:45+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -494,7 +494,7 @@
       "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:16:32+10:00",
+      "updated_at": "2026-11-07T01:43:45+10:00",
       "paths": [
         "android/"
       ],
@@ -581,6 +581,11 @@
           "state": "完成",
           "at": "2026-11-03T02:52:01+10:00",
           "note": "Yarrow 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-07T01:43:45+10:00",
+          "note": "清过时 blocked_on（PR #19 早已合入）；pipeline-watchdog"
         }
       ],
       "branch": "android/android-shell",
@@ -596,7 +601,7 @@
       "review_state": "通过",
       "test_state": "不通过",
       "next_step": "测试 · Osaka 按 run 41455806499 复测",
-      "blocked_on": "PR #19 等 Yarrow 批准"
+      "blocked_on": null
     },
     {
       "id": "android-diagnostics",
@@ -605,7 +610,7 @@
       "state": "完成",
       "owner": "写手 · Android",
       "rework": 3,
-      "updated_at": "2026-11-03T01:33:40+10:00",
+      "updated_at": "2026-11-07T01:54:06+10:00",
       "paths": [
         "android/"
       ],
@@ -661,6 +666,17 @@
           ],
           "results": "必过5项+android-emulator+guards-acceptance success；JvmJsonDivergenceTest 1/0/0/0；JvmJsonTest 6/0/0/0；OrgJsonDivergenceTest 1 tests 0 failures 0 skipped（emulator-5554 - 11）；android/ diff 为空",
           "log": "logs/android-diagnostics/2026-11-03-test-v5.log"
+        },
+        {
+          "kind": "board-closeout",
+          "pr": 104,
+          "merge_commit": "44f3f70ea075a28541a01b881f997923f530d16c",
+          "head": "d999a2cb407cb67ce8aea8de252567901dc9d4bd",
+          "review": "通过 @d999a2c",
+          "test": "pass @d999a2c",
+          "ci": "pass @d999a2c",
+          "notes": "notes/android-diagnostics.md",
+          "at": "2026-11-07T01:41:32+10:00"
         }
       ],
       "history": [
@@ -717,20 +733,26 @@
         {
           "state": "完成",
           "at": "2026-11-03T01:33:40+10:00"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-07T01:41:32+10:00",
+          "note": "PR #104 合入 44f3f70；产品目录 diagnostics 进 main；关闭过时重开 PR #103"
         }
       ],
       "branch": "android/android-diagnostics",
       "summary": "LogRedactor、InviteCode.isValid、错误展示（errors.json 文案）；为 0.2.0 预留的响应校验用 org.json 手写，本期只做 admin-contract 解析校验函数及单测。",
       "brief": "notes/android-diagnostics.md",
-      "test_result": "阻塞：A7/A15 测试脚本未在 CI 跑（workflow 不调用 tests/android/*）；写手单测 BUILD SUCCESSFUL 但无用例计数；A14 lang-guard 通过",
+      "test_result": "通过 @d999a2cb407cb67ce8aea8de252567901dc9d4bd（PR #104；/home/box/osaka/logs/pr104/checks-d999a2c-20261107-005605.txt）",
       "review": "通过",
       "nudges": 0,
       "nudge_log": [
         "2026-11-02T19:52:00+10:00"
       ],
       "review_state": "通过",
-      "test_state": "阻塞",
-      "next_step": "等审阅 CLI 审 f66b7da；Jvm 用例证据等 CI 上传 emulator job testDebugUnitTest XML"
+      "test_state": "通过",
+      "next_step": "已合入 main：PR #104 merge 44f3f70（head d999a2c）。ErrorMessages 反向断言建议留后续小 PR。看板由 pipeline-watchdog 收口。",
+      "blocked_on": null
     },
     {
       "id": "ci-guards",
@@ -823,6 +845,18 @@
       "state": "已合并",
       "merge_commit": "6a15bb5c983769ced70866418211293e1e722120",
       "updated_at": "2026-11-03T03:35:49+10:00"
+    },
+    "103": {
+      "state": "已关闭（被 #104 取代）",
+      "closed_at": "2026-11-07T01:41:32+10:00",
+      "note": "pipeline-watchdog：#104 已合入 main，重开待写 PR 过时，as_lead close",
+      "superseded_by": 104
+    },
+    "104": {
+      "state": "已合并",
+      "merge_commit": "44f3f70ea075a28541a01b881f997923f530d16c",
+      "head": "d999a2cb407cb67ce8aea8de252567901dc9d4bd",
+      "updated_at": "2026-11-07T01:41:32+10:00"
     }
   },
   "tasks": {
