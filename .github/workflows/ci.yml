@@ -45,6 +45,14 @@ jobs:
           set -e
           for p in ${{ steps.has.outputs.code }}; do dotnet restore "$p"; dotnet build "$p" -c Release --no-restore; done
           for p in ${{ steps.has.outputs.code }}; do case "$p" in *Tests*.csproj) dotnet test "$p" -c Release --no-build;; esac; done
+      - name: dotnet format --verify-no-changes
+        if: steps.has.outputs.code != ''
+        shell: bash
+        run: |
+          set -e
+          for p in ${{ steps.has.outputs.code }}; do
+            dotnet format "$p" --verify-no-changes --no-restore
+          done
   windows-acceptance:
     runs-on: windows-latest
     steps:
