@@ -29,3 +29,18 @@ A10, A11, A12, A13, A14, A17（见 `acceptance.md`）。完成标准：PR 上 wo
 - 编译、lint、测试命令及各自输出文件路径
 - 本次 CLI 会话日志路径
 - 改动文件清单（`git diff --name-only main...`）与已知限制
+
+---
+
+## 交付证明（pipeline-watchdog 2026-11-06 20:58 Australia/Brisbane）
+
+核对 main 上 A10–A14、A17 的 CI 接线与最近一次全绿证据。本轮只更新 notes 与 `tests/INDEX.md`，不改 board.json（#96 仍等 Yarrow 批准 modules 改动）。
+
+1. A10 docker 四项：`tests/admin/admin-connect/{gen-certs,run-a10}.sh` + `docker-compose.yml`；workflow job `a10-docker` 调用 `run-a10.sh`。main @ `674017f` run [42202140900](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42202140900) job a10-docker success。
+2. A10 禁跳过校验证书 + A14 技术栈：`tests/admin/admin-connect/grep-guard.sh`、`tests/android/android-shell/lang-guard.sh`；挂在 `guards-acceptance`。同 run guards-acceptance success。
+3. A11 跨端互引：`scripts/ci/check-cross-refs.sh` + `test-check-cross-refs.sh`；PR #82 已合；挂在 `guards-acceptance`。
+4. A12 PR 行数：策略仓 `pr-size` 必过检查（业务仓 `policy-proposals/pr-size.yaml` 提案侧）。
+5. A13 main workflow 全绿：同上 [42202140900](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42202140900) @ `674017f` conclusion=success（8/8 jobs）。
+6. A17 硬编码线路：android `lang-guard.sh`；后台 routes 数组由 server-core / openapi（#77/#81）覆盖。
+
+已知限制：看板 `ci-guards` 仍为「待写」，等 #96 合并后再单独开看板收口 PR 标完成。`tests/INDEX.md` 本轮按上面证据刷新「最后通过」列。
