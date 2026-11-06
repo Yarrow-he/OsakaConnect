@@ -1,6 +1,7 @@
 package com.osakaconnect.shell
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.ParcelFileDescriptor
 import android.os.SystemClock
@@ -79,6 +80,28 @@ class MainActivityTest {
                     assertNotEquals(originalId, rotatedId)
                     assertEquals(targetOrientation, activity.resources.configuration.orientation)
                     assertPage(activity, "P2")
+                    // Keep HOME's orientation from causing a configuration change on return.
+                    activity.requestedOrientation = if (targetOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    } else {
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    }
+                }
+                instrumentation.waitForIdleSync()
+                await("orientation-locked activity must resume in the target orientation") {
+                    var ready = false
+                    if (scenario.state == Lifecycle.State.RESUMED) {
+                        scenario.onActivity { activity ->
+                            ready = !activity.isChangingConfigurations &&
+                                activity.resources.configuration.orientation == targetOrientation
+                            if (ready) {
+                                assertPage(activity, "P2")
+                                rotatedId = activity.lifecycleId
+                                logEvidence("orientation-locked activity before HOME", activity)
+                            }
+                        }
+                    }
+                    ready
                 }
 
                 // Launch the real home screen so the app's task actually goes to the background.
@@ -89,6 +112,7 @@ class MainActivityTest {
                 await("background activity must stop") { "onStop" in lifecycleEvents(rotatedId) }
                 logEvidence("background activity")
                 assertEquals(Lifecycle.State.CREATED, scenario.state)
+                assertTrue("onDestroy" !in lifecycleEvents(rotatedId))
 
                 shell(
                     "am start -W -n ${instrumentation.targetContext.packageName}/" +
@@ -96,6 +120,14 @@ class MainActivityTest {
                 )
                 await("foreground activity must resume again") {
                     lifecycleEvents(rotatedId).count { it == "onResume" } == 2
+                }
+                await("foreground activity must retain its id and target orientation") {
+                    var ready = false
+                    scenario.onActivity { activity ->
+                        ready = activity.resources.configuration.orientation == targetOrientation &&
+                            activity.lifecycleId == rotatedId
+                    }
+                    ready
                 }
                 scenario.onActivity { activity ->
                     logEvidence("foreground activity", activity)
@@ -120,6 +152,139 @@ class MainActivityTest {
             assertTrue("at most 3 activity instances: $testIds", testIds.size <= 3)
         } catch (failure: AssertionError) {
             logEvidence("assertion failed: ${failure.message}")
+            throw failure
+        } finally {
+            try {
+                restoreSetting("user_rotation", userRotation)
+            } finally {
+                restoreSetting("accelerometer_rotation", accelerometerRotation)
+            }
+        }
+    }
+
+    @Test
+    fun displayRotationPressurePreservesOrientationLockedActivity() {
+        var stableId = ""
+        var lockedOrientation = Configuration.ORIENTATION_UNDEFINED
+        var targetRotation = 0
+        val accelerometerRotation = shell("settings get system accelerometer_rotation").trim()
+        val userRotation = shell("settings get system user_rotation").trim()
+        val previousIds = lifecycleLog().map { it.substringBefore(' ') }.toSet()
+
+        fun logEvidence(stage: String, activity: MainActivity? = null) {
+            Log.i("OsakaLifecycleTest", "$stage: saved accelerometer_rotation=$accelerometerRotation " +
+                "user_rotation=$userRotation; targetRotation=$targetRotation " +
+                "lockedOrientation=$lockedOrientation; current accelerometer_rotation=" +
+                shell("settings get system accelerometer_rotation").trim() +
+                " user_rotation=" + shell("settings get system user_rotation").trim() +
+                " configuration.orientation=" +
+                (activity?.resources ?: instrumentation.targetContext.resources).configuration.orientation +
+                " activityId=${activity?.lifecycleId} stableId=$stableId")
+            lifecycleLog().filter { it.substringBefore(' ') !in previousIds }.forEach {
+                Log.i("OsakaLifecycleTest", "$stage: $it")
+            }
+        }
+
+        try {
+            ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+                scenario.onActivity { activity ->
+                    activity.findViewById<Button>(R.id.navigate).performClick()
+                    assertPage(activity, "P2")
+                    stableId = activity.lifecycleId
+                    lockedOrientation = activity.resources.configuration.orientation
+                    activity.requestedOrientation = if (lockedOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    } else {
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    }
+                    logEvidence("activity orientation locked", activity)
+                }
+                instrumentation.waitForIdleSync()
+                scenario.onActivity { activity ->
+                    targetRotation = if (activity.windowManager.defaultDisplay.rotation % 2 == 0) 1 else 0
+                    logEvidence("before locked display rotation pressure", activity)
+                }
+                // Set the target first so disabling the sensor cannot apply a stale user rotation.
+                shell("settings put system user_rotation $targetRotation")
+                shell("settings put system accelerometer_rotation 0")
+                logEvidence("locked display rotation pressure applied")
+                instrumentation.waitForIdleSync()
+
+                await("orientation-locked activity must resume without a configuration change") {
+                    var ready = false
+                    if (scenario.state == Lifecycle.State.RESUMED) {
+                        scenario.onActivity { activity ->
+                            ready = !activity.isChangingConfigurations
+                        }
+                    }
+                    ready
+                }
+                scenario.onActivity { activity ->
+                    logEvidence("locked activity after display rotation pressure", activity)
+                    assertEquals(stableId, activity.lifecycleId)
+                    assertPage(activity, "P2")
+                    assertTrue("onDestroy" !in lifecycleEvents(stableId))
+                }
+            }
+        } catch (failure: AssertionError) {
+            logEvidence("locked display rotation assertion failed: ${failure.message}")
+            throw failure
+        } finally {
+            try {
+                restoreSetting("user_rotation", userRotation)
+            } finally {
+                restoreSetting("accelerometer_rotation", accelerometerRotation)
+            }
+        }
+    }
+
+    @Test
+    fun displayRotationPressureRecreatesUnlockedActivityAndRestoresPage() {
+        var idBefore = ""
+        var targetRotation = 0
+        val accelerometerRotation = shell("settings get system accelerometer_rotation").trim()
+        val userRotation = shell("settings get system user_rotation").trim()
+        val previousIds = lifecycleLog().map { it.substringBefore(' ') }.toSet()
+
+        fun logEvidence(stage: String, activity: MainActivity? = null) {
+            Log.i("OsakaLifecycleTest", "$stage: saved accelerometer_rotation=$accelerometerRotation " +
+                "user_rotation=$userRotation; targetRotation=$targetRotation; current accelerometer_rotation=" +
+                shell("settings get system accelerometer_rotation").trim() +
+                " user_rotation=" + shell("settings get system user_rotation").trim() +
+                " configuration.orientation=" +
+                (activity?.resources ?: instrumentation.targetContext.resources).configuration.orientation +
+                " activityId=${activity?.lifecycleId} idBefore=$idBefore")
+            lifecycleLog().filter { it.substringBefore(' ') !in previousIds }.forEach {
+                Log.i("OsakaLifecycleTest", "$stage: $it")
+            }
+        }
+
+        try {
+            ActivityScenario.launch(MainActivity::class.java).use { scenario ->
+                scenario.onActivity { activity ->
+                    activity.findViewById<Button>(R.id.navigate).performClick()
+                    assertPage(activity, "P2")
+                    idBefore = activity.lifecycleId
+                    targetRotation = if (activity.windowManager.defaultDisplay.rotation % 2 == 0) 1 else 0
+                    logEvidence("before unlocked display rotation pressure", activity)
+                }
+                // Set the target first so disabling the sensor cannot apply a stale user rotation.
+                shell("settings put system user_rotation $targetRotation")
+                shell("settings put system accelerometer_rotation 0")
+                logEvidence("unlocked display rotation pressure applied")
+
+                await("display rotation pressure must destroy the original activity") {
+                    "onDestroy" in lifecycleEvents(idBefore)
+                }
+                await("recreated activity must resume") { scenario.state == Lifecycle.State.RESUMED }
+                scenario.onActivity { activity ->
+                    logEvidence("unlocked activity after display rotation pressure", activity)
+                    assertNotEquals(idBefore, activity.lifecycleId)
+                    assertPage(activity, "P2")
+                }
+            }
+        } catch (failure: AssertionError) {
+            logEvidence("unlocked display rotation assertion failed: ${failure.message}")
             throw failure
         } finally {
             try {
