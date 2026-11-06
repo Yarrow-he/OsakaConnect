@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-07T01:41:32+10:00",
+  "updated_at": "2026-11-07T01:43:45+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -494,7 +494,7 @@
       "state": "完成",
       "owner": "写手 · Android",
       "rework": 1,
-      "updated_at": "2026-11-03T05:16:32+10:00",
+      "updated_at": "2026-11-07T01:43:45+10:00",
       "paths": [
         "android/"
       ],
@@ -581,6 +581,11 @@
           "state": "完成",
           "at": "2026-11-03T02:52:01+10:00",
           "note": "Yarrow 批准（t186u）；PR #19 合入 main bfa016c；android-emulator 加入必过（logs/branch-protection/20261103T024422-*）；junit 4.13.2 与 androidx.test 测试依赖由该批准覆盖"
+        },
+        {
+          "state": "完成",
+          "at": "2026-11-07T01:43:45+10:00",
+          "note": "清过时 blocked_on（PR #19 早已合入）；pipeline-watchdog"
         }
       ],
       "branch": "android/android-shell",
@@ -596,7 +601,7 @@
       "review_state": "通过",
       "test_state": "不通过",
       "next_step": "测试 · Osaka 按 run 41455806499 复测",
-      "blocked_on": "PR #19 等 Yarrow 批准"
+      "blocked_on": null
     },
     {
       "id": "android-diagnostics",
