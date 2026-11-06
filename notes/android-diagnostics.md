@@ -85,3 +85,22 @@ Codex CLI 使用 `gpt-6-astra`、reasoning `high`，按 ponytail full 执行。�
 - 语言守卫命令 `bash tests/android/android-shell/lang-guard.sh` 输出「通过：A14/A17（android/）」；输出文件：`/home/box/osaka/logs/android-diagnostics-2/lang-guard-android-shell.txt`。
 
 已知限制：编译、lint、JVM 单测仍需等待 CI（android-emulator / Gradle 8.9 + JDK 17）执行。diagnostics 产品目录存在后，android-emulator 按决策 009 应能真正运行 diagnostics 脚本；这是待 CI 验证的预期，不是本次已通过的结果。本 notes 会话仅追加本文件，不修改 board.json，不联网，不提交 git。
+
+## 补充说明（2026-11-07，组长）
+
+上面列的 13 个文件是中间版本的清单，最后一项 notes 后来按要求移出了功能分支。最终交付的 [#104](https://github.com/Yarrow-he/OsakaConnect/pull/104)（合并提交 `44f3f70`）对第一父提交的净改动是 12 个文件，不含 notes：
+
+1. `android/app/src/main/java/com/osakaconnect/diagnostics/AdminContract.kt`
+2. `android/app/src/main/java/com/osakaconnect/diagnostics/ErrorMessages.kt`
+3. `android/app/src/main/java/com/osakaconnect/diagnostics/InviteCode.kt`
+4. `android/app/src/main/java/com/osakaconnect/diagnostics/LogRedactor.kt`
+5. `android/app/src/main/java/com/osakaconnect/shell/MainActivity.kt`
+6. `android/app/src/test/java/com/osakaconnect/diagnostics/AdminContractTest.kt`
+7. `android/app/src/test/java/com/osakaconnect/diagnostics/ErrorMessagesTest.kt`
+8. `android/app/src/test/java/com/osakaconnect/diagnostics/InviteCodeTest.kt`
+9. `android/app/src/test/java/com/osakaconnect/diagnostics/JvmJson.kt`
+10. `android/app/src/test/java/com/osakaconnect/diagnostics/JvmJsonTest.kt`
+11. `android/app/src/test/java/com/osakaconnect/diagnostics/LogRedactorTest.kt`
+12. `android/app/src/test/java/com/osakaconnect/diagnostics/SharedVectors.kt`
+
+核对命令：`git diff --name-only 44f3f70^1 44f3f70`。
