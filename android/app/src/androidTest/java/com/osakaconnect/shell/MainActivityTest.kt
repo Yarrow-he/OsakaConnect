@@ -1,6 +1,7 @@
 package com.osakaconnect.shell
 
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.ParcelFileDescriptor
 import android.os.SystemClock
@@ -79,6 +80,28 @@ class MainActivityTest {
                     assertNotEquals(originalId, rotatedId)
                     assertEquals(targetOrientation, activity.resources.configuration.orientation)
                     assertPage(activity, "P2")
+                    // Keep HOME's orientation from causing a configuration change on return.
+                    activity.requestedOrientation = if (targetOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                        ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    } else {
+                        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    }
+                }
+                instrumentation.waitForIdleSync()
+                await("orientation-locked activity must resume in the target orientation") {
+                    var ready = false
+                    if (scenario.state == Lifecycle.State.RESUMED) {
+                        scenario.onActivity { activity ->
+                            ready = !activity.isChangingConfigurations &&
+                                activity.resources.configuration.orientation == targetOrientation
+                            if (ready) {
+                                assertPage(activity, "P2")
+                                rotatedId = activity.lifecycleId
+                                logEvidence("orientation-locked activity before HOME", activity)
+                            }
+                        }
+                    }
+                    ready
                 }
 
                 // Launch the real home screen so the app's task actually goes to the background.
@@ -89,6 +112,7 @@ class MainActivityTest {
                 await("background activity must stop") { "onStop" in lifecycleEvents(rotatedId) }
                 logEvidence("background activity")
                 assertEquals(Lifecycle.State.CREATED, scenario.state)
+                assertTrue("onDestroy" !in lifecycleEvents(rotatedId))
 
                 shell(
                     "am start -W -n ${instrumentation.targetContext.packageName}/" +
@@ -96,6 +120,14 @@ class MainActivityTest {
                 )
                 await("foreground activity must resume again") {
                     lifecycleEvents(rotatedId).count { it == "onResume" } == 2
+                }
+                await("foreground activity must retain its id and target orientation") {
+                    var ready = false
+                    scenario.onActivity { activity ->
+                        ready = activity.resources.configuration.orientation == targetOrientation &&
+                            activity.lifecycleId == rotatedId
+                    }
+                    ready
                 }
                 scenario.onActivity { activity ->
                     logEvidence("foreground activity", activity)
