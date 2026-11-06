@@ -142,9 +142,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: has
-        run: echo "code=$([ -f android/settings.gradle.kts ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ -f android/settings.gradle.kts ]; then
+            echo "code=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "code=" >> "$GITHUB_OUTPUT"
+          fi
       - id: diag
-        run: echo "dir=$([ -d android/app/src/main/java/com/osakaconnect/diagnostics ] && echo yes || true)" >> "$GITHUB_OUTPUT"
+        run: |
+          if [ -d android/app/src/main/java/com/osakaconnect/diagnostics ]; then
+            echo "dir=yes" >> "$GITHUB_OUTPUT"
+          else
+            echo "dir=" >> "$GITHUB_OUTPUT"
+          fi
       - if: steps.has.outputs.code == ''
         run: echo "::error::待测：模块未交付（无 android/settings.gradle.kts），模拟器验收未执行" && exit 3
       - if: steps.has.outputs.code != ''
