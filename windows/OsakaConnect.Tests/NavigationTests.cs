@@ -48,8 +48,7 @@ public class NavigationTests
             {
                 failure = exception;
             }
-        })
-        { IsBackground = true };
+        }) { IsBackground = true };
 
         thread.SetApartmentState(ApartmentState.STA);
         thread.Start();
