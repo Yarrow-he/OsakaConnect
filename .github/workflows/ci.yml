@@ -18,6 +18,8 @@ jobs:
         run: bash tests/android/android-shell/lang-guard.sh
       - name: cross-refs（A11）
         run: bash scripts/ci/check-cross-refs.sh
+      - name: cross-refs 回归（A11）
+        run: bash scripts/ci/test-check-cross-refs.sh
   contract:
     runs-on: ubuntu-latest
     steps:
