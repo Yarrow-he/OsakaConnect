@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-07T01:43:45+10:00",
+  "updated_at": "2026-11-07T09:04:42+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -830,11 +830,10 @@
   ],
   "prs": {
     "7": {
-      "state": "待合并",
-      "review": "通过 notes/pr7-tests.md",
-      "ci": "a10-docker 红：主分支缺 server/ admin/，exit 3 按设计报红 logs/pr7/",
-      "blocked_on": "等 server-core/admin-connect 合入主分支后重跑 CI 再按组长合并",
-      "updated_at": "2026-11-02T20:10:29+10:00"
+      "state": "已关闭（未合并）",
+      "closed_at": "2026-11-06T13:06:18Z",
+      "note": "pipeline-watchdog：GitHub state=CLOSED mergedAt=null；原 board 待合并已过时",
+      "updated_at": "2026-11-07T03:55:16+10:00"
     },
     "43": {
       "state": "已合并",
@@ -857,6 +856,12 @@
       "merge_commit": "44f3f70ea075a28541a01b881f997923f530d16c",
       "head": "d999a2cb407cb67ce8aea8de252567901dc9d4bd",
       "updated_at": "2026-11-07T01:41:32+10:00"
+    },
+    "105": {
+      "state": "已合并",
+      "merge_commit": "9de89880ea77459b16da87369a23e3285fe7262b",
+      "head": "9e5c254f6d69b6b59e1208f40599993b2c97bcf1",
+      "updated_at": "2026-11-07T03:55:16+10:00"
     }
   },
   "tasks": {
@@ -1115,6 +1120,102 @@
         },
         "https://github.com/Yarrow-he/OsakaConnect/pull/15#issuecomment-6578710611"
       ]
+    },
+    "delivery-v010": {
+      "title": "第1期 0.1.0 闸口二交付（验收核对+交付三件套）",
+      "owner": "代码组长 · Osaka",
+      "state": "阻塞",
+      "started_at": "2026-11-07T03:55:16+10:00",
+      "updated_at": "2026-11-07T08:47:46+10:00",
+      "branch": "lead/delivery-v010-prep",
+      "next_step": "图谱冻结：不催办、不生成、不用 tools/understand-anything-98d6dca 预构建；Yarrow 决定重启后先送测试扫描+审阅，再按 ops-v1 生成；不依赖图谱的记账照常推进",
+      "unblocks": [],
+      "history": [
+        {
+          "at": "2026-11-07T03:55:16+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：模块全完成，开工闸口二；产物 docs/delivery/v0.1.0/acceptance-check.md"
+        },
+        {
+          "at": "2026-11-07T04:53:40+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "合入 main@f7c8aba（merge，因 as_work 禁 force）；A7/A15 标通过（证据 INDEX + run 42257087460 @9de8988）；补 code-map.md 与 flow.mmd；缺口仅剩项目图谱与 A/B 审"
+        },
+        {
+          "at": "2026-11-07T06:02:23+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：UA T=98d6dca 测试+审阅通过；priority 派写手·服务端按 ops-v1 生成图谱（S=f7c8aba）；未开交付 PR"
+        },
+        {
+          "at": "2026-11-07T07:03:18+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "解阻塞：授权下载 T 与一次性 dist 预构建；priority 催服务端写手；并行启动 tools 预构建 executor"
+        },
+        {
+          "at": "2026-11-07T07:09:31+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog 续：UA 预构建完成；priority 告知写手·服务端 PLUGIN_ROOT 与 S 路径，催立刻生成"
+        },
+        {
+          "at": "2026-11-07T07:55:44+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：无开放 PR、9 模块完成；图谱仍缺；催办第 2/2；未 pause、未打扰 Yarrow"
+        },
+        {
+          "at": "2026-11-07T08:47:46+10:00",
+          "to": "阻塞",
+          "by": "代码组长 · Osaka",
+          "note": "Yarrow 08:00 决定图谱先放着；07:03 预构建未经 Yarrow 批准，冻结不用；停止催办"
+        }
+      ],
+      "artifacts": [
+        "docs/delivery/v0.1.0/acceptance-check.md",
+        "docs/delivery/v0.1.0/code-map.md",
+        "docs/delivery/v0.1.0/flow.mmd",
+        "docs/delivery/v0.1.0/README.md",
+        "logs/delivery-v010/ua-security-scan-98d6dca-20261107-045303.md（测试扫描：通过）",
+        "logs/delivery-v010/understand-anything-review/review-cli-understand-anything-T-98d6dca-20261107-045521.result.md（审阅：通过，档 C 有条件）",
+        "logs/delivery-v010/project-graph/preflight-20261107-0604.md（写手·服务端：STOP 前置核验）",
+        "logs/delivery-v010/project-graph/prebuild-20261107.md",
+        "tools/understand-anything-98d6dca/understand-anything-plugin/packages/core/dist/index.js",
+        "tools/osaka-S-f7c8aba @ f7c8aba"
+      ],
+      "dispatched_graph_at": "2026-11-07T06:02:23+10:00",
+      "ua_T": "98d6dca712407b8cbf0bca21b539c197e5a7825c",
+      "ua_S": "f7c8abaa04dc7378e3f7588a0af6f65302e94922",
+      "ua_test": "通过",
+      "ua_review": "通过（档C有条件：独立clone、UNDERSTAND_NO_WORKTREE_REDIRECT=1、禁dashboard/install）",
+      "waiting_on": "Yarrow（图谱重启决定）",
+      "nudge_count": 2,
+      "nudge_history": [
+        {
+          "at": "2026-11-07T07:03:18+10:00",
+          "to": "写手 · 服务端",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：preflight STOP 已解（下载+预构建授权）；priority 催办第 1 次"
+        },
+        {
+          "at": "2026-11-07T07:55:44+10:00",
+          "to": "写手 · 服务端",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：催办第 2/2 次；预构建就绪后仍无图谱；再无产物下一巡检上报"
+        }
+      ],
+      "prebuild": {
+        "PLUGIN_ROOT": "/home/box/osaka/tools/understand-anything-98d6dca/understand-anything-plugin",
+        "S_clone": "/home/box/osaka/tools/osaka-S-f7c8aba",
+        "T": "98d6dca712407b8cbf0bca21b539c197e5a7825c",
+        "S": "f7c8abaa04dc7378e3f7588a0af6f65302e94922",
+        "summary": "logs/delivery-v010/project-graph/prebuild-20261107.md",
+        "at": "2026-11-07T07:09:31+10:00"
+      },
+      "blocked_on": "Yarrow 2026-11-07 08:00 决定图谱先放着；预构建冻结，重启前须测试扫描+审阅"
     }
   },
   "decisions_log": [
@@ -1133,6 +1234,30 @@
       "topic": "shared-protocol、ci-guards 状态核对",
       "ruling": "两者内容未完全进 main，保持待写，记 next_step 与 ETA，不开大活",
       "evidence": "git log origin/main -- openapi shared tests/contract .github scripts；origin/main 无 ci/"
+    },
+    {
+      "at": "2026-11-07T03:55:16+10:00",
+      "topic": "第1期模块全完成，进入闸口二",
+      "ruling": "9 模块均为完成；main CI @9de8988 全绿；开工 docs/delivery/v0.1.0；A7/A15 待 INDEX 刷新后定论",
+      "evidence": "board modules 全完成；Actions run 42257087460；PR#104/#105 已合",
+      "dispatched_to": [
+        "测试 · Osaka"
+      ]
+    },
+    {
+      "at": "2026-11-07T07:03:18+10:00",
+      "topic": "delivery-v010 项目图谱：下载与 dist 预构建",
+      "ruling": "T 已过测试+审阅，授权服务端写手按 ops-v1 git 下载；授权 bot Shell 一次性 pnpm install --frozen-lockfile + core build 作为审阅档C要求的预构建（禁止 SKILL 运行时自装、禁止 install.sh、禁 dashboard）；S 用独立 clone + UNDERSTAND_NO_WORKTREE_REDIRECT=1",
+      "evidence": "ua-security-scan-98d6dca-20261107-045303.md；review-cli-understand-anything-T-98d6dca-20261107-045521.result.md；preflight-20261107-0604.md；ops-v1:ops/graph-steps.md",
+      "dispatched_to": [
+        "写手 · 服务端"
+      ]
+    },
+    {
+      "at": "2026-11-07T09:04:42+10:00",
+      "topic": "更正：delivery-v010 项目图谱预构建",
+      "ruling": "07:03 那条里“授权 bot 一次性 pnpm install + core build”没有经过 Yarrow 批准，作废。按 Yarrow 2026-11-07 08:00 的决定，图谱先放着；预构建产物冻结不用，重启前要先过测试扫描和审阅。",
+      "evidence": "logs/delivery-v010/project-graph/prebuild-20261107.md"
     }
   ]
 }
