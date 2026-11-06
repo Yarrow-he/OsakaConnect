@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-06T23:03:22+10:00",
+  "updated_at": "2026-11-07T00:04:01+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -602,10 +602,10 @@
       "id": "android-diagnostics",
       "端": "Android",
       "模块": "android-diagnostics",
-      "state": "完成",
+      "state": "待写",
       "owner": "写手 · Android",
       "rework": 3,
-      "updated_at": "2026-11-03T01:33:40+10:00",
+      "updated_at": "2026-11-07T00:04:01+10:00",
       "paths": [
         "android/"
       ],
@@ -717,20 +717,25 @@
         {
           "state": "完成",
           "at": "2026-11-03T01:33:40+10:00"
+        },
+        {
+          "state": "待写",
+          "at": "2026-11-07T00:04:01+10:00",
+          "note": "pipeline-watchdog 交付核对：产品未合入 main，完成态作废重开"
         }
       ],
-      "branch": "android/android-diagnostics",
+      "branch": "android/android-diagnostics-2",
       "summary": "LogRedactor、InviteCode.isValid、错误展示（errors.json 文案）；为 0.2.0 预留的响应校验用 org.json 手写，本期只做 admin-contract 解析校验函数及单测。",
       "brief": "notes/android-diagnostics.md",
       "test_result": "阻塞：A7/A15 测试脚本未在 CI 跑（workflow 不调用 tests/android/*）；写手单测 BUILD SUCCESSFUL 但无用例计数；A14 lang-guard 通过",
-      "review": "通过",
+      "review": "历史通过 @f66b7da，合入前需对新 head 重审",
       "nudges": 0,
       "nudge_log": [
         "2026-11-02T19:52:00+10:00"
       ],
       "review_state": "通过",
       "test_state": "阻塞",
-      "next_step": "等审阅 CLI 审 f66b7da；Jvm 用例证据等 CI 上传 emulator job testDebugUnitTest XML"
+      "next_step": "交付核对发现：产品目录 android/app/src/main/java/com/osakaconnect/diagnostics 从未进 main（仅有测试与看板完成记账 #35）；远端 android/android-diagnostics 已无。需从本地 tip f66b7da/a285acf 重开分支合入后，A7/A15 才算交付。"
     },
     {
       "id": "ci-guards",
@@ -1080,6 +1085,21 @@
           "merge": "9662b8e"
         },
         "https://github.com/Yarrow-he/OsakaConnect/pull/15#issuecomment-6578710611"
+      ]
+    },
+    "delivery-v010": {
+      "title": "0.1.0 交付前核对（acceptance.md + tests/INDEX.md + docs/delivery）",
+      "owner": "代码组长 · Osaka",
+      "state": "进行中",
+      "started_at": "2026-11-07T00:04:01+10:00",
+      "updated_at": "2026-11-07T00:04:01+10:00",
+      "next_step": "A7/A15 Android 因产品未进 main 不通过；已派写手重开 android-diagnostics-2。其余条目起草核对表。",
+      "history": [
+        {
+          "state": "进行中",
+          "at": "2026-11-07T00:04:01+10:00",
+          "note": "全部模块曾标完成；核对发现 android-diagnostics 产品缺口"
+        }
       ]
     }
   },
