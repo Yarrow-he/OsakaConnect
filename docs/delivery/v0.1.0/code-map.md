@@ -76,8 +76,8 @@
 3. 令牌：后台只从环境变量 `OSAKA_ADMIN_TOKEN` 读取，缺少证书或令牌时直接拒绝启动（`app.py:84-87`）。没有凭据返回 401，令牌不对返回 403，比较用 `hmac.compare_digest`（`app.py:42-49`）。仓库密钥扫描配置在 `.github/secret_scanning.yml`。
 4. 验收和 CI job 的对应关系（job 定义在 `.github/workflows/ci.yml`，都在 main 必过检查里）：
    1. guards-acceptance：A10、A11、A14、A17。
-   2. windows-acceptance：A1、A2、A3、A4、A14、A15、A16、A17。
-   3. android、android-emulator：A5、A6、A7、A15、A16。
+   2. windows-acceptance：A1、A2、A3、A4、A14、A15、A17；A16 仅冒烟级覆盖，逐项对照未验证。
+   3. android、android-emulator：A5、A6、A7、A15；A16 仅冒烟级覆盖，逐项对照未验证。
    4. python（server-core）：A8、A9、A15、A17。
    5. contract：A9。
    6. a10-docker：A10。

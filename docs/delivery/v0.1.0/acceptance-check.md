@@ -23,7 +23,7 @@
 | A13 | main 全绿 | 通过 | https://github.com/Yarrow-he/OsakaConnect/actions/runs/42257087460 @ 9de8988 conclusion=success |
 | A14 | 技术栈锁定 | 通过 | guards-acceptance grep/lang-guard success run 42257087460 |
 | A15 | 邀请码 8 位 Crockford | 通过 | tests/INDEX.md：Windows WinDiagnostics.Tests + Android InviteCodeTest 1/0 + server-core；@main 9de8988 run 42257087460 |
-| A16 | UI 占位对照 design | 未验证 | 只有 windows smoke + android-emulator 冒烟；design inventory 在仓库外 `/home/box/osaka/design/inventory.md`，notes/win-shell.md:16、notes/android-shell.md:16 只把它当只读参考，没有逐项人工对照记录 |
+| A16 | UI 占位对照 design | 未验证 | 仅冒烟级覆盖，逐项对照未验证：只有 windows smoke + android-emulator 冒烟；design inventory 在仓库外 `/home/box/osaka/design/inventory.md`，notes/win-shell.md:14、notes/android-shell.md:14 只把它当只读参考，没有逐项人工对照记录 |
 | A17 | routes[] 可扩展 | 通过 | server-core + lang-guard + windows smoke；run 42257087460 |
 
 ## 阻塞/缺口
