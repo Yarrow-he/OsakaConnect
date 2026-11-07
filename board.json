@@ -1124,11 +1124,11 @@
     "delivery-v010": {
       "title": "第1期 0.1.0 闸口二交付（验收核对+交付三件套）",
       "owner": "代码组长 · Osaka",
-      "state": "进行中",
+      "state": "写作中",
       "started_at": "2026-11-07T03:55:16+10:00",
-      "updated_at": "2026-11-07T11:54:10+10:00",
+      "updated_at": "2026-11-07T13:02:28+10:00",
       "branch": "lead/delivery-v010",
-      "next_step": "PR#110 head 2ba329be：审阅 pass(docs-only)；业务 CI 8/8 绿；测试因 owner-approval/gate-summary 红未判过（第2类预期）；等 Yarrow 对当前 head 再批后组长 as_lead 合并；记账 PR#111 跟进看板；仍禁未批准 UA 预构建；本期不交图谱",
+      "next_step": "PR#110 head 8b579d5c：等审阅、测试重绑和 CI；都过后请 Yarrow 对这一版批准，再 as_lead 合并；仍禁未批准 UA 预构建",
       "unblocks": [],
       "history": [
         {
@@ -1184,6 +1184,27 @@
           "to": "进行中",
           "by": "代码组长 · Osaka",
           "note": "pipeline-watchdog 11:51：组长裁定 tasks 可用进行中（板内先例）；waiting_on 改为等 Yarrow 批 PR#110@2ba329be；本期不交图谱；仍禁未批准 UA 预构建"
+        },
+        {
+          "state": "上报",
+          "at": "2026-11-07T13:02:28+10:00",
+          "to": "上报",
+          "by": "代码组长 · Osaka",
+          "note": "图谱阻塞已上报 Yarrow"
+        },
+        {
+          "state": "待写",
+          "at": "2026-11-07T13:02:28+10:00",
+          "to": "待写",
+          "by": "代码组长 · Osaka",
+          "note": "Yarrow 拍板：本期不交图谱；交付事项按模块状态机走（2026-11-07 13:02）"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-07T13:02:28+10:00",
+          "to": "写作中",
+          "by": "代码组长 · Osaka",
+          "note": "续推 PR#110，A16 已补，新 head 8b579d5"
         }
       ],
       "artifacts": [
@@ -1202,8 +1223,8 @@
       "dispatched_graph_at": "2026-11-07T06:02:23+10:00",
       "ua_T": "98d6dca712407b8cbf0bca21b539c197e5a7825c",
       "ua_S": "f7c8abaa04dc7378e3f7588a0af6f65302e94922",
-      "ua_test": "通过",
-      "ua_review": "通过（档C有条件：独立clone、UNDERSTAND_NO_WORKTREE_REDIRECT=1、禁dashboard/install）",
+      "ua_test": "未做（本期不交图谱，T=98d6dca 的 UA CLI 重扫没跑）",
+      "ua_review": "未做（本期不交图谱）",
       "waiting_on": "Yarrow 在 GitHub 上批准 PR#110 当前 head 2ba329be841cc0b04a020d0cd4af0663e5e8e172（第2类；旧批准因 head 漂移已 DISMISSED）",
       "nudge_count": 2,
       "nudge_history": [
