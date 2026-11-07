@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "updated_at": "2026-11-07T09:04:42+10:00",
+  "updated_at": "2026-11-07T10:58:27+10:00",
   "scope": {
     "description": "本期允许改动的路径前缀；scripts/check-scope.sh 据此检查。模块分支只能改其模块 paths。",
     "global": [
@@ -1124,11 +1124,11 @@
     "delivery-v010": {
       "title": "第1期 0.1.0 闸口二交付（验收核对+交付三件套）",
       "owner": "代码组长 · Osaka",
-      "state": "阻塞",
+      "state": "进行中",
       "started_at": "2026-11-07T03:55:16+10:00",
-      "updated_at": "2026-11-07T08:47:46+10:00",
-      "branch": "lead/delivery-v010-prep",
-      "next_step": "图谱冻结：不催办、不生成、不用 tools/understand-anything-98d6dca 预构建；Yarrow 决定重启后先送测试扫描+审阅，再按 ops-v1 生成；不依赖图谱的记账照常推进",
+      "updated_at": "2026-11-07T10:58:27+10:00",
+      "branch": "lead/delivery-v010",
+      "next_step": "PR#110 head 2ba329be：审阅已过(docs-only)；已派测试绑当前 head；业务 CI 全绿；owner-approval/gate-summary 红属 Yarrow 档预期；等 Yarrow 对当前 head 批准后组长再 as_lead 合并；仍禁未批准 UA 预构建；本期不交图谱",
       "unblocks": [],
       "history": [
         {
@@ -1172,6 +1172,12 @@
           "to": "阻塞",
           "by": "代码组长 · Osaka",
           "note": "Yarrow 08:00 决定图谱先放着；07:03 预构建未经 Yarrow 批准，冻结不用；停止催办"
+        },
+        {
+          "at": "2026-11-07T10:58:27+10:00",
+          "to": "进行中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog 10:55：权威状态取 prep@2c528c1 解阻塞后推进；交付 PR#110@2ba329be 开着（相对旧看板 阻塞）；审阅 pass(docs-only)；Yarrow 旧批准因 head 漂移已 DISMISSED；priority 派测试重绑；不催图谱、不 pause"
         }
       ],
       "artifacts": [
@@ -1184,7 +1190,8 @@
         "logs/delivery-v010/project-graph/preflight-20261107-0604.md（写手·服务端：STOP 前置核验）",
         "logs/delivery-v010/project-graph/prebuild-20261107.md",
         "tools/understand-anything-98d6dca/understand-anything-plugin/packages/core/dist/index.js",
-        "tools/osaka-S-f7c8aba @ f7c8aba"
+        "tools/osaka-S-f7c8aba @ f7c8aba",
+        "https://github.com/Yarrow-he/OsakaConnect/pull/110 (head 2ba329be841cc0b04a020d0cd4af0663e5e8e172)"
       ],
       "dispatched_graph_at": "2026-11-07T06:02:23+10:00",
       "ua_T": "98d6dca712407b8cbf0bca21b539c197e5a7825c",
@@ -1215,7 +1222,7 @@
         "summary": "logs/delivery-v010/project-graph/prebuild-20261107.md",
         "at": "2026-11-07T07:09:31+10:00"
       },
-      "blocked_on": "Yarrow 2026-11-07 08:00 决定图谱先放着；预构建冻结，重启前须测试扫描+审阅"
+      "pr": 110
     }
   },
   "decisions_log": [
@@ -1258,6 +1265,12 @@
       "topic": "更正：delivery-v010 项目图谱预构建",
       "ruling": "07:03 那条里“授权 bot 一次性 pnpm install + core build”没有经过 Yarrow 批准，作废。按 Yarrow 2026-11-07 08:00 的决定，图谱先放着；预构建产物冻结不用，重启前要先过测试扫描和审阅。",
       "evidence": "logs/delivery-v010/project-graph/prebuild-20261107.md"
+    },
+    {
+      "at": "2026-11-07T09:57:00+10:00",
+      "topic": "delivery-v010 项目图谱",
+      "ruling": "Yarrow 定：v0.1.0 这一期交付不带项目图谱，只交代码地图和流程图（仍送 A/B 后开交付 PR）；不因缺图谱阻塞。",
+      "evidence": "Yarrow 私聊 2026-11-07 09:57；pipeline-watchdog 例程〇条"
     }
   ]
 }
