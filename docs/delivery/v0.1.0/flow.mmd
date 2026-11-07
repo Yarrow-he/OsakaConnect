@@ -1,0 +1,23 @@
+flowchart TD
+  shared["shared-protocol<br/>openapi/ + shared/ + tests/contract"]
+
+  shared --> winDiag["win-diagnostics<br/>windows/OsakaConnect.Diagnostics"]
+  shared --> andDiag["android-diagnostics<br/>android/.../diagnostics"]
+  shared --> server["server-core<br/>server/osaka_server"]
+  shared --> admin["admin-connect<br/>admin/OsakaAdmin"]
+
+  winDiag -.->|"架构约定；当前未接入"| winShell["win-shell<br/>windows/OsakaConnect"]
+  andDiag --> andShell["android-shell<br/>android/.../shell"]
+
+  server -.->|"管理端发起；服务端响应 health/version"| admin
+
+  winDiag --> ci["ci-guards<br/>.github/workflows + scripts/"]
+  andDiag --> ci
+  winShell --> ci
+  andShell --> ci
+  server --> ci
+  admin --> ci
+  shared --> ci
+
+  ci --> accept["CI 覆盖项（A1–A11、A13–A15、A17）；A12 见 acceptance-check；A16 冒烟加静态逐项对照"]
+  accept --> delivery["交付闸口二<br/>code-map / flow / A-B 审<br/>（本期不含项目图谱）"]
