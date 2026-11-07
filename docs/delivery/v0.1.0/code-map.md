@@ -5,7 +5,7 @@
 ## 1. shared-protocol（共用协议）
 
 1. **目录**：`openapi/`、`shared/`、`tests/contract/`
-2. **职责**：管理协议唯一事实来源；错误码、邀请码规则、契约/脱敏/邀请码测试向量（含反例）；契约测试保证三端手写校验同源。
+2. **职责**：管理协议唯一事实来源；错误码、邀请码规则、契约/脱敏/邀请码测试向量（含反例）；契约测试保证 spec 与共享向量一致；三端单测读同一份向量。
 3. **对外接口**：`openapi/admin.v1.yaml`；`shared/errors.json`；`shared/invite-code.md`；`shared/test-vectors/{admin-contract,invite-code,redaction}.json`；`shared/FROZEN.sha256`
 4. **依赖**：无
 
@@ -21,7 +21,7 @@
 1. **目录**：`windows/OsakaConnect/`（`App.xaml.cs`、`MainWindow`、`ConnectionPage`、`SettingsPage`）；测 `windows/OsakaConnect.Tests/`、`tests/windows/win-shell/smoke.ps1`
 2. **职责**：WPF 应用入口；连接(W1)、设置(W4) 占位页与侧栏导航；启动自检 `--self-test`
 3. **对外接口**：无（进程入口）
-4. **依赖**：win-diagnostics
+4. **依赖**：架构约定依赖 win-diagnostics；当前壳尚未 ProjectReference/源码接入，诊断模块独立测试。接线放到下一期。
 
 ## 4. win-diagnostics（Windows 诊断）
 
@@ -39,7 +39,11 @@
 
 ## 6. android-shell（Android 壳）
 
-1. **目录**：`android/app/src/main/java/com/osakaconnect/shell/`（`MainActivity.kt`、`Page.kt`）；仪器测与 lang-guard 在 `tests/android/android-shell/`
+1. **目录**：
+   1. 主源：`android/app/src/main/java/com/osakaconnect/shell/`（`MainActivity.kt`、`Page.kt`）
+   2. 单测：`android/app/src/test/java/com/osakaconnect/shell/PageTest.kt`
+   3. 仪器测（参与构建）：`android/app/src/androidTest/java/com/osakaconnect/shell/MainActivityTest.kt`
+   4. `tests/android/android-shell/`：仅 `ci-run.sh`、`lang-guard.sh`；其中 `androidTest/ShellNavigationTest.kt` 是旧草稿，不参与构建
 2. **职责**：应用入口；未激活(P1)/已激活(P2) 占位页与导航；生命周期记录
 3. **对外接口**：无
 4. **依赖**：android-diagnostics
@@ -62,13 +66,13 @@
 
 1. 各端只读 `shared/`、`openapi/`，不互相引用其他端源码（A11）。
 2. 后台入口调业务函数，业务不反向导入入口。
-3. 线路以列表表示，本期长度 1，客户端不硬编码线路（A17）。
+3. 线路（A17）：本期服务端返回 1 条；schema 不设 maxItems，客户端接受长度 ≥1；客户端不硬编码线路。
 4. 密钥、令牌只走环境变量，不进仓库、不进日志。
 
 ## 补充说明（回应 B 评审，2026-11-07）
 
 1. HTTPS 终止：后台自己终止 TLS，没有反向代理。`server/osaka_server/app.py:83-99` 启动时读 `OSAKA_TLS_CERT`、`OSAKA_TLS_KEY`。A10 的 docker 用 `tests/admin/admin-connect/gen-certs.sh` 现场生成临时 CA，管理端信任这个 CA 并做完整校验，不跳过证书。
-2. 线路列表（A17）：由后台 `/v1/health` 返回的 `routes[]` 提供（`app.py:52-55`），格式定义在 `openapi/admin.v1.yaml`。本期只有一条占位线路。
+2. 线路列表（A17）：由后台 `/v1/health` 返回的 `routes[]` 提供（`app.py:52-55`），格式定义在 `openapi/admin.v1.yaml`。本期服务端返回 1 条占位线路；schema 不设 maxItems，客户端接受长度 ≥1，不硬编码线路。
 3. 令牌：后台只从环境变量 `OSAKA_ADMIN_TOKEN` 读取，缺少证书或令牌时直接拒绝启动（`app.py:84-87`）。没有凭据返回 401，令牌不对返回 403，比较用 `hmac.compare_digest`（`app.py:42-49`）。仓库密钥扫描配置在 `.github/secret_scanning.yml`。
 4. 验收和 CI job 的对应关系（job 定义在 `.github/workflows/ci.yml`，都在 main 必过检查里）：
    1. guards-acceptance：A10、A11、A14、A17。
@@ -78,4 +82,4 @@
    5. contract：A9。
    6. a10-docker：A10。
    7. 策略仓库的 pr-size：A12。全部 job 合起来对应 A13。
-5. 架构上的建议（shared 只放数据、抽出 OsakaAdmin.Core、引入 Caddy）放到下一期再评，本期不改代码。
+5. 架构上的建议（壳接诊断、shared 只放数据、抽出 OsakaAdmin.Core、引入 Caddy）放到下一期再评，本期不改代码。

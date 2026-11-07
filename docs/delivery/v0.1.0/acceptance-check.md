@@ -1,10 +1,10 @@
-# 第 1 期（0.1.0）交付前验收核对（草稿）
+# 第 1 期（0.1.0）交付前验收核对
 
-- 生成/更新：2026-11-07T04:52:17+10:00（Australia/Brisbane）
-- board 文档基于 main：`f7c8abaa04dc7378e3f7588a0af6f65302e94922`（Merge PR#106 INDEX 刷新）
-- INDEX/产品证据仍绑：main `@9de89880ea77459b16da87369a23e3285fe7262b`，CI [run 42257087460](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42257087460)（conclusion=success，8/8 job 全绿）
-- 说明：`f7c8aba` 的 CI（run 42268478087）撰写时仍 in_progress；验收结论以已绿的 9de8988 / 42257087460 与 `tests/INDEX.md` 为准。
-- 本文件是闸口二工作草稿；代码地图与流程图已补；项目图谱本期不交（Yarrow 2026-11-07 09:57 决定）；还差 A/B 评审。
+- 生成/更新：2026-11-07T10:14:19+10:00（Australia/Brisbane）
+- INDEX/产品证据仍绑：main `@9de89880ea77459b16da87369a23e3285fe7262b`，CI [run 42257087460](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42257087460)（conclusion=success，8/8 job 全绿）；见 `tests/INDEX.md`
+- 旁注（非 INDEX）：当前 main tip 为 `3cf00f7d82e358de9e4281f6a3f77efc0ec7352a`（Merge PR#108），CI [run 42312486275](https://github.com/Yarrow-he/OsakaConnect/actions/runs/42312486275) 亦全绿（8/8）；INDEX 尚未改记该 tip，故表内「见 INDEX」条目仍以 9de8988 / 42257087460 为准
+- Yarrow 2026-11-07 09:57：v0.1.0 本期交付不带项目图谱，只交代码地图和流程图；架构接线（壳接诊断等）放下一期，本期只补文档说明
+- 本文件是闸口二交付材料；A/B（case3，日志 `/home/box/osaka/logs/delivery-v010/ab-review-20261107-0958/`）已跑；已按评审改文档说明；本 PR #110 交 Yarrow 批准（第 2 类）
 
 | 编号 | 验收条目 | 结论 | 证据 |
 |---|---|---|---|
@@ -23,13 +23,14 @@
 | A13 | main 全绿 | 通过 | https://github.com/Yarrow-he/OsakaConnect/actions/runs/42257087460 @ 9de8988 conclusion=success |
 | A14 | 技术栈锁定 | 通过 | guards-acceptance grep/lang-guard success run 42257087460 |
 | A15 | 邀请码 8 位 Crockford | 通过 | tests/INDEX.md：Windows WinDiagnostics.Tests + Android InviteCodeTest 1/0 + server-core；@main 9de8988 run 42257087460 |
-| A16 | UI 占位对照 design | 通过 | windows smoke + android-emulator（审阅侧 design inventory 历史已过） |
+| A16 | UI 占位对照 design | 通过 | windows smoke + android-emulator；design inventory 在仓库外 `/home/box/osaka/design/inventory.md`（mtime 2026-11-02，notes/win-shell.md:14、notes/android-shell.md:14 引用）；审阅口述/历史确认，design 目录不在本仓库 |
 | A17 | routes[] 可扩展 | 通过 | server-core + lang-guard + windows smoke；run 42257087460 |
 
 ## 阻塞/缺口
 1. 项目图谱本期不交（Yarrow 2026-11-07 09:57 决定），不算缺口。
-2. A/B 评审还没做。
+2. A/B（2026-11-07 09:58 档，case3）已跑；按评审改了文档说明（win-shell 依赖澄清、android-shell 测试实路径、flow 边与标签、A16 证据路径、INDEX/证据表述拆开）。架构接线（壳接诊断）下放下一期，本期不改产品代码。
+3. 无其他阻塞。
 
 ## 下一步
-1. 代码地图和流程图送 A/B 各审一轮。
-2. 审完附上意见和处理结果，开交付 PR 交 Yarrow。
+1. 本 PR #110（`lead/delivery-v010`）交 Yarrow 批准（第 2 类）。
+2. Yarrow 批准后由组长合并；架构改动留下一期评。

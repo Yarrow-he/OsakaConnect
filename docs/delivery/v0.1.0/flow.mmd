@@ -6,16 +6,18 @@ flowchart TD
   shared --> server["server-core<br/>server/osaka_server"]
   shared --> admin["admin-connect<br/>admin/OsakaAdmin"]
 
-  winDiag --> winShell["win-shell<br/>windows/OsakaConnect"]
+  winDiag -.->|"架构约定；当前未接入"| winShell["win-shell<br/>windows/OsakaConnect"]
   andDiag --> andShell["android-shell<br/>android/.../shell"]
 
-  server -.->|"运行时 HTTPS<br/>health / version"| admin
+  server -.->|"管理端发起；服务端响应 health/version"| admin
 
-  winShell --> ci["ci-guards<br/>.github/workflows + scripts/"]
+  winDiag --> ci["ci-guards<br/>.github/workflows + scripts/"]
+  andDiag --> ci
+  winShell --> ci
   andShell --> ci
   server --> ci
   admin --> ci
   shared --> ci
 
-  ci --> accept["验收 A1–A17<br/>tests/INDEX.md + acceptance-check"]
-  accept --> delivery["交付闸口二<br/>code-map / flow / A-B 审<br/>（项目图谱本期不交）"]
+  ci --> accept["CI 覆盖项（A1–A11、A13–A15、A17）；A12/A16 见 acceptance-check"]
+  accept --> delivery["交付闸口二<br/>code-map / flow / A-B 审<br/>（本期不含项目图谱）"]
