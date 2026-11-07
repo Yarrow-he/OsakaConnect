@@ -1126,9 +1126,9 @@
       "owner": "代码组长 · Osaka",
       "state": "写作中",
       "started_at": "2026-11-07T03:55:16+10:00",
-      "updated_at": "2026-11-07T13:02:28+10:00",
+      "updated_at": "2026-11-07T16:01:34+10:00",
       "branch": "lead/delivery-v010",
-      "next_step": "PR#110 head 8b579d5c：等审阅、测试重绑和 CI；都过后请 Yarrow 对这一版批准，再 as_lead 合并；仍禁未批准 UA 预构建",
+      "next_step": "PR#110@8b579d5c：审阅 pass(docs-only)、测试 pass、业务 CI 8/8 绿；等 Yarrow 对当前 head 批准后 as_lead 合并；仍禁未批准 UA 预构建",
       "unblocks": [],
       "history": [
         {
@@ -1205,6 +1205,13 @@
           "to": "写作中",
           "by": "代码组长 · Osaka",
           "note": "续推 PR#110，A16 已补，新 head 8b579d5"
+        },
+        {
+          "state": "写作中",
+          "at": "2026-11-07T16:01:34+10:00",
+          "to": "写作中",
+          "by": "代码组长 · Osaka",
+          "note": "pipeline-watchdog：waiting_on/artifacts 对齐 PR#110 head 8b579d5c；审测结论已绑该 head，等 Yarrow 批"
         }
       ],
       "artifacts": [
@@ -1218,14 +1225,14 @@
         "logs/delivery-v010/project-graph/prebuild-20261107.md",
         "tools/understand-anything-98d6dca/understand-anything-plugin/packages/core/dist/index.js",
         "tools/osaka-S-f7c8aba @ f7c8aba",
-        "https://github.com/Yarrow-he/OsakaConnect/pull/110 (head 2ba329be841cc0b04a020d0cd4af0663e5e8e172)"
+        "https://github.com/Yarrow-he/OsakaConnect/pull/110 (head 8b579d5c68ecaedc5e38e3dc7c782e7c0f4c1058)"
       ],
       "dispatched_graph_at": "2026-11-07T06:02:23+10:00",
       "ua_T": "98d6dca712407b8cbf0bca21b539c197e5a7825c",
       "ua_S": "f7c8abaa04dc7378e3f7588a0af6f65302e94922",
       "ua_test": "未做（本期不交图谱，T=98d6dca 的 UA CLI 重扫没跑）",
       "ua_review": "未做（本期不交图谱）",
-      "waiting_on": "Yarrow 在 GitHub 上批准 PR#110 当前 head 2ba329be841cc0b04a020d0cd4af0663e5e8e172（第2类；旧批准因 head 漂移已 DISMISSED）",
+      "waiting_on": "Yarrow 在 GitHub 上批准 PR#110 当前 head 8b579d5c68ecaedc5e38e3dc7c782e7c0f4c1058（第2类；旧批准因 head 漂移已 DISMISSED）",
       "nudge_count": 2,
       "nudge_history": [
         {
