@@ -64,3 +64,18 @@
 2. 后台入口调业务函数，业务不反向导入入口。
 3. 线路以列表表示，本期长度 1，客户端不硬编码线路（A17）。
 4. 密钥、令牌只走环境变量，不进仓库、不进日志。
+
+## 补充说明（回应 B 评审，2026-11-07）
+
+1. HTTPS 终止：后台自己终止 TLS，没有反向代理。`server/osaka_server/app.py:83-99` 启动时读 `OSAKA_TLS_CERT`、`OSAKA_TLS_KEY`。A10 的 docker 用 `tests/admin/admin-connect/gen-certs.sh` 现场生成临时 CA，管理端信任这个 CA 并做完整校验，不跳过证书。
+2. 线路列表（A17）：由后台 `/v1/health` 返回的 `routes[]` 提供（`app.py:52-55`），格式定义在 `openapi/admin.v1.yaml`。本期只有一条占位线路。
+3. 令牌：后台只从环境变量 `OSAKA_ADMIN_TOKEN` 读取，缺少证书或令牌时直接拒绝启动（`app.py:84-87`）。没有凭据返回 401，令牌不对返回 403，比较用 `hmac.compare_digest`（`app.py:42-49`）。仓库密钥扫描配置在 `.github/secret_scanning.yml`。
+4. 验收和 CI job 的对应关系（job 定义在 `.github/workflows/ci.yml`，都在 main 必过检查里）：
+   1. guards-acceptance：A10、A11、A14、A17。
+   2. windows-acceptance：A1、A2、A3、A4、A14、A15、A16、A17。
+   3. android、android-emulator：A5、A6、A7、A15、A16。
+   4. python（server-core）：A8、A9、A15、A17。
+   5. contract：A9。
+   6. a10-docker：A10。
+   7. 策略仓库的 pr-size：A12。全部 job 合起来对应 A13。
+5. 架构上的建议（shared 只放数据、抽出 OsakaAdmin.Core、引入 Caddy）放到下一期再评，本期不改代码。
