@@ -19,5 +19,5 @@ flowchart TD
   admin --> ci
   shared --> ci
 
-  ci --> accept["CI 覆盖项（A1–A11、A13–A15、A17）；A12 见 acceptance-check；A16 仅冒烟级覆盖，逐项对照未验证"]
+  ci --> accept["CI 覆盖项（A1–A11、A13–A15、A17）；A12 见 acceptance-check；A16 冒烟加静态逐项对照"]
   accept --> delivery["交付闸口二<br/>code-map / flow / A-B 审<br/>（本期不含项目图谱）"]

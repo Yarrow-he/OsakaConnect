@@ -23,13 +23,13 @@
 | A13 | main 全绿 | 通过 | https://github.com/Yarrow-he/OsakaConnect/actions/runs/42257087460 @ 9de8988 conclusion=success |
 | A14 | 技术栈锁定 | 通过 | guards-acceptance grep/lang-guard success run 42257087460 |
 | A15 | 邀请码 8 位 Crockford | 通过 | tests/INDEX.md：Windows WinDiagnostics.Tests + Android InviteCodeTest 1/0 + server-core；@main 9de8988 run 42257087460 |
-| A16 | UI 占位对照 design | 未验证 | 仅冒烟级覆盖，逐项对照未验证：只有 windows smoke + android-emulator 冒烟；design inventory 在仓库外 `/home/box/osaka/design/inventory.md`，notes/win-shell.md:14、notes/android-shell.md:14 只把它当只读参考，没有逐项人工对照记录 |
+| A16 | UI 占位对照 design | 通过（静态逐项对照） | 测试按 design inventory 对 be01ecb 逐项静态对照，全过：`/home/box/osaka/logs/pr110/a16-checklist-20261107-105622.md`，会话日志 `a16-cli-20261107-105409.jsonl`；没跑 UI 测试，运行层面仍只有 windows smoke + android-emulator 冒烟 |
 | A17 | routes[] 可扩展 | 通过 | server-core + lang-guard + windows smoke；run 42257087460 |
 
 ## 阻塞/缺口
 1. 项目图谱本期不交（Yarrow 2026-11-07 09:57 决定），不算缺口。
 2. A/B 意见不一致，按 Yarrow 10:06 的决定只补了文档说明（win-shell 依赖澄清、android-shell 测试实路径、flow 边与标签、A16 证据路径、INDEX/证据表述拆开）。架构接线（壳接诊断）下放下一期，本期不改产品代码。
-3. A16 缺逐项人工对照记录，目前只算未验证，需要补对照或由 Yarrow 手动验收。
+3. A16 已补逐项静态对照（对 be01ecb，be01ecb 到当前 head 只改文档），全过；真机界面仍建议发版前手动看一眼。
 4. 等 Yarrow 对当前 head 批准，以及审阅、测试对当前 head 的结论。
 
 ## 下一步
